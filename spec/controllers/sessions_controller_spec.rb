@@ -24,7 +24,11 @@ describe SessionsController do
   # Session. As you add validations to Session, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    FactoryGirl.attributes_for(:session)
+  end
+  
+  def valid_creation_attributes
+    FactoryGirl.attributes_for(:session).merge :first_presenter_email => "first_presenter@example.com", :second_presenter_email => "second_presenter@example.com"
   end
   
   # This should return the minimal set of values that should be in the session
@@ -67,36 +71,42 @@ describe SessionsController do
 
   describe "POST create" do
     describe "with valid params" do
+      def do_post
+        post :create, {:session => valid_creation_attributes}, valid_session
+      end
       it "creates a new Session" do
         expect {
-          post :create, {:session => valid_attributes}, valid_session
+          do_post
         }.to change(Session, :count).by(1)
       end
 
       it "assigns a newly created session as @session" do
-        post :create, {:session => valid_attributes}, valid_session
+        do_post
         assigns(:session).should be_a(Session)
         assigns(:session).should be_persisted
       end
 
       it "redirects to the created session" do
-        post :create, {:session => valid_attributes}, valid_session
+        do_post
         response.should redirect_to(Session.last)
       end
     end
 
     describe "with invalid params" do
+      def do_post
+        post :create, {:session => {}, :presenters => []}, valid_session
+      end
       it "assigns a newly created but unsaved session as @session" do
         # Trigger the behavior that occurs when invalid params are submitted
         Session.any_instance.stub(:save).and_return(false)
-        post :create, {:session => {}}, valid_session
+        do_post
         assigns(:session).should be_a_new(Session)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Session.any_instance.stub(:save).and_return(false)
-        post :create, {:session => {}}, valid_session
+        do_post
         response.should render_template("new")
       end
     end
