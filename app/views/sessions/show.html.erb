@@ -1,5 +1,11 @@
 <p id="notice"><%= notice %></p>
 
+  <h3>
+  <%= @session.title  %> 
+  </h3>
+  <div>
+  <%= @session.description %>
+  </div>
 
 <%= link_to 'Edit', edit_session_path(@session) %> |
 <%= link_to 'Back', sessions_path %>

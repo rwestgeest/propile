@@ -1,7 +1,9 @@
 <h1>Listing sessions</h1>
 
+<p>Sessions for XPDays Benelux</p>
 <table>
   <tr>
+    <th>Title</th>
     <th></th>
     <th></th>
     <th></th>
@@ -9,6 +11,7 @@
 
 <% @sessions.each do |session| %>
   <tr>
+    <td><%= session.title%> </td>
     <td><%= link_to 'Show', session %></td>
     <td><%= link_to 'Edit', edit_session_path(session) %></td>
     <td><%= link_to 'Destroy', session, confirm: 'Are you sure?', method: :delete %></td>
