@@ -1,10 +1,17 @@
 <p id="notice"><%= notice %></p>
 
-  <h3>
-  <%= @session.title  %> 
-  </h3>
+  <h2>
+    <%= @session.title  %> 
+  </h2>
   <div>
-  <%= @session.description %>
+    <%= @session.description %>
+  </div>
+<hr>
+  <div>
+    Modified: <%= l @session.updated_at %> 
+  </div>
+  <div>
+    Created: <%= l @session.created_at %> 
   </div>
 
 <%= link_to 'Edit', edit_session_path(@session) %> |
