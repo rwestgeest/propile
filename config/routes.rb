@@ -1,4 +1,6 @@
 Propile::Application.routes.draw do
+  resources :presenters
+
   resources :sessions
 
   # The priority is based upon order of creation:

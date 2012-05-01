@@ -1,0 +1,21 @@
+<h1>Listing presenters</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @presenters.each do |presenter| %>
+  <tr>
+    <td><%= link_to 'Show', presenter %></td>
+    <td><%= link_to 'Edit', edit_presenter_path(presenter) %></td>
+    <td><%= link_to 'Destroy', presenter, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Presenter', new_presenter_path %>

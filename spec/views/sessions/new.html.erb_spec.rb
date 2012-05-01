@@ -8,7 +8,6 @@ describe "sessions/new" do
   it "renders new session form" do
     render
 
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "form", :action => sessions_path, :method => "post" do
     end
   end
