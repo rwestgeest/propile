@@ -13,9 +13,27 @@
 */
 
 body {
-background: beige;
+  background-color: beige;
 }
 
-h1 {
-color: blue;
+
+
+table.tablelist {
+  border-collapse:collapse;
+  border: 2px solid grey;
+  text-align: left;
 }
+
+td, th {
+  border: 1px solid grey;
+  padding: 5px;
+}
+
+th {
+  background-color: lightgrey;
+}
+
+.alignright {
+  text-align: right;
+}
+

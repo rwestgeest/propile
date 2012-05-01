@@ -10,16 +10,28 @@
     </div>
   <% end %>
   <div>
-    <%= f.label :title %> <%= f.text_field :title  %> 
+    <%= f.label :title %>:
   </div>
   <div>
-    <%= f.label :description %> <%= f.text_area :description  %>
+    <%= text_field :session, :title, :size => "100"  %> 
   </div>
   <div>
-    <%= f.label :first_presenter_email %> <%= f.text_field :first_presenter_email  %>
+    <%= f.label :first_presenter_email %>:
   </div>
   <div>
-    <%= f.label :second_presenter_email %> <%= f.text_field :second_presenter_email  %>
+    <%= f.text_field :first_presenter_email  %>
+  </div>
+  <div>
+    <%= f.label :second_presenter_email %>:
+  </div>
+  <div>
+    <%= f.text_field :second_presenter_email  %>
+  </div>
+  <div>
+    <%= f.label :description %>:
+  </div>
+  <div>
+    <%= text_area :session, :description, :cols => "100"  %>
   </div>
   <div class="actions">
     <%= f.submit %>

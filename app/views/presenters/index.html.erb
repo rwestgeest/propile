@@ -1,6 +1,6 @@
 <h1>Listing presenters</h1>
 
-<table>
+<table class="tablelist">
   <tr>
     <th>Name</th>
     <th>Email</th>
@@ -12,7 +12,7 @@
   </tr>
 
 <% @presenters.each do |presenter| %>
-  <tr>
+  <tr >
     <td><%= presenter.name%> </td>
     <td><%= presenter.email%> </td>
     <td><%= l presenter.created_at %> </td>
