@@ -2,6 +2,10 @@
 
 <table>
   <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Created</th>
+    <th>Updated</th>
     <th></th>
     <th></th>
     <th></th>
@@ -9,6 +13,10 @@
 
 <% @presenters.each do |presenter| %>
   <tr>
+    <td><%= presenter.name%> </td>
+    <td><%= presenter.email%> </td>
+    <td><%= l presenter.created_at %> </td>
+    <td><%= l presenter.updated_at %> </td>
     <td><%= link_to 'Show', presenter %></td>
     <td><%= link_to 'Edit', edit_presenter_path(presenter) %></td>
     <td><%= link_to 'Destroy', presenter, confirm: 'Are you sure?', method: :delete %></td>

@@ -1,5 +1,20 @@
 <p id="notice"><%= notice %></p>
-
+  <h2>
+    <%= @presenter.name  %> 
+  </h2>
+  <div>
+    <%= @presenter.email %>
+  </div>
+  <div>
+    <%= @presenter.bio %>
+  </div>
+<hr>
+  <div>
+    Modified: <%= l @presenter.updated_at %> 
+  </div>
+  <div>
+    Created: <%= l @presenter.created_at %> 
+  </div>
 
 <%= link_to 'Edit', edit_presenter_path(@presenter) %> |
 <%= link_to 'Back', presenters_path %>

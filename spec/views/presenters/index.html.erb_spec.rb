@@ -3,8 +3,8 @@ require 'spec_helper'
 describe "presenters/index" do
   before(:each) do
     assign(:presenters, [
-      stub_model(Presenter),
-      stub_model(Presenter)
+      FactoryGirl.create(:presenter),
+      FactoryGirl.create(:presenter)
     ])
   end
 

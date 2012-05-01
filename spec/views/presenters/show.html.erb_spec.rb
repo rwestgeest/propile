@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "presenters/show" do
   before(:each) do
-    @presenter = assign(:presenter, stub_model(Presenter))
+    @presenter = assign(:presenter, FactoryGirl.create(:presenter))
   end
 
   it "renders attributes in <p>" do
