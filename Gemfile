@@ -11,6 +11,8 @@ group :development do
   gem 'rspec-rails', '~> 2.9'
   gem 'ZenTest'
   gem 'factory_girl_rails'
+  gem 'vlad'
+  gem 'vlad-git'
 end
 
 # Gems used only for assets and not required
