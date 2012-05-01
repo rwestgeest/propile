@@ -41,7 +41,6 @@ class SessionsController < ApplicationController
   # POST /sessions.json
   def create
     @session = Session.new(params[:session])
-
     respond_to do |format|
       if @session.save
         format.html { redirect_to @session, notice: 'Session was successfully created.' }

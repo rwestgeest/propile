@@ -8,5 +8,6 @@ FactoryGirl.define do
   factory :session do
     title {|n| "title_#{n}"}
     description {|n| "description_#{n}"}
+    first_presenter_email {|n| "session_#{n}_first_presenter@example.com"}
   end
 end
