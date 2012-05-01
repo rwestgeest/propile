@@ -3,8 +3,8 @@ require 'spec_helper'
 describe "sessions/index" do
   before(:each) do
     assign(:sessions, [
-      stub_model(Session),
-      stub_model(Session)
+      FactoryGirl.create(:session),
+      FactoryGirl.create(:session)
     ])
   end
 

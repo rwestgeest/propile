@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "sessions/show" do
   before(:each) do
-    @session = assign(:session, stub_model(Session))
+    @session = assign(:session, FactoryGirl.create(:session))
   end
 
   it "renders attributes in <p>" do
