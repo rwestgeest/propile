@@ -9,6 +9,7 @@ gem 'sqlite3'
 
 group :development do
   gem 'rspec-rails', '~> 2.9'
+  gem 'ZenTest'
 end
 
 # Gems used only for assets and not required
