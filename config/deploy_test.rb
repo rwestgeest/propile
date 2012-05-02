@@ -6,7 +6,6 @@ namespace :vlad do
   desc "deploy with tests - only to=test"
   task "deploy:test" => %w{
     update
-    update-bundle
     assets
     migrate
     tests

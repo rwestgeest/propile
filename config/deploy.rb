@@ -10,14 +10,12 @@ namespace :vlad do
   desc "Deploy application"
   task "deploy" => %w{
     update
-    update-bundle
     assets
     start
   }
   desc "deploy and migrate"
   task "deploy:migrate" => %w{
     update
-    update-bundle
     assets
     migrate
     start
