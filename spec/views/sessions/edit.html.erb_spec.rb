@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "sessions/edit" do
   before(:each) do
-    @session = assign(:session, stub_model(Session))
+    @session = assign(:session, FactoryGirl.create(:session))
   end
 
   it "renders the edit session form" do

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "presenters/edit" do
   before(:each) do
-    @presenter = assign(:presenter, stub_model(Presenter))
+    @presenter = assign(:presenter, FactoryGirl.create(:presenter))
   end
 
   it "renders the edit presenter form" do
