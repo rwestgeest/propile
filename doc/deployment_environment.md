@@ -103,4 +103,5 @@ nvm alias default 0.6
 ## install the application for the first time
 
 rake vlad:setup vlad:setup_app
+rake vlad:deploy:test
 
