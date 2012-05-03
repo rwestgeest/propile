@@ -36,18 +36,19 @@ namespace :vlad do
   desc "migrate database" 
   remote_task "migrate" do
     in_current_path = "cd #{current_path} && "
-    run in_current_path + "RAILS_ENV=#{environment} bundle exec rake db:migrate"
+    run in_current_path + "RAILS_ENV=#{rails_env} bundle exec rake db:migrate"
   end
 
   desc "start stand alone passenger server" 
   remote_task "start" do
-    puts `pwd`
     in_current_path = "cd #{current_path} && "
     begin 
       run in_current_path + "passenger stop -p 3021" 
     rescue 
     end
-    run in_current_path + "RAILS_ENV=#{environment} passenger start -a 127.0.0.1 -p 3021 -d"
+    run in_current_path + "which passenger"
+
+    run in_current_path + "RAILS_ENV=#{rails_env} passenger start -a 127.0.0.1 -p 3021 -d"
   end
 
 end

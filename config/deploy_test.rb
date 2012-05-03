@@ -11,10 +11,5 @@ namespace :vlad do
     tests
     start
   }
-  desc "migrate database" 
-  remote_task "tests" do
-    in_current_path = "cd #{current_path} && "
-    run in_current_path + "RAILS_ENV=#{environment} bundle exec rake"
-  end
 
 end
