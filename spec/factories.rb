@@ -2,11 +2,11 @@
 
 FactoryGirl.define do
   factory :presenter do
-    email {|n| "presenter_#{n}@example.com" }
-    name {|n| "presenter_#{n}"}
+    sequence(:email) {|n| "presenter_#{n}@example.com" }
+    sequence(:name) {|n| "presenter_#{n}"}
   end
   factory :session do
-    title {|n| "title_#{n}"}
-    description {|n| "description_#{n}"}
+    sequence(:title) {|n| "title_#{n}"}
+    sequence(:description) {|n| "description_#{n}"}
   end
 end

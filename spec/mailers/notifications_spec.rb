@@ -2,16 +2,19 @@ require "spec_helper"
 
 describe Notifications do
   describe "session_submit" do
-    let(:mail) { Notifications.session_submit }
+    let(:presenter_email) { "presenter@company.nl"}
+    let(:session) { FactoryGirl.build(:session) } 
+    let(:mail) { Notifications.session_submit(presenter_email,session) }
 
     it "renders the headers" do
-      mail.subject.should eq("Session submit")
-      mail.to.should eq(["to@example.org"])
-      mail.from.should eq(["from@example.com"])
+      mail.subject.should eq(I18n.t('notifications.session_submit.subject'))
+      mail.to.should eq([presenter_email])
+      mail.from.should eq([Notifications::FromAddress])
     end
 
     it "renders the body" do
       mail.body.encoded.should match("Hi")
+      mail.body.encoded.should match session.title
     end
   end
 

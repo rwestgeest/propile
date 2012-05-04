@@ -13,3 +13,6 @@ en:
       short:   "%d/%m/%y %H:%M"
       long:    "%d/%m/%y %H:%M"
   hello: "Hello world"
+  notifications:
+    session_submit:
+      subject: "Thank you for submitting your session"

@@ -27,9 +27,6 @@ describe SessionsController do
     FactoryGirl.attributes_for(:session)
   end
   
-  def valid_creation_attributes
-    FactoryGirl.attributes_for(:session).merge :first_presenter_email => "first_presenter@example.com", :second_presenter_email => "second_presenter@example.com"
-  end
   
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -70,6 +67,11 @@ describe SessionsController do
   end
 
   describe "POST create" do
+    let(:first_presenter_email) { "first_presenter@example.com" }
+    let(:second_presenter_email) { "second_presenter@example.com" }
+    def valid_creation_attributes
+      FactoryGirl.attributes_for(:session).merge :first_presenter_email => first_presenter_email, :second_presenter_email => second_presenter_email
+    end
     describe "with valid params" do
       def do_post
         post :create, {:session => valid_creation_attributes}, valid_session
@@ -89,6 +91,16 @@ describe SessionsController do
       it "redirects to the created session" do
         do_post
         response.should redirect_to(Session.last)
+      end
+
+      describe "notifications" do
+        before { ActionMailer::Base.deliveries = [] }
+        let(:deliveries) { ActionMailer::Base.deliveries }
+        it "sends a confirmation mail to the presenters" do
+          Postman.should_receive(:deliver).with(:session_submit, first_presenter_email, an_instance_of(Session))
+          Postman.should_receive(:deliver).with(:session_submit, second_presenter_email, an_instance_of(Session))
+          do_post
+        end
       end
     end
 
