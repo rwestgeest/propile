@@ -13,6 +13,7 @@ group :development do
   gem 'factory_girl_rails'
   gem 'vlad'
   gem 'vlad-git'
+  gem 'shoulda-matchers'
 end
 
 # Gems used only for assets and not required

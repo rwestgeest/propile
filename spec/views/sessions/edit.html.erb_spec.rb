@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "sessions/edit" do
   before(:each) do
-    @session = assign(:session, FactoryGirl.create(:session))
+    @session = assign(:session, FactoryGirl.create(:session_with_presenter))
   end
 
   it "renders the edit session form" do

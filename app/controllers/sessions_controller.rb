@@ -45,8 +45,7 @@ class SessionsController < ApplicationController
       if @session.save
         format.html { redirect_to @session, notice: 'Session was successfully created.' }
         format.json { render json: @session, status: :created, location: @session }
-        Postman.deliver(:session_submit, @session.first_presenter_email, @session)
-        Postman.deliver(:session_submit, @session.second_presenter_email, @session)
+        @session.presenters.each { |presenter| Postman.deliver(:session_submit, presenter.email, @session) }
       else
         format.html { render action: "new" }
         format.json { render json: @session.errors, status: :unprocessable_entity }

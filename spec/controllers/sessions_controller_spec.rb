@@ -24,7 +24,7 @@ describe SessionsController do
   # Session. As you add validations to Session, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    FactoryGirl.attributes_for(:session)
+    FactoryGirl.attributes_for(:session_with_presenter)
   end
   
   
@@ -94,12 +94,15 @@ describe SessionsController do
       end
 
       describe "notifications" do
-        before { ActionMailer::Base.deliveries = [] }
-        let(:deliveries) { ActionMailer::Base.deliveries }
         it "sends a confirmation mail to the presenters" do
           Postman.should_receive(:deliver).with(:session_submit, first_presenter_email, an_instance_of(Session))
           Postman.should_receive(:deliver).with(:session_submit, second_presenter_email, an_instance_of(Session))
           do_post
+        end
+        it "sends a confirmation mail to one presenter if only one has been submitted" do
+          Postman.should_receive(:deliver).with(:session_submit, first_presenter_email, an_instance_of(Session))
+          Postman.should_not_receive(:deliver).with(:session_submit, '', an_instance_of(Session))
+          post :create, {:session => valid_creation_attributes.merge(:second_presenter_email => '')}, valid_session
         end
       end
     end

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "sessions/show" do
   before(:each) do
-    @session = assign(:session, FactoryGirl.create(:session))
+    @session = assign(:session, FactoryGirl.create(:session_with_presenter))
   end
 
   it "renders attributes in <p>" do

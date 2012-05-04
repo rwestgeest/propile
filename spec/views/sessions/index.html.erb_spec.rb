@@ -3,8 +3,8 @@ require 'spec_helper'
 describe "sessions/index" do
   before(:each) do
     assign(:sessions, [
-      FactoryGirl.create(:session),
-      FactoryGirl.create(:session)
+      FactoryGirl.create(:session_with_presenter),
+      FactoryGirl.create(:session_with_presenter)
     ])
   end
 
