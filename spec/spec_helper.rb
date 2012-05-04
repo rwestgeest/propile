@@ -21,7 +21,6 @@ RSpec.configure do |config|
 
   config.include Shoulda::Matchers::ActiveModel
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
@@ -33,3 +32,8 @@ RSpec.configure do |config|
   # rspec-rails.
   config.infer_base_class_for_anonymous_controllers = false
 end
+
+ load_schema = lambda {  
+   load "#{Rails.root.to_s}/db/schema.rb" # use db agnostic schema by default  
+ }
+ silence_stream(STDOUT, &load_schema)
