@@ -1,6 +1,6 @@
 Autotest.add_hook(:initialize) { |at| 
-  at.add_exception %r{^\.git}
-  at.add_exception %r{^log}
-  at.add_exception %r{^data}
+  at.add_exception %r{^\./\.git}
+  at.add_exception %r{^\./log}
+  at.add_exception %r{^\./data}
   nil
 }
