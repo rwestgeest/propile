@@ -4,8 +4,7 @@ Thank you for submitting <%= @session.title %>
 
 Please know that you are invited to take part in the review process of the xpdays sessions.
 
-Please click this link to login and join us in giving the wonderful gift of feedback
-http://propile.xpday.net/login/?key=<%= @login_guid %>
+Please login and join us in giving the wonderful gift of feedback
 
 Cheers,
 
