@@ -139,7 +139,6 @@ DEPENDENCIES
   ZenTest
   coffee-rails (~> 3.2.1)
   factory_girl_rails
-  guid
   jquery-rails
   rails (= 3.2.3)
   rspec-rails (~> 2.9)
