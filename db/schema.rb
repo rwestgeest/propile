@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120501113458) do
+ActiveRecord::Schema.define(:version => 20120511203157) do
 
   create_table "presenters", :force => true do |t|
     t.string   "name",       :limit => 100
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20120501113458) do
     t.text     "bio"
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
+    t.string   "login_guid"
   end
 
   create_table "presenters_sessions", :id => false, :force => true do |t|
