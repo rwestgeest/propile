@@ -8,6 +8,10 @@ describe Session do
     end
   end
 
+  def isGuid(s)
+    (s =~ /^(\{){0,1}[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(\}){0,1}$/) != nil
+  end
+
   it { should validate_presence_of(:title) }
   it { should validate_presence_of(:description) }
   it { should validate_presence_of(:presenters) }
@@ -21,8 +25,9 @@ describe Session do
       context "on session without presenters" do
         let!(:session) { FactoryGirl.build(:session, :first_presenter_email => "presenter_1@example.com", :second_presenter_email => '')}
         it "builds a presenter" do
-          session.presenters.first.email.should == "presenter_1@example.com"
           session.first_presenter_email.should == "presenter_1@example.com"
+          session.presenters.first.email.should == "presenter_1@example.com"
+          (isGuid session.presenters.first.login_guid).should eq(true) 
         end 
         it "creates a presenter on save" do
           expect { session.save }.to change { Presenter.count }.by(1)
