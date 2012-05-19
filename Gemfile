@@ -7,13 +7,19 @@ gem 'rails', '3.2.3'
 
 gem 'sqlite3'
 
-group :development do
-  gem 'rspec-rails', '~> 2.9'
+group :test do
   gem 'ZenTest'
   gem 'factory_girl_rails'
+  gem 'shoulda-matchers'
+end
+
+group :development do
+  gem 'rspec-rails', '~> 2.9'
+end
+
+group :rake do
   gem 'vlad'
   gem 'vlad-git'
-  gem 'shoulda-matchers'
 end
 
 # Gems used only for assets and not required
