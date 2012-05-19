@@ -1,5 +1,5 @@
 <h1>New session</h1>
 
-<%= render 'form_new' %>
+<%= render :partial => 'form', :locals => { :session => "@session", :editable_presenters=> "true" }  %>
 
 <%= link_to 'Back', sessions_path %>

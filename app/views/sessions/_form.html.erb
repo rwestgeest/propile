@@ -14,14 +14,25 @@
   <div> <%= f.label :title %>: </div>
   <div> <%= text_area :session, :title, :cols => "100", :rows => "1"  %> </div>
 
-  <div class="left">
-    <div> <%= f.label :first_presenter_email %>: </div>
-    <div> <%= f.text_area :first_presenter_email,  :rows => "1", :disabled => "@disabled_presenters" %> </div>
-  </div>
-  <div class="right">
-    <div> <%= f.label :second_presenter_email %>: </div>
-    <div> <%= f.text_area :second_presenter_email,  :rows => "1", :disabled => "@disabled_presenters" %> </div>
-  </div>
+  <% if editable_presenters=="true" %> 
+    <div class="left">
+      <div> <%= f.label :first_presenter_email %>: </div>
+      <div> <%= f.text_area :first_presenter_email,  :rows => "1" %> </div>
+    </div>
+    <div class="right">
+      <div> <%= f.label :second_presenter_email %>: </div>
+      <div> <%= f.text_area :second_presenter_email,  :rows => "1" %> </div>
+    </div>
+  <% else %> 
+    <div class="left">
+      <div> <%= f.label :first_presenter_email %>: </div>
+      <div> <%= f.text_area :first_presenter_email,  :rows => "1", :disabled => "@disabled_presenters" %> </div>
+    </div>
+    <div class="right">
+      <div> <%= f.label :second_presenter_email %>: </div>
+      <div> <%= f.text_area :second_presenter_email,  :rows => "1", :disabled => "@disabled_presenters" %> </div>
+    </div>
+  <% end %> 
 
 
 <div class="full"> 
