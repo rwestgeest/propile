@@ -37,3 +37,17 @@ th {
   text-align: right;
 }
 
+div.full {
+  float: left;
+  width: 100%;
+}
+
+div.right {
+  float: right;
+  width: 50%;
+}
+
+div.left {
+  float: left;
+  width: 50%;
+}

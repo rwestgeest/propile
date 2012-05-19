@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120511203157) do
+ActiveRecord::Schema.define(:version => 20120519155342) do
 
   create_table "presenters", :force => true do |t|
     t.string   "name",       :limit => 100
@@ -32,8 +32,22 @@ ActiveRecord::Schema.define(:version => 20120511203157) do
   create_table "sessions", :force => true do |t|
     t.string   "title"
     t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.string   "sub_title"
+    t.string   "short_description"
+    t.string   "session_type"
+    t.string   "topic"
+    t.string   "duration"
+    t.string   "intended_audience"
+    t.string   "experience_level"
+    t.string   "max_participants"
+    t.string   "laptops_required"
+    t.string   "other_limitations"
+    t.string   "room_setup"
+    t.string   "materials_needed"
+    t.string   "session_goal"
+    t.string   "outline_or_timetable"
   end
 
 end
