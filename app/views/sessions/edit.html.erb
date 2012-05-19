@@ -4,7 +4,8 @@
   Created: <%= l @session.created_at %> -- 
   Modified: <%= l @session.updated_at %> 
 </div>
-<%= render 'form' %>
+
+<%= render :partial => 'form', :locals => { :session => "@session", :disabled_presenters=> "true" }  %>
 
 <%= link_to 'Show', @session %> |
 <%= link_to 'Back', sessions_path %>
