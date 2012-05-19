@@ -16,12 +16,46 @@
   <div>
     <%= text_field :session, :title, :size => "100"  %> 
   </div>
-  <div>
-    <%= f.label :description %>:
-  </div>
-  <div>
-    <%= text_area :session, :description, :cols => "100"  %>
-  </div>
+
+<div class="full"> 
+  <div> <%= f.label :sub_title %>: </div>
+  <div> <%= text_area :session, :sub_title, :cols => "100", :rows => "1"  %> </div>
+  <div> <%= f.label :short_description %>: </div>
+  <div> <%= text_area :session, :short_description, :cols => "100", :rows => "4"  %> </div>
+</div>
+<div class="left">
+  <div> <%= f.label :session_type %>: </div>
+  <div> <%= text_area :session, :session_type, :cols => "45", :rows => "1"  %> </div>
+  <div> <%= f.label :topic %>: </div>
+  <div> <%= text_area :session, :topic, :cols => "45", :rows => "1"  %> </div>
+  <div> <%= f.label :duration %>: </div>
+  <div> <%= text_area :session, :duration, :cols => "45", :rows => "1"  %> </div>
+  <div> <%= f.label :intended_audience %>: </div>
+  <div> <%= text_area :session, :intended_audience, :cols => "45", :rows => "1"  %> </div>
+  <div> <%= f.label :experience_level %>: </div>
+  <div> <%= text_area :session, :experience_level, :cols => "45", :rows => "1"  %> </div>
+</div>
+<div class="right">
+  <div> <%= f.label :max_participants %>: </div>
+  <div> <%= text_area :session, :max_participants, :cols => "45", :rows => "1"  %> </div>
+  <div> <%= f.label :laptops_required %>: </div>
+  <div> <%= text_area :session, :laptops_required, :cols => "45", :rows => "1"  %> </div>
+  <div> <%= f.label :other_limitations %> </div>
+  <div> <%= text_area :session, :other_limitations, :cols => "45", :rows => "1"  %> </div>
+  <div> <%= f.label :room_setup %>: </div>
+  <div> <%= text_area :session, :room_setup, :cols => "45", :rows => "1"  %> </div>
+  <div> <%= f.label :materials_needed %>: </div>
+  <div> <%= text_area :session, :materials_needed, :cols => "45", :rows => "1"  %> </div>
+</div>
+<div class="full"> 
+  <div> <%= f.label :session_goal %>: </div>
+  <div> <%= text_area :session, :session_goal, :cols => "100", :rows => "1"  %> </div>
+  <div> <%= f.label :description %>: </div>
+  <div> <%= text_area :session, :description, :cols => "100"  , :rows => "20"%> </div>
+  <div> <%= f.label :outline_or_timetable %>: </div>
+  <div> <%= text_area :session, :outline_or_timetable, :cols => "100", :rows => "10"  %> </div>
+</div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
