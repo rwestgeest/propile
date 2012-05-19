@@ -10,12 +10,17 @@
       </ul>
     </div>
   <% end %>
-  <div>
-    <%= f.label :title %>:
-  </div>
-  <div>
-    <%= text_field :session, :title, :size => "100"  %> 
-  </div>
+
+<div class="left">
+  <div> <%= f.label :first_presenter_email %>: </div>
+  <div> <%= f.text_area :first_presenter_email,  :rows => "1" %> </div>
+</div>
+<div class="right">
+  <div> <%= f.label :second_presenter_email %>: </div>
+  <div> <%= f.text_area :second_presenter_email,  :rows => "1" %> </div>
+</div>
+  <div> <%= f.label :title %>: </div>
+  <div> <%= text_area :session, :title, :cols => "100", :rows => "1"  %> </div>
 
 <div class="full"> 
   <div> <%= f.label :sub_title %>: </div>
