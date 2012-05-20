@@ -14,6 +14,12 @@ FactoryGirl.define do
   end
   factory :review do
     sequence(:body) {|n| "review_body_#{n}"}
+#    session
+    presenter
+  end
+  factory :comment do
+    sequence(:body) {|n| "comment_body_#{n}"}
+#    review
     presenter
   end
 end

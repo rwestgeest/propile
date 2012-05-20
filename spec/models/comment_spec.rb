@@ -1,14 +1,15 @@
 require 'spec_helper'
 
-describe Review do
+describe Comment do
   describe "saving" do
     it "is possible" do
-      review = FactoryGirl.create :review
-      Review.first.should == review
+      comment = FactoryGirl.create :comment
+      Comment.first.should == comment
     end
   end
 
   it { should validate_presence_of(:body) }
+#  it { should validate_presence_of(:review) }
 #  it { should validate_presence_of(:presenter) }
-#  it { should validate_presence_of(:session) }
+
 end
