@@ -12,4 +12,8 @@ FactoryGirl.define do
       sequence(:first_presenter_email) { |n| "first_presenter_#{n}@presenters.com" }
     end
   end
+  factory :review do
+    sequence(:body) {|n| "review_body_#{n}"}
+    presenter
+  end
 end
