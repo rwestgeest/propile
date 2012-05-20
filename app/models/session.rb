@@ -1,5 +1,6 @@
 class Session < ActiveRecord::Base
   has_and_belongs_to_many :presenters
+  has_many :reviews
   attr_accessible :description, :title, :first_presenter_email, :second_presenter_email 
   attr_accessor :second_presenter_email 
   attr_accessible :sub_title, :short_description, :session_type, :topic

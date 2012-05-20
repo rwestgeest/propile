@@ -1,4 +1,6 @@
 Propile::Application.routes.draw do
+  resources :reviews
+
   resources :presenters
 
   resources :sessions
