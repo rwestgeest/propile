@@ -56,3 +56,9 @@ div.outlined {
   border: 2px solid grey;
   background-color: lightgrey;
 }
+
+div > i {
+  color:brown;
+  font-size:smaller;
+}
+
