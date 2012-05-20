@@ -7,5 +7,7 @@
 
 <%= render :partial => 'form', :locals => { :session => "@session", :editable_presenters=> "false" }  %>
 
-<%= link_to 'Show', @session %> |
-<%= link_to 'Back', sessions_path %>
+<div class="full"> 
+  <%= link_to 'Show', @session %> |
+  <%= link_to 'Back', sessions_path %>
+</div>
