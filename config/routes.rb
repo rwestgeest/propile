@@ -1,4 +1,6 @@
 Propile::Application.routes.draw do
+  resources :comments
+
   resources :reviews
 
   resources :presenters
