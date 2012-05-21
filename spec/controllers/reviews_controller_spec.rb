@@ -52,7 +52,7 @@ describe ReviewsController do
 
   describe "GET new" do
     it "assigns a new review as @review" do
-      get :new, {}, valid_session
+    get :new, {}, valid_session
       assigns(:review).should be_a_new(Review)
     end
   end

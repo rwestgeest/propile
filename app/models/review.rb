@@ -2,8 +2,15 @@ class Review < ActiveRecord::Base
   belongs_to :session
   belongs_to :presenter
   attr_accessible :body, :score
+# attr_accessible :session, :presenter
 
   validates :body, :presence => true
 #  validates :presenter, :presence => true
-#  validates :session, :session => true
+#  validates :session, :presence => true
+
+#  def initialize(session)
+#    @session = session
+#  end
+
+
 end

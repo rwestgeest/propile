@@ -20,12 +20,20 @@
     <%= f.text_field :score %>
   </div>
   <div class="field">
-    <%= f.label :session %><br />
-    <%= f.text_field :session %>
+    <%= f.label :session %>: 
+    <% if @review.session.nil?  %>  
+      no session defined (invalid review)
+    <% else %> 
+      <%= @review.session.title %>
+    <% end %> 
   </div>
   <div class="field">
-    <%= f.label :presenter %><br />
-    <%= f.text_field :presenter %>
+    <%= f.label :presenter %>: 
+    <% if @review.presenter.nil?  %>  
+      no presenter defined (invalid review)
+    <% else %> 
+      <%= @review.presenter.name %>
+    <% end %> 
   </div>
   <div class="actions">
     <%= f.submit %>
