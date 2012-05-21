@@ -15,9 +15,11 @@ class Session < ActiveRecord::Base
   def first_presenter_email
     presenters.first && presenters.first.email || ''
   end
+
   def second_presenter_email
     presenters[1] && presenters[1].email || ''
   end
+
   def first_presenter_email=(value)
     presenters << Presenter.new(:email => value, :login_guid => String(Guid.new))
   end
@@ -27,4 +29,27 @@ class Session < ActiveRecord::Base
     presenters << Presenter.new(:email => value, :login_guid => String(Guid.new))
   end
 
+  def presenter_names
+    s = ""
+    if presenters.first 
+    then  
+      if presenters.first.name && presenters.first.name != "" 
+      then 
+        s = presenters.first.name 
+      else 
+        s = presenters.first.email 
+      end 
+    end 
+    if presenters[1] 
+    then 
+      s = s + " & " 
+      if presenters[1].name && presenters[1].name != ""
+      then 
+        s = s + presenters[1].name
+      else 
+        s = s + presenters[1].email
+      end 
+    end 
+    s
+  end
 end
