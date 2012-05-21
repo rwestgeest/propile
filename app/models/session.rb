@@ -33,22 +33,11 @@ class Session < ActiveRecord::Base
     s = ""
     if presenters.first 
     then  
-      if presenters.first.name && presenters.first.name != "" 
-      then 
-        s = presenters.first.name 
-      else 
-        s = presenters.first.email 
-      end 
+      s = presenters.first.name || presenters.first.email
     end 
     if presenters[1] 
     then 
-      s = s + " & " 
-      if presenters[1].name && presenters[1].name != ""
-      then 
-        s = s + presenters[1].name
-      else 
-        s = s + presenters[1].email
-      end 
+      s = s + " & " + (presenters[1].name || presenters[1].email)
     end 
     s
   end
