@@ -30,15 +30,8 @@ class Session < ActiveRecord::Base
   end
 
   def presenter_names
-    s = ""
-    if presenters.first 
-    then  
-      s = presenters.first.name || presenters.first.email
-    end 
-    if presenters[1] 
-    then 
-      s = s + " & " + (presenters[1].name || presenters[1].email)
-    end 
+    s = presenters.first && ( presenters.first.name || presenters.first.email ) || ''
+    s += presenters[1] && (" & " + ( presenters[1].name || presenters[1].email ) ) || ''
     s
   end
 end

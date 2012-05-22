@@ -54,42 +54,42 @@ describe Session do
     end
   end
 
-  describe "presenter names" do
+  describe "presenter_names" do
     let!(:session) { Session.new } 
     it "empty session returns emtpy names" do
       session.presenter_names.should be_empty
     end
     context "first presenter email set" do
       let!(:session) { FactoryGirl.build(:session, :first_presenter_email => "presenter_1@example.com", :second_presenter_email => '')}
-      it "returns first presenter email" do
+      it "returns email" do
         session.presenters.first.email.should == "presenter_1@example.com"
         session.presenter_names.should == "presenter_1@example.com"
       end
     end
     context "first and second presenter email set" do
       let!(:session) { FactoryGirl.build(:session, :first_presenter_email => "presenter_1@example.com", :second_presenter_email => 'presenter_2@example.com')}
-      it "returns first presenter email" do
+      it "returns 2 emails" do
         session.presenter_names.should == "presenter_1@example.com & presenter_2@example.com"
       end
     end
     # how can I add names to my presenters?
     context "first presenter email and name set, no second presenter" do
       let!(:session) { FactoryGirl.build(:session, :first_presenter_email => "presenter_1@example.com", :second_presenter_email => '')}
-      it "returns first presenter name" do
+      it "returns name" do
         session.presenters.first.name = "Petra The Firstpresenter"
         session.presenter_names.should == "Petra The Firstpresenter"
       end
     end
     context "first presenter email and name set, second presenter only email" do
       let!(:session) { FactoryGirl.build(:session, :first_presenter_email => "presenter_1@example.com", :second_presenter_email => 'presenter_2@example.com')}
-      it "returns first presenter name" do
+      it "returns name and email" do
         session.presenters.first.name = "Petra The Firstpresenter"
         session.presenter_names.should == "Petra The Firstpresenter & presenter_2@example.com"
       end
     end
     context "both presenters name set" do
       let!(:session) { FactoryGirl.build(:session, :first_presenter_email => "presenter_1@example.com", :second_presenter_email => 'presenter_2@example.com')}
-      it "returns first presenter name" do
+      it "returns 2 names" do
         session.presenters.first.name = "Petra The Firstpresenter"
         session.presenters.second.name = "Peter The Secondpresenter"
         session.presenter_names.should == "Petra The Firstpresenter & Peter The Secondpresenter"
