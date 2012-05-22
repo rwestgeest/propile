@@ -8,9 +8,11 @@
 
 <div> 
   by 
-  <%=  @session.presenters[0] && ( @session.presenters[0].name || @session.presenters[0].email )  %>
+  <%=  @session.presenters[0] && 
+       ( link_to @session.presenters[0].name || @session.presenters[0].email, @session.presenters[0] )  %>
   <%=  @session.presenters[1] && " & " %>
-  <%=  @session.presenters[1] && ( @session.presenters[1].name || @session.presenters[1].email )  %>
+  <%=  @session.presenters[1] && 
+       ( link_to @session.presenters[1].name || @session.presenters[1].email, @session.presenters[1] )  %>
 </div>
 
 <hr>
