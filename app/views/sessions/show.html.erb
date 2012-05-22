@@ -7,7 +7,10 @@
 </h3>
 
 <div> 
-  by <%= @session.presenter_names %><br>
+  by 
+  <%=  @session.presenters[0] && ( @session.presenters[0].name || @session.presenters[0].email )  %>
+  <%=  @session.presenters[1] && " & " %>
+  <%=  @session.presenters[1] && ( @session.presenters[1].name || @session.presenters[1].email )  %>
 </div>
 
 <hr>
