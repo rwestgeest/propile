@@ -22,4 +22,17 @@ FactoryGirl.define do
 #    review
     presenter
   end
+
+  factory :account do
+    sequence(:login) {|n| "login_name_#{n}"}
+    role Account::Maintainer
+    factory :confirmed_account do
+      password 'secret'
+      password_confirmation 'secret'
+      after_create do |account|
+        account.confirm!
+      end
+    end
+    
+  end
 end

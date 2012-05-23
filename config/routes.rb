@@ -1,4 +1,6 @@
 Propile::Application.routes.draw do
+  resources :accounts
+
   resources :comments
 
   resources :reviews
