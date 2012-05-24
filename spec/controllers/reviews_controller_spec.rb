@@ -27,10 +27,6 @@ describe ReviewsController do
     FactoryGirl.attributes_for(:review)
   end
 
-  def valid_session_attributes
-    FactoryGirl.attributes_for(:session_with_presenter)
-  end
-  
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # ReviewsController. Be sure to keep this updated too.
@@ -55,8 +51,8 @@ describe ReviewsController do
 
   describe "GET new" do
     it "assigns a new review as @review" do
-      session = Session.create! valid_session_attributes
-      get :new, {:session => session}, valid_session
+      session = FactoryGirl.create :session_with_presenter
+      get :new, {:session => session.id}, valid_session
       assigns(:review).should be_a_new(Review)
     end
   end
