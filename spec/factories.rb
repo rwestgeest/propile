@@ -1,5 +1,4 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
-
 FactoryGirl.define do
   factory :presenter do
     sequence(:email) {|n| "presenter_#{n}@example.com" }
@@ -23,7 +22,7 @@ FactoryGirl.define do
     presenter
   end
 
-  factory :account do
+  factory :account, :aliases => [:maintainer_account] do
     sequence(:login) {|n| "login_name_#{n}"}
     role Account::Maintainer
     factory :confirmed_account do
@@ -34,5 +33,9 @@ FactoryGirl.define do
       end
     end
     
+  end
+  factory :presenter_account, :class => Account do
+    sequence( :login ) { |n| "presenter_account_#{n}" }
+    role Account::Presenter
   end
 end

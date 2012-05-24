@@ -2,6 +2,11 @@ class Notifications < ActionMailer::Base
   FromAddress = "sessions@xpday.net"
   default from: FromAddress
 
+  def account_reset(account)
+    @account = account
+    mail to: account.email
+  end
+
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #

@@ -16,8 +16,8 @@ module Authenticable
   end
 
   module ClassMethods
-    def authenticate_by_email_and_password(email, password)
-      account = find_by_email(email)
+    def authenticate_by_login_and_password(login, password)
+      account = find_by_login(login)
       return account if account && 
                         account.confirmed? && 
                         account.authenticate(password)
