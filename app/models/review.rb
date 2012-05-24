@@ -8,9 +8,5 @@ class Review < ActiveRecord::Base
 #  validates :presenter, :presence => true
 #  validates :session, :presence => true
 
-#  def initialize(session)
-#    @session = session
-#  end
-
 
 end

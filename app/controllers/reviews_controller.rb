@@ -24,7 +24,8 @@ class ReviewsController < ApplicationController
   # GET /reviews/new
   # GET /reviews/new.json
   def new
-    @review = Review.new
+    @session = Session.find(params[:session])
+    @review =  @session.reviews.build()
 
     respond_to do |format|
       format.html # new.html.erb
