@@ -21,12 +21,12 @@ class Session < ActiveRecord::Base
   end
 
   def first_presenter_email=(value)
-    presenters << Presenter.new(:email => value, :login_guid => String(Guid.new))
+    presenters << Presenter.new(:email => value)
   end
 
   def second_presenter_email=(value)
     return if !value || value.strip.empty?
-    presenters << Presenter.new(:email => value, :login_guid => String(Guid.new))
+    presenters << Presenter.new(:email => value)
   end
 
   def presenter_names

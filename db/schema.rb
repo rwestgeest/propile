@@ -11,7 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120520161359) do
+ActiveRecord::Schema.define(:version => 20120523200919) do
+
+  create_table "accounts", :force => true do |t|
+    t.string   "email",                :limit => 150,                          :null => false
+    t.string   "role",                 :limit => 50,  :default => "presenter", :null => false
+    t.string   "encrypted_password"
+    t.string   "password_salt"
+    t.string   "authentication_token"
+    t.datetime "confirmed_at"
+    t.datetime "reset_at"
+    t.datetime "created_at",                                                   :null => false
+    t.datetime "updated_at",                                                   :null => false
+  end
+
+  add_index "accounts", ["authentication_token"], :name => "index_accounts_on_authentication_token"
+  add_index "accounts", ["email"], :name => "index_accounts_on_email"
 
   create_table "comments", :force => true do |t|
     t.text     "body"
@@ -26,12 +41,13 @@ ActiveRecord::Schema.define(:version => 20120520161359) do
 
   create_table "presenters", :force => true do |t|
     t.string   "name",       :limit => 100
-    t.string   "email",      :limit => 100
     t.text     "bio"
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
-    t.string   "login_guid"
+    t.integer  "account_id"
   end
+
+  add_index "presenters", ["account_id"], :name => "index_presenters_on_account_id"
 
   create_table "presenters_sessions", :id => false, :force => true do |t|
     t.integer "presenter_id"

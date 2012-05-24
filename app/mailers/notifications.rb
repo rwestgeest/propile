@@ -12,10 +12,10 @@ class Notifications < ActionMailer::Base
   #
   #   en.notifications.session_submit.subject
   #
-  def session_submit(presenter_email, presenter_login_guid, session)
+  def session_submit(presenter, session)
     @greeting = "Hi"
-    @login_guid = presenter_login_guid
+    @login_guid = presenter.account.authentication_token
     @session = session
-    mail to: presenter_email
+    mail to: presenter.email
   end
 end

@@ -14,6 +14,13 @@ describe Account do
       account.generate_authentication_token
       account.authentication_token.should == "first_free_generated_token"
     end
+    def isGuid(s)
+      (s =~ /^(\{){0,1}[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(\}){0,1}$/) != nil
+    end
+    it "is a guid" do
+      account.generate_authentication_token
+      isGuid(account.authentication_token).should == true
+    end
   end
 
   describe 'authenticate' do
@@ -35,15 +42,15 @@ describe Account do
     describe 'on password' do
       before { account.confirm_with_password :password => 'secret', :password_confirmation => 'secret' }
       it "fails when password does not match" do
-        Account.authenticate_by_login_and_password(account.login, 'xxxx').should be_nil
-        Account.authenticate_by_login_and_password("other"+account.login, 'secret').should be_nil
+        Account.authenticate_by_email_and_password(account.email, 'xxxx').should be_nil
+        Account.authenticate_by_email_and_password("other"+account.email, 'secret').should be_nil
       end
       it "passes when password matcher" do
-        Account.authenticate_by_login_and_password(account.login, 'secret').should == account
+        Account.authenticate_by_email_and_password(account.email, 'secret').should == account
       end
       it "fails when account is not confirmed" do
         account.update_attribute :confirmed_at, nil
-        Account.authenticate_by_login_and_password(account.login, 'secret').should be_nil
+        Account.authenticate_by_email_and_password(account.email, 'secret').should be_nil
       end
     end
   end

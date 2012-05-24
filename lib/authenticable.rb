@@ -1,9 +1,10 @@
 require 'bcrypt'
 require 'securerandom'
-
+require 'guid'
 module TokenGenerator 
   def self.generate_token
-    SecureRandom.hex(16)
+    #SecureRandom.hex(16)
+    String(Guid.new)
   end
 end
 
@@ -16,8 +17,8 @@ module Authenticable
   end
 
   module ClassMethods
-    def authenticate_by_login_and_password(login, password)
-      account = find_by_login(login)
+    def authenticate_by_email_and_password(email, password)
+      account = find_by_email(email)
       return account if account && 
                         account.confirmed? && 
                         account.authenticate(password)

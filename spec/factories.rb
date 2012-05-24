@@ -23,7 +23,7 @@ FactoryGirl.define do
   end
 
   factory :account, :aliases => [:maintainer_account] do
-    sequence(:login) {|n| "login_name_#{n}"}
+    sequence(:email) {|n| "maintainer_#{n}@example.com"}
     role Account::Maintainer
     factory :confirmed_account do
       password 'secret'
@@ -32,10 +32,9 @@ FactoryGirl.define do
         account.confirm!
       end
     end
-    
   end
   factory :presenter_account, :class => Account do
-    sequence( :login ) { |n| "presenter_account_#{n}" }
+    sequence( :email ) { |n| "presenter_#{n}@example.com" }
     role Account::Presenter
   end
 end

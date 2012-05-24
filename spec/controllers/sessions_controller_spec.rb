@@ -95,13 +95,11 @@ describe SessionsController do
 
       describe "notifications" do
         it "sends a confirmation mail to the presenters" do
-          Postman.should_receive(:deliver).with(:session_submit, first_presenter_email, an_instance_of(String), an_instance_of(Session))
-          Postman.should_receive(:deliver).with(:session_submit, second_presenter_email, an_instance_of(String), an_instance_of(Session))
+          Postman.should_receive(:deliver).with(:session_submit, an_instance_of(Presenter), an_instance_of(Session)).twice
           do_post
         end
         it "sends a confirmation mail to one presenter if only one has been submitted" do
-          Postman.should_receive(:deliver).with(:session_submit, first_presenter_email, an_instance_of(String), an_instance_of(Session))
-          Postman.should_not_receive(:deliver).with(:session_submit, '', an_instance_of(String), an_instance_of(Session))
+          Postman.should_receive(:deliver).with(:session_submit, an_instance_of(Presenter), an_instance_of(Session)).once
           post :create, {:session => valid_creation_attributes.merge(:second_presenter_email => '')}, valid_session
         end
       end
