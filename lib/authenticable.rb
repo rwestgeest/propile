@@ -52,11 +52,11 @@ module Authenticable
   end
 
   def reset!
-    if (confirmed?)
-      generate_authentication_token
-      self.reset_at = Time.now
-      save!
-    end
+    self.password = self.password_confirmation = random_password
+    generate_authentication_token
+    self.reset_at = Time.now
+    save!
+
     do_reset_hook 
   end
 
@@ -93,6 +93,9 @@ module Authenticable
       self.password_salt = ::BCrypt::Engine.generate_salt
       self.encrypted_password = ::BCrypt::Engine.hash_secret(password, password_salt)
     end
+  end
+  def random_password
+    "asdasdasd"
   end
 end
 

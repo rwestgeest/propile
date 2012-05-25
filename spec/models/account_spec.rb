@@ -94,6 +94,7 @@ describe Account do
         old_token = account.authentication_token
         reset_account
         account.authentication_token.should_not == old_token
+        account.authentication_token.should_not be_nil
       end
       it "sets the account to reset" do
         reset_account
@@ -111,18 +112,19 @@ describe Account do
 
     context "on a new account" do
       let!(:account) { FactoryGirl.create :account }
-      it "keeps the old token" do
+      it "regenerates the token" do
         old_token = account.authentication_token
         reset_account
-        account.authentication_token.should == old_token
+        account.authentication_token.should_not == old_token
+        account.authentication_token.should_not be_nil
       end
       it "sends an account reset mail" do
         Postman.should_receive(:deliver).with(:account_reset, account)
         account.reset!
       end
-      it "leaves the reset state to false"  do
-        reset_account
-        account.should_not be_reset
+      it "sets the landing page to change password" do
+        account.reset!
+        account.landing_page.should == '/account/password/edit'
       end
     end
   end
