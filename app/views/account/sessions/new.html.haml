@@ -1,0 +1,15 @@
+- title 'Login' 
+
+= form_for @account, :url => account_session_path do |f|
+  = errors_for @account
+  %p
+    .label= f.label :email
+    .input= f.text_field :email
+
+  %p
+    .label= f.label :password
+    .input= f.password_field :password
+
+  .actions
+    = f.submit t('.create_session')
+    = link_to 'I have forgotten my password', new_account_password_reset_path

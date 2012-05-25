@@ -9,6 +9,16 @@ Propile::Application.routes.draw do
 
   resources :sessions
 
+  namespace :account do
+    resource :session, :only => [:new, :create, :destroy]
+    resources :response_sessions, :only => [:show]
+    resource :password, :only => [:edit, :update]
+    resource :password_reset, :only => [:new, :create] do
+      get 'success'
+    end
+  end
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

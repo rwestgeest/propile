@@ -1,0 +1,14 @@
+- title "Change password"
+= form_for @account, :as => :account, :url  => account_password_path  do |f|
+  = errors_for @account
+
+  %p
+    .label= f.label :password
+    .input= f.password_field :password
+  %p
+    .label= f.label :password_confirmation
+    .input= f.password_field :password_confirmation
+
+  .actions
+    = f.submit
+

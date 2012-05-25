@@ -1,7 +1,8 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.2.3'
-
+gem "haml-rails"
+ 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
@@ -12,6 +13,7 @@ group :test do
   gem 'ZenTest'
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
+  gem "capybara"
 end
 
 group :development do
