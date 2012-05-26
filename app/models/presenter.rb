@@ -10,8 +10,12 @@ class Presenter < ActiveRecord::Base
   delegate :email, :to => :lazy_account, :allow_nil => true
   delegate :email=, :to => :lazy_account
 
-  private
+  def initialize(*args)
+    super(*args)
+    lazy_account
+  end
   def lazy_account
     self.account ||= Account.new
   end
+
 end

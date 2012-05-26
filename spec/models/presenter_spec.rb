@@ -16,6 +16,11 @@ describe Presenter do
       session.presenters.should include(presenter)
     end
   end
+  describe 'account' do
+    it "is a presenter account" do
+      Presenter.new.account.role.should == Account::Presenter
+    end
+  end
   describe 'email' do 
     let(:presenter) { Presenter.new }
 

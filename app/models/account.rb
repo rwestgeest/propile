@@ -2,7 +2,7 @@ require 'authenticable'
 
 class Account < ActiveRecord::Base
   Maintainer = "maintainer"
-  Submitter = "submitter"
+  Presenter = "presenter"
 
   include Authenticable 
   on_account_reset :send_reset_message
