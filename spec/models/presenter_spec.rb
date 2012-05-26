@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Presenter do
+  it { should validate_presence_of :email } 
   describe 'sessions' do
     let(:presenter) { FactoryGirl.create :presenter }
     it "are empty by default" do

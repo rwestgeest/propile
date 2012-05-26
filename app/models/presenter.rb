@@ -5,6 +5,8 @@ class Presenter < ActiveRecord::Base
 
   attr_accessible :bio, :email, :name
 
+  validates_presence_of :email
+
   delegate :email, :to => :lazy_account, :allow_nil => true
   delegate :email=, :to => :lazy_account
 
