@@ -22,15 +22,14 @@
 
   <div class="field">
     I give this session a 
-    <%= f.text_field :score, :size => 3 %> / 10. </br>
+    <%= f.text_field :score, :size => 3 %> / 10. 
     <i>This means that you, as a reviewer, think that the session can be improved to get a 10/10. You will list those possible improvements below. </i> 
   </div>
 
 
   <div class="field">
-    <%= f.label :body %><br />
-    <i>What I like: first list the things that you like about this session, why did it get the score you gave it? </br>
-       How to improve: list improvements to the session: what does the session presenter need to change so that you will give them a 10/10? </i> 
+    <div> What I like: <i>first list the things that you like about this session, why did it get the score you gave it? </i> </div>
+    <div> I will give you a 10/10 if you improve these things: <i> list improvements to the session: what does the session presenter need to change so that you will give them a 10/10? </i> </div>
     <%= f.text_area :body, :cols => 100, :rows => 10 %>
   </div>
   <div class="actions">

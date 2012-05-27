@@ -12,11 +12,13 @@ FactoryGirl.define do
       sequence(:first_presenter_email) { |n| "first_presenter_#{n}@presenters.com" }
     end
   end
+
   factory :review do
     sequence(:body) {|n| "review_body_#{n}"}
-#    session
+    association :session, factory: :session_with_presenter
     presenter
   end
+
   factory :comment do
     sequence(:body) {|n| "comment_body_#{n}"}
 #    review
@@ -34,6 +36,7 @@ FactoryGirl.define do
       end
     end
   end
+
   factory :presenter_account, :class => Account do
     sequence( :email ) { |n| "presenter_#{n}@example.com" }
     role Account::Presenter

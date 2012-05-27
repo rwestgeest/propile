@@ -7,7 +7,7 @@ class Review < ActiveRecord::Base
 
   validates :body, :presence => true
 #  validates :presenter, :presence => true
-#  validates :session, :presence => true
+  validates :session, :presence => true
 
 
 end

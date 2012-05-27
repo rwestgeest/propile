@@ -3,11 +3,13 @@ require 'spec_helper'
 describe ReviewsController do
 
   def valid_attributes
-    FactoryGirl.attributes_for(:review)
+    session = FactoryGirl.create(:session_with_presenter)
+    FactoryGirl.attributes_for(:review).merge :session_id => session.id
   end
 
   describe "GET index" do
     it "assigns all reviews as @reviews" do
+      #review = FactoryGirl.create(:review)
       review = Review.create! valid_attributes
       get :index, {}
       assigns(:reviews).should eq([review])
