@@ -13,9 +13,9 @@
   <%=  @session.presenters[1] && " & " %>
   <%=  @session.presenters[1] && 
        ( link_to @session.presenters[1].name || @session.presenters[1].email, @session.presenters[1] )  %>
+<hr>
 </div>
 
-<hr>
 
 <div class="outlined"> 
 <b>Short:</b>
@@ -68,13 +68,17 @@
 <h4>Outline or Timetable</h4>
 <pre>
 <%= @session.outline_or_timetable %> 
+</pre>
 </div>
 
 <hr>
+
 <h2> Reviews for this session: </h2>
+<div>
 <% if @session.reviews.size==0 %> 
   no reviews yet.
 <% else %> 
+
 <table class="tablelist">
   <tr>
     <th>Reviewer</th>
@@ -82,22 +86,26 @@
     <th></th>
   </tr>
 
-<% @session.reviews.each do |review| %>
-  <tr>
-    <td><%= review.presenter %></td>
-    <td><%= review.score %></td>
-    <td><pre><%= review.body %></pre></td>
-  </tr>
-<% end %>
-
+  <% @session.reviews.each do |review| %>
+    <tr>
+      <td><%= review.presenter %></td>
+      <td><%= review.score %></td>
+      <td><pre><%= review.body %></pre></td>
+    </tr>
+  <% end %>
+</table>
 <% end %> 
+</div>
 
-</hr>
+<hr>
+
+<div>
 <div class="alignright">
   Created: <%= l @session.created_at %> -- 
   Modified: <%= l @session.updated_at %> 
 </div>
+
 <%= link_to 'Edit', edit_session_path(@session) %> |
 <%= link_to 'Back', sessions_path %> |
 <%= link_to 'New Review', new_review_path( :session => @session ) %> 
-
+</div>
