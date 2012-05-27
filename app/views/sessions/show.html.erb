@@ -71,6 +71,28 @@
 </div>
 
 <hr>
+<h2> Reviews for this session: </h2>
+<% if @session.reviews.size==0 %> 
+  no reviews yet.
+<% else %> 
+<table class="tablelist">
+  <tr>
+    <th>Reviewer</th>
+    <th>Score</th>
+    <th></th>
+  </tr>
+
+<% @session.reviews.each do |review| %>
+  <tr>
+    <td><%= review.presenter %></td>
+    <td><%= review.score %></td>
+    <td><%= link_to 'Show', review %></td>
+  </tr>
+<% end %>
+
+<% end %> 
+
+<hr>
 <div class="alignright">
   Created: <%= l @session.created_at %> -- 
   Modified: <%= l @session.updated_at %> 
