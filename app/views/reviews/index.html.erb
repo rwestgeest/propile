@@ -1,11 +1,10 @@
 <%= title "Listing reviews" %>
 
-<table>
+<table class="tablelist">
   <tr>
-    <th>Body</th>
-    <th>Score</th>
     <th>Session</th>
     <th>Presenter</th>
+    <th>Score</th>
     <th></th>
     <th></th>
     <th></th>
@@ -13,10 +12,9 @@
 
 <% @reviews.each do |review| %>
   <tr>
-    <td><%= review.body %></td>
-    <td><%= review.score %></td>
-    <td><%= review.session %></td>
+    <td><%= review.session && review.session.title %></td>
     <td><%= review.presenter %></td>
+    <td><%= review.score %></td>
     <td><%= link_to 'Show', review %></td>
     <td><%= link_to 'Edit', edit_review_path(review) %></td>
     <td><%= link_to 'Destroy', review, confirm: 'Are you sure?', method: :delete %></td>

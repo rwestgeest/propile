@@ -1,4 +1,9 @@
-<%= title "Editing review" %>
+<%= title "Editing review" %> 
+
+<div class="alignright">
+  Created: <%= l @review.created_at %> -- 
+  Modified: <%= l @review.updated_at %> 
+</div>
 
 <%= render 'form' %>
 

@@ -2,18 +2,18 @@
   <h2>
     <%= @presenter.name  %> 
   </h2>
-  <div class="alignright">
-    Created: <%= l @presenter.created_at %> -- 
-    Modified: <%= l @presenter.updated_at %> 
-  </div>
-<hr>
   <div>
     <%= @presenter.email %>
   </div>
+<hr>
   <div>
     <%= @presenter.bio %>
   </div>
 <hr>
 
+<div class="alignright">
+  Created: <%= l @presenter.created_at %> -- 
+  Modified: <%= l @presenter.updated_at %> 
+</div>
 <%= link_to 'Edit', edit_presenter_path(@presenter) %> |
 <%= link_to 'Back', presenters_path %>

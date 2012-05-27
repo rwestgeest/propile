@@ -1,25 +1,31 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Body:</b>
-  <%= @review.body %>
-</p>
-
-<p>
-  <b>Score:</b>
-  <%= @review.score %>
-</p>
-
-<p>
   <b>Session:</b>
-  <%= @review.session %>
+  <%= @review.session && @review.session.title %>
 </p>
 
 <p>
-  <b>Presenter:</b>
+  <b>Review by:</b>
   <%= @review.presenter %>
 </p>
 
+<p>
+  This session gets a 
+  <%= @review.score %> / 10.
+</p>
 
+<p>
+  <pre>
+<%= @review.body %>
+  </pre>
+</p>
+
+
+<hr>
+<div class="alignright">
+  Created: <%= l @review.created_at %> -- 
+  Modified: <%= l @review.updated_at %> 
+</div>
 <%= link_to 'Edit', edit_review_path(@review) %> |
 <%= link_to 'Back', reviews_path %>

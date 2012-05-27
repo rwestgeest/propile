@@ -2,15 +2,7 @@
   <%= errors_for @review %>
 
   <div class="field">
-    <%= f.label :body %><br />
-    <%= f.text_area :body %>
-  </div>
-  <div class="field">
-    <%= f.label :score %><br />
-    <%= f.text_field :score %>
     <%= f.hidden_field :session_id %>
-  </div>
-  <div class="field">
     <%= f.label :session %>: 
     <% if @review.session.nil?  %>  
       no session defined (invalid review)
@@ -19,7 +11,8 @@
     <% end %> 
   </div>
   <div class="field">
-    <%= f.label :presenter %>: 
+    Review by
+    <!--%= f.label :presenter %-->: 
     <% if @review.presenter.nil?  %>  
       no presenter defined (invalid review)
     <% else %> 
@@ -27,6 +20,19 @@
     <% end %> 
   </div>
 
+  <div class="field">
+    I give this session a 
+    <%= f.text_field :score, :size => 3 %> / 10. </br>
+    <i>This means that you, as a reviewer, think that the session can be improved to get a 10/10. You will list those possible improvements below. </i> 
+  </div>
+
+
+  <div class="field">
+    <%= f.label :body %><br />
+    <i>What I like: first list the things that you like about this session, why did it get the score you gave it? </br>
+       How to improve: list improvements to the session: what does the session presenter need to change so that you will give them a 10/10? </i> 
+    <%= f.text_area :body, :cols => 100, :rows => 10 %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
