@@ -89,15 +89,7 @@
       <div>
         <% review.comments.each do |comment| %>
           <div class="comment">
-            <b>Comment by:</b>
-            <% if comment.presenter.nil?  %>  
-              no presenter defined (invalid comment)
-            <% else %> 
-              <%= comment.presenter.name %>
-            <% end %> 
-            -- Created: <%= l comment.created_at %> 
-            -- Modified: <%= l comment.updated_at %> 
-            <pre><%= comment.body %></pre>
+            <%= render 'comments/show', :comment => comment  %>
             <%= link_to 'Edit this comment', edit_comment_path(comment) %> 
           </div>
         <% end %>

@@ -9,23 +9,7 @@
 
 <%= render 'reviews/show', :review => @comment.review  %>
 
-<p>
-  <b>Comment on Review by</b>
-  <% if @comment.presenter.nil?  %>  
-    nobody defined (invalid comment)
-  <% else %> 
-    <%= @comment.presenter.name %>
-  <% end %> 
-  :
-</p>
+<%= render 'comments/show', :comment => @comment  %>
 
-<div> <pre> <%= @comment.body %> </pre> </div>
-
-
-<hr>
-<div class="alignright">
-  Created: <%= l @comment.created_at %> -- 
-  Modified: <%= l @comment.updated_at %> 
-</div>
 <%= link_to 'Edit', edit_comment_path(@comment) %> |
 <%= link_to 'Back to Session', @comment.review.session %> 
