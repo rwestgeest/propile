@@ -55,6 +55,8 @@ div.left {
 div.outlined {
   border: 2px solid grey;
   background-color: lightgrey;
+  margin: 2px;
+  padding: 5px;
 }
 
 div > i {
@@ -62,3 +64,14 @@ div > i {
   font-size:smaller;
 }
 
+div.review {
+  border: 1px solid grey;
+  margin: 20px;
+  padding: 20px;
+}
+
+div.comment {
+  border: 1px solid grey;
+  margin: 20px;
+  padding: 20px;
+}

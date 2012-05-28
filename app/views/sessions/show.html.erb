@@ -79,21 +79,48 @@
   no reviews yet.
 <% else %> 
 
-<table class="tablelist">
-  <tr>
-    <th>Reviewer</th>
-    <th>Score</th>
-    <th></th>
-  </tr>
-
   <% @session.reviews.each do |review| %>
-    <tr>
-      <td><%= review.presenter %></td>
-      <td><%= review.score %></td>
-      <td><pre><%= review.body %></pre></td>
-    </tr>
+  <div class="review">
+    <p>
+      <b>Review by:</b>
+      <% if review.presenter.nil?  %>  
+        no presenter defined (invalid review)
+      <% else %> 
+        <%= review.presenter.name %>
+      <% end %> 
+      -- Created: <%= l review.created_at %> 
+      -- Modified: <%= l review.updated_at %> 
+    </p>
+
+    <p> This session gets a <%= review.score %> / 10.  </p>
+
+    <p> <pre><%= review.body %> </pre> </p>
+
+    <%= link_to 'Edit this review', edit_review_path(review) %> 
+
+    <% if review.comments.size!=0 %> 
+      <h3> Comments on this review: </h3>
+      <div>
+        <% review.comments.each do |comment| %>
+          <div class="comment">
+            <b>Comment by:</b>
+            <% if comment.presenter.nil?  %>  
+              no presenter defined (invalid comment)
+            <% else %> 
+              <%= comment.presenter.name %>
+            <% end %> 
+            -- Created: <%= l comment.created_at %> 
+            -- Modified: <%= l comment.updated_at %> 
+            <pre><%= comment.body %></pre>
+            <%= link_to 'Edit this comment', edit_review_path(comment) %> 
+          </div>
+        <% end %>
+      </div>
+    <% end %> 
+    <%= link_to 'New Comment on this review', new_comment_path( :review => review ) %>
+  </div>
   <% end %>
-</table>
+
 <% end %> 
 </div>
 
