@@ -7,22 +7,7 @@
 </p>
 <hr>
 
-<p>
-  Review by:
-  <% if @comment.review.presenter.nil?  %>  
-    nobody defined (invalid review)
-  <% else %> 
-    <%= @comment.review.presenter.name %>
-  <% end %> 
-</p>
-
-<p>
-  This session gets a 
-  <%= @comment.review.score %> / 10.
-</p>
-<div> <pre> <%= @comment.review.body %> </pre> </div>
-
-<hr>
+<%= render 'reviews/show', :review => @comment.review  %>
 
 <p>
   <b>Comment on Review by</b>
