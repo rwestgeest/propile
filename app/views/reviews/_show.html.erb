@@ -1,12 +1,11 @@
-<div>
-  <b>Review by</b>
+<h3>Review by
   <% if review.presenter.nil?  %>  
-    nobody defined (invalid review)
+    nobody (invalid review)
   <% else %> 
     <%= review.presenter.name %>
   <% end %> 
   :
-</div>
+</h3>
 
 <div>
   This session gets a 

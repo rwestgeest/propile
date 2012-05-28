@@ -8,15 +8,15 @@
 
 <%= render 'reviews/show', :review => @comment.review  %>
 
-<p>
-  <b>Comment on Review by</b>
+<h4>
+  Comment by
   <% if @comment.presenter.nil?  %>  
-    nobody defined (invalid comment)
+    nobody (invalid comment)
   <% else %> 
     <%= @comment.presenter.name %>
   <% end %> 
-  :
-</p>
+  on this Review:
+</h4>
 
 <div class="field">
   <%= f.text_area :body, :cols => 100, :rows => 10 %>

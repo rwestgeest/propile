@@ -7,14 +7,14 @@
 
 <hr>
 
-<p>
-  <b>Review by:</b>
+<h3>Review by:
   <% if @review.presenter.nil?  %>  
     nobody defined (invalid review)
   <% else %> 
     <%= @review.presenter.name %>
   <% end %> 
-</p>
+  :
+</h3>
 
 
   <div class="field">

@@ -3,6 +3,7 @@
 <table class="tablelist">
   <tr>
     <th>Title</th>
+    <th>Presenter(s)</th>
     <th>Created</th>
     <th>Modified</th>
     <th></th>
@@ -13,6 +14,13 @@
 <% @sessions.each do |session| %>
   <tr>
     <td><%= session.title%> </td>
+    <td>
+      <%=  session.presenters[0] && 
+           ( link_to session.presenters[0].name || session.presenters[0].email, session.presenters[0] )  %>
+      <%=  session.presenters[1] && " & " %>
+      <%=  session.presenters[1] && 
+           ( link_to session.presenters[1].name || session.presenters[1].email, session.presenters[1] )  %>
+    </td>
     <td><%= l session.created_at %> </td>
     <td><%= l session.updated_at %> </td>
     <td><%= link_to 'Show', session %></td>

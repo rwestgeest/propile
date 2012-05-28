@@ -1,19 +1,16 @@
 <p id="notice"><%= notice %></p>
-  <h2>
-    <%= @presenter.name  %> 
-  </h2>
-  <div>
-    <%= @presenter.email %>
-  </div>
+
+<h2> <%= @presenter.name  %> </h2>
+<div> <%= @presenter.email %> </div>
 <hr>
-  <div>
-    <%= @presenter.bio %>
-  </div>
-<hr>
+
+<div> <pre> <%= @presenter.bio %> </pre> </div>
 
 <div class="alignright">
   Created: <%= l @presenter.created_at %> -- 
   Modified: <%= l @presenter.updated_at %> 
 </div>
+<hr>
+
 <%= link_to 'Edit', edit_presenter_path(@presenter) %> |
 <%= link_to 'Back', presenters_path %>

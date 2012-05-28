@@ -1,13 +1,12 @@
 
-<div>
-  <b>Comment on Review by</b>
+<h4>Comment by
   <% if comment.presenter.nil?  %>  
-    nobody defined (invalid comment)
+    nobody (invalid comment)
   <% else %> 
     <%= comment.presenter.name %>
   <% end %> 
-  :
-</div>
+  on this Review:
+</h4>
 
 <div> <pre> <%= comment.body %> </pre> </div>
 

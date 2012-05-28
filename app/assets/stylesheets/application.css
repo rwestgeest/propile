@@ -80,13 +80,13 @@ div > pre {
 div.review {
   border: 1px solid lavender;
   margin: 20px;
-  padding: 3px 20px;
+  padding: 0px 20px;
 }
 
 div.comment {
   border: 1px solid lavender;
   margin: 20px;
-  padding: 3px 20px;
+  padding: 0px 20px;
 }
 
 hr {
