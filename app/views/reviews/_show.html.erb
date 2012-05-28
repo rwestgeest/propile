@@ -1,4 +1,4 @@
-<p>
+<div>
   <b>Review by</b>
   <% if review.presenter.nil?  %>  
     nobody defined (invalid review)
@@ -6,18 +6,18 @@
     <%= review.presenter.name %>
   <% end %> 
   :
-</p>
+</div>
 
-<p>
+<div>
   This session gets a 
   <%= review.score %> / 10.
-</p>
+</div>
 
-<p>
+<div>
   <pre>
 <%= review.body %>
   </pre>
-</p>
+</div>
 
 <div class="alignright">
   Created: <%= l review.created_at %> -- Modified: <%= l review.updated_at %> 

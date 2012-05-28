@@ -1,9 +1,17 @@
 <%= form_for(@session) do |f| %>
   <%= errors_for @session %>
 
+<div class="full"> 
   <div> <%= f.label :title %>*: </div>
   <div> <%= text_area :session, :title, :cols => "100", :rows => "1"  %> </div>
+</div>
+<div class="full"> 
+  <div> <%= f.label :sub_title %>: <i>sometimes your title is catchy but doesn't describe the content of your session. A subtitle can help. Keep short! </i> </div> 
+  <div> <%= text_area :session, :sub_title, :cols => "100", :rows => "1"  %> </div>
+</div>
 
+
+<div class="full"> 
   <% if editable_presenters=="true" %> 
     <div class="left">
       <div> <%= f.label :first_presenter_email %>*: </div>
@@ -23,14 +31,16 @@
       <div> <%= f.text_area :second_presenter_email,  :rows => "1", :disabled => "@disabled_presenters" %> </div>
     </div>
   <% end %> 
-
+</div>
 
 <div class="full"> 
-  <div> <%= f.label :sub_title %>: <i>sometimes your title is catchy but doesn't describe the content of your session. A subtitle can help. Keep short! </i> </div> 
-  <div> <%= text_area :session, :sub_title, :cols => "100", :rows => "1"  %> </div>
+  <hr>
   <div> <%= f.label :short_description %>: <i> will appear on the "Program Cards" on the "Program Board" at the conference. It should be a teaser. </i> </div>
-  <div> <%= text_area :session, :short_description, :cols => "100", :rows => "4"  %> </div>
+  <div> <%= text_area :session, :short_description, :cols => "100", :rows => "6"  %> </div>
+  <hr>
 </div>
+
+
 <div class="left">
   <div> <%= f.label :session_type %>: <i> can include presentations, simulations, games, workshops, open space...</i> </div>
   <div> <%= text_area :session, :session_type, :cols => "45", :rows => "1"  %> </div>

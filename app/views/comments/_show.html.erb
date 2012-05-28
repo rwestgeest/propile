@@ -1,5 +1,5 @@
 
-<p>
+<div>
   <b>Comment on Review by</b>
   <% if comment.presenter.nil?  %>  
     nobody defined (invalid comment)
@@ -7,7 +7,7 @@
     <%= comment.presenter.name %>
   <% end %> 
   :
-</p>
+</div>
 
 <div> <pre> <%= comment.body %> </pre> </div>
 

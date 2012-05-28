@@ -24,8 +24,15 @@ table.tablelist {
   text-align: left;
 }
 
+table.propertytable {
+  border-collapse:collapse;
+  border: 2px solid lavender;
+  text-align: left;
+  width: 100%;
+}
+
 td, th {
-  border: 1px solid grey;
+  border: 1px solid lavender;
   padding: 5px;
 }
 
@@ -35,6 +42,7 @@ th {
 
 .alignright {
   text-align: right;
+  font-size: smaller;
 }
 
 div.full {
@@ -53,10 +61,10 @@ div.left {
 }
 
 div.outlined {
-  border: 2px solid grey;
-  background-color: lightgrey;
-  margin: 2px;
-  padding: 5px;
+  border: 2px solid lavender;
+  background-color: azure;
+  margin: 1px;
+  padding: 6px;
 }
 
 div > i {
@@ -64,14 +72,26 @@ div > i {
   font-size:smaller;
 }
 
+div > pre {
+  border: 1px solid lavender;
+  background-color: honeydew;
+}
+
 div.review {
-  border: 1px solid grey;
+  border: 1px solid lavender;
   margin: 20px;
-  padding: 20px;
+  padding: 3px 20px;
 }
 
 div.comment {
-  border: 1px solid grey;
+  border: 1px solid lavender;
   margin: 20px;
-  padding: 20px;
+  padding: 3px 20px;
 }
+
+hr {
+  height:1px;
+  background-color:lavender;
+  border:0px;
+}
+
