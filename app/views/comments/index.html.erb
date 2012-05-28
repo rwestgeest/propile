@@ -1,12 +1,10 @@
 <%= title "Listing comments" %>
 
-<p>Not yet ready to use!!! </p>
-
-<table>
+<table class="tablelist">
   <tr>
-    <th>Body</th>
-    <th>Review</th>
-    <th>Presenter</th>
+    <th>Session</th>
+    <th>Review by</th>
+    <th>Comment by</th>
     <th></th>
     <th></th>
     <th></th>
@@ -14,8 +12,8 @@
 
 <% @comments.each do |comment| %>
   <tr>
-    <td><%= comment.body %></td>
-    <td><%= comment.review %></td>
+    <td><%= comment.review.session && comment.review.session.title %></td>
+    <td><%= comment.review.presenter && comment.review.presenter.name %></td>
     <td><%= comment.presenter %></td>
     <td><%= link_to 'Show', comment %></td>
     <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
@@ -26,4 +24,4 @@
 
 <br />
 
-<%= link_to 'New Comment', new_comment_path %>
+<%= link_to 'Back', "/" %>

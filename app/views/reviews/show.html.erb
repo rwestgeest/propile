@@ -8,7 +8,11 @@
 
 <p>
   <b>Review by:</b>
-  <%= @review.presenter %>
+  <% if @review.presenter.nil?  %>  
+    no presenter defined (invalid review)
+  <% else %> 
+    <%= @review.presenter.name %>
+  <% end %> 
 </p>
 
 <p>
@@ -23,7 +27,8 @@
 </p>
 
 
-<h2> Comments on this review: </h2>
+<hr>
+<h3> Comments on this review: </h3>
 <div>
 <% if @review.comments.size==0 %> 
   no comments yet.

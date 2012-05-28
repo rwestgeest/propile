@@ -1,11 +1,12 @@
 <%= title "Editing review" %> 
 
+<%= render 'form' %>
+
+<hr>
 <div class="alignright">
   Created: <%= l @review.created_at %> -- 
   Modified: <%= l @review.updated_at %> 
 </div>
-
-<%= render 'form' %>
 
 <%= link_to 'Show', @review %> |
 <%= link_to 'Back', reviews_path %>

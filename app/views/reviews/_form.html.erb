@@ -1,24 +1,23 @@
 <%= form_for(@review) do |f| %>
   <%= errors_for @review %>
 
-  <div class="field">
-    <%= f.hidden_field :session_id %>
-    <%= f.label :session %>: 
-    <% if @review.session.nil?  %>  
-      no session defined (invalid review)
-    <% else %> 
-      <%= @review.session.title %>
-    <% end %> 
-  </div>
-  <div class="field">
-    Review by
-    <!--%= f.label :presenter %-->: 
-    <% if @review.presenter.nil?  %>  
-      no presenter defined (invalid review)
-    <% else %> 
-      <%= @review.presenter.name %>
-    <% end %> 
-  </div>
+<%= f.hidden_field :session_id %>
+
+<p>
+  <div> <b>Review for:</b> </div>
+  <h2> <%= link_to @review.session.title, @review.session %> </h2>
+  <div> <%= @review.session && @review.session.short_description %> </div> 
+</p>
+
+<p>
+  <b>Review by:</b>
+  <% if @review.presenter.nil?  %>  
+    no presenter defined (invalid review)
+  <% else %> 
+    <%= @review.presenter.name %>
+  <% end %> 
+</p>
+
 
   <div class="field">
     I give this session a 
