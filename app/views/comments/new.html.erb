@@ -1,5 +1,5 @@
-<%= title "New comment" %>
+<b><%= title "New Comment on Review for:" %></b>
 
 <%= render 'form' %>
 
-<%= link_to 'Back', comments_path %>
+<%= link_to 'Back to Session', @comment.review.session %>

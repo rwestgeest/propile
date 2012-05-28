@@ -112,7 +112,7 @@
             -- Created: <%= l comment.created_at %> 
             -- Modified: <%= l comment.updated_at %> 
             <pre><%= comment.body %></pre>
-            <%= link_to 'Edit this comment', edit_review_path(comment) %> 
+            <%= link_to 'Edit this comment', edit_comment_path(comment) %> 
           </div>
         <% end %>
       </div>
@@ -120,6 +120,7 @@
     <%= link_to 'New Comment on this review', new_comment_path( :review => review ) %>
   </div>
   <% end %>
+  <%= link_to 'New Review on this session', new_review_path( :session => @session ) %>
 
 <% end %> 
 </div>
@@ -131,7 +132,6 @@
   Modified: <%= l @session.updated_at %> 
 </div>
 
-<%= link_to 'Edit', edit_session_path(@session) %> |
-<%= link_to 'Back', sessions_path %> |
-<%= link_to 'New Review', new_review_path( :session => @session ) %> 
+<%= link_to 'Edit this session', edit_session_path(@session) %> |
+<%= link_to 'Back to list of sessions', sessions_path %> 
 </div>

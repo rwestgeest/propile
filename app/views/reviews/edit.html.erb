@@ -1,4 +1,4 @@
-<%= title "Editing review" %> 
+<b><%= title "Editing review for:" %> </b>
 
 <%= render 'form' %>
 
@@ -8,5 +8,4 @@
   Modified: <%= l @review.updated_at %> 
 </div>
 
-<%= link_to 'Show', @review %> |
-<%= link_to 'Back', reviews_path %>
+<%= link_to 'Back to Session', @review.session %>

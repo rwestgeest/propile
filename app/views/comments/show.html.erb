@@ -1,20 +1,46 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Body:</b>
-  <%= @comment.body %>
+  <div> <b>Comment on Review for:</b> </div>
+  <h2> <%= link_to @comment.review.session.title, @comment.review.session %> </h2>
+  <%= @comment.review.session && @comment.review.session.short_description %>
+</p>
+<hr>
+
+<p>
+  Review by:
+  <% if @comment.review.presenter.nil?  %>  
+    nobody defined (invalid review)
+  <% else %> 
+    <%= @comment.review.presenter.name %>
+  <% end %> 
 </p>
 
 <p>
-  <b>Review:</b>
-  <%= @comment.review %>
+  This session gets a 
+  <%= @comment.review.score %> / 10.
 </p>
+<div> <pre> <%= @comment.review.body %> </pre> </div>
+
+<hr>
 
 <p>
-  <b>Presenter:</b>
-  <%= @comment.presenter %>
+  <b>Comment on Review by</b>
+  <% if @comment.presenter.nil?  %>  
+    nobody defined (invalid comment)
+  <% else %> 
+    <%= @comment.presenter.name %>
+  <% end %> 
+  :
 </p>
 
+<div> <pre> <%= @comment.body %> </pre> </div>
 
+
+<hr>
+<div class="alignright">
+  Created: <%= l @comment.created_at %> -- 
+  Modified: <%= l @comment.updated_at %> 
+</div>
 <%= link_to 'Edit', edit_comment_path(@comment) %> |
-<%= link_to 'Back', comments_path %>
+<%= link_to 'Back to Session', @comment.review.session %> 

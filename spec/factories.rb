@@ -21,7 +21,7 @@ FactoryGirl.define do
 
   factory :comment do
     sequence(:body) {|n| "comment_body_#{n}"}
-#    review
+    association :review, factory: :review
     presenter
   end
 

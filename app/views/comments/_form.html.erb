@@ -1,41 +1,49 @@
 <%= form_for(@comment) do |f| %>
   <%= errors_for @comment %>
 
-  <div>
-    <%= f.hidden_field :review_id %>
-    <% if @comment.review.nil? || @comment.review.session.nil?  %>  
-      no valid session defined (invalid comment)
-    <% else %> 
-      <h2> <div> <%= @comment.review.session.title %> </div></h2>
-      <div> <%= @comment.review.session.short_description %> </div>
-      <hr>
-      <div>
-        Review by
-        <% if @comment.review.presenter.nil?  %>  
-          no presenter defined (invalid review)
-        <% else %> 
-          <%= @comment.review.presenter.name %>
-        <% end %> 
-      </div>
-      <div> <pre> <%= @comment.review.body %> </pre> </div>
-    <% end %> 
-  </div>
+<%= f.hidden_field :review_id %>
 
-  <div class="field">
-    Comment by
-    <% if @comment.presenter.nil?  %>  
-      no presenter defined (invalid review)
-    <% else %> 
-      <%= @comment.presenter.name %>
-    <% end %> 
-  </div>
+<p>
+  <h2> <%= link_to @comment.review.session.title, @comment.review.session %> </h2>
+  <%= @comment.review.session && @comment.review.session.short_description %> 
+</p>
+<hr>
 
-    Comment: 
-  <div class="field">
-    <%= f.text_area :body %>
-  </div>
+<p>
+  Review by:
+  <% if @comment.review.presenter.nil?  %>  
+    nobody defined (invalid review)
+  <% else %> 
+    <%= @comment.review.presenter.name %>
+  <% end %> 
+</p>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<p>
+  This session gets a 
+  <%= @comment.review.score %> / 10.
+</p>
+<div> <pre> <%= @comment.review.body %> </pre> </div>
+
+<hr>
+
+<p>
+  <b>Comment on Review by</b>
+  <% if @comment.presenter.nil?  %>  
+    nobody defined (invalid comment)
+  <% else %> 
+    <%= @comment.presenter.name %>
+  <% end %> 
+  :
+</p>
+
+<div class="field">
+  <%= f.text_area :body, :cols => 100, :rows => 10 %>
+</div>
+
+
+<hr>
+<div class="actions">
+  <%= f.submit %>
+</div>
+
 <% end %>

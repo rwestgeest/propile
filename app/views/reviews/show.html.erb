@@ -3,13 +3,14 @@
 <p>
   <div> <b>Review for:</b> </div>
   <h2> <%= link_to @review.session.title, @review.session %> </h2>
-  <div> <%= @review.session && @review.session.short_description %> </div> 
+  <%= @review.session && @review.session.short_description %> 
 </p>
+<hr>
 
 <p>
   <b>Review by:</b>
   <% if @review.presenter.nil?  %>  
-    no presenter defined (invalid review)
+    nobody defined (invalid review)
   <% else %> 
     <%= @review.presenter.name %>
   <% end %> 
@@ -27,28 +28,6 @@
 </p>
 
 
-<hr>
-<h3> Comments on this review: </h3>
-<div>
-<% if @review.comments.size==0 %> 
-  no comments yet.
-<% else %> 
-
-<table class="tablelist">
-  <tr>
-    <th>Commenter</th>
-    <th></th>
-  </tr>
-
-  <% @review.comments.each do |comment| %>
-    <tr>
-      <td><%= comment.presenter %></td>
-      <td><pre><%= comment.body %></pre></td>
-    </tr>
-  <% end %>
-</table>
-<% end %> 
-</div>
 
 <hr>
 <div class="alignright">
@@ -56,5 +35,4 @@
   Modified: <%= l @review.updated_at %> 
 </div>
 <%= link_to 'Edit', edit_review_path(@review) %> |
-<%= link_to 'Back', reviews_path %> |
-<%= link_to 'New Comment', new_comment_path( :review => @review ) %> 
+<%= link_to 'Back to Session', @review.session %> 

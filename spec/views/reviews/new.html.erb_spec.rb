@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "reviews/new" do
   before(:each) do
-    assign(:review, stub_model(Review).as_new_record)
+    assign(:review, FactoryGirl.create(:review))
   end
 
   it "renders new review form" do

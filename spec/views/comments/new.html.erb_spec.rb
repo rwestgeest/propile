@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "comments/new" do
   before(:each) do
-    assign(:comment, stub_model(Comment).as_new_record)
+    assign(:comment, FactoryGirl.create(:comment))
   end
 
   it "renders new comment form" do
