@@ -1,10 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <div> <b>Comment on Review for:</b> </div>
-  <h2> <%= link_to @comment.review.session.title, @comment.review.session %> </h2>
-  <%= @comment.review.session && @comment.review.session.short_description %>
-</p>
+<%= render 'sessions/show_short', :session => @comment.review.session  %>
 <hr>
 
 <%= render 'reviews/show', :review => @comment.review  %>

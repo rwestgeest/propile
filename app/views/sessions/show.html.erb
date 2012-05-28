@@ -1,26 +1,6 @@
 <p id="notice"><%= notice %></p> 
-<h2>
-  <%= @session.title  %> 
-</h2>
-<h3>
-  <%= @session.sub_title  %> 
-</h3>
 
-<div> 
-  by 
-  <%=  @session.presenters[0] && 
-       ( link_to @session.presenters[0].name || @session.presenters[0].email, @session.presenters[0] )  %>
-  <%=  @session.presenters[1] && " & " %>
-  <%=  @session.presenters[1] && 
-       ( link_to @session.presenters[1].name || @session.presenters[1].email, @session.presenters[1] )  %>
-<hr>
-</div>
-
-
-<div class="outlined"> 
-<b>Short:</b>
-  <%= @session.short_description %>
-</div>
+<%= render 'sessions/show_short', :session => @session  %>
 
 <div>
 <table width="100%">

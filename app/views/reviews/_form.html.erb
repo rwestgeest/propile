@@ -3,10 +3,8 @@
 
 <%= f.hidden_field :session_id %>
 
-<p>
-  <h2> <%= link_to @review.session.title, @review.session %> </h2>
-  <%= @review.session && @review.session.short_description %> 
-</p>
+<%= render 'sessions/show_short', :session => @review.session  %>
+
 <hr>
 
 <p>
