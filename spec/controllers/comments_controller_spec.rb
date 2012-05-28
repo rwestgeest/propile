@@ -3,7 +3,8 @@ require 'spec_helper'
 describe CommentsController do
 
   def valid_attributes
-    FactoryGirl.attributes_for(:comment)
+    review = FactoryGirl.create(:review)
+    FactoryGirl.attributes_for(:comment).merge :review_id => review.id
   end
   
   describe "GET index" do
@@ -24,7 +25,8 @@ describe CommentsController do
 
   describe "GET new" do
     it "assigns a new comment as @comment" do
-      get :new, {}
+      review = FactoryGirl.create :review
+      get :new, {:review => review.id}
       assigns(:comment).should be_a_new(Comment)
     end
   end

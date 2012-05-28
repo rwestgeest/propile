@@ -1,8 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Session:</b>
-  <%= @review.session && @review.session.title %>
+  <div> <b>Review for:</b> </div>
+  <h2> <%= link_to @review.session.title, @review.session %> </h2>
+  <div> <%= @review.session && @review.session.short_description %> </div> 
 </p>
 
 <p>
@@ -22,6 +23,28 @@
 </p>
 
 
+<h2> Comments on this review: </h2>
+<div>
+<% if @review.comments.size==0 %> 
+  no comments yet.
+<% else %> 
+
+<table class="tablelist">
+  <tr>
+    <th>Commenter</th>
+    <th></th>
+  </tr>
+
+  <% @review.comments.each do |comment| %>
+    <tr>
+      <td><%= comment.presenter %></td>
+      <td><pre><%= comment.body %></pre></td>
+    </tr>
+  <% end %>
+</table>
+<% end %> 
+</div>
+
 <hr>
 <div class="alignright">
   Created: <%= l @review.created_at %> -- 
@@ -29,3 +52,4 @@
 </div>
 <%= link_to 'Edit', edit_review_path(@review) %> |
 <%= link_to 'Back', reviews_path %>
+<%= link_to 'New Comment', new_comment_path( :review => @review ) %> 

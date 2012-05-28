@@ -1,18 +1,40 @@
 <%= form_for(@comment) do |f| %>
   <%= errors_for @comment %>
 
+  <div>
+    <%= f.hidden_field :review_id %>
+    <% if @comment.review.nil? || @comment.review.session.nil?  %>  
+      no valid session defined (invalid comment)
+    <% else %> 
+      <h2> <div> <%= @comment.review.session.title %> </div></h2>
+      <div> <%= @comment.review.session.short_description %> </div>
+      <hr>
+      <div>
+        Review by
+        <% if @comment.review.presenter.nil?  %>  
+          no presenter defined (invalid review)
+        <% else %> 
+          <%= @comment.review.presenter.name %>
+        <% end %> 
+      </div>
+      <div> <pre> <%= @comment.review.body %> </pre> </div>
+    <% end %> 
+  </div>
+
   <div class="field">
-    <%= f.label :body %><br />
+    Comment by
+    <% if @comment.presenter.nil?  %>  
+      no presenter defined (invalid review)
+    <% else %> 
+      <%= @comment.presenter.name %>
+    <% end %> 
+  </div>
+
+    Comment: 
+  <div class="field">
     <%= f.text_area :body %>
   </div>
-  <div class="field">
-    <%= f.label :review %><br />
-    <%= f.text_field :review %>
-  </div>
-  <div class="field">
-    <%= f.label :presenter %><br />
-    <%= f.text_field :presenter %>
-  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

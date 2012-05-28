@@ -24,7 +24,8 @@ class CommentsController < ApplicationController
   # GET /comments/new
   # GET /comments/new.json
   def new
-    @comment = Comment.new
+    @review  = Review.find(params[:review])
+    @comment =  @review.comments.build()
 
     respond_to do |format|
       format.html # new.html.erb
