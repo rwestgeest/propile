@@ -16,3 +16,10 @@ en:
   notifications:
     session_submit:
       subject: "Thank you for submitting your session"
+  account:
+    sessions:
+      new:
+        create_session: "Sign in"
+    password_resets:
+      new:
+        send_password: "Reset password"

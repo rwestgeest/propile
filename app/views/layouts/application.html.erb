@@ -22,7 +22,6 @@
   <ul>
     <%= menu(request.fullpath) do |m| %>
       <% m.tab("Sessions", sessions_path) %>
-      <% m.tab("Feedback", '/') %>
       <% m.tab("Presenters", presenters_path) %>
         <% m.tab("Submit a session", new_session_path) %>
     <% end %>

@@ -2,6 +2,16 @@ require 'spec_helper'
 
 describe Presenter do
   it { should validate_presence_of :email } 
+
+  describe "name" do
+    it "is name if set" do
+      Presenter.new(:name => "rob").name.should == "rob"
+    end
+    it "is email if not set" do
+      Presenter.new(:email => "rob@rob.nl").name.should == "rob@rob.nl"
+    end
+  end
+
   describe 'sessions' do
     let(:presenter) { FactoryGirl.create :presenter }
     it "are empty by default" do

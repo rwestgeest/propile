@@ -14,6 +14,11 @@ class Presenter < ActiveRecord::Base
     super(*args)
     lazy_account
   end
+
+  def name
+    super || email
+  end
+
   def lazy_account
     self.account ||= Account.new
   end
