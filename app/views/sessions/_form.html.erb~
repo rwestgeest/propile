@@ -49,7 +49,7 @@
   <div> <%= text_area :session, :topic, :cols => "45", :rows => "1"  %> </div>
   <div> <%= f.label :duration %>: <i> 30 min / 60 min / 90 min </i> </div>
   <div> <%= text_area :session, :duration, :cols => "45", :rows => "1"  %> </div>
-  <div> <%= f.label :intended_audience %>: <i> who will benefit from this session? Have a look at the <a href="http://www.xpday.net/Xpday2012/Personas.html" target="_new">Personas</a> to get ideas about what participants want out of XP Days.</i> </div>
+  <div> <%= f.label :intended_audience %>: <i> who will benefit from this session? Have a look at the <a href="http://www.xpday.net/Xpday2012/Personas.html">Personas</a> to get ideas about what participants want out of XP Days.</i> </div>
   <div> <%= text_area :session, :intended_audience, :cols => "45", :rows => "1"  %> </div>
   <div> <%= f.label :experience_level %>: <i> do you expect them to have certain knowledge or experience?</i> </div>
   <div> <%= text_area :session, :experience_level, :cols => "45", :rows => "1"  %> </div>
