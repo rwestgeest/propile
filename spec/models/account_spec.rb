@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Account do
+
   describe 'generate_authentication_token' do
     let!(:existing_account) { FactoryGirl.create :maintainer_account }
     let(:account) { Account.new }

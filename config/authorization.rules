@@ -4,4 +4,5 @@ allow '/presenters', :at_least => :maintainer
 allow '/comments', :at_least => :presenter
 allow '/reviews', :at_least => :presenter
 allow '/sessions', :at_least => :presenter
+allow '/account/password', :at_least => :presenter
 allow '/'

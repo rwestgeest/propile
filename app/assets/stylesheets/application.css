@@ -16,6 +16,30 @@ body {
   background-color: beige;
 }
 
+#header-navigation {
+  text-align: right;
+}
+
+#main-navigation ul { height: 40px; display: block; list-style-type: none; padding:0;}
+#main-navigation ul li { float: left; }
+#main-navigation ul li a { 
+	display: block; 
+	font-size: 123%;
+	text-decoration: none;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-box-radius: 3px;
+	padding: 6px 17px;
+	margin: 9px 3px 0 0;
+}
+#main-navigation ul li a:hover { 
+	display: block;
+	background: lightGrey;
+}
+#main-navigation ul li a.active {
+	background: Grey;
+  color: #fff;
+}
 
 
 table.tablelist {

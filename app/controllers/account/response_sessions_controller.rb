@@ -1,5 +1,5 @@
 class Account::ResponseSessionsController < ApplicationController
-  layout 'sessions'
+  layout 'account'
   def show
     @account = Account.find_by_authentication_token(params[:id])
     if @account

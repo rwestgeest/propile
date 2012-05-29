@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   prepend_before_filter :authorize_action
   helper_method :current_account
+  helper_method :signed_in?
 
   def signed_in?
     not session[:current_account_id].nil?

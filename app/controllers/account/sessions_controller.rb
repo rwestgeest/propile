@@ -1,6 +1,6 @@
 class Account::SessionsController < ApplicationController
   skip_before_filter :authorize_action, :only => [:new, :create]
-  layout 'sessions'
+  layout 'account'
   def new
     @account = Account.new
   end

@@ -7,7 +7,30 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<%= yield :title %>
+  <nav id="header-navigation">
+    <% if signed_in? %> 
+      <%= "Signed in as" %>&nbsp;<%= current_account.email %>&nbsp;|&nbsp;
+      <%= link_to 'Change password', edit_account_password_path %>&nbsp;|&nbsp;
+      <%= link_to 'Sign out', account_session_path, :method => :delete %>
+    <% else %>
+      <%= link_to 'Sign in', new_account_session_path %>
+    <% end %>
+  </nav>
+
+<h1><%= yield :title %></h1>
+	<nav id="main-navigation">
+  <ul>
+    <%= menu(request.fullpath) do |m| %>
+      <% m.tab("Sessions", sessions_path) %>
+      <% m.tab("Feedback", '/') %>
+      <% m.tab("Presenters", presenters_path) %>
+        <% m.tab("Submit a session", new_session_path) %>
+    <% end %>
+	</ul>
+	</nav>
+<section id="flash_messages">
+<%= flash_tags %>
+</section>
 <%= yield %>
 
 </body>
