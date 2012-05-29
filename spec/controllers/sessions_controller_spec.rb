@@ -1,26 +1,8 @@
 require 'spec_helper'
 
 describe SessionsController do
-
-  def valid_attributes
-    FactoryGirl.attributes_for(:session_with_presenter)
-  end
-
-  describe "GET index" do
-    it "assigns all sessions as @sessions" do
-      session = Session.create! valid_attributes
-      get :index, {}
-      assigns(:sessions).should eq([session])
-    end
-  end
-
-  describe "GET show" do
-    it "assigns the requested session as @session" do
-      session = Session.create! valid_attributes
-      get :show, {:id => session.to_param}
-      assigns(:session).should eq(session)
-    end
-  end
+  it_should_behave_like "a guarded resource controller", :presenter, :maintainer,
+                                        :except => [:new, :create]
 
   describe "GET new" do
     it "assigns a new session as @session" do
@@ -29,20 +11,14 @@ describe SessionsController do
     end
   end
 
-  describe "GET edit" do
-    it "assigns the requested session as @session" do
-      session = Session.create! valid_attributes
-      get :edit, {:id => session.to_param}
-      assigns(:session).should eq(session)
-    end
-  end
-
   describe "POST create" do
     let(:first_presenter_email) { "first_presenter@example.com" }
     let(:second_presenter_email) { "second_presenter@example.com" }
+
     def valid_creation_attributes
       FactoryGirl.attributes_for(:session).merge :first_presenter_email => first_presenter_email, :second_presenter_email => second_presenter_email
     end
+
     describe "with valid params" do
       def do_post
         post :create, {:session => valid_creation_attributes}
@@ -96,63 +72,94 @@ describe SessionsController do
     end
   end
 
-  describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested session" do
-        session = Session.create! valid_attributes
-        # Assuming there are no other sessions in the database, this
-        # specifies that the Session created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        Session.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => session.to_param, :session => {'these' => 'params'}}
-      end
+  context "when logged in" do
+    login_as :presenter
+    def valid_attributes
+      FactoryGirl.attributes_for(:session_with_presenter)
+    end
 
+    describe "GET index" do
+      it "assigns all sessions as @sessions" do
+        session = Session.create! valid_attributes
+        get :index, {}
+        assigns(:sessions).should eq([session])
+      end
+    end
+
+    describe "GET show" do
       it "assigns the requested session as @session" do
         session = Session.create! valid_attributes
-        put :update, {:id => session.to_param, :session => valid_attributes}
+        get :show, {:id => session.to_param}
         assigns(:session).should eq(session)
-      end
-
-      it "redirects to the session" do
-        session = Session.create! valid_attributes
-        put :update, {:id => session.to_param, :session => valid_attributes}
-        response.should redirect_to(session)
       end
     end
 
-    describe "with invalid params" do
-      it "assigns the session as @session" do
+    describe "GET edit" do
+      it "assigns the requested session as @session" do
         session = Session.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Session.any_instance.stub(:save).and_return(false)
-        put :update, {:id => session.to_param, :session => {}}
+        get :edit, {:id => session.to_param}
         assigns(:session).should eq(session)
       end
+    end
 
-      it "re-renders the 'edit' template" do
-        session = Session.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Session.any_instance.stub(:save).and_return(false)
-        put :update, {:id => session.to_param, :session => {}}
-        response.should render_template("edit")
+
+    describe "PUT update" do
+      describe "with valid params" do
+        it "updates the requested session" do
+          session = Session.create! valid_attributes
+          # Assuming there are no other sessions in the database, this
+          # specifies that the Session created on the previous line
+          # receives the :update_attributes message with whatever params are
+          # submitted in the request.
+          Session.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+          put :update, {:id => session.to_param, :session => {'these' => 'params'}}
+        end
+
+        it "assigns the requested session as @session" do
+          session = Session.create! valid_attributes
+          put :update, {:id => session.to_param, :session => valid_attributes}
+          assigns(:session).should eq(session)
+        end
+
+        it "redirects to the session" do
+          session = Session.create! valid_attributes
+          put :update, {:id => session.to_param, :session => valid_attributes}
+          response.should redirect_to(session)
+        end
+      end
+
+      describe "with invalid params" do
+        it "assigns the session as @session" do
+          session = Session.create! valid_attributes
+          # Trigger the behavior that occurs when invalid params are submitted
+          Session.any_instance.stub(:save).and_return(false)
+          put :update, {:id => session.to_param, :session => {}}
+          assigns(:session).should eq(session)
+        end
+
+        it "re-renders the 'edit' template" do
+          session = Session.create! valid_attributes
+          # Trigger the behavior that occurs when invalid params are submitted
+          Session.any_instance.stub(:save).and_return(false)
+          put :update, {:id => session.to_param, :session => {}}
+          response.should render_template("edit")
+        end
       end
     end
-  end
 
-  describe "DELETE destroy" do
-    it "destroys the requested session" do
-      session = Session.create! valid_attributes
-      expect {
+    describe "DELETE destroy" do
+      it "destroys the requested session" do
+        session = Session.create! valid_attributes
+        expect {
+          delete :destroy, {:id => session.to_param}
+        }.to change(Session, :count).by(-1)
+      end
+
+      it "redirects to the sessions list" do
+        session = Session.create! valid_attributes
         delete :destroy, {:id => session.to_param}
-      }.to change(Session, :count).by(-1)
-    end
-
-    it "redirects to the sessions list" do
-      session = Session.create! valid_attributes
-      delete :destroy, {:id => session.to_param}
-      response.should redirect_to(sessions_url)
+        response.should redirect_to(sessions_url)
+      end
     end
   end
-
 end

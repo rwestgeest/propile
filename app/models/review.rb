@@ -4,11 +4,9 @@ class Review < ActiveRecord::Base
   has_many :comments
   attr_accessible :body, :score
   attr_accessible :session_id
-# attr_accessible :session, :presenter
 
   validates :body, :presence => true
-#  validates :presenter, :presence => true
+  validates :presenter, :presence => true
   validates :session, :presence => true
-
 
 end

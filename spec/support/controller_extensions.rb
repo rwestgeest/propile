@@ -47,10 +47,9 @@ module ControllerExtensions
     @current_account ||= Account.find(session[:current_account_id]) rescue nil
   end
 
-  def current_organizer
-    contribution = current_account.active_contribution 
-    raise 'current account is not an organizer' unless contribution.is_a? Organizer
-    return contribution
+  def current_presenter
+    raise "current account has no presenter associated" unless current_account.presenter
+    current_account.presenter
   end
 
 end

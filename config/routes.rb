@@ -3,11 +3,16 @@ Propile::Application.routes.draw do
 
   resources :comments
 
-  resources :reviews
 
   resources :presenters
 
-  resources :sessions
+  resources :reviews do
+    resources :comments, :on => :member
+  end
+
+  resources :sessions do
+    resources :reviews, :on => :member
+  end
 
   namespace :account do
     resource :session, :only => [:new, :create, :destroy]

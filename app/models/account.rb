@@ -11,7 +11,7 @@ class Account < ActiveRecord::Base
 
   attr_accessible :email, :password, :password_confirmation, :role
 
-  belongs_to :person
+  has_one :presenter
 
   attr_accessor :password
   validates_confirmation_of :password
@@ -28,6 +28,7 @@ class Account < ActiveRecord::Base
   end
 
   def landing_page
-    '/account/password/edit'
+    return '/account/password/edit' if !confirmed? || reset?
+    return '/sessions'
   end
 end

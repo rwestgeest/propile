@@ -75,11 +75,11 @@
         <% end %>
       </div>
     <% end %> 
-    <%= link_to 'New Comment on this review', new_comment_path( :review => review ) %>
+    <%= link_to 'New Comment on this review', new_review_comment_path(review) %>
   </div>
   <% end %>
 <% end %> 
-<%= link_to 'New Review on this session', new_review_path( :session => @session ) %>
+<%= link_to 'New Review on this session', new_session_review_path(@session) %>
 </div>
 
 <hr>

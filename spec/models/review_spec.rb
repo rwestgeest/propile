@@ -9,6 +9,6 @@ describe Review do
   end
 
   it { should validate_presence_of(:body) }
-#  it { should validate_presence_of(:presenter) }
-#  it { should validate_presence_of(:session) }
+  it { should validate_presence_of(:presenter) }
+  it { should validate_presence_of(:session) }
 end

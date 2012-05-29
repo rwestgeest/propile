@@ -1,4 +1,4 @@
-class Account::PasswordResetsController < ApplicationController
+class Account::PasswordResetsController < PublicController
   layout 'sessions'
   def new
     @account = Account.new

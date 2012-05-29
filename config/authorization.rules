@@ -1,10 +1,7 @@
 role :maintainer, 0
 role :presenter, 1
-#allow '/participant/', :at_least => :participant, :at_most => :paying_participant
-#allow '/participant/transactions/parking_credits', :only_by => :paying_participant
-#allow '/participant/company/buy_subscription', :only_by => :participant
-#allow '/consumer/', :only_by => :consumer 
-#allow '/maintenance', :only_by => :maintainer
-#allow '/account/', :at_least => :consumer
-allow '/sessions/', :at_least => :presenter
+allow '/presenters', :at_least => :maintainer
+allow '/comments', :at_least => :presenter
+allow '/reviews', :at_least => :presenter
+allow '/sessions', :at_least => :presenter
 allow '/'
