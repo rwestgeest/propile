@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe PresentersController do
-  it_should_behave_like "a guarded resource controller", :maintainer 
+  it_should_behave_like "a guarded resource controller", :maintainer, :presenter
 
   context "when logged in" do
     login_as :maintainer
