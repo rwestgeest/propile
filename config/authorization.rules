@@ -1,6 +1,6 @@
 role :maintainer, 0
 role :presenter, 1
-allow '/presenters', :at_least => :maintainer
+allow '/presenters', :at_least => :presenter
 allow '/comments', :at_least => :presenter
 allow '/reviews', :at_least => :presenter
 allow '/sessions', :at_least => :presenter
