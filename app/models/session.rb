@@ -11,6 +11,8 @@ class Session < ActiveRecord::Base
   validates :title, :presence => true
   validates :description, :presence => true
   validates :presenters, :presence => true
+  validates :first_presenter_email, :format => { :with => /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/i }
+  validates :second_presenter_email, :format => { :with => /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/i }
 
   def first_presenter_email
     presenters.first && presenters.first.email || ''
