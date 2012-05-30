@@ -1,8 +1,9 @@
 class Session < ActiveRecord::Base
-  has_and_belongs_to_many :presenters
+  belongs_to :first_presenter, :class_name => 'Presenter'
+  belongs_to :second_presenter, :class_name => 'Presenter'
+
   has_many :reviews
   attr_accessible :description, :title, :first_presenter_email, :second_presenter_email 
-  attr_accessor :second_presenter_email 
   attr_accessible :sub_title, :short_description, :session_type, :topic
   attr_accessible :duration, :intended_audience, :experience_level
   attr_accessible :max_participants, :laptops_required, :other_limitations, :room_setup, :materials_needed
@@ -10,30 +11,33 @@ class Session < ActiveRecord::Base
 
   validates :title, :presence => true
   validates :description, :presence => true
-  validates :presenters, :presence => true
+  validates :first_presenter, :presence => true
   validates :first_presenter_email, :format => { :with => /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/i }
   validates :second_presenter_email, :format => { :with => /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/i }
 
   def first_presenter_email
-    presenters.first && presenters.first.email || ''
+    first_presenter && first_presenter.email || ''
   end
 
   def second_presenter_email
-    presenters[1] && presenters[1].email || ''
+    second_presenter && second_presenter.email || ''
   end
 
   def first_presenter_email=(value)
-    presenters << Presenter.new(:email => value)
+    return unless value and not value.empty?
+    self.first_presenter = Presenter.includes(:account).where('accounts.email = ?', value).first || Presenter.new(:email => value)
   end
 
   def second_presenter_email=(value)
-    return if !value || value.strip.empty?
-    presenters << Presenter.new(:email => value)
+    return unless value and not value.empty?
+    self.second_presenter = Presenter.includes(:account).where('accounts.email = ?', value).first || Presenter.new(:email => value)
   end
 
   def presenter_names
-    s = presenters.first && ( presenters.first.name || presenters.first.email ) || ''
-    s += presenters[1] && (" & " + ( presenters[1].name || presenters[1].email ) ) || ''
-    s
+    presenters.collect {|presenter| presenter.name }.join(' & ')
+  end
+
+  def presenters 
+    [ first_presenter, second_presenter ].compact
   end
 end

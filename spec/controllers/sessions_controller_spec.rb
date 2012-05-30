@@ -80,7 +80,7 @@ describe SessionsController do
 
     describe "GET index" do
       it "assigns all sessions as @sessions" do
-        session = Session.create! valid_attributes
+        session = FactoryGirl.create :session_with_presenter
         get :index, {}
         assigns(:sessions).should eq([session])
       end
@@ -88,7 +88,7 @@ describe SessionsController do
 
     describe "GET show" do
       it "assigns the requested session as @session" do
-        session = Session.create! valid_attributes
+        session = FactoryGirl.create :session_with_presenter
         get :show, {:id => session.to_param}
         assigns(:session).should eq(session)
       end
@@ -96,7 +96,7 @@ describe SessionsController do
 
     describe "GET edit" do
       it "assigns the requested session as @session" do
-        session = Session.create! valid_attributes
+        session = FactoryGirl.create :session_with_presenter
         get :edit, {:id => session.to_param}
         assigns(:session).should eq(session)
       end
@@ -106,7 +106,7 @@ describe SessionsController do
     describe "PUT update" do
       describe "with valid params" do
         it "updates the requested session" do
-          session = Session.create! valid_attributes
+          session = FactoryGirl.create :session_with_presenter
           # Assuming there are no other sessions in the database, this
           # specifies that the Session created on the previous line
           # receives the :update_attributes message with whatever params are
@@ -116,13 +116,13 @@ describe SessionsController do
         end
 
         it "assigns the requested session as @session" do
-          session = Session.create! valid_attributes
+          session = FactoryGirl.create :session_with_presenter
           put :update, {:id => session.to_param, :session => valid_attributes}
           assigns(:session).should eq(session)
         end
 
         it "redirects to the session" do
-          session = Session.create! valid_attributes
+          session = FactoryGirl.create :session_with_presenter
           put :update, {:id => session.to_param, :session => valid_attributes}
           response.should redirect_to(session)
         end
@@ -130,7 +130,7 @@ describe SessionsController do
 
       describe "with invalid params" do
         it "assigns the session as @session" do
-          session = Session.create! valid_attributes
+          session = FactoryGirl.create :session_with_presenter
           # Trigger the behavior that occurs when invalid params are submitted
           Session.any_instance.stub(:save).and_return(false)
           put :update, {:id => session.to_param, :session => {}}
@@ -138,7 +138,7 @@ describe SessionsController do
         end
 
         it "re-renders the 'edit' template" do
-          session = Session.create! valid_attributes
+          session = FactoryGirl.create :session_with_presenter
           # Trigger the behavior that occurs when invalid params are submitted
           Session.any_instance.stub(:save).and_return(false)
           put :update, {:id => session.to_param, :session => {}}
@@ -149,14 +149,14 @@ describe SessionsController do
 
     describe "DELETE destroy" do
       it "destroys the requested session" do
-        session = Session.create! valid_attributes
+        session = FactoryGirl.create :session_with_presenter
         expect {
           delete :destroy, {:id => session.to_param}
         }.to change(Session, :count).by(-1)
       end
 
       it "redirects to the sessions list" do
-        session = Session.create! valid_attributes
+        session = FactoryGirl.create :session_with_presenter
         delete :destroy, {:id => session.to_param}
         response.should redirect_to(sessions_url)
       end

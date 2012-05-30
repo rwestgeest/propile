@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120523200919) do
+ActiveRecord::Schema.define(:version => 20120530112653) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                :limit => 150,                          :null => false
@@ -49,13 +49,6 @@ ActiveRecord::Schema.define(:version => 20120523200919) do
 
   add_index "presenters", ["account_id"], :name => "index_presenters_on_account_id"
 
-  create_table "presenters_sessions", :id => false, :force => true do |t|
-    t.integer "presenter_id"
-    t.integer "session_id"
-  end
-
-  add_index "presenters_sessions", ["presenter_id", "session_id"], :name => "index_presenters_sessions_on_presenter_id_and_session_id"
-
   create_table "reviews", :force => true do |t|
     t.text     "body"
     t.integer  "score"
@@ -87,6 +80,11 @@ ActiveRecord::Schema.define(:version => 20120523200919) do
     t.string   "materials_needed"
     t.string   "session_goal"
     t.string   "outline_or_timetable"
+    t.integer  "first_presenter_id"
+    t.integer  "second_presenter_id"
   end
+
+  add_index "sessions", ["first_presenter_id"], :name => "index_sessions_on_first_presenter_id"
+  add_index "sessions", ["second_presenter_id"], :name => "index_sessions_on_second_presenter_id"
 
 end

@@ -17,11 +17,12 @@ describe Presenter do
     it "are empty by default" do
       presenter.sessions.should be_empty
     end
-    it "can be added" do
+    it "can be added as first presenter session" do
       session = FactoryGirl.create(:session_with_presenter)
-      presenter.sessions << session
-      presenter.reload
+      session.first_presenter = presenter
+      session.save
       session.reload
+      presenter.reload
       presenter.sessions.should include(session)
       session.presenters.should include(presenter)
     end

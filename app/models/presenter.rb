@@ -1,5 +1,6 @@
 class Presenter < ActiveRecord::Base
-  has_and_belongs_to_many :sessions
+  has_many :first_presenter_sessions, :class_name => 'Session', :foreign_key => :first_presenter_id
+  has_many :second_presenter_sessions, :class_name => 'Session', :foreign_key => :second_presenter_id
   has_many :reviews
   belongs_to :account
 
@@ -17,6 +18,10 @@ class Presenter < ActiveRecord::Base
 
   def name
     super || email
+  end
+
+  def sessions
+    first_presenter_sessions + second_presenter_sessions
   end
 
   def lazy_account
