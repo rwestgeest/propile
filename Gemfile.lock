@@ -34,6 +34,7 @@ GEM
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
     bcrypt-ruby (3.0.1-x86-mingw32)
+    bluecloth (2.2.0)
     builder (3.0.0)
     capybara (1.1.2)
       mime-types (>= 1.16)
@@ -81,6 +82,9 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    markitup_rails (0.1.1)
+      bluecloth
+      rails (~> 3.1)
     mime-types (1.18)
     multi_json (1.3.4)
     nokogiri (1.5.2)
@@ -178,6 +182,7 @@ DEPENDENCIES
   guid
   haml-rails
   jquery-rails
+  markitup_rails
   rails (= 3.2.3)
   rspec-rails (~> 2.9)
   sass-rails (~> 3.2.3)
