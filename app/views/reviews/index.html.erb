@@ -7,7 +7,6 @@
     <th>Score</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @reviews.each do |review| %>
@@ -17,8 +16,7 @@
     <td><%= review.score %></td>
     <td><%= link_to 'Show', review %></td>
     <td><%= link_to 'Edit', edit_review_path(review) %></td>
-    <td><%= link_to 'Destroy', review, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+    </tr>
 <% end %>
 </table>
 

@@ -8,7 +8,6 @@
     <th>Modified</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @sessions.each do |session| %>
@@ -25,7 +24,6 @@
     <td><%= l session.updated_at %> </td>
     <td><%= link_to 'Show', session %></td>
     <td><%= link_to 'Edit', edit_session_path(session) %></td>
-    <td><%= link_to 'Destroy', session, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
