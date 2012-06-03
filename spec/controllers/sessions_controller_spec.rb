@@ -45,7 +45,7 @@ describe SessionsController do
 
       it "redirects to the thank you" do
         do_post
-        response.should redirect_to(session_thanks_path(Session.last))
+        response.should redirect_to(thanks_session_path(Session.last))
       end
 
       describe "notifications" do
