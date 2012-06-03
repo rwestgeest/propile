@@ -12,6 +12,4 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.markitup
-//= require sets/markdown/set.js
 //= require_tree .

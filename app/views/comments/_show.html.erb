@@ -1,4 +1,5 @@
 
+<div class="left">
 <h4>Comment by
   <% if comment.presenter.nil?  %>  
     nobody (invalid comment)
@@ -7,12 +8,16 @@
   <% end %> 
   on this Review:
 </h4>
-
-<div> <pre> <%= comment.body %> </pre> </div>
-
+</div>
 
 <div class="alignright">
   Created: <%= l comment.created_at %> -- 
   Modified: <%= l comment.updated_at %> 
 </div>
-<hr>
+
+
+<div class="reviewcontent">
+<pre><%= comment.body %></pre> 
+</div>
+
+

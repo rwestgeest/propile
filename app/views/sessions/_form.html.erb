@@ -1,6 +1,13 @@
 <%= form_for(@session) do |f| %>
   <%= errors_for @session %>
 
+<p> 
+  <div> 
+    <i> Note: You don't need to fill in all the fields on this page at once. Only the fields marked with a (*) are mandatory. You can finish up the rest later.  
+    </i>
+  </div>
+</p>
+
 <div class="full"> 
   <div> <%= f.label :title %>*: </div>
   <div> <%= text_area :session, :title, :cols => "100", :rows => "1"  %> </div>
@@ -40,6 +47,11 @@
   <hr>
 </div>
 
+<div class="full"> 
+  <div> <%= f.label :session_goal %>: <i> what do you expect participants to get out of this session?</i> </div>
+  <div> <%= text_area :session, :session_goal, :cols => "100", :rows => "1"  %> </div>
+</div>
+
 
 <div class="left">
   <div> <%= f.label :session_type %>: <i> can include presentations, simulations, games, workshops, open space...</i> </div>
@@ -67,8 +79,6 @@
   <div> <%= text_area :session, :materials_needed, :cols => "45", :rows => "1"  %> </div>
 </div>
 <div class="full"> 
-  <div> <%= f.label :session_goal %>: <i> what do you expect participants to get out of this session?</i> </div>
-  <div> <%= text_area :session, :session_goal, :cols => "100", :rows => "1"  %> </div>
   <div> <%= f.label :description %>*: <i> this will appear on the website, and they will also be displayed on the wall during the conference -> public description </i> </div>
   <div> <%= text_area :session, :description, :cols => "100"  , :rows => "20"%> </div>
   <div> <%= f.label :outline_or_timetable %>: <i> this section contains a detailed outline of your session. It will not be viewable by the public, only by reviewers </i> </div>
