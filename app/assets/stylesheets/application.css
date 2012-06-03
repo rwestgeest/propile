@@ -11,10 +11,6 @@
  *= require_self
  *= require_tree .
 */
-/*
-*= require skins/markitup/style.css
-*= require sets/markdown/style.css
-*/
 
 body {
   background-color: beige;
