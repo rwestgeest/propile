@@ -1,6 +1,13 @@
 <%= form_for(@session) do |f| %>
   <%= errors_for @session %>
 
+<p> 
+  <div> 
+    <i> Note: You don't need to fill in all the fields on this page at once. Only the fields marked with a (*) are mandatory. You can finish up the rest later.  
+    </i>
+  </div>
+</p>
+
 <div class="full"> 
   <div> <%= f.label :title %>*: </div>
   <div> <%= text_area :session, :title, :cols => "100", :rows => "1"  %> </div>
