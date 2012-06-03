@@ -11,6 +11,14 @@ describe SessionsController do
     end
   end
 
+  describe "GET thanks" do
+    let(:session) { FactoryGirl.create :session_with_presenter }
+    it "assigns the session @session" do
+      get :thanks, :id => session.to_param
+      assigns(:session).should == session
+    end
+  end
+
   describe "POST create" do
     let(:first_presenter_email) { "first_presenter@example.com" }
     let(:second_presenter_email) { "second_presenter@example.com" }
@@ -35,9 +43,9 @@ describe SessionsController do
         assigns(:session).should be_persisted
       end
 
-      it "redirects to the created session" do
+      it "redirects to the thank you" do
         do_post
-        response.should redirect_to(Session.last)
+        response.should redirect_to(session_thanks_path(Session.last))
       end
 
       describe "notifications" do

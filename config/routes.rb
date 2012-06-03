@@ -12,6 +12,7 @@ Propile::Application.routes.draw do
 
   resources :sessions do
     resources :reviews, :on => :member
+    get 'thanks', :on => :member
   end
 
   namespace :account do
