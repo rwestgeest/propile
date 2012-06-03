@@ -21,6 +21,10 @@ module ApplicationHelper
     end.join)
   end
 
+  def markdown text
+    raw BlueCloth.new(text).to_html
+  end
+
   private
   def alert_flash_tag(message)
     flash_tag(:alert, message)
