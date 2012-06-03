@@ -3,6 +3,9 @@
 <div>
 <table class="propertytable" >
 <tr>
+  <td colspan="2"> Goal of the session: <%= @session.session_goal %>  </td>
+</tr>
+<tr>
   <td> Session Type: <%= @session.session_type %> </td>
   <td> Max participants: <%= @session.max_participants %>  </td>
 </tr>
@@ -23,15 +26,11 @@
   <td> Experience level: <%= @session.experience_level %> </td>
   <td> Materials needed: <%= @session.materials_needed %> </td>
 </tr>
-<tr>
-  <td colspan="2"> Goal of the session: <%= @session.session_goal %>  </td>
-</tr>
 <table>
 </div>
 
 
 
-<hr>
 
 <div>
 <h4>Description</h4>
@@ -40,7 +39,6 @@
 </pre>
 </div>
 
-<hr>
 
 <div>
 <h4>Outline or Timetable</h4>
@@ -49,7 +47,6 @@
 </pre>
 </div>
 
-<hr>
 
 <h2> Reviews for this session: </h2>
 <div>
@@ -60,7 +57,10 @@
   <% @session.reviews.each do |review| %>
   <div class="review">
     <%= render 'reviews/show', :review => review  %>
-    <%= link_to 'Edit this review', edit_review_path(review) %> 
+    <div class="alignright">
+      <%= link_to 'Edit this review', edit_review_path(review) %> &nbsp;
+      <%= link_to 'New Comment on this review', new_review_comment_path(review) %>
+    </div>
 
     <% if review.comments.size!=0 %> 
       <h3> Comments on this review: </h3>
@@ -68,19 +68,18 @@
         <% review.comments.each do |comment| %>
           <div class="comment">
             <%= render 'comments/show', :comment => comment  %>
-            <%= link_to 'Edit this comment', edit_comment_path(comment) %> 
+            <div class="alignright">
+              <%= link_to 'Edit this comment', edit_comment_path(comment) %> 
+            </div>
           </div>
         <% end %>
       </div>
     <% end %> 
-    <%= link_to 'New Comment on this review', new_review_comment_path(review) %>
   </div>
   <% end %>
 <% end %> 
-<%= link_to 'New Review on this session', new_session_review_path(@session) %>
 </div>
 
-<hr>
 
 <div class="alignright">
   Created: <%= l @session.created_at %> -- 
@@ -88,5 +87,6 @@
 </div>
 
 <%= link_to 'Edit this session', edit_session_path(@session) %> |
+<%= link_to 'New Review on this session', new_session_review_path(@session) %>  |
 <%= link_to 'Back to list of sessions', sessions_path %> 
 </div>

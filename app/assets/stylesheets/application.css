@@ -99,11 +99,13 @@ div > i {
 div > pre {
   border: 1px solid lavender;
   background-color: honeydew;
+  margin: 0px;
+  padding: 5px;
 }
 
 div.review {
   border: 1px solid lavender;
-  margin: 20px;
+  margin: 0px 20px;
   padding: 0px 20px;
 }
 
@@ -116,6 +118,24 @@ div.comment {
 hr {
   height:1px;
   background-color:lavender;
-  border:0px;
+  border: 0px;
+}
+
+div.reviewcontent {
+  margin: 0px;
+  width: 100%;
+}
+
+div.commentcontent {
+  margin: 0px;
+  width: 100%;
+}
+
+h3 {
+  margin: 0px;
+}
+
+h4 {
+  margin: 0px;
 }
 
