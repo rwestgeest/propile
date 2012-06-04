@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe Account::SessionsController do
   render_views
-
   let(:account) { FactoryGirl.create :confirmed_account  }
   def valid_attributes 
     { email: account.email, password: account.password }
@@ -32,13 +31,13 @@ describe Account::SessionsController do
       end
     end
     context "with invalid parameters" do
-      before {   post 'create', :account => valid_attributes.merge(password: 'false') }
+      before {  post 'create', :account => valid_attributes.merge(password: 'false')  }
       it "renders the form again" do
         response.should be_success
         response.should render_template(:new)
       end
       it "sets the flash alert" do
-        flash[:alert].should_not be_empty
+        response.body.should have_selector("#alert")
       end
     end
   end

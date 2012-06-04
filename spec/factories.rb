@@ -15,6 +15,7 @@ FactoryGirl.define do
 
   factory :review do
     sequence(:body) {|n| "review_body_#{n}"}
+    score 5
     association :session, factory: :session_with_presenter
     presenter
   end

@@ -7,11 +7,13 @@ describe ReviewsController do
   context "when logged in" do
     login_as :presenter
 
+    let(:session_for_review) { FactoryGirl.create(:session_with_presenter) }
     def valid_attributes
-      session = FactoryGirl.create(:session_with_presenter)
-      FactoryGirl.attributes_for(:review).merge :session_id => session.id
+      FactoryGirl.attributes_for(:review).merge :session_id => session_for_review.id
     end
-    let(:review) { FactoryGirl.create :review }
+
+    let(:review) { FactoryGirl.create :review, :session => session_for_review }
+
     alias_method :create_review, :review
 
     describe "GET index" do
@@ -46,20 +48,31 @@ describe ReviewsController do
 
     describe "POST create" do
       describe "with valid params" do
+        def do_post
+          post :create, {:review => valid_attributes}
+        end
         it "creates a new Review" do
           expect {
-            post :create, {:review => valid_attributes}
+            do_post
           }.to change(Review, :count).by(1)
         end
 
         it "current_presenter is newly created comments' owner" do
-          post :create, {:review => valid_attributes}
+          do_post
           Review.last.presenter.should == current_presenter
         end
 
         it "redirects to the created review" do
-          post :create, {:review => valid_attributes}
+          do_post
           response.should redirect_to(Review.last)
+        end
+
+        it "sends a message to the sessions presenters" do
+          # we can safely assume that an_instance_of_review is the only review in the database
+          Postman.should_receive(:notify_review_creation).with do |review| 
+            review.should be_persisted
+          end
+          do_post
         end
       end
 

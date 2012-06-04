@@ -9,7 +9,6 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree .
 */
 
 body {
@@ -41,6 +40,13 @@ body {
   color: #fff;
 }
 
+#notice {
+  color: #0f0;
+}
+
+#alert {
+  color: #f00;
+}
 
 table.tablelist {
   border-collapse:collapse;

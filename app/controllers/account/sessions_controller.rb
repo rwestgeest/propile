@@ -11,7 +11,7 @@ class Account::SessionsController < ApplicationController
       sign_in @account
       redirect_to @account.landing_page
     else
-      flash.alert = 'e-mail or password incorrect' 
+      flash.alert = 'e-mail or password incorrect'
       @account = Account.new
       render :action => 'new'
     end

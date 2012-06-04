@@ -1,0 +1,11 @@
+A new review has been made for <%= @session.title %> by <%= @review.presenter.name %>:
+
+You can find the review here: <%= review_url(@review) %>
+
+Heres the review 
+
+I give the session a '<%= @review.score %>' out of 10
+
+<%= @review.body %>
+
+

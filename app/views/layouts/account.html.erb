@@ -3,11 +3,15 @@
 <head>
   <title>Propile <%= yield :title %></title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= stylesheet_link_tag    "account/sessions", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 <h1><%= yield :title %></h1>
+<section id="flash_messages">
+<%= flash_tags %>
+</section>
 <%= yield %>
 
 </body>

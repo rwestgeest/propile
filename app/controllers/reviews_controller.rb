@@ -20,6 +20,7 @@ class ReviewsController < ApplicationController
     @review = Review.new(params[:review])
     @review.presenter = current_presenter
     if @review.save
+      Postman.notify_review_creation(@review)
       redirect_to @review, notice: 'Review was successfully created.'
     else
       render action: "new"

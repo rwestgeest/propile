@@ -1,0 +1,11 @@
+<p>A new review has been made for <%= @session.title %> by <%= @review.presenter.name %>:</p>
+
+<p>You can find the review <%= link_to 'here', review_url(@review) %></p>
+
+<p>Heres the review</p> 
+
+<p>I give the session a '<%= @review.score %>' out of 10</p>
+
+<p><%= @review.body %></p>
+
+

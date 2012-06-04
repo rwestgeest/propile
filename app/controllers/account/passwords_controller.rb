@@ -1,4 +1,5 @@
 class Account::PasswordsController < ApplicationController
+  layout "account"
   def edit
     @account = current_account
   end

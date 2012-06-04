@@ -18,4 +18,10 @@ class Notifications < ActionMailer::Base
     @session = session
     mail to: presenter.email
   end
+
+  def review_creation(email, review)
+    @review = review
+    @session= review.session
+    mail to: email, :subject => "Review on session '#{review.session.title}'"
+  end
 end
