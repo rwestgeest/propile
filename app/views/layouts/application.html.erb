@@ -18,15 +18,15 @@
   </nav>
 
 <h1><%= yield :title %></h1>
-	<nav id="main-navigation">
+<nav id="main-navigation">
   <ul>
     <%= menu(request.fullpath) do |m| %>
       <% m.tab("Sessions", sessions_path) %>
       <% m.tab("Presenters", presenters_path) %>
-        <% m.tab("Submit a session", new_session_path) %>
+      <% m.tab("Submit a session", new_session_path) %>
     <% end %>
-	</ul>
-	</nav>
+  </ul>
+</nav>
 <section id="flash_messages">
 <%= flash_tags %>
 </section>
