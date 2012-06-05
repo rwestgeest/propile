@@ -14,7 +14,8 @@ FactoryGirl.define do
   end
 
   factory :review do
-    sequence(:body) {|n| "review_body_#{n}"}
+    sequence(:things_i_like) {|n| "things_i_like_#{n}"}
+    sequence(:things_to_improve) {|n| "things_to_improve_#{n}"}
     score 5
     association :session, factory: :session_with_presenter
     presenter
