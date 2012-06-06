@@ -6,7 +6,7 @@ gem "haml-rails"
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem "action-guard", "~> 1.0.0"
+gem "action-guard", "~> 1.1.0"
 gem 'guid'
 gem 'sqlite3'
 
