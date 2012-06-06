@@ -8,10 +8,10 @@ module ApplicationHelper
     content_for(:title) { title }
   end
 
-  def menu(request_path, &block)
-    m = Menu.new
+  def menu(request, &block)
+    m = Menu.create(self)
     yield(m) 
-    raw m.render(request_path, current_account)
+    raw m.render(request.parameters, current_account)
   end
 
   def flash_tags

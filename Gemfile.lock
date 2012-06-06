@@ -2,7 +2,7 @@ GEM
   remote: http://rubygems.org/
   specs:
     ZenTest (4.7.0)
-    action-guard (0.1.0)
+    action-guard (1.0.0)
     actionmailer (3.2.3)
       actionpack (= 3.2.3)
       mail (~> 2.4.4)
@@ -170,7 +170,7 @@ PLATFORMS
 
 DEPENDENCIES
   ZenTest
-  action-guard (~> 0.1)
+  action-guard (~> 1.0.0)
   bcrypt-ruby
   capybara
   coffee-rails (~> 3.2.1)

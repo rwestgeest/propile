@@ -21,11 +21,11 @@
 <h1><%= yield :title %></h1>
 <nav id="main-navigation">
   <ul>
-    <%= menu(request.fullpath) do |m| %>
-      <% m.tab("Home", '/') %>
-      <% m.tab("Sessions", sessions_path) %>
-      <% m.tab("Presenters", presenters_path) %>
-      <% m.tab("Submit a session", new_session_path) %>
+    <%= menu(request) do |m| %>
+      <% m.tab("Home", 'pages') %>
+      <% m.tab("Sessions", "sessions") %>
+      <% m.tab("Presenters", "presenters") %>
+      <% m.tab("Submit a session", "sessions#new") %>
     <% end %>
   </ul>
 </nav>

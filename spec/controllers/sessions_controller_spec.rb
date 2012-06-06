@@ -90,6 +90,8 @@ describe SessionsController do
       it "assigns all sessions as @sessions" do
         session = FactoryGirl.create :session_with_presenter
         get :index, {}
+        response.should be_success
+        response.should render_template('index')
         assigns(:sessions).should eq([session])
       end
     end
@@ -105,11 +107,11 @@ describe SessionsController do
     describe "GET edit" do
       it "assigns the requested session as @session" do
         session = FactoryGirl.create :session_with_presenter
+        session.update_attribute :first_presenter_email, current_account.email # my session
         get :edit, {:id => session.to_param}
         assigns(:session).should eq(session)
       end
     end
-
 
     describe "PUT update" do
       describe "with valid params" do

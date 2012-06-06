@@ -1,9 +1,12 @@
 role :maintainer, 0
 role :presenter, 1
-allow '/presenters', :at_least => :presenter
-allow '/comments', :at_least => :presenter
-allow '/reviews', :at_least => :presenter
-allow '/sessions', :at_least => :presenter
-allow '/account/password', :at_least => :presenter
-allow '/sessions/new'
-allow '/'
+allow 'presenters', :at_least => :presenter
+allow 'comments', :at_least => :presenter
+allow 'reviews', :at_least => :presenter
+allow 'sessions', :at_least => :presenter
+allow 'sessions#edit', :at_least => :presenter do |account, params|
+  account.presenter.has_session?(params['id'])
+end
+allow 'account/password', :at_least => :presenter
+allow 'sessions#new'
+allow ''

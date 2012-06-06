@@ -9,8 +9,8 @@ class ApplicationController < ActionController::Base
   end
 
   protected
-  def authorized?(fullpath)
-    ActionGuard.authorized?(current_account, fullpath)
+  def authorized?(request_params)
+    ActionGuard.authorized?(current_account, request_params)
   end
   helper_method :authorized?
 
@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
     #   redirect_to new_account_session_path
     #   return
     # end
-    unless authorized?(request.fullpath)
+    unless authorized?(request.params)
       flash[:alert] = I18n.t("not_authorized")
       sign_out 
       redirect_to new_account_session_path

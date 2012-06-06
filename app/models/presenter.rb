@@ -24,6 +24,10 @@ class Presenter < ActiveRecord::Base
     first_presenter_sessions + second_presenter_sessions
   end
 
+  def has_session?(session_id)
+    first_presenter_sessions.find_by_id(session_id) || second_presenter_sessions.find_by_id(session_id)
+  end
+
   def lazy_account
     self.account ||= Account.new
   end
