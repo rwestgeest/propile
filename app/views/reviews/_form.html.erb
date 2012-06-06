@@ -25,8 +25,9 @@
 
   <div class="field">
     <div> What I like: <i>first list the things that you like about this session, why did it get the score you gave it? </i> </div>
+    <%= f.text_area :things_i_like, :cols => 100, :rows => 10 %>
     <div> I will give you a 10/10 if you improve these things: <i> list improvements to the session: what does the session presenter need to change so that you will give them a 10/10? </i> </div>
-    <%= f.text_area :body, :cols => 100, :rows => 10 %>
+    <%= f.text_area :things_to_improve, :cols => 100, :rows => 10 %>
   </div>
   <div class="actions">
     <%= f.submit %>

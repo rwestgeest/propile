@@ -105,6 +105,12 @@ div > i {
   font-size:smaller;
 }
 
+div.important {
+  color:brown;
+  font-weight:bold;
+}
+
+
 pre {
   white-space: pre-wrap;       /* css-3 */
   white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
@@ -130,7 +136,7 @@ div.review {
 
 div.comment {
   border: 1px solid lavender;
-  margin: 20px;
+  margin: 0px 20px;
   padding: 0px 20px;
 }
 
@@ -145,9 +151,15 @@ div.reviewcontent {
   width: 100%;
 }
 
-div.commentcontent {
-  margin: 0px;
+div.reviewcontenttitle {
+  margin: 10px 0px;
   width: 100%;
+}
+
+div.commentcontent {
+  margin: 0px 0px;
+  width: 100%;
+  background-color:red;
 }
 
 h3 {

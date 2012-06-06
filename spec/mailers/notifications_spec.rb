@@ -50,7 +50,8 @@ describe Notifications do
       mail.body.encoded.should match session.title
       mail.body.encoded.should match review.presenter.name 
       mail.body.encoded.should match review.score.to_s
-      mail.body.encoded.should match review.body
+      mail.body.encoded.should match review.things_i_like
+      mail.body.encoded.should match review.things_to_improve
       mail.body.encoded.should match(review_url(review))
     end
   end
