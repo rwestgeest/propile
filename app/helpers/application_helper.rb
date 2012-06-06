@@ -14,6 +14,11 @@ module ApplicationHelper
     raw m.render(request.parameters, current_account)
   end
 
+  def guarded_link_to(what, url_options)
+    return '' unless ActionGuard.authorized?(current_account, url_options.stringify_keys)
+    link_to(what, url_options)
+  end
+
   def flash_tags
     raw(flash.collect do |name, message| 
       flash[name] = nil

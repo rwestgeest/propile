@@ -1,6 +1,6 @@
 require 'spec_helper'
 require 'menu'
-describe Menu, :focus => true do
+describe Menu do
   include Menu
   include ActionView::Helpers::UrlHelper
   include ActionView::Helpers::OutputSafetyHelper
@@ -9,7 +9,7 @@ describe Menu, :focus => true do
     raw "link_to(#{name}, #{url_options.inspect}, #{html_options.inspect})"
   end
 
-  let(:menu) { create self }
+  let(:menu) { Menu.create self }
 
   def normal_tab(link_name = 'LinkName', controller_path='controller_path') 
     "<li>#{link_to(link_name, request_params_for(controller_path))}</li>"

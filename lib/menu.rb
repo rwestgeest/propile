@@ -37,7 +37,6 @@ module Menu
 
       private
       def link(selected)
-        p @link_parameters
         return @router.link_to(@link_name, @link_parameters, :class => 'active') if (selected)
         return @router.link_to(@link_name, @link_parameters)
       end
