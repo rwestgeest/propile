@@ -19,7 +19,15 @@ body {
 
 #header-navigation {
   text-align: right;
+  height:50px;
 }
+
+#header-navigation img {
+  vertical-align:text-top;
+  position:absolute;
+  left:0px;
+}
+
 
 #main-navigation ul { height: 40px; display: block; list-style-type: none; padding:0;}
 #main-navigation ul li { float: left; }

@@ -9,10 +9,9 @@
 </head>
 <body>
 
-<div class="full">
-<div class="full">
-<div class="left"> <%= image_tag "logo-200.png", :size => "100x50" %> </div>
+<div>
   <nav id="header-navigation">
+    <%= image_tag "logo-200.png", :size => "100x50" %> 
     <% if signed_in? %> 
       <%= "Signed in as" %>&nbsp;<%= current_account.email %>&nbsp;|&nbsp;
       <%= link_to 'Change password', edit_account_password_path %>&nbsp;|&nbsp;
@@ -21,23 +20,23 @@
       <%= link_to 'Sign in', new_account_session_path %>
     <% end %>
   </nav>
+
+  <nav id="main-navigation">
+    <ul>
+      <%= menu(request) do |m| %>
+        <% m.tab("Home", 'pages') %>
+        <% m.tab("Sessions", "sessions") %>
+        <% m.tab("Presenters", "presenters") %>
+        <% m.tab("Submit a session", "sessions#new") %>
+      <% end %>
+    </ul>
+  </nav>
+  <h1><%= yield :title %></h1>
+  <section id="flash_messages">
+    <%= flash_tags %>
+  </section>
 </div>
 
-<nav id="main-navigation">
-  <ul>
-    <%= menu(request) do |m| %>
-      <% m.tab("Home", 'pages') %>
-      <% m.tab("Sessions", "sessions") %>
-      <% m.tab("Presenters", "presenters") %>
-      <% m.tab("Submit a session", "sessions#new") %>
-    <% end %>
-  </ul>
-</nav>
-<h1><%= yield :title %></h1>
-<section id="flash_messages">
-<%= flash_tags %>
-</section>
-</div>
 <%= yield %>
 
 </body>
