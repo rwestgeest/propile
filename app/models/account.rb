@@ -16,6 +16,10 @@ class Account < ActiveRecord::Base
   attr_accessor :password
   validates_confirmation_of :password
 
+  def maintainer?
+    role == Maintainer
+  end
+
   def send_reset_message
     Postman.deliver(:account_reset, self)
   end

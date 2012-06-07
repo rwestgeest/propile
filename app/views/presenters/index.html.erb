@@ -16,7 +16,7 @@
     <td><%= l presenter.created_at %> </td>
     <td><%= l presenter.updated_at %> </td>
     <td><%= link_to 'Show', presenter %></td>
-    <td><%= link_to 'Edit', edit_presenter_path(presenter) %></td>
+    <td><%= guarded_link_to 'Edit', controller: 'presenters', action: 'edit', id: presenter.to_param %></td> 
   </tr>
 <% end %>
 </table>
