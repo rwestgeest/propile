@@ -11,12 +11,16 @@
   Created: <%= l review.created_at %> -- Modified: <%= l review.updated_at %>
 </div>
 
-<div class="reviewcontent">
-  This session gets a 
-  <%= review.score %> / 10.
+<div class="reviewcontenttitle">
+  This session gets a <%= review.score %> / 10.
 </div>
 
 <div class="reviewcontent">
-  <pre><%= review.body %></pre>
+  What I like:
+  <pre><%= review.things_i_like %></pre>
+</div>
+<div class="reviewcontent">
+  Improvement opportunities:
+  <pre><%= review.things_to_improve %></pre>
 </div>
 

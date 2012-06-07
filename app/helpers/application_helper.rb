@@ -8,10 +8,15 @@ module ApplicationHelper
     content_for(:title) { title }
   end
 
-  def menu(request_path, &block)
-    m = Menu.new
+  def menu(request, &block)
+    m = Menu.create(self)
     yield(m) 
-    raw m.render(request_path, current_account)
+    raw m.render(request.parameters, current_account)
+  end
+
+  def guarded_link_to(what, url_options)
+    return '' unless ActionGuard.authorized?(current_account, url_options.stringify_keys)
+    link_to(what, url_options)
   end
 
   def flash_tags

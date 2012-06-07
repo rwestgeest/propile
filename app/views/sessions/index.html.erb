@@ -1,8 +1,3 @@
-<%= title "XPDay Benelux Sessions" %>
-
-<a href="info.html">info</a>
-
-
 <table class="tablelist">
   <tr>
     <th>Title</th>
@@ -26,7 +21,7 @@
     <td><%= l session.created_at %> </td>
     <td><%= l session.updated_at %> </td>
     <td><%= link_to 'Show', session %></td>
-    <td><%= link_to 'Edit', edit_session_path(session) %></td>
+    <td><%= guarded_link_to 'Edit', controller: 'sessions', action: 'edit', id: session.to_param %></td>
   </tr>
 <% end %>
 </table>

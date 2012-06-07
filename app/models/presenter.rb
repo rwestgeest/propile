@@ -2,6 +2,7 @@ class Presenter < ActiveRecord::Base
   has_many :first_presenter_sessions, :class_name => 'Session', :foreign_key => :first_presenter_id
   has_many :second_presenter_sessions, :class_name => 'Session', :foreign_key => :second_presenter_id
   has_many :reviews
+  has_many :comments
   belongs_to :account
 
   attr_accessible :bio, :email, :name
@@ -22,6 +23,18 @@ class Presenter < ActiveRecord::Base
 
   def sessions
     first_presenter_sessions + second_presenter_sessions
+  end
+
+  def has_session?(session_id)
+    first_presenter_sessions.find_by_id(session_id) || second_presenter_sessions.find_by_id(session_id)
+  end
+
+  def has_review?(review_id)
+    reviews.find_by_id(review_id) 
+  end
+
+  def has_comment?(comment_id)
+    comments.find_by_id(comment_id) 
   end
 
   def lazy_account

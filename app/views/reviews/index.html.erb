@@ -15,7 +15,7 @@
     <td><%= review.presenter %></td>
     <td><%= review.score %></td>
     <td><%= link_to 'Show', review %></td>
-    <td><%= link_to 'Edit', edit_review_path(review) %></td>
+    <td><%= guarded_link_to 'Edit', controller: 'reviews', action: 'edit', id: review  %></td>
     </tr>
 <% end %>
 </table>

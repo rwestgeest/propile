@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe Account do
+  describe 'role acessors' do
+    it 'is maintainer when the role is maintainer' do
+      Account.new(role: Account::Maintainer).should be_maintainer
+    end
+  end
+
 
   describe 'generate_authentication_token' do
     let!(:existing_account) { FactoryGirl.create :maintainer_account }

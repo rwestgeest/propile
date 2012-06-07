@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120530112653) do
+ActiveRecord::Schema.define(:version => 20120605195920) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                :limit => 150,                          :null => false
@@ -50,12 +50,13 @@ ActiveRecord::Schema.define(:version => 20120530112653) do
   add_index "presenters", ["account_id"], :name => "index_presenters_on_account_id"
 
   create_table "reviews", :force => true do |t|
-    t.text     "body"
+    t.text     "things_i_like"
     t.integer  "score"
     t.integer  "session_id"
     t.integer  "presenter_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.text     "things_to_improve"
   end
 
   add_index "reviews", ["presenter_id"], :name => "index_reviews_on_presenter_id"

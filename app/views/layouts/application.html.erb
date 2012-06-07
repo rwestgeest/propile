@@ -8,7 +8,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+
+<div>
   <nav id="header-navigation">
+    <%= image_tag "logo-200.png", :size => "100x50" %> 
     <% if signed_in? %> 
       <%= "Signed in as" %>&nbsp;<%= current_account.email %>&nbsp;|&nbsp;
       <%= link_to 'Change password', edit_account_password_path %>&nbsp;|&nbsp;
@@ -18,20 +21,22 @@
     <% end %>
   </nav>
 
-<h1><%= yield :title %></h1>
-<nav id="main-navigation">
-  <ul>
-    <%= menu(request.fullpath) do |m| %>
-      <% m.tab("Home", '/') %>
-      <% m.tab("Sessions", sessions_path) %>
-      <% m.tab("Presenters", presenters_path) %>
-      <% m.tab("Submit a session", new_session_path) %>
-    <% end %>
-  </ul>
-</nav>
-<section id="flash_messages">
-<%= flash_tags %>
-</section>
+  <nav id="main-navigation">
+    <ul>
+      <%= menu(request) do |m| %>
+        <% m.tab("Home", 'pages') %>
+        <% m.tab("Sessions", "sessions") %>
+        <% m.tab("Presenters", "presenters") %>
+        <% m.tab("Submit a session", "sessions#new") %>
+      <% end %>
+    </ul>
+  </nav>
+  <h1><%= yield :title %></h1>
+  <section id="flash_messages">
+    <%= flash_tags %>
+  </section>
+</div>
+
 <%= yield %>
 
 </body>

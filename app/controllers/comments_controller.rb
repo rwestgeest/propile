@@ -10,6 +10,7 @@ class CommentsController < ApplicationController
   def new
     @review  = Review.find(params[:review_id])
     @comment =  @review.comments.build()
+    @comment.presenter = current_presenter
   end
 
   def edit

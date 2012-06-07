@@ -48,9 +48,9 @@ describe Account::SessionsController do
       delete 'destroy'
       current_account.should == nil
     end
-    it "redirects to sessions/new " do
+    it "redirects to root" do
       delete 'destroy'
-      response.should redirect_to(new_account_session_path)
+      response.should redirect_to(root_path)
     end
   end
 end

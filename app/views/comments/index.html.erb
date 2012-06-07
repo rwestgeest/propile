@@ -15,7 +15,7 @@
     <td><%= comment.review.presenter && comment.review.presenter.name %></td>
     <td><%= comment.presenter %></td>
     <td><%= link_to 'Show', comment %></td>
-    <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
+    <td><%= guarded_link_to 'Edit', controller: 'comment', action: 'edit', id: comment %></td>
   </tr>
 <% end %>
 </table>
