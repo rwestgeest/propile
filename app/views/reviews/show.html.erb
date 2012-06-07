@@ -3,5 +3,5 @@
 
 <%= render 'reviews/show', :review => @review  %>
 
-<%= link_to 'Edit', edit_review_path(@review) %> |
+<%= guarded_link_to 'Edit', controller: 'reviews', action: 'edit', id: @review  %> &nbsp; 
 <%= link_to 'Back to Session', @review.session %> 

@@ -18,7 +18,6 @@
     <% end %>
   </nav>
 
-<h1><%= yield :title %></h1>
 <nav id="main-navigation">
   <ul>
     <%= menu(request) do |m| %>
@@ -29,6 +28,7 @@
     <% end %>
   </ul>
 </nav>
+<h1><%= yield :title %></h1>
 <section id="flash_messages">
 <%= flash_tags %>
 </section>

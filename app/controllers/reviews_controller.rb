@@ -10,6 +10,7 @@ class ReviewsController < ApplicationController
   def new
     @session = Session.find(params[:session_id])
     @review =  @session.reviews.build()
+    @review.presenter = current_presenter
   end
 
   def edit
@@ -23,6 +24,7 @@ class ReviewsController < ApplicationController
       Postman.notify_review_creation(@review)
       redirect_to @review, notice: 'Review was successfully created.'
     else
+      @session = @review.session
       render action: "new"
     end
   end

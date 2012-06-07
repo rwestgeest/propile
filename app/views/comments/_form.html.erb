@@ -1,31 +1,32 @@
 <%= form_for(@comment) do |f| %>
   <%= errors_for @comment %>
 
-<%= f.hidden_field :review_id %>
+  <%= f.hidden_field :review_id %>
 
-<%= render 'sessions/show_short', :session => @comment.review.session  %>
-<hr>
+  <%= render 'sessions/show_short', :session => @comment.review.session  %>
 
-<%= render 'reviews/show', :review => @comment.review  %>
+  <hr>
 
-<h4>
-  Comment by
-  <% if @comment.presenter.nil?  %>  
-    nobody (invalid comment)
-  <% else %> 
-    <%= @comment.presenter.name %>
-  <% end %> 
-  on this Review:
-</h4>
+  <%= render 'reviews/show', :review => @comment.review  %>
 
-<div class="field">
-  <%= f.text_area :body, :cols => 100, :rows => 10 %>
-</div>
+  <h4>
+    Comment by
+    <% if @comment.presenter.nil?  %>  
+      nobody (invalid comment)
+    <% else %> 
+      <%= @comment.presenter.name %>
+    <% end %> 
+    on this Review:
+  </h4>
+
+  <div class="field">
+    <%= f.text_area :body, :cols => 100, :rows => 10 %>
+  </div>
 
 
-<hr>
-<div class="actions">
-  <%= f.submit %>
-</div>
+  <hr>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
 
 <% end %>

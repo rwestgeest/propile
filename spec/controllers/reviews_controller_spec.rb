@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe ReviewsController do
+  render_views
   it_should_behave_like "a guarded resource controller", :presenter, :maintainer
 
 
@@ -36,11 +37,13 @@ describe ReviewsController do
         session = FactoryGirl.create :session_with_presenter
         get :new, {:session_id => session.id}
         assigns(:review).should be_a_new(Review)
+        assigns(:review).presenter.should == current_presenter
       end
     end
 
     describe "GET edit" do
       it "assigns the requested review as @review" do
+        review.update_attribute :presenter, current_presenter
         get :edit, {:id => review.to_param}
         assigns(:review).should eq(review)
       end
@@ -80,7 +83,7 @@ describe ReviewsController do
         before do
           # Trigger the behavior that occurs when invalid params are submitted
           Review.any_instance.stub(:save).and_return(false)
-          post :create, {:review => {}}
+          post :create, {:review => valid_attributes}
         end
         it "assigns a newly created but unsaved review as @review" do
           assigns(:review).should be_a_new(Review)

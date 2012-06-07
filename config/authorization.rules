@@ -7,6 +7,12 @@ allow 'sessions', :at_least => :presenter
 allow 'sessions#edit', :at_least => :presenter do |account, params|
   account.presenter.has_session?(params['id'])
 end
+allow 'reviews#edit', :at_least => :presenter do |account, params|
+  account.presenter.has_review?(params['id'])
+end
+allow 'comments#edit', :at_least => :presenter do |account, params|
+  account.presenter.has_comment?(params['id'])
+end
 allow 'account/password', :at_least => :presenter
 allow 'sessions#new'
 allow ''
