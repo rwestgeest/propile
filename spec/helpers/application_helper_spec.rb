@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ApplicationHelper, :focus => true do
+describe ApplicationHelper do
   include ApplicationHelper
 
   def current_account
