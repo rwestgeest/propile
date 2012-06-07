@@ -10,5 +10,5 @@
 </div>
 <hr>
 
-<%= link_to 'Edit', edit_presenter_path(@presenter) %> |
+<%= guarded_link_to 'Edit', controller: 'presenters', action: 'edit', id: @presenter.to_param %> &nbsp;
 <%= link_to 'Back', presenters_path %>
