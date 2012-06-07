@@ -56,7 +56,7 @@
   <div class="review">
     <%= render 'reviews/show', :review => review  %>
     <div class="alignright">
-      <%= link_to 'Edit this review', edit_review_path(review) %> &nbsp;
+      <%= guarded_link_to 'Edit this review', controller: 'reviews', action: 'edit', id: review  %> &nbsp;
       <%= link_to 'New Comment on this review', new_review_comment_path(review) %>
     </div>
 
@@ -67,7 +67,7 @@
           <div class="comment">
             <%= render 'comments/show', :comment => comment  %>
             <div class="alignright">
-              <%= link_to 'Edit this comment', edit_comment_path(comment) %> 
+              <%= guarded_link_to 'Edit this comment', controller: 'comments', action: 'edit', id: comment %> 
             </div>
           </div>
         <% end %>

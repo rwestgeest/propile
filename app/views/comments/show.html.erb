@@ -5,5 +5,5 @@
 
 <%= render 'comments/show', :comment => @comment  %>
 
-<%= link_to 'Edit', edit_comment_path(@comment) %> |
+<%= guarded_link_to 'Edit', controller: 'comments', action: 'edit', id: @comment %> |
 <%= link_to 'Back to Session', @comment.review.session %> 

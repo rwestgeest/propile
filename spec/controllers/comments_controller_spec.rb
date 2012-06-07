@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe CommentsController do
+  render_views
   it_should_behave_like "a guarded resource controller", :presenter, :maintainer
 
   context "when logged in" do
@@ -33,12 +34,14 @@ describe CommentsController do
         review = FactoryGirl.create :review
         get :new, {:review_id => review.id}
         assigns(:comment).should be_a_new(Comment)
+        assigns(:comment).presenter.should == current_presenter
       end
     end
 
     describe "GET edit" do
       it "assigns the requested comment as @comment" do
         comment = Comment.create! valid_attributes
+        comment.update_attribute :presenter, current_presenter
         get :edit, {:id => comment.to_param}
         assigns(:comment).should eq(comment)
       end
@@ -64,17 +67,17 @@ describe CommentsController do
       end
 
       describe "with invalid params" do
-        it "assigns a newly created but unsaved comment as @comment" do
+        before do
           # Trigger the behavior that occurs when invalid params are submitted
           Comment.any_instance.stub(:save).and_return(false)
-          post :create, {:comment => {}}
+          post :create, {:comment => valid_attributes}
+        end
+
+        it "assigns a newly created but unsaved comment as @comment" do
           assigns(:comment).should be_a_new(Comment)
         end
 
         it "re-renders the 'new' template" do
-          # Trigger the behavior that occurs when invalid params are submitted
-          Comment.any_instance.stub(:save).and_return(false)
-          post :create, {:comment => {}}
           response.should render_template("new")
         end
       end
