@@ -2,6 +2,9 @@ require 'spec_helper'
 
 describe Presenter do
   it { should validate_presence_of :email } 
+  ["rob@", "@mo.nl", "123.nl", "123@nl", "aaa.123.nl", "aaa.123@nl"].each do |illegal_mail|
+    it { should_not allow_value(illegal_mail).for(:email) }
+  end
 
   describe "name" do
     it "is name if set" do
