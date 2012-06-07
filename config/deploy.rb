@@ -5,7 +5,6 @@ shared_paths['data'] = 'data'
 shared_paths['assets'] = 'public/assets'
 ENV['to'] = 'test' unless ENV['to']
 
-
 namespace :vlad do
 
   set :migrate_target, :current
