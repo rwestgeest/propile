@@ -137,14 +137,14 @@ div > pre {
 
 div.review {
   border: 1px solid lavender;
-  margin: 0px 20px;
-  padding: 0px 20px;
+  margin: 5px 20px;
+  padding: 5px 20px;
 }
 
 div.comment {
   border: 1px solid lavender;
-  margin: 0px 20px;
-  padding: 0px 20px;
+  margin: 5px 20px;
+  padding: 5px 20px;
 }
 
 hr {
