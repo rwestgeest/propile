@@ -9,6 +9,7 @@
 # Ignore bundler config
 /.bundle
 /.sass-cache
+/public/assets
 
 # Ignore the default SQLite database.
 /db/*.sqlite3

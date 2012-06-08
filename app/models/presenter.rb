@@ -1,4 +1,5 @@
 class Presenter < ActiveRecord::Base
+  EMAIL_REGEXP = /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/i
   has_many :first_presenter_sessions, :class_name => 'Session', :foreign_key => :first_presenter_id
   has_many :second_presenter_sessions, :class_name => 'Session', :foreign_key => :second_presenter_id
   has_many :reviews
@@ -7,7 +8,8 @@ class Presenter < ActiveRecord::Base
 
   attr_accessible :bio, :email, :name
 
-  validates_presence_of :email
+  validates :email, :presence => true,
+                    :format => { :with => EMAIL_REGEXP }
 
   delegate :email, :to => :lazy_account, :allow_nil => true
   delegate :email=, :to => :lazy_account

@@ -84,7 +84,7 @@
   Modified: <%= l @session.updated_at %> 
 </div>
 
-<%= link_to 'Edit this session', edit_session_path(@session) %> |
+<%= guarded_link_to 'Edit this session', controller: 'sessions', action: 'edit', id: @session.to_param %> |
 <%= link_to 'New Review on this session', new_session_review_path(@session) %>  |
 <%= link_to 'Back to list of sessions', sessions_path %> 
 </div>
