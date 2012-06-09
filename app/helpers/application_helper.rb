@@ -1,4 +1,6 @@
 require 'menu'
+include ActionView::Helpers::TextHelper
+
 module ApplicationHelper
   def errors_for record
     render :partial => 'shared/form_errors', locals: { record: record }
@@ -45,6 +47,13 @@ module ApplicationHelper
 
   def flash_tag(name, message)
     content_tag :div, message, :id => "#{name}", :class => "flash"
+  end
+
+  def wikinized( text )
+    return "" unless text and not text.empty?
+    text = text.gsub( /\*(.*)\*/, '<b>\1</b>' ) 
+    text = text.gsub( /_(.*)_/, '<i>\1</i>' ) 
+    simple_format( text )
   end
   
 

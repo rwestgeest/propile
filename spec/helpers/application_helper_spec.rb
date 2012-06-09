@@ -28,4 +28,38 @@ describe ApplicationHelper do
     end
   
   end
+
+  describe "wikinized", :focus => true do
+    it "nil returns empty string" , :focus => true do
+       wikinized(nil).should == ""
+    end
+
+    it "empty string returns empty string" , :focus => true do
+       wikinized("").should == ""
+    end
+
+    it "simple string is wrapped in <p>" , :focus => true do
+       wikinized("simple string").should == "<p>simple string</p>"
+    end
+
+    it "new-line returns <br/>" , :focus => true do
+       wikinized("string\nwith newline").should == "<p>string\n<br />with newline</p>"
+    end
+
+    it "2 new-lines return new <p>" , :focus => true do
+       wikinized("string\n\nwith newline").should == "<p>string</p>\n\n<p>with newline</p>"
+    end
+
+    it "bold" , :focus => true do
+       wikinized("simple string with *bold* word").should == "<p>simple string with <b>bold</b> word</p>"
+    end
+
+    it "bold not closed returns *" , :focus => true do
+       wikinized("simple string with *bold-not-closed word").should == "<p>simple string with *bold-not-closed word</p>"
+    end
+
+    it "italic" , :focus => true do
+       wikinized("simple string with _italic_ word").should == "<p>simple string with <i>italic</i> word</p>"
+    end
+  end
 end
