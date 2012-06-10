@@ -13,6 +13,9 @@ describe Presenter do
     it "is email if not set" do
       Presenter.new(:email => "rob@rob.nl").name.should == "rob@rob.nl"
     end
+    it "is email if empty" do
+      Presenter.new(:email => "rob@rob.nl", :name => "").name.should == "rob@rob.nl"
+    end
   end
 
   describe 'sessions' do

@@ -20,7 +20,7 @@ class Presenter < ActiveRecord::Base
   end
 
   def name
-    super || email
+    if super.nil? || super.empty? then email else super end
   end
 
   def sessions
