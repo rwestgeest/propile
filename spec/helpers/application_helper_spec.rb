@@ -50,16 +50,33 @@ describe ApplicationHelper do
        wikinize("string\n\nwith newline").should == "<p>string</p>\n\n<p>with newline</p>"
     end
 
-    it "bold"  do
+    it "*word* returns bold"  do
        wikinize("simple string with *bold* word").should == "<p>simple string with <b>bold</b> word</p>"
     end
 
-    it "bold not closed returns *"  do
-       wikinize("simple string with *bold-not-closed word").should == "<p>simple string with *bold-not-closed word</p>"
+    it "*bold not closed returns *"  do
+       wikinize("simple string with *bold-not-closed word").should == 
+                "<p>simple string with *bold-not-closed word</p>"
     end
 
-    it "italic"  do
-       wikinize("simple string with _italic_ word").should == "<p>simple string with <i>italic</i> word</p>"
+    it "more than 1 bold word"  do
+       wikinize("can we have *more* than *only one* bold word?").should == 
+                "<p>can we have <b>more</b> than <b>only one</b> bold word?</p>"
+    end
+
+    it "_word_ returns italic"  do
+       wikinize("simple string with _italic_ word").should == 
+                "<p>simple string with <i>italic</i> word</p>"
+    end
+
+    it "more than 1 italic word"  do
+       wikinize("can we have _more_ than _only one_ italic word?").should == 
+                "<p>can we have <i>more</i> than <i>only one</i> italic word?</p>"
+    end
+
+    it "link is displayed in a clickable way"  do
+       wikinize("klik hier: http://www.xpday.be").should == 
+                "<p>klik hier: <a href=\"http://www.xpday.be\">http://www.xpday.be</a></p>"
     end
   end
 end

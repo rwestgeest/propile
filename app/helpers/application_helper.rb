@@ -51,8 +51,9 @@ module ApplicationHelper
 
   def wikinize( text )
     return "" unless text and not text.empty?
-    text = text.gsub( /\*(.*)\*/, '<b>\1</b>' ) 
-    text = text.gsub( /_(.*)_/, '<i>\1</i>' ) 
+    text = text.gsub( /\*([^*]*)\*/, '<b>\1</b>' ) 
+    text = text.gsub( /_([^_]*)_/, '<i>\1</i>' ) 
+    text = text.gsub(/(http:\/\/[^ ]*)/, '<a href="\1">\1</a>')
     simple_format( text )
   end
   
