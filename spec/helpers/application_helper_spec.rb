@@ -59,6 +59,11 @@ describe ApplicationHelper do
                 "<p>simple string with *bold-not-closed word</p>"
     end
 
+    it "*bold not closed within this line returns *"  do
+       wikinize("simple string with *bold-not-closed on this line\n *word").should == 
+                "<p>simple string with *bold-not-closed on this line\n<br /> *word</p>"
+    end
+
     it "more than 1 bold word"  do
        wikinize("can we have *more* than *only one* bold word?").should == 
                 "<p>can we have <b>more</b> than <b>only one</b> bold word?</p>"
@@ -78,5 +83,26 @@ describe ApplicationHelper do
        wikinize("klik hier: http://www.xpday.be").should == 
                 "<p>klik hier: <a href=\"http://www.xpday.be\">http://www.xpday.be</a></p>"
     end
+
+    it "* starts ul"  do
+       wikinize("* een\n* twee").should == 
+                "<p><ul><li>een</li><li>twee</li></ul></p>"
+    end
+
+    it "ul with string before" do
+       wikinize("voila:\n* een\n* twee").should == 
+                "<p>voila:\n<br /><ul><li>een</li><li>twee</li></ul></p>"
+    end
+
+    it "ul with string after" do
+       wikinize("* een\n* twee\nen nog iets").should == 
+                "<p><ul><li>een</li><li>twee</li></ul>\n<br />en nog iets</p>"
+    end
+
+    it "2 uls in a string"  do
+       wikinize("* een\n* twee\nblabla\n* nog \n* en nog").should == 
+                "<p><ul><li>een</li><li>twee</li></ul>\n<br />blabla\n<br /><ul><li>nog </li><li>en nog</li></ul></p>"
+    end
+
   end
 end

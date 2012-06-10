@@ -51,9 +51,14 @@ module ApplicationHelper
 
   def wikinize( text )
     return "" unless text and not text.empty?
-    text = text.gsub( /\*([^*]*)\*/, '<b>\1</b>' ) 
-    text = text.gsub( /_([^_]*)_/, '<i>\1</i>' ) 
-    text = text.gsub(/(http:\/\/[^ ]*)/, '<a href="\1">\1</a>')
+    if not text.index(/^\* /).nil?  #list
+      text = text.gsub(/^\* (.*)/, '<li>\1</li>')
+      text = text.gsub( /<\/li>\n<li>/, '<LIMIDDLELI>' ).gsub( /<li>/, '<ul><li>').gsub( /<\/li>/, '</li></ul>' )
+      text = text.gsub( /<LIMIDDLELI>/, '</li><li>' )
+    end
+    text = text.gsub( /\*([^*\n]*)\*/, '<b>\1</b>' ) #bold
+    text = text.gsub( /_([^_\n]*)_/, '<i>\1</i>' )   #italic
+    text = text.gsub(/(http:\/\/[^ ]*)/, '<a href="\1">\1</a>') #links
     simple_format( text )
   end
   
