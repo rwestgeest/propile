@@ -149,16 +149,6 @@ pre {
   word-wrap: break-word;   
 }
 
-
-div > pre {
-  border: 1px solid lavender;
-  background-color: honeydew;
-  margin: 0px;
-  padding: 5px;
-  font-family: Sans-serif;
-  font-size: 100%;
-}
-
 div.review {
   border: 1px solid lavender;
   margin: 5px 20px;
