@@ -29,37 +29,37 @@ describe ApplicationHelper do
   
   end
 
-  describe "wikinized" do
+  describe "wikinize" do
     it "nil returns empty string"  do
-       wikinized(nil).should == ""
+       wikinize(nil).should == ""
     end
 
     it "empty string returns empty string"  do
-       wikinized("").should == ""
+       wikinize("").should == ""
     end
 
     it "simple string is wrapped in <p>"  do
-       wikinized("simple string").should == "<p>simple string</p>"
+       wikinize("simple string").should == "<p>simple string</p>"
     end
 
     it "new-line returns <br/>"  do
-       wikinized("string\nwith newline").should == "<p>string\n<br />with newline</p>"
+       wikinize("string\nwith newline").should == "<p>string\n<br />with newline</p>"
     end
 
     it "2 new-lines return new <p>"  do
-       wikinized("string\n\nwith newline").should == "<p>string</p>\n\n<p>with newline</p>"
+       wikinize("string\n\nwith newline").should == "<p>string</p>\n\n<p>with newline</p>"
     end
 
     it "bold"  do
-       wikinized("simple string with *bold* word").should == "<p>simple string with <b>bold</b> word</p>"
+       wikinize("simple string with *bold* word").should == "<p>simple string with <b>bold</b> word</p>"
     end
 
     it "bold not closed returns *"  do
-       wikinized("simple string with *bold-not-closed word").should == "<p>simple string with *bold-not-closed word</p>"
+       wikinize("simple string with *bold-not-closed word").should == "<p>simple string with *bold-not-closed word</p>"
     end
 
     it "italic"  do
-       wikinized("simple string with _italic_ word").should == "<p>simple string with <i>italic</i> word</p>"
+       wikinize("simple string with _italic_ word").should == "<p>simple string with <i>italic</i> word</p>"
     end
   end
 end
