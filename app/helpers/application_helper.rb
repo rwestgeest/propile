@@ -53,8 +53,8 @@ module ApplicationHelper
     return "" unless text and not text.empty?
     if not text.index(/^\* /).nil?  #list
       text = text.gsub(/^\* (.*)/, '<li>\1</li>')
-      text = text.gsub( /<\/li>\n<li>/, '<LIMIDDLELI>' ).gsub( /<li>/, '<ul><li>').gsub( /<\/li>/, '</li></ul>' )
-      text = text.gsub( /<LIMIDDLELI>/, '</li><li>' )
+      text = text.gsub( /<\/li>\n<li>/, '</li><li>' )
+      text = text.gsub( /^<li>/, '<ul><li>').gsub( /<\/li>$/, '</li></ul>' )
     end
     text = text.gsub( /\*([^*\n]*)\*/, '<b>\1</b>' ) #bold
     text = text.gsub( /_([^_\n]*)_/, '<i>\1</i>' )   #italic

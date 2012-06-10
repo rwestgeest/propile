@@ -107,6 +107,29 @@ div.outlined {
   padding: 6px;
 }
 
+div.outlined > p {
+  margin: 0px 0px;
+  padding: 3px 0px;
+}
+
+div.lessoutlined {
+  border: 1px solid lavender;
+  background-color: honeydew;
+  margin: 0px 0px;
+  padding: 5px 10px;
+  font-family: Sans-serif;
+  font-size: 100%;
+}
+
+div.lessoutlined > p {
+  margin: 0px 0px;
+  padding: 3px 0px;
+}
+
+div.commentcontent {
+  margin: 0px 0px;
+}
+
 div > i {
   color:brown;
   font-size:smaller;
@@ -125,6 +148,7 @@ pre {
   white-space: -o-pre-wrap;    /* Opera 7 */
   word-wrap: break-word;   
 }
+
 
 div > pre {
   border: 1px solid lavender;
@@ -153,18 +177,8 @@ hr {
   border: 0px;
 }
 
-div.reviewcontent {
-  margin: 0px;
-  width: 100%;
-}
-
 div.reviewcontenttitle {
   margin: 10px 0px;
-  width: 100%;
-}
-
-div.commentcontent {
-  margin: 0px 0px;
   width: 100%;
 }
 

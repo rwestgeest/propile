@@ -33,16 +33,18 @@
 
 
 <div>
-<h4>Description</h4>
-<div><pre><%= @session.description %></pre></div>
+  <h4>Description</h4>
+  <div class="lessoutlined"> 
+    <%= wikinize( @session.description) %>
+  </div>
 </div>
 
 
 <div>
-<h4>Outline or Timetable</h4>
-<pre>
-<%= @session.outline_or_timetable %> 
-</pre>
+  <h4>Outline or Timetable</h4>
+  <div class="lessoutlined"> 
+    <%= wikinize( @session.outline_or_timetable) %> 
+  </div>
 </div>
 
 

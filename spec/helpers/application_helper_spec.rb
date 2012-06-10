@@ -83,7 +83,9 @@ describe ApplicationHelper do
        wikinize("klik hier: http://www.xpday.be").should == 
                 "<p>klik hier: <a href=\"http://www.xpday.be\">http://www.xpday.be</a></p>"
     end
+  end
 
+  describe "wikinize list" do
     it "* starts ul"  do
        wikinize("* een\n* twee").should == 
                 "<p><ul><li>een</li><li>twee</li></ul></p>"

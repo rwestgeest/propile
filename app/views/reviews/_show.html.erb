@@ -15,12 +15,12 @@
   This session gets a <%= review.score %> / 10.
 </div>
 
-<div class="reviewcontent">
-  What I like:
-  <pre><%= review.things_i_like %></pre>
+What I like:
+<div class="lessoutlined"> 
+  <%= wikinize(review.things_i_like) %>
 </div>
-<div class="reviewcontent">
-  Improvement opportunities:
-  <pre><%= review.things_to_improve %></pre>
+Improvement opportunities:
+<div class="lessoutlined"> 
+  <%= wikinize(review.things_to_improve) %>
 </div>
 
