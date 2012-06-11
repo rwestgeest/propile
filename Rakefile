@@ -20,9 +20,8 @@ task "release" do
   releaseline = File.readlines('VERSION').first.strip
   p releaseline
   version = releaseline[/[^\s]*/] 
-  message = "Released " + releaseline
   raise "Version #{version} has invalid format" unless version =~ /\d*\.\d*.\d*/
+  raise "Tag #{version} was released earlier" if `git tag`.split.include?(version)
+  message = "Released " + releaseline
   sh "git tag -a -m '#{message}' #{version}"
-  
-
 end
