@@ -14,3 +14,15 @@ end
 require File.expand_path('../config/application', __FILE__)
 
 Propile::Application.load_tasks
+
+desc "release version defined in VERSION" 
+task "release" do
+  releaseline = File.readlines('VERSION').first.strip
+  p releaseline
+  version = releaseline[/[^\s]*/] 
+  message = "Released " + releaseline
+  raise "Version #{version} has invalid format" unless version =~ /\d*\.\d*.\d*/
+  sh "git tag -a -m '#{message}' #{version}"
+  
+
+end
