@@ -85,6 +85,7 @@ th {
   font-size: smaller;
 }
 
+
 div.full {
   float: left;
   width: 100%;
@@ -135,6 +136,10 @@ div > i {
   font-size:smaller;
 }
 
+div > a {
+  font-size: smaller;
+}
+
 div.important {
   color:brown;
   font-weight:bold;
@@ -179,4 +184,5 @@ h3 {
 h4 {
   margin: 0px;
 }
+
 

@@ -42,9 +42,10 @@
 
 <div class="full"> 
   <hr>
-  <div> <%= f.label :short_description %>: <i> will appear on the "Program Cards" on the "Program Board" at the conference. It should be a teaser. </i> </div>
+  <div> <%= f.label :short_description %>: <i> will appear on the "Program Cards" on the "Program Board" at the conference. It should be a teaser. </i> 
+    <%= link_to '(formatting)', "/pages/formatting", :target => '_blank', :class => 'smalllink' %> 
+  </div>
   <div> <%= text_area :session, :short_description, :cols => "100", :rows => "6"  %> </div>
-  <%= link_to 'formatting', "pages#show" %> 
   <hr>
 </div>
 
@@ -80,9 +81,15 @@
   <div> <%= text_area :session, :materials_needed, :cols => "45", :rows => "1"  %> </div>
 </div>
 <div class="full"> 
-  <div> <%= f.label :description %>*: <i> this will appear on the website, and they will also be displayed on the wall during the conference -> public description </i> </div>
+  <div> 
+    <%= f.label :description %>*: <i> this will appear on the website, and they will also be displayed on the wall during the conference -> public description </i> 
+    <%= link_to '(formatting)', "/pages/formatting", :target => '_blank', :class => 'smalllink' %> 
+  </div>
   <div> <%= text_area :session, :description, :cols => "100"  , :rows => "20"%> </div>
-  <div> <%= f.label :outline_or_timetable %>: <i> this section contains a detailed outline of your session. It will not be viewable by the public, only by reviewers </i> </div>
+  <div> 
+    <%= f.label :outline_or_timetable %>: <i> this section contains a detailed outline of your session. It will not be viewable by the public, only by reviewers </i>
+    <%= link_to '(formatting)', "/pages/formatting", :target => '_blank', :class => 'smalllink' %> 
+  </div>
   <div> <%= text_area :session, :outline_or_timetable, :cols => "100", :rows => "10"  %> </div>
 </div>
 
