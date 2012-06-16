@@ -80,6 +80,10 @@ th {
   background-color: lightgrey;
 }
 
+td.nowrap {
+  white-space:nowrap;
+}
+
 table.sessiontable {
   border-collapse:collapse;
   border: 0px;
