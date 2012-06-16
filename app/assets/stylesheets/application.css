@@ -80,6 +80,27 @@ th {
   background-color: lightgrey;
 }
 
+table.sessiontable {
+  border-collapse:collapse;
+  border: 0px;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+  #background-color: pink;
+}
+
+td.sessiontable {
+  border: 0px;
+  padding: 5px 10px 0px 0px;
+  vertical-align: bottom;
+}
+
+div.session_form {
+  border: 0px;
+  padding: 10px 10px 0px 0px;
+  vertical-align: bottom;
+}
+
 .alignright {
   text-align: right;
   font-size: smaller;
@@ -132,6 +153,11 @@ div.commentcontent {
 }
 
 div > i {
+  color:brown;
+  font-size:smaller;
+}
+
+td > i {
   color:brown;
   font-size:smaller;
 }
