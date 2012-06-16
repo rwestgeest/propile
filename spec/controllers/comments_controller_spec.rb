@@ -8,14 +8,19 @@ describe CommentsController do
 
     login_as :presenter
 
+    let(:review_for_comment) { FactoryGirl.create(:review) }
+
     def valid_attributes
-      review = FactoryGirl.create(:review)
-      FactoryGirl.attributes_for(:comment).merge :review_id => review.id
+      FactoryGirl.attributes_for(:comment).merge :review_id => review_for_comment.id
     end
+
+    let(:comment) { FactoryGirl.create :comment, :review => review_for_comment }
+
+    alias_method :create_comment, :comment
 
     describe "GET index" do
       it "assigns all comments as @comments" do
-        comment = Comment.create! valid_attributes
+        create_comment
         get :index, {}
         assigns(:comments).should eq([comment])
       end
@@ -23,7 +28,6 @@ describe CommentsController do
 
     describe "GET show" do
       it "assigns the requested comment as @comment" do
-        comment = Comment.create! valid_attributes
         get :show, {:id => comment.to_param}
         assigns(:comment).should eq(comment)
       end
@@ -40,7 +44,6 @@ describe CommentsController do
 
     describe "GET edit" do
       it "assigns the requested comment as @comment" do
-        comment = Comment.create! valid_attributes
         comment.update_attribute :presenter, current_presenter
         get :edit, {:id => comment.to_param}
         assigns(:comment).should eq(comment)
@@ -86,7 +89,6 @@ describe CommentsController do
     describe "PUT update" do
       describe "with valid params" do
         it "updates the requested comment" do
-          comment = Comment.create! valid_attributes
           # Assuming there are no other comments in the database, this
           # specifies that the Comment created on the previous line
           # receives the :update_attributes message with whatever params are
@@ -96,13 +98,11 @@ describe CommentsController do
         end
 
         it "assigns the requested comment as @comment" do
-          comment = Comment.create! valid_attributes
           put :update, {:id => comment.to_param, :comment => valid_attributes}
           assigns(:comment).should eq(comment)
         end
 
         it "redirects to the comment" do
-          comment = Comment.create! valid_attributes
           put :update, {:id => comment.to_param, :comment => valid_attributes}
           response.should redirect_to(comment)
         end
@@ -110,7 +110,6 @@ describe CommentsController do
 
       describe "with invalid params" do
         it "assigns the comment as @comment" do
-          comment = Comment.create! valid_attributes
           # Trigger the behavior that occurs when invalid params are submitted
           Comment.any_instance.stub(:save).and_return(false)
           put :update, {:id => comment.to_param, :comment => {}}
@@ -118,7 +117,6 @@ describe CommentsController do
         end
 
         it "re-renders the 'edit' template" do
-          comment = Comment.create! valid_attributes
           # Trigger the behavior that occurs when invalid params are submitted
           Comment.any_instance.stub(:save).and_return(false)
           put :update, {:id => comment.to_param, :comment => {}}
@@ -129,14 +127,13 @@ describe CommentsController do
 
     describe "DELETE destroy" do
       it "destroys the requested comment" do
-        comment = Comment.create! valid_attributes
+        create_comment
         expect {
           delete :destroy, {:id => comment.to_param}
         }.to change(Comment, :count).by(-1)
       end
 
       it "redirects to the comments list" do
-        comment = Comment.create! valid_attributes
         delete :destroy, {:id => comment.to_param}
         response.should redirect_to(comments_url)
       end

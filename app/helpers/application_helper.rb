@@ -28,10 +28,6 @@ module ApplicationHelper
     end.join)
   end
 
-  def presenter_name(presenter)
-    presenter && presenter.name || "nobody"
-  end
-
   private
   def alert_flash_tag(message)
     flash_tag(:alert, message)

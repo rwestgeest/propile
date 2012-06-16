@@ -9,6 +9,7 @@ describe ReviewsController do
     login_as :presenter
 
     let(:session_for_review) { FactoryGirl.create(:session_with_presenter) }
+
     def valid_attributes
       FactoryGirl.attributes_for(:review).merge :session_id => session_for_review.id
     end

@@ -9,7 +9,7 @@ describe Comment do
   end
 
   it { should validate_presence_of(:body) }
-#  it { should validate_presence_of(:review) }
-#  it { should validate_presence_of(:presenter) }
+  it { should validate_presence_of(:review) }
+  it { should validate_presence_of(:presenter) }
 
 end
