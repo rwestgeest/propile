@@ -94,6 +94,21 @@ describe SessionsController do
         response.should render_template('index')
         assigns(:sessions).should eq([session])
       end
+
+      it "assigns all sessions as @sessions ordered by number of reviews" do
+        session_with_1_review = FactoryGirl.create :session_with_presenter
+        r = FactoryGirl.create :review, :session => session_with_1_review
+        session_with_1_review.reviews << r
+        session_with_1_review.reviews.count.should eq(1)
+        session_without_reviews = FactoryGirl.create :session_with_presenter
+        session_without_reviews.reviews.count.should eq(0)
+
+        get :index, {}
+
+        response.should be_success
+        response.should render_template('index')
+        assigns(:sessions).should eq([session_without_reviews, session_with_1_review])
+      end
     end
 
     describe "GET show" do
