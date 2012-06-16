@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   skip_before_filter :authorize_action, :only => [:new, :create, :thanks]
   def index
-    @sessions = Session.all
+    @sessions = Session.all.sort { |s1, s2| s1.reviews.size <=> s2.reviews.size } 
   end
 
   def show
