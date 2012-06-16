@@ -1,21 +1,23 @@
 
 <table class="tablelist">
   <tr>
+    <th></th>
     <th>Name</th>
     <th>Email</th>
     <th>Created</th>
     <th>Updated</th>
     <th></th>
-    <th></th>
   </tr>
 
+<% i=0 %>
 <% @presenters.each do |presenter| %>
   <tr >
-    <td><%= presenter.name%> </td>
+    <% i=i+1 %>
+    <td> <%= i %> </td>
+    <td> <%= link_to presenter.name, presenter %></td>
     <td><%= presenter.email%> </td>
-    <td><%= l presenter.created_at %> </td>
-    <td><%= l presenter.updated_at %> </td>
-    <td><%= link_to 'Show', presenter %></td>
+    <td class="nowrap" ><%= l presenter.created_at %> </td>
+    <td class="nowrap" ><%= l presenter.updated_at %> </td>
     <td><%= guarded_link_to 'Edit', controller: 'presenters', action: 'edit', id: presenter.to_param %></td> 
   </tr>
 <% end %>
