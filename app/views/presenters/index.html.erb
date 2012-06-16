@@ -9,11 +9,9 @@
     <th></th>
   </tr>
 
-<% i=0 %>
-<% @presenters.each do |presenter| %>
+<% @presenters.each_with_index do |presenter, i| %>
   <tr >
-    <% i=i+1 %>
-    <td> <%= i %> </td>
+    <td> <%= i+1 %> </td>
     <td> <%= link_to presenter.name, presenter %></td>
     <td><%= presenter.email%> </td>
     <td class="nowrap" ><%= l presenter.created_at %> </td>

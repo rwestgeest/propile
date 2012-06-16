@@ -9,11 +9,9 @@
     <th></th>
   </tr>
 
-<% i=0 %>
-<% @sessions.each do |session| %>
+<% @sessions.each_with_index do |session, i| %>
   <tr>
-    <% i=i+1 %>
-    <td> <%= i %> </td>
+    <td> <%= i+1 %> </td>
     <td> <%= link_to session.title , session %></td>
     <td> <%=  session.presenter_names %> </td>
     <td> <%= session.reviews.count %> </td>
