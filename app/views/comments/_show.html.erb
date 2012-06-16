@@ -1,13 +1,14 @@
 
 
-<div class="alignright">
-  Created: <%= l comment.created_at %> -- 
-  Modified: <%= l comment.updated_at %>  by <%= presenter_name(comment.presenter) %>
-</div>
-
 
 <div class="lessoutlined ">
   <%= wikinize( comment.body ) %>
 </div>
 
+
+<div class="alignright">
+  Comment Created: <%= l comment.created_at %> -- 
+  Modified: <%= l comment.updated_at %>  
+  by <%= presenter_name(comment.presenter) %>
+</div>
 

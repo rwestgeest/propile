@@ -95,7 +95,7 @@ td.sessiontable {
   vertical-align: bottom;
 }
 
-div.session_form {
+div.in_a_form {
   border: 0px;
   padding: 10px 10px 0px 0px;
   vertical-align: bottom;
@@ -104,22 +104,6 @@ div.session_form {
 .alignright {
   text-align: right;
   font-size: smaller;
-}
-
-
-div.full {
-  float: left;
-  width: 100%;
-}
-
-div.right {
-  float: right;
-  width: 50%;
-}
-
-div.left {
-  float: left;
-  width: 50%;
 }
 
 div.outlined {
@@ -146,10 +130,6 @@ div.lessoutlined {
 div.lessoutlined > p {
   margin: 0px 0px;
   padding: 3px 0px;
-}
-
-div.commentcontent {
-  margin: 0px 0px;
 }
 
 div > i {
@@ -186,6 +166,11 @@ div.review {
   padding: 5px 20px;
 }
 
+div.reviewcontenttitle {
+  margin: 10px 0px;
+  width: 100%;
+}
+
 div.comment {
   border: 1px solid lavender;
   margin: 5px 20px;
@@ -196,11 +181,6 @@ hr {
   height:1px;
   background-color:lavender;
   border: 0px;
-}
-
-div.reviewcontenttitle {
-  margin: 10px 0px;
-  width: 100%;
 }
 
 h3 {

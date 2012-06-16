@@ -7,34 +7,31 @@
 
 <hr>
 
-<h3>Review by:
-  <% if @review.presenter.nil?  %>  
-    nobody defined (invalid review)
-  <% else %> 
-    <%= @review.presenter.name %>
-  <% end %> 
-</h3>
+<h3>Review by: <%= @review.presenter.name %> </h3>
 
 
-  <div class="field">
+  <div class="in_a_form">
     I give this session a 
     <%= f.text_field :score, :size => 3 %> / 10. 
     <i>This means that you, as a reviewer, think that the session can be improved to get a 10/10. You will list those possible improvements below. </i> 
   </div>
 
 
-  <div class="field">
+  <div class="in_a_form">
     <div> 
       What I like: <i>first list the things that you like about this session, why did it get the score you gave it? </i> 
       <%= link_to '(formatting)', "/pages/formatting", :target => '_blank', :class => 'smalllink' %> 
     </div>
     <%= f.text_area :things_i_like, :cols => 100, :rows => 10 %>
+  </div>
+  <div class="in_a_form">
     <div> 
       I will give you a 10/10 if you improve these things: <i> list improvements to the session: what does the session presenter need to change so that you will give them a 10/10? </i> 
       <%= link_to '(formatting)', "/pages/formatting", :target => '_blank', :class => 'smalllink' %> 
     </div>
     <%= f.text_area :things_to_improve, :cols => 100, :rows => 10 %>
   </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

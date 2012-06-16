@@ -1,15 +1,4 @@
-<div class="left"><h3>Review by
-  <% if review.presenter.nil?  %>  
-    nobody (invalid review)
-  <% else %> 
-    <%= review.presenter.name %>
-  <% end %>
-  :
-</h3></div>
 
-<div class="alignright">
-  Created: <%= l review.created_at %> -- Modified: <%= l review.updated_at %>
-</div>
 
 <div class="reviewcontenttitle">
   This session gets a <%= review.score %> / 10.
@@ -24,3 +13,8 @@ Improvement opportunities:
   <%= wikinize(review.things_to_improve) %>
 </div>
 
+<div class="alignright">
+  Review Created: <%= l review.created_at %> -- 
+  Modified: <%= l review.updated_at %> 
+  by <%= review.presenter.name %>
+</div>

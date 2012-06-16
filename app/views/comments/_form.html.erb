@@ -10,17 +10,11 @@
   <%= render 'reviews/show', :review => @comment.review  %>
 
   <h4>
-    Comment by
-    <% if @comment.presenter.nil?  %>  
-      nobody (invalid comment)
-    <% else %> 
-      <%= @comment.presenter.name %>
-    <% end %> 
-    on this Review:
+    Comment by <%= @comment.presenter.name %> on this Review:
   </h4>
   <div><%= link_to '(formatting)', "/pages/formatting", :target => '_blank', :class => 'smalllink' %> </div>
 
-  <div class="field">
+  <div class="in_a_form">
     <%= f.text_area :body, :cols => 100, :rows => 10 %>
   </div>
 

@@ -8,11 +8,11 @@
   </div>
 </p>
 
-<div class="session_form"> 
+<div class="in_a_form"> 
   <div> <%= f.label :title %>*: </div>
   <div> <%= text_area :session, :title, :cols => "100", :rows => "1"  %> </div>
 </div>
-<div class="session_form"> 
+<div class="in_a_form"> 
   <div> <%= f.label :sub_title %>: <i>sometimes your title is catchy but doesn't describe the content of your session. A subtitle can help. Keep short! </i> </div> 
   <div> <%= text_area :session, :sub_title, :cols => "100", :rows => "1"  %> </div>
 </div>
@@ -156,14 +156,14 @@
   </table> 
 </div>
 
-<div class="session_form"> 
+<div class="in_a_form"> 
   <div> 
     <%= f.label :description %>*: <i> this will appear on the website, and they will also be displayed on the wall during the conference -> public description </i> 
     <%= link_to '(formatting)', "/pages/formatting", :target => '_blank', :class => 'smalllink' %> 
   </div>
   <div> <%= text_area :session, :description, :cols => "100"  , :rows => "20"%> </div>
 </div>
-<div class="session_form"> 
+<div class="in_a_form"> 
   <div> 
     <%= f.label :outline_or_timetable %>: <i> this section contains a detailed outline of your session. It will not be viewable by the public, only by reviewers </i>
     <%= link_to '(formatting)', "/pages/formatting", :target => '_blank', :class => 'smalllink' %> 
