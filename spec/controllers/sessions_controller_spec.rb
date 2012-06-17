@@ -95,20 +95,34 @@ describe SessionsController do
         assigns(:sessions).should eq([session])
       end
 
-      it "assigns all sessions as @sessions ordered by number of reviews" do
+      it "assigns all sessions as @sessions ordered by number of reviews and then creation-date" do
         session_with_1_review = FactoryGirl.create :session_with_presenter
-        r = FactoryGirl.create :review, :session => session_with_1_review
-        session_with_1_review.reviews << r
+        r1 = FactoryGirl.create :review, :session => session_with_1_review
+        session_with_1_review.reviews << r1
         session_with_1_review.reviews.count.should eq(1)
+        session_with_1_review.created_at = "2012/06/13"
+        session_with_1_review.save
+
+        session_with_1_review_earlier = FactoryGirl.create :session_with_presenter
+        r2 = FactoryGirl.create :review, :session => session_with_1_review_earlier
+        session_with_1_review_earlier.reviews << r2
+        session_with_1_review_earlier.reviews.count.should eq(1)
+        session_with_1_review_earlier.created_at = "2012/06/10"
+        session_with_1_review_earlier.save
+
         session_without_reviews = FactoryGirl.create :session_with_presenter
         session_without_reviews.reviews.count.should eq(0)
+        session_without_reviews.created_at = "2012/06/20"
+        session_without_reviews.save
 
         get :index, {}
 
         response.should be_success
         response.should render_template('index')
-        assigns(:sessions).should eq([session_without_reviews, session_with_1_review])
+        #assigns(:sessions).should eq([session_without_reviews, session_with_1_review])
+        assigns(:sessions).should eq([session_without_reviews, session_with_1_review_earlier, session_with_1_review])
       end
+
     end
 
     describe "GET show" do
