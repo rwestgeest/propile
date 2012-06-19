@@ -1,13 +1,6 @@
 <%= form_for(@session) do |f| %>
   <%= errors_for @session %>
 
-<p> 
-  <div class="important"> 
-    You don't need to fill in all the fields on this page at once. Only the fields marked with a (*) are mandatory. </br>
-    You can finish up the rest later.  
-  </div>
-</p>
-
 <div class="in_a_form"> 
   <div> <%= f.label :title %>*: </div>
   <div> <%= text_area :session, :title, :cols => "100", :rows => "1"  %> </div>
@@ -30,18 +23,10 @@
     </tr>
     <tr> 
       <td class="sessiontable" >  
-        <% if editable_presenters=="true" %> 
-          <%= f.text_area :first_presenter_email, :cols => "48", :rows => "1" %> 
-        <% else %> 
-          <%= f.text_area :first_presenter_email, :cols => "48", :rows => "1", :disabled => "true" %> 
-        <% end %> 
+        <%= f.text_area :first_presenter_email, :cols => "48", :rows => "1", :disabled => "true" %> 
       </td>
       <td class="sessiontable">  
-        <% if editable_presenters=="true" %> 
-          <%= f.text_area :second_presenter_email, :cols => "48", :rows => "1" %> 
-        <% else %> 
-          <%= f.text_area :second_presenter_email, :cols => "48", :rows => "1", :disabled => "true" %> 
-        <% end %> 
+        <%= f.text_area :second_presenter_email, :cols => "48", :rows => "1", :disabled => "true" %> 
       </td>
     </tr>
   </table >

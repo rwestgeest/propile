@@ -1,0 +1,51 @@
+<%= form_for(@session) do |f| %>
+  <%= errors_for @session %>
+
+<div class="in_a_form"> 
+  <div> <%= f.label :title %>*: </div>
+  <div> <%= text_area :session, :title, :cols => "100", :rows => "1"  %> </div>
+</div>
+<div class="in_a_form"> 
+  <div> <%= f.label :sub_title %>: <i>sometimes your title is catchy but doesn't describe the content of your session. A subtitle can help. Keep short! </i> </div> 
+  <div> <%= text_area :session, :sub_title, :cols => "100", :rows => "1"  %> </div>
+</div>
+
+
+<div > 
+  <table class="sessiontable">
+    <tr> 
+      <td class="sessiontable" width="100px">  
+          <div> <%= f.label :first_presenter_email %>*: </div>
+      </td>
+      <td class="sessiontable">  
+          <div> <%= f.label :second_presenter_email %>: </div>
+      </td>
+    </tr>
+    <tr> 
+      <td class="sessiontable" >  
+        <%= f.text_area :first_presenter_email, :cols => "48", :rows => "1" %> 
+      </td>
+      <td class="sessiontable">  
+        <%= f.text_area :second_presenter_email, :cols => "48", :rows => "1" %> 
+      </td>
+    </tr>
+  </table >
+</div>
+
+
+
+<div class="in_a_form"> 
+  <div> 
+    <%= f.label :description %>*: <i> this will appear on the website, and they will also be displayed on the wall during the conference -> public description </i> 
+    <%= link_to '(formatting)', "/pages/formatting", :target => '_blank', :class => 'smalllink' %> 
+  </div>
+  <div> <%= text_area :session, :description, :cols => "100"  , :rows => "20"%> </div>
+</div>
+
+<div > 
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+</div>
+
+<% end %>
