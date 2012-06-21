@@ -29,6 +29,10 @@ module ApplicationHelper
   end
 
   private
+  def recaptcha_error_flash_tag(message)
+    return '' if message != 'recaptcha-not-reachable'
+    flash_tag(:recaptcha_error, I18n.t(message))
+  end
   def alert_flash_tag(message)
     flash_tag(:alert, message)
   end

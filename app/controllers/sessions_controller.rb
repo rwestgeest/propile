@@ -26,6 +26,11 @@ class SessionsController < ApplicationController
 
   def create
     @session = Session.new(params[:session])
+    unless Captcha.verified?(self)
+      flash[:alert]  = I18n.t('sessions.captcha_error')
+      render :action => 'new'
+      return
+    end
     if @session.save
       redirect_to thanks_session_path(@session), notice: 'Session was successfully created.' 
       @session.presenters.each { |presenter| Postman.deliver(:session_submit, presenter, @session) }

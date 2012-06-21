@@ -24,7 +24,7 @@ describe SessionsController do
     let(:second_presenter_email) { "second_presenter@example.com" }
 
     def valid_creation_attributes
-      FactoryGirl.attributes_for(:session).merge :first_presenter_email => first_presenter_email, :second_presenter_email => second_presenter_email
+      @valid_creation_attributes ||= FactoryGirl.attributes_for(:session).merge :first_presenter_email => first_presenter_email, :second_presenter_email => second_presenter_email
     end
 
     describe "with valid params" do
@@ -76,6 +76,28 @@ describe SessionsController do
         Session.any_instance.stub(:save).and_return(false)
         do_post
         response.should render_template("new")
+      end
+    end
+    describe "when captcha fails" do
+      before do 
+        Captcha.stub(:verified?).with(controller) { false }
+        post :create, {:session => valid_creation_attributes}
+      end
+
+      it "renders new view" do
+        response.should be_success
+        response.should render_template(:new)
+      end
+
+      it "sets the flash message to the exception result" do
+        flash[:alert].should == I18n.t('sessions.captcha_error')
+      end
+
+      it "assigns the session with the filled in values" do
+        assigns(:session).should be_a_new(Session)
+        valid_creation_attributes.each do |key, value|
+          assigns(:session).send(key).should == value
+        end
       end
     end
   end

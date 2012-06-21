@@ -41,6 +41,7 @@
   </div>
   <div> <%= text_area :session, :description, :cols => "100"  , :rows => "20"%> </div>
 </div>
+  <div class="captcha"><%= recaptcha_tags :display => { :theme => 'white', :lang => I18n.locale } %></div>
 
 <div > 
   <div class="actions">

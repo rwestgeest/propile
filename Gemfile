@@ -9,6 +9,7 @@ gem "haml-rails"
 gem "action-guard", "~> 1.1.0"
 gem 'guid'
 gem 'sqlite3'
+gem "recaptcha", :require => "recaptcha/rails"
 
 group :test do
   gem 'ZenTest'

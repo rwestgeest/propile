@@ -115,6 +115,7 @@ GEM
       rake (~> 0.8)
     rdoc (3.12)
       json (~> 1.4)
+    recaptcha (0.3.4)
     rspec (2.9.0)
       rspec-core (~> 2.9.0)
       rspec-expectations (~> 2.9.0)
@@ -179,6 +180,7 @@ DEPENDENCIES
   haml-rails
   jquery-rails
   rails (= 3.2.3)
+  recaptcha
   rspec-rails (~> 2.9)
   sass-rails (~> 3.2.3)
   shoulda-matchers
