@@ -13,7 +13,14 @@
   <tr>
     <td> <%= i+1 %> </td>
     <td> <%= link_to session.title , session %></td>
-    <td> <%=  session.presenter_names %> </td>
+    <!--td> <%=  session.presenter_names %> </td-->
+    <td>
+         <%=  session.presenters[0] && 
+              ( link_to session.presenters[0].name, session.presenters[0] )  %>
+         <%=  session.presenters[1] && " & " %>
+         <%=  session.presenters[1] && 
+              ( link_to session.presenters[1].name, session.presenters[1] )  %>
+    </td>
     <td> <%= session.reviews.count %> </td>
     <td class="nowrap" ><%= l session.created_at %> </td>
     <td class="nowrap" ><%= l session.updated_at %> </td>
