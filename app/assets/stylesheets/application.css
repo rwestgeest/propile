@@ -55,6 +55,11 @@ body {
 }
 
 #alert {
+  font-weight:bold;
+  color: #f00;
+}
+
+#error_explanation {
   color: #f00;
 }
 
