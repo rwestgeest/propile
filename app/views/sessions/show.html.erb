@@ -11,8 +11,7 @@
 </tr>
 <tr>
   <td> Topic: <%= @session.topic %> </td>
-  <td> Laptops required: <%= @session.laptops_required %>  
-  </td>
+  <td> Laptops required: <%= @session.laptops_required %>  </td>
 </tr>
 <tr>
   <td> Duration: <%= @session.duration %>  </td>
@@ -26,10 +25,14 @@
   <td> Experience level: <%= @session.experience_level %> </td>
   <td> Materials needed: <%= @session.materials_needed %> </td>
 </tr>
-<table>
+</table>
 </div>
 
 
+<h4>Short:</h4>
+<div class="outlined">  wiewie
+  <%= wikinize(  @session.short_description )  %>
+</div>
 
 
 <div>
