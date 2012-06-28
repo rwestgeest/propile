@@ -3,12 +3,12 @@ class Postman
     Notifications.send(message, *args).deliver
   end
   def self.notify_review_creation(review)
-    ([ review.presenter ] + review.session.presenters).each do |presenter|
+    ([ review.presenter ] + review.session.presenters).uniq.each do |presenter|
       deliver(:review_creation, presenter.email, review)
     end
   end
   def self.notify_comment_creation(comment)
-    ([comment.presenter, comment.review.presenter] + comment.review.session.presenters).each do |presenter|
+    ([comment.presenter, comment.review.presenter] + comment.review.session.presenters).uniq.each do |presenter|
       deliver( :comment_creation, presenter.email, comment )
     end
   end
