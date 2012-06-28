@@ -1,0 +1,7 @@
+<p>A new comment has been made for review by <%= @review.presenter.name %> on <%= @session.title %> by <%= @comment.presenter.name %>:</p>
+
+<p>You can find the review here: <%= review_url(@review) %></p>
+
+<p><%= @comment.presenter.name  %> wrote:</p>
+
+<%= wikinize @comment.body %>

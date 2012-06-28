@@ -22,6 +22,7 @@ class CommentsController < ApplicationController
     @comment.presenter = current_presenter
 
     if @comment.save
+       Postman.notify_comment_creation(@comment)
        redirect_to @comment, notice: 'Comment was successfully created.'
     else
        render action: "new"

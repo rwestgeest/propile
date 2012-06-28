@@ -1,0 +1,8 @@
+A new comment has been made for review by <%= @review.presenter.name %> on <%= @session.title %> by <%= @comment.presenter.name %>:
+
+You can find the review here: <%= review_url(@review) %>
+
+<%= @comment.presenter.name  %> wrote:
+
+<%= @comment.body %>
+

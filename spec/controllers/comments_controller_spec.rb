@@ -67,6 +67,14 @@ describe CommentsController do
           post :create, {:comment => valid_attributes}
           response.should redirect_to(Comment.last)
         end
+
+        it "sends a message to the sessions presenters" do
+          # we can safely assume that an_instance_of_review is the only review in the database
+          Postman.should_receive(:notify_comment_creation).with do |comment| 
+            comment.should be_persisted
+          end
+          post :create, {:comment => valid_attributes}
+        end
       end
 
       describe "with invalid params" do
