@@ -58,7 +58,11 @@ After being setisfied with the feature (accepted)
 
 I sould 
 
-rake vlad:deploy:migrate to=prod
+edit the release notes (see ReleaseNotes.md)
+
+update the VERSION file
+
+rake release
 
 
 
