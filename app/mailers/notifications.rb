@@ -1,6 +1,7 @@
 class Notifications < ActionMailer::Base
   FromAddress = "sessions@xpday.net"
   default from: FromAddress
+  helper :application
 
   def account_reset(account)
     @account = account
@@ -23,5 +24,12 @@ class Notifications < ActionMailer::Base
     @review = review
     @session= review.session
     mail to: email, :subject => "Review on session '#{review.session.title}'"
+  end
+
+  def comment_creation(email, comment)
+    @review = comment.review
+    @comment = comment
+    @session= @review.session
+    mail to: email, :subject => "Comment for review on session '#{@session.title}'"
   end
 end

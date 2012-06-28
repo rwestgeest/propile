@@ -24,4 +24,5 @@ task "release" do
   raise "Tag #{version} was released earlier" if `git tag`.split.include?(version)
   message = "Released " + releaseline
   sh "git tag -a -m '#{message}' #{version}"
+  sh 'rake vlad:deploy:migrate to=prod'
 end

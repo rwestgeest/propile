@@ -7,5 +7,11 @@ class Postman
       deliver(:review_creation, presenter.email, review)
     end
   end
+  def self.notify_comment_creation(comment)
+    ([comment.presenter, comment.review.presenter] + comment.review.session.presenters).each do |presenter|
+      deliver( :comment_creation, presenter.email, comment )
+    end
+  end
 end
+
 

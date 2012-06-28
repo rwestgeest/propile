@@ -17,4 +17,26 @@ describe Postman do
       Postman.notify_review_creation(review)
     end
   end
+  describe "notify comment creation" do
+    let(:comment) { FactoryGirl.build :comment } 
+    let(:review) { comment.review } 
+    let(:session) { review.session } 
+    before do 
+      comment.presenter.email = "commenter@example.com"
+      review.presenter.email = "reviewer@example.com"
+      session.first_presenter_email = "presenter@example.com"
+    end
+    it "sends a comment_creation notification to commentter reviewer and presenter" do
+      Postman.should_receive(:deliver).with(:comment_creation, comment.presenter.email, comment)
+      Postman.should_receive(:deliver).with(:comment_creation, review.presenter.email, comment)
+      Postman.should_receive(:deliver).with(:comment_creation, session.first_presenter_email, comment)
+      Postman.notify_comment_creation(comment)
+    end
+    it "sends a comment_creation notification to commentter reviewer and presenter" do
+      session.second_presenter_email = "second_presenter@email" 
+      Postman.stub(:deliver)
+      Postman.should_receive(:deliver).with(:comment_creation, session.second_presenter_email, comment)
+      Postman.notify_comment_creation(comment)
+    end
+  end
 end

@@ -1,3 +1,11 @@
+# 0.2.1
+
+Fixes
+
+* tag for released version
+* fix IE9
+* mail notification on comment creation
+
 # 0.2.0
 
 Small improvements on initial release

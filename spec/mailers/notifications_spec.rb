@@ -55,4 +55,23 @@ describe Notifications do
       mail.body.encoded.should match(review_url(review))
     end
   end
+
+  describe "comment_creation" do
+    let(:comment) { FactoryGirl.create :comment } 
+    let(:review) { comment.review } 
+    let(:session) { review.session }
+    let(:mail) { Notifications.comment_creation "to@mail.com", comment }
+    it "renders the headers" do
+      mail.subject.should  == "Comment for review on session '#{session.title}'"
+      mail.to.should  == ['to@mail.com']
+      mail.from.should == [ Notifications::FromAddress ]
+    end
+
+    it "renders the body" do
+      mail.body.encoded.should match session.title
+      mail.body.encoded.should match comment.presenter.name 
+      mail.body.encoded.should match review.presenter.name 
+      mail.body.encoded.should match(review_url(review))
+    end
+  end
 end

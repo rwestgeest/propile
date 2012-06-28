@@ -7,9 +7,9 @@
 <p>I give the session a '<%= @review.score %>' out of 10</p>
 
 <p>What I like</p>
-<p><%= @review.things_i_like %></p>
+<%= wikinize @review.things_i_like %>
 
 <p>Improvement opportunities</p>
-<p><%= @review.things_to_improve %></p>
+<%= wikinize @review.things_to_improve %>
 
 
