@@ -18,7 +18,7 @@ module Authenticable
 
   module ClassMethods
     def authenticate_by_email_and_password(email, password)
-      account = find_by_email(email)
+      account = where("lower(email) = ?", email.downcase).first 
       return account if account && 
                         account.confirmed? && 
                         account.authenticate(password)

@@ -52,8 +52,11 @@ describe Account do
         Account.authenticate_by_email_and_password(account.email, 'xxxx').should be_nil
         Account.authenticate_by_email_and_password("other"+account.email, 'secret').should be_nil
       end
-      it "passes when password matcher" do
+      it "passes when password matches" do
         Account.authenticate_by_email_and_password(account.email, 'secret').should == account
+      end
+      it "ignores the case of the email" do
+        Account.authenticate_by_email_and_password(account.email.upcase, 'secret').should == account
       end
       it "fails when account is not confirmed" do
         account.update_attribute :confirmed_at, nil

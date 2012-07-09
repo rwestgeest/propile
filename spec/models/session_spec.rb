@@ -21,6 +21,7 @@ describe Session do
       email_value.should be_empty
     end
     context "when presenter is not set" do
+
       context "and presenter does not exist" do
         before { set_email_value_to "some_new_presenter@example.com" }
         it "sets the email value" do
@@ -30,21 +31,39 @@ describe Session do
           expect {session.save!}.to change(Presenter, :count).by(1)
         end
       end
+
       context "and presenter exists" do
         let!(:presenter) { FactoryGirl.create :presenter }
         before { set_email_value_to presenter.email }
+
         it "sets the email value" do
           email_value.should == presenter.email
         end
+
         it "does not create a presenter" do
           expect {session.save!}.not_to change(Presenter, :count)
         end
+
+        context "and presenter exists with other casing" do
+          before { set_email_value_to presenter.email.upcase }
+
+          it "does not create a presenter" do
+            expect { session.save!}.not_to change(Presenter, :count)
+          end
+
+          it "takse the original email value" do
+            email_value.should == presenter.email
+          end
+        end
+
       end
+
       context "and value is empty" do
         it "does not create a presenter" do
           expect {set_email_value_to ''}.not_to change{ session.presenters.length }
         end
       end
+
       context "and value is nil" do
         it "does not create a presenter" do
           expect {set_email_value_to nil}.not_to change{ session.presenters.length }

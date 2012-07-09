@@ -25,12 +25,12 @@ class Session < ActiveRecord::Base
 
   def first_presenter_email=(value)
     return unless value and not value.empty?
-    self.first_presenter = Presenter.includes(:account).where('accounts.email = ?', value).first || Presenter.new(:email => value)
+    self.first_presenter = Presenter.includes(:account).where('lower(accounts.email) = ?', value.downcase).first || Presenter.new(:email => value)
   end
 
   def second_presenter_email=(value)
     return unless value and not value.empty?
-    self.second_presenter = Presenter.includes(:account).where('accounts.email = ?', value).first || Presenter.new(:email => value)
+    self.second_presenter = Presenter.includes(:account).where('lower(accounts.email) = ?', value.downcase).first || Presenter.new(:email => value)
   end
 
   def presenter_names
