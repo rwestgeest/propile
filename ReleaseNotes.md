@@ -1,3 +1,10 @@
+# 0.2.2
+Fixes
+
+* remove wiewie
+* find or create presenter case ignored
+* login email case ignored
+
 # 0.2.1
 
 Fixes
