@@ -69,6 +69,20 @@ table.tablelist {
   text-align: left;
 }
 
+.tablelist th .current {
+  padding-right: 12px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.tablelist th .asc {
+  background-image: url(/assets/up_arrow.gif);
+}
+
+.tablelist th .desc {
+  background-image: url(/assets/down_arrow.gif);
+}
+
 table.propertytable {
   border-collapse:collapse;
   border: 2px solid lavender;
