@@ -1,12 +1,12 @@
 <table class="tablelist">
   <tr>
     <th></th>
-    <th> <%= link_to "Title", :sort=>"title" %> </th>
-    <th> <%= link_to "Presenter(s)", :sort=>"presenters" %> </th>
-    <th> <%= link_to "Reviews", :sort=>"reviewcount" %> </th>
-    <th> <%= link_to "Topic", :sort=>"topic" %> </td>
-    <th> <%= link_to "Created", :sort=>"created_at" %> </th>
-    <th> <%= link_to "Modified", :sort=>"updated_at" %> </th>
+    <th> <%= sortable "title" %> </th>
+    <th> <%= sortable "presenters", "Presenter(s)" %> </th>
+    <th> <%= sortable "reviewcount", "Reviews" %> </th>
+    <th> <%= sortable "topic" %> </td>
+    <th> <%= sortable "created_at", "Created" %> </th>
+    <th> <%= sortable "updated_at", "Modified" %> </th>
     <th></th>
   </tr>
 

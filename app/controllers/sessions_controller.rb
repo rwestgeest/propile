@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   skip_before_filter :authorize_action, :only => [:new, :create, :thanks]
+  helper_method :sort_column, :sort_direction
 
   def index
     if sort_column=="reviewcount"
@@ -8,13 +9,12 @@ class SessionsController < ApplicationController
         size_compare = (s1.reviews.size <=> s2.reviews.size) 
         size_compare==0 ? (s1.created_at <=> s2.created_at) : size_compare
       } 
+      @sessions = sort_direction=="asc" ? @sessions :  @sessions.reverse 
     elsif sort_column=="presenters"
-      @sessions = Session.all.sort {
-        |s1, s2| 
-        s1.presenter_names <=> s2.presenter_names 
-      } 
+      @sessions = Session.all.sort_by { |s| s.presenter_names }  
+      @sessions = sort_direction=="asc" ? @sessions :  @sessions.reverse 
     else
-      @sessions = Session.order(sort_column)
+      @sessions = Session.order(sort_column + " " + sort_direction)
     end
   end
 
@@ -69,5 +69,10 @@ class SessionsController < ApplicationController
   def sort_column
     params[:sort] ? params[:sort] : "reviewcount"
   end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
 
 end
