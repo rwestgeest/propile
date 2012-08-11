@@ -6,12 +6,7 @@
 </h3>
 
 <div> 
-  by 
-  <%=  session.presenters[0] && 
-       ( link_to session.presenters[0].name, session.presenters[0] )  %>
-  <%=  session.presenters[1] && " & " %>
-  <%=  session.presenters[1] && 
-       ( link_to session.presenters[1].name, session.presenters[1] )  %>
+  by <%= session_presenter_names(session) %> 
 <hr>
 </div>
 
