@@ -69,18 +69,9 @@ module ApplicationHelper
     link_to title, {:sort => column, :direction => direction}, {:class => css_class}
   end
 
-  def presenter_clickable_name(presenter) 
-    presenter && ( link_to presenter.name, presenter ) 
-  end
-
   def session_presenter_names(session) 
-    session.presenters[0] && ( link_to session.presenters[0].name, session.presenters[0] ) +
-      (session.presenters[1] && " & " ) +
-      (session.presenters[1] && ( link_to session.presenters[1].name, session.presenters[1] ) )
-  end
-
-  def presenter_clickable_name(presenter) 
-    presenter && ( link_to presenter.name, presenter ) 
+    session.presenters[0] && ( link_to session.presenters[0].name, session.presenters[0] )  +
+        ( session.presenters[1].nil? ? "" : " & " + (link_to session.presenters[1].name, session.presenters[1]) ) 
   end
 
 end
