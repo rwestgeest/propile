@@ -110,15 +110,15 @@ describe ApplicationHelper do
 
   describe "session_presenter_names_no_presenters_EMPTY" do
     let(:link_params) {{:controller => 'some_controller', :action => 'some_action'}} 
-    it "session with 1 presenter" do
-      session_presenter_names( Session.new ).should == nil 
+    it "session with 0 presenter" do
+      session_presenter_names( Session.new ).should == ""
     end
   end
 
   describe "session_presenter_names" do
     let!(:session) { Session.new } 
     it "empty session returns emtpy names" do
-      session_presenter_names(session).should == nil
+      session_presenter_names(session).should == ""
     end
     context "first presenter email set" do
       let!(:session) { FactoryGirl.build(:session, :first_presenter_email => "presenter_1@example.com", :second_presenter_email => '')}

@@ -69,9 +69,16 @@ module ApplicationHelper
     link_to title, {:sort => column, :direction => direction}, {:class => css_class}
   end
 
-  def session_presenter_names(session) 
+  def session_presenter_namesOLD(session) 
     session.presenters[0] && ( link_to session.presenters[0].name, session.presenters[0] )  +
         ( session.presenters[1].nil? ? "" : " & " + (link_to session.presenters[1].name, session.presenters[1]) ) 
+  end
+
+  def session_presenter_names(session) 
+    return "" unless session.presenters && session.presenters[0]
+    s = (session.presenters[0] && ( link_to session.presenters[0].name, session.presenters[0] )  )
+    s += session.presenters[1].nil? ? "" : " & " 
+    s += (session.presenters[1].nil? ? "" : (link_to session.presenters[1].name, session.presenters[1]) )
   end
 
 end
