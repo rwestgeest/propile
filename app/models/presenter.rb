@@ -4,6 +4,7 @@ class Presenter < ActiveRecord::Base
   has_many :second_presenter_sessions, :class_name => 'Session', :foreign_key => :second_presenter_id
   has_many :reviews
   has_many :comments
+  has_many :votes
   belongs_to :account
 
   attr_accessible :bio, :email, :name
@@ -37,6 +38,10 @@ class Presenter < ActiveRecord::Base
 
   def has_comment?(comment_id)
     comments.find_by_id(comment_id) 
+  end
+
+  def has_vote_for?(session_id)
+    votes.exists?( :session_id => session_id ) 
   end
 
   def lazy_account

@@ -20,6 +20,7 @@ class SessionsController < ApplicationController
 
   def show
     @session = Session.find(params[:id])
+    @current_presenter_has_voted_for_this_session = current_presenter.has_vote_for?(params[:id]) 
   end
 
   def new
