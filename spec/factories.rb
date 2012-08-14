@@ -43,4 +43,10 @@ FactoryGirl.define do
     sequence( :email ) { |n| "presenter_#{n}@example.com" }
     role Account::Presenter
   end
+
+  factory :vote do
+    association :session, factory: :session_with_presenter
+    presenter
+  end
+
 end
