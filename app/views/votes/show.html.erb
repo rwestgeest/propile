@@ -1,0 +1,11 @@
+<%= render 'sessions/show_short', :session => @vote.session  %>
+<hr>
+
+<div class="alignright">
+  Vote Created: <%= l @vote.created_at %> -- 
+  Modified: <%= l @vote.updated_at %> 
+  by <%= @vote.presenter.name %>
+</div>
+
+<%= link_to 'Back to Session', @vote.session %> 
+

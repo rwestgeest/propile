@@ -1,0 +1,23 @@
+<%= form_for(@vote) do |f| %>
+  <%= errors_for @vote %>
+
+<%= f.hidden_field :session_id %>
+
+<%= render 'sessions/show_short', :session => @vote.session  %>
+
+<hr>
+
+<h3>Vote by: <%= @vote.presenter.name %> </h3>
+
+<div class="actions">
+  <%= f.submit %>
+</div>
+
+<% end %>
+
+<% if ! @vote.created_at.nil? && !@vote.updated_at.nil? %> 
+  <div class="alignright">
+    Created: <%= l @vote.created_at %> -- Modified: <%= l @vote.updated_at %> 
+  </div>
+<% end %> 
+
