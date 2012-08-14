@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120813162151) do
+ActiveRecord::Schema.define(:version => 20120814084626) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                :limit => 150,                          :null => false
@@ -39,6 +39,14 @@ ActiveRecord::Schema.define(:version => 20120813162151) do
   add_index "comments", ["presenter_id"], :name => "index_comments_on_presenter_id"
   add_index "comments", ["review_id"], :name => "index_comments_on_review_id"
 
+  create_table "configurations", :force => true do |t|
+    t.string   "name"
+    t.string   "value"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "presenters", :force => true do |t|
     t.string   "name",       :limit => 100
     t.text     "bio"
@@ -48,6 +56,14 @@ ActiveRecord::Schema.define(:version => 20120813162151) do
   end
 
   add_index "presenters", ["account_id"], :name => "index_presenters_on_account_id"
+
+  create_table "propile_configs", :force => true do |t|
+    t.string   "name"
+    t.string   "value"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "reviews", :force => true do |t|
     t.text     "things_i_like"

@@ -5,6 +5,7 @@ allow 'presenters#edit', :at_least => :presenter do |account, params|
   account.maintainer? || account.presenter.id == params['id'].to_i
 end
 
+allow 'propile_configs', :at_least => :maintainer
 allow 'comments', :at_least => :presenter
 allow 'reviews', :at_least => :presenter
 allow 'votes', :at_least => :presenter

@@ -1,0 +1,27 @@
+<h1>Listing propile_configs</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Value</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @propile_configs.each do |propile_config| %>
+  <tr>
+    <td><%= propile_config.name %></td>
+    <td><%= propile_config.value %></td>
+    <td><%= propile_config.description %></td>
+    <td><%= link_to 'Show', propile_config %></td>
+    <td><%= link_to 'Edit', edit_propile_config_path(propile_config) %></td>
+    <td><%= link_to 'Destroy', propile_config, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Propile config', new_propile_config_path %>

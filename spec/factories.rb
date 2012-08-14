@@ -49,4 +49,8 @@ FactoryGirl.define do
     presenter
   end
 
+  factory :propile_config do
+    sequence(:name) {|n| "propile_config_name_#{n}" }
+    sequence(:value) {|n| "propile_config_value_#{n}"}
+  end
 end

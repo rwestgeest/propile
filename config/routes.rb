@@ -1,4 +1,6 @@
 Propile::Application.routes.draw do
+  resources :propile_configs
+
   resources :votes
 
   resources :pages, :only => :show

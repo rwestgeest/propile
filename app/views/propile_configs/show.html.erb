@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @propile_config.name %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%= @propile_config.value %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @propile_config.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_propile_config_path(@propile_config) %> |
+<%= link_to 'Back', propile_configs_path %>

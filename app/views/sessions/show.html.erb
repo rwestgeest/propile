@@ -1,6 +1,8 @@
-<div class="flashy">
-<%= link_to 'Vote for this session', new_session_vote_path(@session) %>  
-</div>
+<% if PropileConfig.is_set( "voting_active") %> 
+  <div class="flashy">
+  <%= link_to 'Vote for this session', new_session_vote_path(@session) %>  
+  </div>
+<% end %>
 
 <%= render 'sessions/show_short', :session => @session  %>
 
