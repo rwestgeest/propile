@@ -33,11 +33,13 @@ describe Presenter do
       session.presenters.should include(presenter)
     end
   end
+
   describe 'account' do
     it "is a presenter account" do
       Presenter.new.account.role.should == Account::Presenter
     end
   end
+
   describe 'email' do 
     let(:presenter) { Presenter.new }
 
@@ -61,6 +63,18 @@ describe Presenter do
         presenter.account.email.should == "some@mail.nl" 
         presenter.email.should == "some@mail.nl" 
       end
+    end
+  end
+
+  describe 'has_vote_for?' do
+    let(:presenter) { Presenter.new }
+    session = FactoryGirl.create(:session_with_presenter)
+    it "has no vote by default " do
+      presenter.has_vote_for?(session.id).should == false
+    end
+    it "returns true if presenter has vote for this session " do
+      vote = FactoryGirl.create :vote
+      vote.presenter.has_vote_for?(vote.session.id).should == true
     end
   end
 end
