@@ -66,15 +66,4 @@ describe Presenter do
     end
   end
 
-  describe 'has_vote_for?' do
-    let(:presenter) { Presenter.new }
-    session = FactoryGirl.create(:session_with_presenter)
-    it "has no vote by default " do
-      presenter.has_vote_for?(session.id).should == false
-    end
-    it "returns true if presenter has vote for this session " do
-      vote = FactoryGirl.create :vote
-      vote.presenter.has_vote_for?(vote.session.id).should == true
-    end
-  end
 end
