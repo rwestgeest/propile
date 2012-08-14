@@ -10,7 +10,40 @@
   Created: <%= l @presenter.created_at %> -- 
   Modified: <%= l @presenter.updated_at %> 
 </div>
+<%= guarded_link_to 'Edit bio', controller: 'presenters', action: 'edit', id: @presenter.to_param %> &nbsp;
+
 <hr>
 
-<%= guarded_link_to 'Edit', controller: 'presenters', action: 'edit', id: @presenter.to_param %> &nbsp;
+<% if @you_are_current_user==true %> 
+
+<h2>Your votes </h2>
+<div>(only you can see this)</div>
+
+<table class="tablelist">
+  <tr>
+    <th></th>
+    <th> <%= "Session" %>  </th>
+    <th> <%= "Voted by" %> </th>
+    <th> <%= "Created" %>  </th>
+    <th> <%= "Modified" %> </th>
+  </tr>
+
+<% @presenter.votes.each_with_index do |vote, i| %>
+  <tr>
+    <td> <%= i+1 %> </td>
+    <td> <%= link_to vote.session.title , vote.session %></td>
+    <td> <%= link_to vote.presenter.name, vote.presenter %> </td>
+    <td class="nowrap" ><%= l vote.created_at %> </td>
+    <td class="nowrap" ><%= l vote.updated_at %> </td>
+  </tr>
+<% end %>
+</table>
+
+<%end%> 
+
+
+<p class="alignright"><a href="mailto:sessions@xpday.net">problems or questions</a> </p> 
+
+<hr>
+
 <%= link_to 'Back to list of presenters', presenters_path %>

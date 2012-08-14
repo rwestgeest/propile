@@ -5,6 +5,7 @@ class PresentersController < ApplicationController
 
   def show
     @presenter = Presenter.find(params[:id])
+    @you_are_current_user = (current_presenter == @presenter)
   end
 
   def new
