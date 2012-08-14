@@ -7,10 +7,17 @@ class Vote < ActiveRecord::Base
   validates :presenter, :presence => true
   validates :session, :presence => true
   validate :voter_cannot_be_presenter
+  validate :max_10_votes
 
   def voter_cannot_be_presenter
     if session && ( session.presenters.include? presenter )
       errors[:presenter] << "--> Don't vote for you own session please!"
+    end
+  end
+
+  def max_10_votes
+    if presenter && ( presenter.votes.size >= 10 )
+      errors[:presenter] << "--> You can vote for max 10 sessions!"
     end
   end
 
