@@ -40,6 +40,10 @@ class Presenter < ActiveRecord::Base
     comments.find_by_id(comment_id) 
   end
 
+  def has_vote?(vote_id)
+    votes.find_by_id(vote_id) 
+  end
+
   def lazy_account
     self.account ||= Account.new
   end
