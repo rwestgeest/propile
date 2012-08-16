@@ -39,14 +39,6 @@ ActiveRecord::Schema.define(:version => 20120814084626) do
   add_index "comments", ["presenter_id"], :name => "index_comments_on_presenter_id"
   add_index "comments", ["review_id"], :name => "index_comments_on_review_id"
 
-  create_table "configurations", :force => true do |t|
-    t.string   "name"
-    t.string   "value"
-    t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
   create_table "presenters", :force => true do |t|
     t.string   "name",       :limit => 100
     t.text     "bio"

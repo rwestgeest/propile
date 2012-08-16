@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe PropileConfigsController do
+  it_should_behave_like "a guarded resource controller", :maintainer
 
   context "when logged in" do
     login_as :maintainer
