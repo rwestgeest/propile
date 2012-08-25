@@ -7,11 +7,18 @@ class Vote < ActiveRecord::Base
   validates :presenter, :presence => true
   validates :session, :presence => true
   validate :voter_cannot_be_presenter
+  validate :max_1_vote_per_session_per_presenter
   validate :max_10_votes
 
   def voter_cannot_be_presenter
     if session && ( session.presenters.include? presenter )
       errors[:presenter] << "--> Don't vote for you own session please!"
+    end
+  end
+
+  def max_1_vote_per_session_per_presenter
+    if session && ( session.votes.exists? :presenter_id => presenter.id )
+      errors[:presenter] << "--> Don't vote twice for the same session please!"
     end
   end
 

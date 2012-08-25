@@ -58,6 +58,9 @@ describe Vote do
     end
   end
 
+  describe 'max_1_vote_per_session_per_presenter', :broken => true do 
+  end
+
   describe 'max_10_votes', :broken => true do 
     let(:apresenter) { FactoryGirl.create(:presenter) }
     it "should validate max 10 sessions" do
