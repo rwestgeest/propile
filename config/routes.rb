@@ -18,7 +18,8 @@ Propile::Application.routes.draw do
 
   resources :sessions do
     resources :reviews, :on => :member
-    resources :votes, :on => :member
+    resources :votes, :on => :member do
+    end
     get 'thanks', :on => :member
   end
 
