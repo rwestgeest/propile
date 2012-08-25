@@ -23,5 +23,6 @@ allow 'comments#edit', :at_least => :presenter do |account, params|
 end
 allow 'account/password', :at_least => :presenter
 allow 'sessions#new', :at_least => :maintainer
+allow 'votes#index', :at_least => :maintainer
 #allow 'sessions#new'
 allow ''
