@@ -5,6 +5,8 @@ describe Vote do
     it "is possible" do
       vote = FactoryGirl.create :vote
       Vote.first.should == vote
+      Vote.first.presenter.votes.size.should == 1
+      Vote.first.session.votes.size.should == 1
     end
   end
 
@@ -18,6 +20,69 @@ describe Vote do
     vote.save
     vote.errors[:presenter].should_not be_empty 
   end
+
+  def vote_by_presenter (apresenter) 
+    vote = Vote.new
+    vote.session = FactoryGirl.create :session_with_presenter 
+    vote.presenter = apresenter
+    vote.save
+    vote.presenter.votes.size.should == 1
+    apresenter.votes.size.should == 1
+    vote
+  end
+
+  context "1 presenter votes" , :broken => true do 
+  #context "1 presenter votes" do 
+    let(:apresenter) { FactoryGirl.create(:presenter) }
+    it "should validate max 10 sessions" do
+      10.times do |i|
+        vote = Vote.new 
+        vote.session = FactoryGirl.create :session_with_presenter 
+        vote.presenter = apresenter
+        Vote.all.size.should == i
+        vote.save!
+        Vote.all.size.should == i+1
+        vote.presenter.should_not be_nil
+        p vote.presenter
+        p vote.presenter.votes
+        #vote.presenter.votes.size.should == i
+        #apresenter.votes.size.should == i
+        #vote_by_presenter ppresenter
+      end
+      Vote.all.size.should == 10
+      apresenter.votes.size.should == 10
+      vote = vote_by_presenter apresenter
+      Vote.all.size.should == 11
+      apresenter.votes.size.should == 11
+      #vote.errors[:presenter].should_not be_empty 
+    end
+  end
+
+  describe 'max_10_votes', :broken => true do 
+    let(:apresenter) { FactoryGirl.create(:presenter) }
+    it "should validate max 10 sessions" do
+      10.times do |i|
+        vote = Vote.new 
+        vote.session = FactoryGirl.create :session_with_presenter 
+        vote.presenter = apresenter
+        Vote.all.size.should == i
+        vote.save!
+        Vote.all.size.should == i+1
+        vote.presenter.should_not be_nil
+        p vote.presenter
+        p vote.presenter.votes
+        #vote.presenter.votes.size.should == i
+        #apresenter.votes.size.should == i
+        #vote_by_presenter ppresenter
+      end
+      Vote.all.size.should == 10
+      apresenter.votes.size.should == 10
+      vote = vote_by_presenter apresenter
+      Vote.all.size.should == 11
+      apresenter.votes.size.should == 11
+      #vote.errors[:presenter].should_not be_empty 
+    end
+  end 
 
   describe 'presenter_has_voted_for?' do
     let(:presenter) { FactoryGirl.create(:presenter) }
