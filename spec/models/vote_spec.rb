@@ -97,4 +97,17 @@ describe Vote do
     end
   end
 
+  describe 'vote_of_presenter_for' do
+    let(:presenter) { FactoryGirl.create(:presenter) }
+    let(:session) { FactoryGirl.create :session_with_presenter }
+
+    it "returns nil default " do
+      Vote.vote_of_presenter_for(presenter.id, session.id).should == nil
+    end
+    it "returns true if presenter has vote for this session " do
+      vote = FactoryGirl.create :vote
+      Vote.vote_of_presenter_for(vote.presenter.id, vote.session.id).should == vote
+    end
+  end
+
 end

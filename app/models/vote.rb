@@ -24,4 +24,9 @@ class Vote < ActiveRecord::Base
   def self.presenter_has_voted_for?(presenter_id, session_id) 
     Vote.exists?( :presenter_id => presenter_id, :session_id => session_id ) 
   end
+
+  def self.vote_of_presenter_for(presenter_id, session_id) 
+    votes = Vote.where( :presenter_id => presenter_id, :session_id => session_id ) 
+    votes ? votes.first : nil
+  end
 end
