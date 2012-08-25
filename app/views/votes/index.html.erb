@@ -4,7 +4,6 @@
     <th> <%= "Session" %>  </th>
     <th> <%= "Voted by" %> </th>
     <th> <%= "Created" %>  </th>
-    <th> <%= "Modified" %> </th>
   </tr>
 
 <% @votes.each_with_index do |vote, i| %>
@@ -13,7 +12,6 @@
     <td> <%= link_to vote.session.title , vote.session %></td>
     <td> <%= link_to vote.presenter.name, vote.presenter %> </td>
     <td class="nowrap" ><%= l vote.created_at %> </td>
-    <td class="nowrap" ><%= l vote.updated_at %> </td>
   </tr>
 <% end %>
 </table>
