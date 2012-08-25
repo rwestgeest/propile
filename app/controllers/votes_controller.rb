@@ -25,7 +25,7 @@ class VotesController < ApplicationController
     if @vote.save
       redirect_to session_url @session
     else
-      redirect_to session_url @session
+      render action: "new"
     end
   end
 
