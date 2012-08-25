@@ -1,6 +1,9 @@
 <table class="tablelist">
   <tr>
     <th></th>
+<% if PropileConfig.is_set( "voting_active") %> 
+    <th> <%= sortable "voted" %> </th>
+<% end %>
     <th> <%= sortable "title" %> </th>
     <th> <%= sortable "presenters", "Presenter(s)" %> </th>
     <th> <%= sortable "reviewcount", "Reviews" %> </th>
@@ -13,6 +16,9 @@
 <% @sessions.each_with_index do |session, i| %>
   <tr>
     <td> <%= i+1 %> </td>
+<% if PropileConfig.is_set( "voting_active") %> 
+    <td> <% if Vote.presenter_has_voted_for?(@current_account.presenter.id, session.id) %> YES  <% end %> </td>
+<% end %>
     <td> <%= link_to session.title , session %></td>
     <td> <%= session_presenter_names(session) %> </td>
     <td> <%= session.reviews.count %> </td>
