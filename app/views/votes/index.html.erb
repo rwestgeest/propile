@@ -1,22 +1,8 @@
-<table class="tablelist">
-  <tr>
-    <th></th>
-    <th> <%= "Session" %>  </th>
-    <th> <%= "Voted by" %> </th>
-    <th> <%= "Created" %>  </th>
-  </tr>
+<%= render 'votes/index', :votes => @votes  %>
 
-<% @votes.each_with_index do |vote, i| %>
-  <tr>
-    <td> <%= i+1 %> </td>
-    <td> <%= link_to vote.session.title , vote.session %></td>
-    <td> <%= link_to vote.presenter.name, vote.presenter %> </td>
-    <td class="nowrap" ><%= l vote.created_at %> </td>
-  </tr>
-<% end %>
-</table>
+<% if PropileConfig.is_set( "voting_active") %> 
+  <%= link_to 'Export CSV', csv_votes_path %>
+<% end %> 
 
-
-<%= link_to 'Export CSV', csv_votes_path %>
 <p class="alignright"><a href="mailto:sessions@xpday.net">problems or questions</a> </p> 
 
