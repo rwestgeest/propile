@@ -3,10 +3,10 @@
   <div class="flashy">
   <% if @current_presenter_has_voted_for_this_session  %>  
     You have voted for this session 
-    --> <%= link_to 'Destroy this vote', @my_vote, confirm: 'Are you sure?', method: :delete %>
+    --> <%= link_to 'Destroy this vote', @my_vote, method: :delete %>
   <% else %>
     <!--%= link_to 'Vote for this session', new_session_vote_path(@session) %-->  
-    <%= link_to 'Vote for this session', session_votes_path(@session), confirm: 'Are you sure?', method: :post %>
+    <%= link_to 'Vote for this session', session_votes_path(@session), method: :post %>
   <% end %>
   </div>
 <% end %>
