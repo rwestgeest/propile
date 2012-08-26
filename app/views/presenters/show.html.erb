@@ -26,12 +26,18 @@
 <%end%> 
 
 
-<h2>Sessions by <%= @presenter.name  %> </h2>
+<h2>Sessions submitted by <%= @presenter.name  %> </h2>
 
 <%= render 'sessions/index', :sessions => @presenter.sessions, :sortable => false  %>
 
-<p class="alignright"><a href="mailto:sessions@xpday.net">problems or questions</a> </p> 
+<hr>
+
+<h2>Sessions reviewed by <%= @presenter.name  %> </h2>
+
+<%= render 'sessions/index', :sessions => @sessions_reviewed_by_you, :sortable => false  %>
 
 <hr>
+
+<p class="alignright"><a href="mailto:sessions@xpday.net">problems or questions</a> </p> 
 
 <%= link_to 'Back to list of presenters', presenters_path %>
