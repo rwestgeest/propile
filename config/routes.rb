@@ -1,7 +1,9 @@
 Propile::Application.routes.draw do
   resources :propile_configs
 
-  resources :votes
+  resources :votes do
+    get 'csv', :on => :collection
+  end
 
   resources :pages, :only => :show
   

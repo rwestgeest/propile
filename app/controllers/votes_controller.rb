@@ -1,3 +1,5 @@
+require 'csv'
+
 class VotesController < ApplicationController
   def index
     @votes = Vote.all
@@ -46,4 +48,23 @@ class VotesController < ApplicationController
 
     redirect_to session_url @session
   end
+
+  def csv 
+    @votes = Vote.all
+    vote_csv = CSV.generate(options = { :col_sep => ';' }) do |csv| 
+      #header row
+      csv << [ "Title", "Subtitle",
+               "Presenters", 
+               "Voter" ]
+      #data row
+      @votes.each do |vote| 
+        csv << [ vote.session.title, vote.session.sub_title, 
+                 vote.session.presenter_names, 
+                 vote.presenter.name
+               ]
+      end
+    end
+    send_data(vote_csv, :type => 'test/csv', :filename => 'votes.csv') 
+  end
+
 end

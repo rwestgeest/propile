@@ -10,6 +10,7 @@ allow 'comments', :at_least => :presenter
 allow 'reviews', :at_least => :presenter
 
 allow 'votes', :at_least => :presenter
+allow 'votes#csv', :at_least => :maintainer
 
 allow 'sessions', :at_least => :presenter
 allow 'sessions#edit', :at_least => :presenter do |account, params|

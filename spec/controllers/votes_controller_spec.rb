@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'csv'
 
 describe VotesController do
   render_views
@@ -22,6 +23,16 @@ describe VotesController do
         assigns(:votes).should eq([vote])
       end
     end
+
+    describe "GET csv" do
+      it "exports all votes in csv format" do
+        create_vote 
+        get :csv
+        response.should be_success
+        CSV.parse(@response.body).size.should be 2
+      end
+    end
+
 
     describe "GET show" do
       it "assigns the requested vote as @vote" do
@@ -68,6 +79,7 @@ describe VotesController do
         end
       end
     end
+
 
   end
   context "when logged in as presenter" do
