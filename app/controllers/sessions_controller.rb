@@ -1,5 +1,7 @@
+require 'csv'
+
 class SessionsController < ApplicationController
-  skip_before_filter :authorize_action, :only => [:new, :create, :thanks]
+  skip_before_filter :authorize_action, :only => [:new, :create, :thanks, :csv]
   helper_method :sort_column, :sort_direction
 
   def index
@@ -43,6 +45,20 @@ class SessionsController < ApplicationController
     @session = Session.find(params[:id])
   end
 
+  def csv 
+    @sessions = Session.all
+    session_csv = CSV.generate do |csv| 
+      #header row
+      csv << ["Title"]
+      #data row
+      @sessions.each do |session| 
+        csv << [session.title]
+      end
+    end
+    send_data(session_csv, :type => 'test/csv', :filename => 'session_record.csv') 
+    #redirect_to sessions_url 
+  end
+
   def create
     @session = Session.new(params[:session])
     unless Captcha.verified?(self)
@@ -74,6 +90,7 @@ class SessionsController < ApplicationController
 
     redirect_to sessions_url 
   end
+
 
   def sort_column
     params[:sort] ? params[:sort] : "reviewcount"

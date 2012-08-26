@@ -18,9 +18,9 @@ Propile::Application.routes.draw do
 
   resources :sessions do
     resources :reviews, :on => :member
-    resources :votes, :on => :member do
-    end
+    resources :votes, :on => :member 
     get 'thanks', :on => :member
+    get 'csv', :on => :collection
   end
 
   namespace :account do
