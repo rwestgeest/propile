@@ -152,12 +152,14 @@ describe VotesController do
     describe "DELETE destroy" do
       it "destroys the requested vote" do
         create_vote
+        request.env["HTTP_REFERER"] = session_url  :id => session_for_vote.id
         expect {
           delete :destroy, {:id => vote.to_param}
         }.to change(Vote, :count).by(-1)
       end
 
       it "redirects to the votes list"  do
+        request.env["HTTP_REFERER"] = session_url  :id => session_for_vote.id
         delete :destroy, {:id => vote.to_param}
         response.should redirect_to session_url  :id => session_for_vote.id
       end

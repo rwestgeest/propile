@@ -46,7 +46,7 @@ class VotesController < ApplicationController
     @session = @vote.session
     @vote.destroy
 
-    redirect_to session_url @session
+    redirect_to(:back)
   end
 
   def csv 
