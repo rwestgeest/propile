@@ -41,4 +41,8 @@ class Session < ActiveRecord::Base
   def presenters 
     [ first_presenter, second_presenter ].compact
   end
+
+  def presenter_has_voted_for?(presenter_id) 
+    votes.exists?( :presenter_id => presenter_id ) 
+  end
 end

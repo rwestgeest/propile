@@ -13,6 +13,13 @@ class SessionsController < ApplicationController
     elsif sort_column=="presenters"
       @sessions = Session.all.sort_by { |s| s.presenter_names }  
       @sessions = sort_direction=="asc" ? @sessions :  @sessions.reverse 
+    elsif sort_column=="voted"
+      @sessions = Session.all.sort { 
+        |s1, s2| 
+        size_compare =  ( (s1.presenter_has_voted_for? current_presenter.id).to_s <=> (s2.presenter_has_voted_for? current_presenter.id).to_s )
+        size_compare==0 ? (s1.created_at <=> s2.created_at) : size_compare
+      } 
+      @sessions = sort_direction=="asc" ? @sessions :  @sessions.reverse 
     else
       @sessions = Session.order(sort_column + " " + sort_direction)
     end
