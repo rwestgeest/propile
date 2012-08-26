@@ -69,7 +69,6 @@ class SessionsController < ApplicationController
       end
     end
     send_data(session_csv, :type => 'test/csv', :filename => 'sessions.csv') 
-    #redirect_to sessions_url 
   end
 
   def create
