@@ -1,8 +1,6 @@
 <%= render 'votes/index', :votes => @votes  %>
 
-<% if PropileConfig.is_set( "voting_active") %> 
-  <%= link_to 'Export CSV', csv_votes_path %>
-<% end %> 
+<%= link_to 'Export CSV', csv_votes_path %>
 
 <p class="alignright"><a href="mailto:sessions@xpday.net">problems or questions</a> </p> 
 
