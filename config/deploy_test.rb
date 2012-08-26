@@ -16,7 +16,7 @@ namespace :vlad do
 
   remote_task "tests", :role => :app do
     in_current_path = "cd #{current_path} && "
-    run in_current_path + "RAILS_ENV=#{rails_env} bundle exec rake "
+    run in_current_path + "bundle exec rake "
   end
 
   remote_task "bundle", :role => :app do
