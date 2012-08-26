@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       } 
       @sessions = sort_direction=="asc" ? @sessions :  @sessions.reverse 
     elsif sort_column=="presenters"
-      @sessions = Session.all.sort_by { |s| s.presenter_names }  
+      @sessions = Session.all.sort_by { |s| s.presenter_names.upcase }  
       @sessions = sort_direction=="asc" ? @sessions :  @sessions.reverse 
     elsif sort_column=="voted"
       @sessions = Session.all.sort { 
@@ -23,7 +23,7 @@ class SessionsController < ApplicationController
       } 
       @sessions = sort_direction=="asc" ? @sessions :  @sessions.reverse 
     else
-      @sessions = Session.order(sort_column + " " + sort_direction)
+      @sessions = Session.order( "upper("+sort_column+") " + sort_direction)
     end
   end
 
