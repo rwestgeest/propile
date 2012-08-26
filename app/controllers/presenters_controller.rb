@@ -1,6 +1,16 @@
 class PresentersController < ApplicationController
+  helper_method :sort_column, :sort_direction
+
   def index
-    @presenters = Presenter.all
+    if sort_column=="name"
+      @presenters = Presenter.all.sort_by { |p| p.name.upcase }  
+      @presenters = sort_direction=="asc" ? @presenters :  @presenters.reverse 
+    elsif sort_column=="email"
+      @presenters = Presenter.all.sort_by { |p| p.email.upcase }  
+      @presenters = sort_direction=="asc" ? @presenters :  @presenters.reverse 
+    else
+      @presenters = Presenter.order( "upper("+sort_column+") " + sort_direction)
+    end
   end
 
   def show
@@ -44,4 +54,13 @@ class PresentersController < ApplicationController
 
     redirect_to presenters_url
   end
+
+  def sort_column
+    params[:sort] ? params[:sort] : "created_at"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
 end
