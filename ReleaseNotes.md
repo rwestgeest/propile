@@ -1,3 +1,13 @@
+# 0.3.0
+
+* tag maken voor gereleasede versie 
+* Bug: show sessions contains the paragraph "SHORT" 2x 
+* fix holapola bug 
+* I want to see the sessions grouped by topic (or at least see the topic in the list). 
+* sortable columns in session list 
+* clickable names for reviewers/commenters in show-session 
+* deploy in PR (en move the stories van "deployed on test" naar "deployed in PR) (en maak tag) 
+
 # 0.2.2
 Fixes
 
