@@ -1,5 +1,7 @@
+require 'csv'
+
 class SessionsController < ApplicationController
-  skip_before_filter :authorize_action, :only => [:new, :create, :thanks]
+  skip_before_filter :authorize_action, :only => [:new, :create, :thanks, :csv]
   helper_method :sort_column, :sort_direction
 
   def index
@@ -11,16 +13,24 @@ class SessionsController < ApplicationController
       } 
       @sessions = sort_direction=="asc" ? @sessions :  @sessions.reverse 
     elsif sort_column=="presenters"
-      @sessions = Session.all.sort_by { |s| s.presenter_names }  
+      @sessions = Session.all.sort_by { |s| s.presenter_names.upcase }  
+      @sessions = sort_direction=="asc" ? @sessions :  @sessions.reverse 
+    elsif sort_column=="voted"
+      @sessions = Session.all.sort { 
+        |s1, s2| 
+        size_compare =  ( (s1.presenter_has_voted_for? current_presenter.id).to_s <=> (s2.presenter_has_voted_for? current_presenter.id).to_s )
+        size_compare==0 ? (s1.created_at <=> s2.created_at) : size_compare
+      } 
       @sessions = sort_direction=="asc" ? @sessions :  @sessions.reverse 
     else
-      @sessions = Session.order(sort_column + " " + sort_direction)
+      @sessions = Session.order( "upper("+sort_column+") " + sort_direction)
     end
   end
 
   def show
     @session = Session.find(params[:id])
     @current_presenter_has_voted_for_this_session = Vote.presenter_has_voted_for?(current_presenter.id, params[:id]) 
+    @my_vote = Vote.vote_of_presenter_for(current_presenter.id, params[:id]) 
   end
 
   def new
@@ -33,6 +43,34 @@ class SessionsController < ApplicationController
 
   def thanks
     @session = Session.find(params[:id])
+  end
+
+  def csv 
+    @sessions = Session.all
+    session_csv = CSV.generate(options = { :col_sep => ';' }) do |csv| 
+      #header row
+      csv << [ "Title", "Subtitle",
+               "Presenters", "Created", "Modified", 
+               "Type", "Topic", "Duration", 
+               "Reviews", 
+               "Goal", 
+               "Intended Audience", "Experience Level", 
+               "Max participants", "Laptops", "Other limitations", "Room setup", "Materials", 
+               "Short" ]
+      #data row
+      @sessions.each do |session| 
+        csv << [ session.title, session.sub_title, 
+                 session.presenter_names, session.created_at, session.updated_at,
+                 session.session_type, session.topic, session.duration, 
+                 session.reviews.size,
+                 session.session_goal, 
+                 session.intended_audience, session.experience_level,
+                 session.max_participants, session.laptops_required, session.other_limitations, session.room_setup, session.materials_needed,
+                 session.short_description
+               ]
+      end
+    end
+    send_data(session_csv, :type => 'test/csv', :filename => 'sessions.csv') 
   end
 
   def create
@@ -66,6 +104,7 @@ class SessionsController < ApplicationController
 
     redirect_to sessions_url 
   end
+
 
   def sort_column
     params[:sort] ? params[:sort] : "reviewcount"

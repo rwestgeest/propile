@@ -47,9 +47,9 @@ describe VotesController do
           assigns(:vote).should eq(vote)
         end
 
-        it "redirects to the vote" do
+        it "redirects to the 'edit' template because update is never supposed to do anything"  do
           put :update, {:id => vote.to_param, :vote => valid_attributes}
-          response.should redirect_to(vote)
+          response.should render_template("edit")
         end
       end
 
@@ -101,7 +101,8 @@ describe VotesController do
     describe "POST create" do
       describe "with valid params" do
         def do_post
-          post :create, {:vote => valid_attributes}
+          session = FactoryGirl.create :session_with_presenter
+          post :create, {:vote => valid_attributes, :session_id => session_for_vote.id}
         end
         it "creates a new Vote" do
           expect {
@@ -114,10 +115,9 @@ describe VotesController do
           Vote.last.presenter.should == current_presenter
         end
 
-        it "redirects to the created review" do
+        it "redirects to the voted session" do
           do_post
-          response.should redirect_to(Vote.last)
-        end
+          response.should redirect_to session_url  :id => session_for_vote.id
         end
       end
 
@@ -125,14 +125,15 @@ describe VotesController do
         before do
           # Trigger the behavior that occurs when invalid params are submitted
           Vote.any_instance.stub(:save).and_return(false)
-          post :create, {:vote => valid_attributes}
+          post :create, {:vote => valid_attributes, :session_id => session_for_vote.id}
         end
         it "assigns a newly created but unsaved vote as @vote" do
           assigns(:vote).should be_a_new(Vote)
         end
 
-      it "re-renders the 'new' template" do
-        response.should render_template("new")
+        it "re-renders the 'new' template" do
+          response.should render_template("new")
+        end
       end
     end
 
@@ -144,9 +145,9 @@ describe VotesController do
         }.to change(Vote, :count).by(-1)
       end
 
-      it "redirects to the votes list" do
+      it "redirects to the votes list"  do
         delete :destroy, {:id => vote.to_param}
-        response.should redirect_to(votes_url)
+        response.should redirect_to session_url  :id => session_for_vote.id
       end
     end
   end

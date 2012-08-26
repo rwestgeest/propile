@@ -9,14 +9,7 @@ allow 'propile_configs', :at_least => :maintainer
 allow 'comments', :at_least => :presenter
 allow 'reviews', :at_least => :presenter
 
-allow 'votes', :at_least => :maintainer
-allow 'votes#edit', :at_least => :presenter do |account, params| 
-  account.presenter.has_vote?(params['id'])
-end
-allow 'votes#new', :at_least => :presenter
-allow 'votes#create', :at_least => :presenter 
-allow 'votes#update', :at_least => :maintainer 
-allow 'votes#destroy', :at_least => :presenter 
+allow 'votes', :at_least => :presenter
 
 allow 'sessions', :at_least => :presenter
 allow 'sessions#edit', :at_least => :presenter do |account, params|
@@ -30,4 +23,6 @@ allow 'comments#edit', :at_least => :presenter do |account, params|
 end
 allow 'account/password', :at_least => :presenter
 allow 'sessions#new', :at_least => :maintainer
+allow 'votes#index', :at_least => :maintainer
+#allow 'sessions#new'
 allow ''

@@ -18,13 +18,13 @@ class VotesController < ApplicationController
   end
 
   def create
-    @vote = Vote.new(params[:vote])
+    @session = Session.find(params[:session_id])
+    @vote =  @session.votes.build()
     @vote.presenter = current_presenter
 
     if @vote.save
-      redirect_to @vote, notice: 'Vote was successfully created.'
+      redirect_to session_url @session
     else
-      @session = @vote.session
       render action: "new"
     end
   end
@@ -41,8 +41,9 @@ class VotesController < ApplicationController
 
   def destroy
     @vote = Vote.find(params[:id])
+    @session = @vote.session
     @vote.destroy
 
-    redirect_to votes_url
+    redirect_to session_url @session
   end
 end

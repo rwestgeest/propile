@@ -144,4 +144,6 @@ describe Session do
       end
     end
   end
+  describe "presenter_has_voted_for?", :broken => true do
+  end
 end

@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'csv'
 
 describe SessionsController do
   it_should_behave_like "a guarded resource controller", :presenter, :maintainer,
@@ -106,6 +107,15 @@ describe SessionsController do
     login_as :presenter
     def valid_attributes
       FactoryGirl.attributes_for(:session_with_presenter)
+    end
+
+    describe "GET csv" do
+      let(:session) { FactoryGirl.create :session_with_presenter }
+      it "exports all sessions in csv format" do
+        get :csv
+        response.should be_success
+        CSV.parse(@response.body).size.should be 2
+      end
     end
 
     describe "GET index" do
