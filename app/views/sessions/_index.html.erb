@@ -1,0 +1,34 @@
+<table class="tablelist">
+  <tr>
+    <th></th>
+<% if PropileConfig.is_set( "voting_active") %> 
+    <th> <%= sortable ? sortable("voted") : "Voted"  %> </th>
+<% end %>
+    <!--th> <% if sortable %> <%= sortable "title" %> <% else %> Title <% end %> </th-->
+    <th> <%= sortable ? sortable("title") : "Title"  %> </th>
+    <th> <%= sortable ? sortable("presenters", "Presenter(s)") : "Presenter(s)" %> </th>
+    <th> <%= sortable ? sortable("reviewcount", "Reviews" ) : "Reviews" %> </th>
+    <th> <%= sortable ? sortable("topic") : "Topic" %> </td>
+    <th> <%= sortable ? sortable("created_at", "Created" ) : "Created" %> </th>
+    <th> <%= sortable ? sortable("updated_at", "Modified" ) : "Modified" %> </th>
+    <th></th>
+  </tr>
+
+<% sessions.each_with_index do |session, i| %>
+  <tr>
+    <td> <%= i+1 %> </td>
+<% if PropileConfig.is_set( "voting_active") %> 
+    <td> <% if session.presenter_has_voted_for?(@current_account.presenter.id) %> YES  <% end %> </td>
+<% end %>
+    <td> <%= link_to session.title , session %></td>
+    <td> <%= session_presenter_names(session) %> </td>
+    <td> <%= session.reviews.count %> </td>
+    <td> <%= session.topic %> </td>
+    <td class="nowrap" ><%= l session.created_at %> </td>
+    <td class="nowrap" ><%= l session.updated_at %> </td>
+    <td><%= guarded_link_to 'Edit', controller: 'sessions', action: 'edit', id: session.to_param %></td>
+  </tr>
+<% end %>
+</table>
+
+
