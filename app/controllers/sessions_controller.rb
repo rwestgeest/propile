@@ -49,10 +49,23 @@ class SessionsController < ApplicationController
     @sessions = Session.all
     session_csv = CSV.generate(options = { :col_sep => ';' }) do |csv| 
       #header row
-      csv << ["Title", "Presenter 1", "Presenter 2", "Created", "Modified"]
+      csv << [ "Title", "Subtitle",
+               "Presenters", "Created", "Modified", 
+               "Type", "Topic", "Duration", 
+               "Goal", 
+               "Intended Audience", "Experience Level", 
+               "Max participants", "Laptops", "Other limitations", "Room setup", "Materials", 
+               "Short" ]
       #data row
       @sessions.each do |session| 
-        csv << [session.title, session.first_presenter_email, session.second_presenter_email, session.created_at, session.updated_at]
+        csv << [ session.title, session.sub_title, 
+                 session.presenter_names, session.created_at, session.updated_at,
+                 session.session_type, session.topic, session.duration, 
+                 session.session_goal, 
+                 session.intended_audience, session.experience_level,
+                 session.max_participants, session.laptops_required, session.other_limitations, session.room_setup, session.materials_needed,
+                 session.short_description
+               ]
       end
     end
     send_data(session_csv, :type => 'test/csv', :filename => 'sessions.csv') 
