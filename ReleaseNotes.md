@@ -1,5 +1,18 @@
+# 0.3.1
+
+* sorteervolgorde van presenter lijst aanpassen 
+* presenter-activity dashboard: lijstje/dashboard op presenter pagina met de sessies waar hij iets mee gedaan heeft (sessie/review/comment) 
+* bug fixes and small improvements 
+* voting: switch on/off (as a maintainer) 
+* vote for a session 
+* revoke vote 
+* Excel dump van alle sessies 
+* see all votes 
+* deploy in PR (en move the stories van "deployed on test" naar "deployed in PR) (en maak tag) 
+
 # 0.3.0
 
+* first version of voting
 * tag maken voor gereleasede versie 
 * Bug: show sessions contains the paragraph "SHORT" 2x 
 * fix holapola bug 
