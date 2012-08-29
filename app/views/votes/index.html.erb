@@ -12,6 +12,7 @@
   <tr>
     <th></th>
     <th> <%= "Session" %>  </th>
+    <th> <%= "Presenter(s)" %> </th>
     <th> <%= "#votes" %>  </th>
   </tr>
 
@@ -19,6 +20,7 @@
   <tr>
     <td> <%= i+1 %> </td>
     <td> <%= link_to session.title , session %></td>
+    <td> <%= session_presenter_names(session) %> </td>
     <td> <%= session.votes.size %> </td>
   </tr>
 <% end %>
