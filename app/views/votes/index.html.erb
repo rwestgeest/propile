@@ -2,5 +2,28 @@
 
 <%= link_to 'Export CSV', csv_votes_path %>
 
+<br>
+<br>
+<br>
+
+<div>
+<h2>Summary</h2>
+<table class="tablelist">
+  <tr>
+    <th></th>
+    <th> <%= "Session" %>  </th>
+    <th> <%= "#votes" %>  </th>
+  </tr>
+
+<% @sessions.each_with_index do |session, i| %>
+  <tr>
+    <td> <%= i+1 %> </td>
+    <td> <%= link_to session.title , session %></td>
+    <td> <%= session.votes.size %> </td>
+  </tr>
+<% end %>
+</table>
+</div>
+
 <p class="alignright"><a href="mailto:sessions@xpday.net">problems or questions</a> </p> 
 

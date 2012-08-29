@@ -3,6 +3,11 @@ require 'csv'
 class VotesController < ApplicationController
   def index
     @votes = Vote.all
+    @sessions = Session.all.find_all { |s| s.votes.size>0 }.sort { 
+      |s1, s2| 
+      size_compare = (s1.votes.size <=> s2.votes.size) 
+      size_compare==0 ? (s1.created_at <=> s2.created_at) : size_compare
+    }.reverse
   end
 
   def show
