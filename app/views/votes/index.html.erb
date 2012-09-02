@@ -1,6 +1,10 @@
+<p> 
+<%= link_to 'Export CSV', csv_votes_path %>
+<%= link_to 'Export CSV PAF-sessions', csv_paf_sessions_votes_path %>
+<%= link_to 'Export CSV PAF-presenters', csv_paf_presenters_votes_path %>
+</p>
 <%= render 'votes/index', :votes => @votes  %>
 
-<%= link_to 'Export CSV', csv_votes_path %>
 
 <br>
 <br>

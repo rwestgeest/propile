@@ -33,6 +33,24 @@ describe VotesController do
       end
     end
 
+    describe "GET csv_paf_sessions" do
+      it "exports votes in csv format: PAF-sessions" do
+        create_vote 
+        get :csv_paf_sessions
+        response.should be_success
+        CSV.parse(@response.body).size.should be 2
+      end
+    end
+
+    describe "GET csv_paf_presenters" do
+      it "exports votes in csv format: PAF-presenters" do
+        create_vote 
+        get :csv_paf_presenters
+        response.should be_success
+        CSV.parse(@response.body).size.should be 2
+      end
+    end
+
 
     describe "GET show" do
       it "assigns the requested vote as @vote" do

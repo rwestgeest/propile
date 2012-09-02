@@ -11,6 +11,8 @@ allow 'reviews', :at_least => :presenter
 
 allow 'votes', :at_least => :presenter
 allow 'votes#csv', :at_least => :maintainer
+allow 'votes#csv_paf_sessions', :at_least => :maintainer
+allow 'votes#csv_paf_presenters', :at_least => :maintainer
 
 allow 'sessions', :at_least => :presenter
 allow 'sessions#edit', :at_least => :presenter do |account, params|
