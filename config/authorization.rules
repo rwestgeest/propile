@@ -27,5 +27,6 @@ end
 allow 'account/password', :at_least => :presenter
 allow 'sessions#new', :at_least => :maintainer
 allow 'votes#index', :at_least => :maintainer
+allow 'sessions#pcm_cards', :at_least => :maintainer
 #allow 'sessions#new'
 allow ''
