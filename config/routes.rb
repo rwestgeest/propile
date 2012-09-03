@@ -25,6 +25,7 @@ Propile::Application.routes.draw do
     resources :votes, :on => :member 
     get 'thanks', :on => :member
     get 'csv', :on => :collection
+    get 'pcm_cards', :on => :collection
   end
 
   namespace :account do

@@ -1,10 +1,17 @@
 <p> 
 <%= link_to 'Export CSV', csv_votes_path %>
-<%= link_to 'Export CSV PAF-sessions', csv_paf_sessions_votes_path %>
+</p>
+<p> 
+<%= link_to 'Export CSV PAF-sessions', csv_paf_sessions_votes_path %> &&
 <%= link_to 'Export CSV PAF-presenters', csv_paf_presenters_votes_path %>
 </p>
-<%= render 'votes/index', :votes => @votes  %>
+<p> 
+<%= link_to 'Printable sessions for Program Committee Meeting', pcm_cards_sessions_path %> (works best in IE)
+</p>
 
+
+<h2>All Votes</h2>
+<%= render 'votes/index', :votes => @votes  %>
 
 <br>
 <br>
