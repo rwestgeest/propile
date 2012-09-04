@@ -4,12 +4,16 @@
 <div class="PgmCommitteeCard_session">
   <div class="PgmCommitteeCard_numbers">
     <table class="PgmCommitteeCard_numbers">
-      <tr><td>Duration: </td><td> <%=session.duration%> </td></tr>
+      <tr>
+          <td>Duration: </td><td> <%=session.duration%> </td>
+          <td rowspan="3" class="PgmCommitteeCard_id"> &nbsp; &nbsp; <%=session.id%> </td>
+      </tr>
       <tr><td>Votes: </td><td> <%=session.votes.size%> </td></tr>
       <tr><td>Reviews: </td><td> <%=session.reviews.size%> </td></tr>
     </table>
   </div>
   <h1 class="PgmCommitteeCard"> <%=session.title%> </h1>
+  <h2 class="PgmCommitteeCard"> <%=session.sub_title%> </h2>
   <table class="PgmCommitteeCard_session">
     <tr><td>
       <div class="PgmCommitteeCard_properties">
