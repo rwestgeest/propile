@@ -35,6 +35,26 @@ class ProgramsController < ApplicationController
   # GET /programs/1/edit
   def edit
     @program = Program.find(params[:id])
+
+    respond_to do |format|
+      format.html # edit.html.erb
+      format.json { render json: @program }
+    end
+  end
+
+  def copy
+    from = Program.find(params[:id])
+    to = from.dup
+    to.version += " COPY"
+    from.program_entries.each { |pe| to.program_entries.append(pe.dup) }
+    to.save
+
+    @program = to
+
+    respond_to do |format|
+      format.html # edit.html.erb
+      format.json { render json: @program }
+    end
   end
 
   # POST /programs
@@ -80,4 +100,5 @@ class ProgramsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
 end

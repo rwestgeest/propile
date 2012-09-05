@@ -14,7 +14,7 @@
 <% program_entries.each_with_index do |program_entry, i| %>
   <tr>
     <td> <%= i+1 %> </td>
-    <td> <%= link_to program_entry.program.version, program_entry.program %> </td>
+    <td> <%= program_entry.program.version %>  </td>
     <td> <%= program_entry.slot %> </td>
     <td> <%= program_entry.track %> </td>
     <td> <%= link_to program_entry.session && program_entry.session.title , program_entry.session %></td>

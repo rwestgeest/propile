@@ -4,6 +4,7 @@ Propile::Application.routes.draw do
 
   resources :programs do
     resources :program_entries, :on => :member
+    get 'copy', :on => :member
   end
 
   resources :propile_configs
