@@ -55,8 +55,13 @@ class ProgramsController < ApplicationController
     @program.calculatePaf
 
     respond_to do |format|
-      format.html { redirect_to @program, notice: 'Program PAF was successfully calculated.' }
-      format.json { render json: @program }
+      if @program.save
+        format.html { redirect_to @program, notice: 'Program was successfully created.' }
+        format.json { render json: @program, status: :created, location: @program }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @program.errors, status: :unprocessable_entity }
+      end
     end
   end
 

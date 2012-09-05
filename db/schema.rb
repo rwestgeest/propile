@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120905081136) do
+ActiveRecord::Schema.define(:version => 20120905194539) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                :limit => 150,                          :null => false
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(:version => 20120905081136) do
     t.string   "version"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "avgpaf"
   end
 
   create_table "propile_configs", :force => true do |t|

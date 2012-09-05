@@ -1,16 +1,17 @@
 class Program < ActiveRecord::Base
   attr_accessible :version
+  attr_accessible :avgpaf
   has_many :program_entries
 
 
   def calculatePaf
-    pafPerPresenter = calculateAvgPafForPresenters(Presenter.all)
+    self.avgpaf = calculateAvgPafForPresenters(Presenter.all)
   end
 
   def calculateAvgPafForPresenters(presenters)
     return 0 unless presenters and not presenters.empty?
     pafPerPresenter = calculatePafForPresenters(presenters)
-    avgPaf = pafPerPresenter.inject {|sum,x| sum+x}  / pafPerPresenter.size
+    pafPerPresenter.inject {|sum,x| sum+x}  / pafPerPresenter.size
   end
 
   def calculatePafForPresenters(presenters)

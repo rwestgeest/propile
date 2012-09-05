@@ -13,9 +13,10 @@
   Modified: <%= l @program.updated_at %> 
 </div>
 
-<p>
-<%= link_to 'Calculate PAF for this program', controller: 'programs', action: 'calculate_paf', id: @program.to_param %> 
-</p>
+<div>
+PAF = <%= @program.avgpaf.nil? ? "not yet calculated" : @program.avgpaf %>
+<p> <%= link_to 'Calculate PAF for this program', controller: 'programs', action: 'calculate_paf', id: @program.to_param %> </p>
+</div>
 
 <%= guarded_link_to 'Edit this program', controller: 'programs', action: 'edit', id: @program.to_param %> |
 <%= link_to 'New entry in this program', new_program_program_entry_path(@program) %>  
