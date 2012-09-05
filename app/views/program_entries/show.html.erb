@@ -2,7 +2,11 @@
 
   <div class="in_a_form"> Slot: <%= @program_entry.slot %> </div>
   <div class="in_a_form"> Track: <%= @program_entry.track %> </div>
-  <div class="in_a_form"> Session: <%= @program_entry.session.id %>  <%= link_to @program_entry.session.title, @program_entry.session %> </div>
+  <div class="in_a_form"> Session: 
+           <% if ! @program_entry.session.nil? %> 
+              <%= @program_entry.session.id %>  
+              <%= link_to @program_entry.session.title, @program_entry.session %> </div>
+           <% end %> 
 
 
   <div class="alignright">

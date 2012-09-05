@@ -17,7 +17,12 @@
     <td> <%= program_entry.program.version %>  </td>
     <td> <%= program_entry.slot %> </td>
     <td> <%= program_entry.track %> </td>
-    <td> <%= link_to program_entry.session && program_entry.session.title , program_entry.session %></td>
+    <td> 
+           <% if ! program_entry.session.nil? %> 
+              <%= program_entry.session.id %>  
+              <%= link_to program_entry.session.title, program_entry.session %> </div>
+           <% end %> 
+    </td>
     <td class="nowrap" ><%= l program_entry.created_at %> </td>
     <td><%= link_to 'Edit program entry', controller: 'program_entries', action: 'edit', id: program_entry.to_param %></td>
     <td> <%= link_to 'Destroy', program_entry, method: :delete %> </td>
