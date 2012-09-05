@@ -1,6 +1,4 @@
 class ProgramEntriesController < ApplicationController
-  # GET /program_entries
-  # GET /program_entries.json
   def index
     @program_entries = ProgramEntry.all
 
@@ -10,8 +8,6 @@ class ProgramEntriesController < ApplicationController
     end
   end
 
-  # GET /program_entries/1
-  # GET /program_entries/1.json
   def show
     @program_entry = ProgramEntry.find(params[:id])
 
@@ -21,10 +17,9 @@ class ProgramEntriesController < ApplicationController
     end
   end
 
-  # GET /program_entries/new
-  # GET /program_entries/new.json
   def new
-    @program_entry = ProgramEntry.new
+    @program = Program.find(params[:program_id])
+    @program_entry =  @program.program_entries.build()
 
     respond_to do |format|
       format.html # new.html.erb
@@ -32,13 +27,10 @@ class ProgramEntriesController < ApplicationController
     end
   end
 
-  # GET /program_entries/1/edit
   def edit
     @program_entry = ProgramEntry.find(params[:id])
   end
 
-  # POST /program_entries
-  # POST /program_entries.json
   def create
     @program_entry = ProgramEntry.new(params[:program_entry])
 
@@ -53,8 +45,6 @@ class ProgramEntriesController < ApplicationController
     end
   end
 
-  # PUT /program_entries/1
-  # PUT /program_entries/1.json
   def update
     @program_entry = ProgramEntry.find(params[:id])
 
@@ -69,8 +59,6 @@ class ProgramEntriesController < ApplicationController
     end
   end
 
-  # DELETE /program_entries/1
-  # DELETE /program_entries/1.json
   def destroy
     @program_entry = ProgramEntry.find(params[:id])
     @program_entry.destroy

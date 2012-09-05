@@ -2,7 +2,9 @@ Propile::Application.routes.draw do
 
   resources :program_entries
 
-  resources :programs
+  resources :programs do
+    resources :program_entries, :on => :member
+  end
 
   resources :propile_configs
 

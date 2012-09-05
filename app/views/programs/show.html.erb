@@ -1,0 +1,17 @@
+
+<h1> Program Version: <%= @program.version %> </h1>
+
+<p>Program Entries:</p>
+<% if @program.program_entries.size==0 %> 
+  no entries yet.
+<% else %> 
+  <%= render 'program_entries/index', :program_entries => @program.program_entries  %>
+<% end %> 
+
+<div class="alignright">
+  Created: <%= l @program.created_at %> -- 
+  Modified: <%= l @program.updated_at %> 
+</div>
+
+<%= guarded_link_to 'Edit this program', controller: 'programs', action: 'edit', id: @program.to_param %> |
+<%= link_to 'New entry in this program', new_program_program_entry_path(@program) %>  

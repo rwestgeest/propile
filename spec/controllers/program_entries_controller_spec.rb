@@ -33,7 +33,8 @@ describe ProgramEntriesController do
   
     describe "GET new" do
       it "assigns a new program_entry as @program_entry" do
-        get :new, {}
+        program = FactoryGirl.create :program
+        get :new, {:program_id => program.id}
         assigns(:program_entry).should be_a_new(ProgramEntry)
       end
     end
