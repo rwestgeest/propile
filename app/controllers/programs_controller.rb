@@ -1,6 +1,4 @@
 class ProgramsController < ApplicationController
-  # GET /programs
-  # GET /programs.json
   def index
     @programs = Program.all
 
@@ -10,8 +8,6 @@ class ProgramsController < ApplicationController
     end
   end
 
-  # GET /programs/1
-  # GET /programs/1.json
   def show
     @program = Program.find(params[:id])
 
@@ -21,8 +17,6 @@ class ProgramsController < ApplicationController
     end
   end
 
-  # GET /programs/new
-  # GET /programs/new.json
   def new
     @program = Program.new
 
@@ -32,7 +26,6 @@ class ProgramsController < ApplicationController
     end
   end
 
-  # GET /programs/1/edit
   def edit
     @program = Program.find(params[:id])
 
@@ -57,8 +50,16 @@ class ProgramsController < ApplicationController
     end
   end
 
-  # POST /programs
-  # POST /programs.json
+  def calculate_paf
+    @program = Program.find(params[:id])
+    @program.calculatePaf
+
+    respond_to do |format|
+      format.html { redirect_to @program, notice: 'Program PAF was successfully calculated.' }
+      format.json { render json: @program }
+    end
+  end
+
   def create
     @program = Program.new(params[:program])
 
@@ -73,8 +74,6 @@ class ProgramsController < ApplicationController
     end
   end
 
-  # PUT /programs/1
-  # PUT /programs/1.json
   def update
     @program = Program.find(params[:id])
 
@@ -89,8 +88,6 @@ class ProgramsController < ApplicationController
     end
   end
 
-  # DELETE /programs/1
-  # DELETE /programs/1.json
   def destroy
     @program = Program.find(params[:id])
     @program.destroy
