@@ -7,6 +7,7 @@
     <th> Modified </th>
     <th></th>
     <th></th>
+    <th></th>
   </tr>
 
 <% @programs.each_with_index do |program, i| %>
@@ -16,8 +17,9 @@
     <td> <%= program.avgpaf %></td>
     <td class="nowrap" ><%= l program.created_at %> </td>
     <td class="nowrap" ><%= l program.updated_at %> </td>
-    <td><%= link_to 'Edit', controller: 'programs', action: 'edit', id: program.to_param %></td> 
-    <td><%= link_to 'Copy', controller: 'programs', action: 'copy', id: program.to_param %></td> 
+    <td> <%= link_to 'Edit', controller: 'programs', action: 'edit', id: program.to_param %></td> 
+    <td> <%= link_to 'Copy', controller: 'programs', action: 'copy', id: program.to_param %></td> 
+    <td> <%= link_to 'Destroy', program, method: :delete %> </td>
   </tr>
 <% end %>
 </table>

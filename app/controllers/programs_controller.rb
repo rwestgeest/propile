@@ -70,6 +70,15 @@ class ProgramsController < ApplicationController
 
     respond_to do |format|
       if @program.save
+        8.times {|slot| 
+          5.times {|track| 
+            pe = ProgramEntry.new
+            pe.slot=slot+1
+            pe.track=track+1
+            @program.program_entries<<pe
+          }  
+        }
+        @program.save
         format.html { redirect_to @program, notice: 'Program was successfully created.' }
         format.json { render json: @program, status: :created, location: @program }
       else
