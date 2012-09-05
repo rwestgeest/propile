@@ -17,15 +17,13 @@ class Program < ActiveRecord::Base
   end
 
   def calculatePafForPresenter(votes_by_presenter)
-    #is voted session in program? -> paf is 1
-    pafForPresenter = 0
+    slotsForPresenter = Set.new
     votes_by_presenter.each do |vote| 
-      pafForPresenter += ( (program_entries.exists? :session_id => vote.session.id) ? 1 : 0 )
-      #print "\n"
-      #print "-- program_entries = ", program_entries
-      #print "-- pafForPresenter = ", pafForPresenter
+      if program_entries.exists? :session_id => vote.session.id
+        slotsForPresenter << program_entries.where(:session_id => vote.session.id).first.slot
+      end
     end
-    pafForPresenter
+    slotsForPresenter.size
   end
 
 end

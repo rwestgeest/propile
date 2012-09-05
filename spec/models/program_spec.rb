@@ -71,13 +71,13 @@ describe Program do
       end
     end
     context "when presenter has voted for 2 sessions which are scheduled in program in same slot" do
-      it "paf should be 1 ", :broken => true do
+      it "paf should be 1 " do
         program_entry1 = FactoryGirl.build(:program_entry, :program => program)
         program_entry1.session = vote1.session
         program_entry1.save
         program_entry2 = FactoryGirl.build(:program_entry, :program => program)
         program_entry2.session = vote2.session
-        program_entry2.slot = program_entry2.slot = vote1.session
+        program_entry2.slot = program_entry1.slot 
         program_entry2.save
         program.calculatePafForPresenter([vote1, vote2]).should == 1
       end
