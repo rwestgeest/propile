@@ -2,21 +2,26 @@ class Program < ActiveRecord::Base
   attr_accessible :version
   has_many :program_entries
 
-  attr_accessor :pafPerPresenter 
 
   def calculatePaf
-    calculatePafForAllPresenters(Presenter.all)
+    pafPerPresenter = calculateAvgPafForPresenters(Presenter.all)
   end
 
-  def calculatePafForAllPresenters(presenters)
+  def calculateAvgPafForPresenters(presenters)
+    return 0 unless presenters and not presenters.empty?
+    pafPerPresenter = calculatePafForPresenters(presenters)
+    avgPaf = pafPerPresenter.inject {|sum,x| sum+x}  / pafPerPresenter.size
+  end
+
+  def calculatePafForPresenters(presenters)
     pafPerPresenter = []
     presenters.each do |presenter|
-      pafPerPresenter.append calculatePafForPresenter(presenter.votes)
+      pafPerPresenter.append calculatePafForOnePresenter(presenter.votes)
     end 
     pafPerPresenter
   end
 
-  def calculatePafForPresenter(votes_by_presenter)
+  def calculatePafForOnePresenter(votes_by_presenter)
     slotsForPresenter = Set.new
     votes_by_presenter.each do |vote| 
       if program_entries.exists? :session_id => vote.session.id

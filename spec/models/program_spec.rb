@@ -9,38 +9,47 @@ describe Program do
     end
   end
 
-  describe "calculatePafForAllPresenters" do
+  describe  "calculateAvgPafForPresenters" do
+    let(:program) { FactoryGirl.build :program  }
+    let(:presenter) { FactoryGirl.build :presenter  }
+    context "for empty presenter list" do
+      it "returns emtpy 0" do
+        program.calculateAvgPafForPresenters([]).should == 0
+      end
+    end
+  end
+
+  describe "calculatePafForPresenters" do
     let(:program) { FactoryGirl.build :program  }
     let(:presenter) { FactoryGirl.build :presenter  }
     context "for empty presenter list" do
       it "returns emtpy paf list" do
-        list = program.calculatePafForAllPresenters([])
+        list = program.calculatePafForPresenters([])
         #program.pafPerPresenter.should be_empty
         list.should be_empty
       end
     end
     context "when 1 presenter defined" do
       it "returns something for that presenter" do
-        list = program.calculatePafForAllPresenters([presenter])
-        #program.pafPerPresenter.size.should == 1
+        list = program.calculatePafForPresenters([presenter])
         list.size.should == 1
       end
     end
   end
 
 
-  describe "calculatePafForPresenter" do
+  describe "calculatePafForOnePresenter" do
     let(:program) { FactoryGirl.build :program  }
     let(:vote1) { FactoryGirl.build :vote  }
     let(:vote2) { FactoryGirl.build :vote  }
     context "when presenter has not voted" do
       it "paf should be 0 " do
-        program.calculatePafForPresenter([]).should == 0
+        program.calculatePafForOnePresenter([]).should == 0
       end
     end
     context "when presenter has voted for 1 session which is not scheduled in program" do
       it "paf should be 0 " do
-        program.calculatePafForPresenter([vote1]).should == 0
+        program.calculatePafForOnePresenter([vote1]).should == 0
       end
     end
     context "when presenter has voted for 1 session which is scheduled in program" do
@@ -48,7 +57,7 @@ describe Program do
         program_entry = FactoryGirl.build(:program_entry, :program => program)
         program_entry.session = vote1.session
         program_entry.save
-        program.calculatePafForPresenter([vote1]).should == 1
+        program.calculatePafForOnePresenter([vote1]).should == 1
       end
     end
     context "when presenter has voted for 2 sessions which are scheduled in program" do
@@ -59,7 +68,7 @@ describe Program do
         program_entry2 = FactoryGirl.build(:program_entry, :program => program)
         program_entry2.session = vote2.session
         program_entry2.save
-        program.calculatePafForPresenter([vote1, vote2]).should == 2
+        program.calculatePafForOnePresenter([vote1, vote2]).should == 2
       end
     end
     context "when presenter has voted for 2 sessions of which 1 is scheduled in program" do
@@ -67,7 +76,7 @@ describe Program do
         program_entry1 = FactoryGirl.build(:program_entry, :program => program)
         program_entry1.session = vote1.session
         program_entry1.save
-        program.calculatePafForPresenter([vote1, vote2]).should == 1
+        program.calculatePafForOnePresenter([vote1, vote2]).should == 1
       end
     end
     context "when presenter has voted for 2 sessions which are scheduled in program in same slot" do
@@ -79,7 +88,7 @@ describe Program do
         program_entry2.session = vote2.session
         program_entry2.slot = program_entry1.slot 
         program_entry2.save
-        program.calculatePafForPresenter([vote1, vote2]).should == 1
+        program.calculatePafForOnePresenter([vote1, vote2]).should == 1
       end
     end
   end
