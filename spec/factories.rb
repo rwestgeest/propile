@@ -65,4 +65,10 @@ FactoryGirl.define do
     association :program, factory: :program
   end
 
+  factory :program_entry_wo_session, :class => ProgramEntry  do
+    sequence(:slot) {|n| "#{n}" }
+    sequence(:track) {|n| "#{n}" }
+    association :program, factory: :program
+  end
+
 end
