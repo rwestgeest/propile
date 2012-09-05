@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Program:
+  = @program_entry.program
+%p
+  %b Slot:
+  = @program_entry.slot
+%p
+  %b Track:
+  = @program_entry.track
+%p
+  %b Session:
+  = @program_entry.session
+
+= link_to 'Edit', edit_program_entry_path(@program_entry)
+\|
+= link_to 'Back', program_entries_path

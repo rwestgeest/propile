@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Version:
+  = @program.version
+
+= link_to 'Edit', edit_program_path(@program)
+\|
+= link_to 'Back', programs_path

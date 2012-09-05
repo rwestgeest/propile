@@ -1,4 +1,9 @@
 Propile::Application.routes.draw do
+
+  resources :program_entries
+
+  resources :programs
+
   resources :propile_configs
 
   resources :votes do

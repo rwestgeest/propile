@@ -1,0 +1,25 @@
+%h1 Listing program_entries
+
+%table
+  %tr
+    %th Program
+    %th Slot
+    %th Track
+    %th Session
+    %th
+    %th
+    %th
+
+  - @program_entries.each do |program_entry|
+    %tr
+      %td= program_entry.program
+      %td= program_entry.slot
+      %td= program_entry.track
+      %td= program_entry.session
+      %td= link_to 'Show', program_entry
+      %td= link_to 'Edit', edit_program_entry_path(program_entry)
+      %td= link_to 'Destroy', program_entry, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Program entry', new_program_entry_path

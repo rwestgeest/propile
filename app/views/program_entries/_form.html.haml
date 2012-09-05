@@ -1,0 +1,22 @@
+= form_for @program_entry do |f|
+  -if @program_entry.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@program_entry.errors.count, "error")} prohibited this program_entry from being saved:"
+      %ul
+        - @program_entry.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :program
+    = f.text_field :program
+  .field
+    = f.label :slot
+    = f.number_field :slot
+  .field
+    = f.label :track
+    = f.number_field :track
+  .field
+    = f.label :session
+    = f.text_field :session
+  .actions
+    = f.submit 'Save'
