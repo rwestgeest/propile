@@ -61,6 +61,7 @@ class ProgramEntriesController < ApplicationController
 
   def destroy
     @program_entry = ProgramEntry.find(params[:id])
+    @program = @program_entry.program
     @program_entry.destroy
 
     respond_to do |format|
