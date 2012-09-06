@@ -1,3 +1,8 @@
+# 0.4.0
+* PGM meeting: generate input for Pascal's magical Pgm composer tool
+* Comments4 PGM meeting: generate cards to use during program comittee meeting 
+* calculate paf for programs
+
 # 0.3.1
 
 * sorteervolgorde van presenter lijst aanpassen 

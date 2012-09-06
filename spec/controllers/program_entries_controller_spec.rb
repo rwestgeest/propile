@@ -100,15 +100,13 @@ describe ProgramEntriesController do
         end
   
         it "assigns the requested program_entry as @program_entry" do
-          program_entry = ProgramEntry.create! valid_attributes
           put :update, {:id => program_entry.to_param, :program_entry => valid_attributes}
           assigns(:program_entry).should eq(program_entry)
         end
   
         it "redirects to the program_entry" do
-          program_entry = ProgramEntry.create! valid_attributes
           put :update, {:id => program_entry.to_param, :program_entry => valid_attributes}
-          response.should redirect_to(program_entry)
+          response.should redirect_to(program_entry.program)
         end
       end
   
