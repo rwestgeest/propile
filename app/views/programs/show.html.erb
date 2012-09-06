@@ -20,16 +20,16 @@ PAF = <%= @program.avgpaf.nil? ? "not yet calculated" : @program.avgpaf %>
     (1..maxSlot).each do |slot|
 %>
   <tr>
-  <td> slot <%=slot%> </td> 
+  <th> slot <%=slot%> </th> 
   <% (1..maxTrack).each do |track|
-      programEntry = @programMatrix[[slot,track]]
+      program_entry = @programMatrix[[slot,track]]
   %>
      <td class="ProgramMatrix"> 
-       <% if programEntry.session.nil? %>  
+       <% if program_entry.session.nil? %>  
          &nbsp;
        <% else %> 
-         <%= programEntry.session.id %> <br>
-         <%= programEntry.session.title %> 
+         <%= link_to program_entry.session.id , controller: 'program_entries', action: 'edit', id: program_entry.to_param %>
+         <%= program_entry.session.title %> 
        <% end %> 
      </td>
   <% end %>
