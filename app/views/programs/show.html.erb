@@ -1,6 +1,11 @@
 
 <h1> Program Version: <%= @program.version %> </h1>
 
+<div>
+PAF = <%= @program.avgpaf.nil? ? "not yet calculated" : @program.avgpaf %>
+<p> <%= link_to 'Calculate PAF for this program', controller: 'programs', action: 'calculate_paf', id: @program.to_param %> </p>
+</div>
+
 <table class="ProgramMatrix">
 <%  #YES TOO MUCH PGM HERE BUT I DONT HAVE TIME :-(
     maxSlot = @program.program_entries.collect{ |pe| pe.slot }.max
@@ -32,6 +37,7 @@
   <% end %>
 </table>
 
+
 <p>Program Entries:</p>
 <% if @program.program_entries.size==0 %> 
   no entries yet.
@@ -42,11 +48,6 @@
 <div class="alignright">
   Created: <%= l @program.created_at %> -- 
   Modified: <%= l @program.updated_at %> 
-</div>
-
-<div>
-PAF = <%= @program.avgpaf.nil? ? "not yet calculated" : @program.avgpaf %>
-<p> <%= link_to 'Calculate PAF for this program', controller: 'programs', action: 'calculate_paf', id: @program.to_param %> </p>
 </div>
 
 <%= guarded_link_to 'Edit this program', controller: 'programs', action: 'edit', id: @program.to_param %> |
