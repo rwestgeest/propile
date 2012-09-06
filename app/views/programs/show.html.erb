@@ -1,6 +1,37 @@
 
 <h1> Program Version: <%= @program.version %> </h1>
 
+<table class="ProgramMatrix">
+<%  #YES TOO MUCH PGM HERE BUT I DONT HAVE TIME :-(
+    maxSlot = @program.program_entries.collect{ |pe| pe.slot }.max
+    maxTrack = @program.program_entries.collect{ |pe| pe.track }.max
+%>
+  <tr> <th></th>
+    <% (1..maxTrack).each do |track| %>
+      <th>Track <%= track %> </th>
+    <% end %>
+  </tr>
+<%
+    (1..maxSlot).each do |slot|
+%>
+  <tr>
+  <td> slot <%=slot%> </td> 
+  <% (1..maxTrack).each do |track|
+      programEntry = @programMatrix[[slot,track]]
+  %>
+     <td class="ProgramMatrix"> 
+       <% if programEntry.session.nil? %>  
+         &nbsp;
+       <% else %> 
+         <%= programEntry.session.id %> <br>
+         <%= programEntry.session.title %> 
+       <% end %> 
+     </td>
+  <% end %>
+  </tr>
+  <% end %>
+</table>
+
 <p>Program Entries:</p>
 <% if @program.program_entries.size==0 %> 
   no entries yet.

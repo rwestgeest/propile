@@ -3,6 +3,13 @@ class Program < ActiveRecord::Base
   attr_accessible :avgpaf
   has_many :program_entries
 
+  def getProgramEntryMatrix # rows=slots, cols=tracks
+    matrix = Hash.new
+    program_entries.each do |pe|
+      matrix[[pe.slot, pe.track]] = pe
+    end
+    matrix
+  end
 
   def calculatePaf
     self.avgpaf = calculateAvgPafForPresenters(Presenter.all)
