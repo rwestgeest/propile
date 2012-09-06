@@ -12,7 +12,9 @@
   <nav id="header-navigation">
     <%= image_tag "logo-200.png", :size => "100x50" %> 
     <% if signed_in? %> 
-      <%= "Signed in as" %>&nbsp;<%= link_to current_account.email , current_account.presenter %>&nbsp;|&nbsp;
+      <%= "Signed in as" %>&nbsp;<%= link_to current_account.email , current_account.presenter %>
+      <%= current_account.role == "maintainer" ? "(maintainer )" : "" %>
+      &nbsp;|&nbsp;
       <%= link_to 'Change password', edit_account_password_path %>&nbsp;|&nbsp;
       <%= link_to 'Sign out', account_session_path, :method => :delete %>
     <% else %>
@@ -28,6 +30,7 @@
         <% m.tab("Presenters", "presenters") %>
         <% m.tab("Submit a session", "sessions#new") %>
         <% m.tab("Votes", "votes") %>
+        <% m.tab("Programs", "programs") %>
         <% m.tab("Configuration", "propile_configs") %>
       <% end %>
     </ul>

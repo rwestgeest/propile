@@ -1,0 +1,55 @@
+
+<h1> Program Version: <%= @program.version %> </h1>
+
+<div>
+PAF = <%= @program.avgpaf.nil? ? "not yet calculated" : @program.avgpaf %>
+<p> <%= link_to 'Calculate PAF for this program', controller: 'programs', action: 'calculate_paf', id: @program.to_param %> </p>
+</div>
+
+<table class="ProgramMatrix">
+<%  #YES TOO MUCH PGM HERE BUT I DONT HAVE TIME :-(
+    maxSlot = @program.program_entries.collect{ |pe| pe.slot }.max
+    maxTrack = @program.program_entries.collect{ |pe| pe.track }.max
+%>
+  <tr> <th></th>
+    <% (1..maxTrack).each do |track| %>
+      <th>Track <%= track %> </th>
+    <% end %>
+  </tr>
+<%
+    (1..maxSlot).each do |slot|
+%>
+  <tr>
+  <th> slot <%=slot%> </th> 
+  <% (1..maxTrack).each do |track|
+      program_entry = @programMatrix[[slot,track]]
+  %>
+     <td class="ProgramMatrix"> 
+       <% if program_entry.nil? || program_entry.session.nil? %>  
+         &nbsp;
+       <% else %> 
+         <%= link_to program_entry.session.id , controller: 'program_entries', action: 'edit', id: program_entry.to_param %>
+         <%= program_entry.session.title %> 
+       <% end %> 
+     </td>
+  <% end %>
+  </tr>
+  <% end %>
+</table>
+
+<!--
+<p>Program Entries:</p>
+<% if @program.program_entries.size==0 %> 
+  no entries yet.
+<% else %> 
+  <%= render 'program_entries/index', :program_entries => @program.program_entries  %>
+<% end %> 
+-->
+
+<div class="alignright">
+  Created: <%= l @program.created_at %> -- 
+  Modified: <%= l @program.updated_at %> 
+</div>
+
+<%= guarded_link_to 'Edit this program version-name', controller: 'programs', action: 'edit', id: @program.to_param %> |
+<%= link_to 'New entry in this program', new_program_program_entry_path(@program) %>  

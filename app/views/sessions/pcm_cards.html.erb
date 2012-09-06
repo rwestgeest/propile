@@ -1,0 +1,39 @@
+
+<% @sessions.each do |session| %>
+
+<div class="PgmCommitteeCard_session">
+  <div class="PgmCommitteeCard_numbers">
+    <table class="PgmCommitteeCard_numbers">
+      <tr>
+          <td>Votes: </td><td> <%=session.votes.size%> </td>
+          <td rowspan="2" class="PgmCommitteeCard_id"> &nbsp; &nbsp; <%=session.id%> </td>
+      </tr>
+      <tr><td>Reviews: </td><td> <%=session.reviews.size%> </td></tr>
+    </table>
+  </div>
+  <h1 class="PgmCommitteeCard"> <%=session.title%> </h1>
+  <h2 class="PgmCommitteeCard"> <%=session.sub_title%> </h2>
+  <table class="PgmCommitteeCard_session">
+    <tr><td>
+      <div class="PgmCommitteeCard_properties">
+        <table class="PgmCommitteeCard_properties">
+          <tr><td class="PgmCommitteeCard_propertiestitle">Presenters:</td><td> <%= session.presenter_names %>  </td></tr>
+          <tr><td>Type:</td><td> <%= session.session_type %> </td></tr>
+          <tr><td>Topic: </td><td> <%= session.topic %>  </td></tr>
+          <tr><td>Intended audience:</td><td> <%= session.intended_audience %>  </td></tr>
+          <tr><td>Experience level: </td><td> <%= session.experience_level  %>  </td></tr>
+          <tr><td>Duration: </td><td> <%=session.duration%> </td></tr>
+        </table>
+      </div>
+    </td></tr>
+    <tr class="PgmCommitteeCard_maxheight"><td>
+      <div class="PgmCommitteeCard_summary">
+        <%= wikinize(  session.short_description )  %>
+      </div>
+    </td></tr>
+  </table>
+</div>
+
+<div class="PgmCommitteeCard_pagebreak"></div>
+
+<% end %>

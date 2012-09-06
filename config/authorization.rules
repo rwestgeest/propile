@@ -11,6 +11,8 @@ allow 'reviews', :at_least => :presenter
 
 allow 'votes', :at_least => :presenter
 allow 'votes#csv', :at_least => :maintainer
+allow 'votes#csv_paf_sessions', :at_least => :maintainer
+allow 'votes#csv_paf_presenters', :at_least => :maintainer
 
 allow 'sessions', :at_least => :presenter
 allow 'sessions#edit', :at_least => :presenter do |account, params|
@@ -25,5 +27,10 @@ end
 allow 'account/password', :at_least => :presenter
 allow 'sessions#new', :at_least => :maintainer
 allow 'votes#index', :at_least => :maintainer
+allow 'sessions#pcm_cards', :at_least => :maintainer
 #allow 'sessions#new'
+
+allow 'program', :at_least => :maintainer
+allow 'program_entries', :at_least => :maintainer
+
 allow ''

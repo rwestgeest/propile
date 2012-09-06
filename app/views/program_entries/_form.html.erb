@@ -1,0 +1,22 @@
+<%= form_for(@program_entry) do |f| %>
+  <%= errors_for @program_entry %>
+
+<%= f.hidden_field :program_id %>
+<h3>Program version <%= @program_entry.program.version %> </h3>
+
+  <div class="in_a_form"> Slot <%= f.text_field :slot  %> </div>
+  <div class="in_a_form"> Track <%= f.text_field :track %> </div>
+  <div class="in_a_form"> Session id <%= f.text_field :session_id %> </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+<% end %>
+
+<% if ! @program_entry.created_at.nil? && !@program_entry.updated_at.nil? %> 
+  <div class="alignright">
+    Created: <%= l @program_entry.created_at %> -- Modified: <%= l @program_entry.updated_at %> 
+  </div>
+<% end %> 
+

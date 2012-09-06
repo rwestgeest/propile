@@ -73,6 +73,11 @@ class SessionsController < ApplicationController
     send_data(session_csv, :type => 'test/csv', :filename => 'sessions.csv') 
   end
 
+  def pcm_cards
+    @sessions = Session.all
+    render :layout => 'pcm_cards'
+  end
+
   def create
     @session = Session.new(params[:session])
     unless Captcha.verified?(self)

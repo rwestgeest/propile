@@ -1,6 +1,42 @@
+<p> 
+<%= link_to 'Export CSV', csv_votes_path %>
+</p>
+<p> 
+<%= link_to 'Export CSV PAF-sessions', csv_paf_sessions_votes_path %> &&
+<%= link_to 'Export CSV PAF-presenters', csv_paf_presenters_votes_path %>
+</p>
+<p> 
+<%= link_to 'Printable sessions for Program Committee Meeting', pcm_cards_sessions_path %> (works best in IE -- export-to-bdf works with up to 24 pages at the same time -- print setup: horizontal, 4 pages/sheet, margins of .9mm)
+</p>
+
+
+<h2>All Votes</h2>
 <%= render 'votes/index', :votes => @votes  %>
 
-<%= link_to 'Export CSV', csv_votes_path %>
+<br>
+<br>
+<br>
+
+<div>
+<h2>Summary</h2>
+<table class="tablelist">
+  <tr>
+    <th></th>
+    <th> <%= "Session" %>  </th>
+    <th> <%= "Presenter(s)" %> </th>
+    <th> <%= "#votes" %>  </th>
+  </tr>
+
+<% @sessions.each_with_index do |session, i| %>
+  <tr>
+    <td> <%= i+1 %> </td>
+    <td> <%= link_to session.title , session %></td>
+    <td> <%= session_presenter_names(session) %> </td>
+    <td> <%= session.votes.size %> </td>
+  </tr>
+<% end %>
+</table>
+</div>
 
 <p class="alignright"><a href="mailto:sessions@xpday.net">problems or questions</a> </p> 
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120814084626) do
+ActiveRecord::Schema.define(:version => 20120905194539) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                :limit => 150,                          :null => false
@@ -48,6 +48,25 @@ ActiveRecord::Schema.define(:version => 20120814084626) do
   end
 
   add_index "presenters", ["account_id"], :name => "index_presenters_on_account_id"
+
+  create_table "program_entries", :force => true do |t|
+    t.integer  "program_id"
+    t.integer  "slot"
+    t.integer  "track"
+    t.integer  "session_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "program_entries", ["program_id"], :name => "index_program_entries_on_program_id"
+  add_index "program_entries", ["session_id"], :name => "index_program_entries_on_session_id"
+
+  create_table "programs", :force => true do |t|
+    t.string   "version"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "avgpaf"
+  end
 
   create_table "propile_configs", :force => true do |t|
     t.string   "name"

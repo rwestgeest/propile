@@ -16,5 +16,5 @@ Improvement opportunities:
 <div class="alignright">
   Review Created: <%= l review.created_at %> -- 
   Modified: <%= l review.updated_at %> 
-  by <%= review.presenter.name %>
+  by <%= link_to review.presenter.name, review.presenter %>
 </div>

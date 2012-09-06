@@ -1,8 +1,19 @@
 Propile::Application.routes.draw do
+
+  resources :program_entries
+
+  resources :programs do
+    resources :program_entries, :on => :member
+    get 'copy', :on => :member
+    get 'calculate_paf', :on => :member
+  end
+
   resources :propile_configs
 
   resources :votes do
     get 'csv', :on => :collection
+    get 'csv_paf_sessions', :on => :collection
+    get 'csv_paf_presenters', :on => :collection
   end
 
   resources :pages, :only => :show
@@ -23,6 +34,7 @@ Propile::Application.routes.draw do
     resources :votes, :on => :member 
     get 'thanks', :on => :member
     get 'csv', :on => :collection
+    get 'pcm_cards', :on => :collection
   end
 
   namespace :account do

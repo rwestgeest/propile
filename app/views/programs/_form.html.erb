@@ -1,0 +1,13 @@
+<%= form_for(@program) do |f| %>
+  <%= errors_for @program %>
+
+  <div>
+    <%= f.label :version %> 
+  </div>
+  <div>
+    <%= text_field :program, :version, :size => "100" %> 
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -53,4 +53,22 @@ FactoryGirl.define do
     sequence(:name) {|n| "propile_config_name_#{n}" }
     sequence(:value) {|n| "propile_config_value_#{n}"}
   end
+
+  factory :program do
+    sequence(:version) {|n| "program_version_#{n}" }
+  end
+
+  factory :program_entry do
+    sequence(:slot) {|n| "#{n}" }
+    sequence(:track) {|n| "#{n}" }
+    association :session, factory: :session_with_presenter
+    association :program, factory: :program
+  end
+
+  factory :program_entry_wo_session, :class => ProgramEntry  do
+    sequence(:slot) {|n| "#{n}" }
+    sequence(:track) {|n| "#{n}" }
+    association :program, factory: :program
+  end
+
 end
