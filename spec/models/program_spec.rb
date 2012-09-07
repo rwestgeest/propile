@@ -9,6 +9,26 @@ describe Program do
     end
   end
 
+  describe "calculatePaf" do
+    let(:vote) { FactoryGirl.create :vote  }
+    let!(:presenter_with_matching_vote) { vote.presenter }
+    let(:session) { vote.session }
+    let(:program_entry) { FactoryGirl.create :program_entry, :session => session }
+    let(:program) { program_entry.program }
+
+    it "uses all presenters with votes" do
+      presenter_with_matching_vote.reload
+      Presenter.voting_presenters.should == [ presenter_with_matching_vote ]
+      program.calculatePaf.should == 1
+    end
+    it "does not increase the paf if another persenter voted on a session outside the program" do
+      presenter_with_matching_vote.reload
+      other_vote = FactoryGirl.create :vote
+      other_presenter = other_vote.presenter
+      program.calculatePaf.should == 0
+    end
+  end
+
   describe  "calculateAvgPafForPresenters" do
     let(:program) { FactoryGirl.build :program  }
     let(:presenter) { FactoryGirl.build :presenter  }

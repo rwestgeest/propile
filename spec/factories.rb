@@ -46,7 +46,7 @@ FactoryGirl.define do
 
   factory :vote do
     association :session, factory: :session_with_presenter
-    presenter
+    association :presenter
   end
 
   factory :propile_config do

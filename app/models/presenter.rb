@@ -15,6 +15,10 @@ class Presenter < ActiveRecord::Base
   delegate :email, :to => :lazy_account, :allow_nil => true
   delegate :email=, :to => :lazy_account
 
+  def self.voting_presenters
+    all.select {|p| !p.votes.empty? }
+  end
+
   def initialize(*args)
     super(*args)
     lazy_account

@@ -26,3 +26,8 @@ task "release" do
   sh "git tag -a -m '#{message}' #{version}"
   sh 'rake vlad:deploy:migrate to=prod'
 end
+
+desc "Get the production database to local development"
+task "get_prod_db" do
+  sh 'scp agilesystems@propile.xpday.net:propile-prod/data/production.sqlite3 data/development.sqlite3'
+end

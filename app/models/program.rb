@@ -12,7 +12,7 @@ class Program < ActiveRecord::Base
   end
 
   def calculatePaf
-    self.avgpaf = calculateAvgPafForPresenters(Presenter.all)
+    self.avgpaf = calculateAvgPafForPresenters(Presenter.voting_presenters)
   end
 
   def calculateAvgPafForPresenters(presenters)
