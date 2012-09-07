@@ -110,8 +110,8 @@ describe SessionsController do
     end
 
     describe "GET csv" do
-      let(:session) { FactoryGirl.create :session_with_presenter }
       it "exports all sessions in csv format" do
+        session = FactoryGirl.create :session_with_presenter
         get :csv
         response.should be_success
         CSV.parse(@response.body).size.should be 2
