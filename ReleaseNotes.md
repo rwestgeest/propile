@@ -1,3 +1,6 @@
+# 0.4.2 
+* Paf uses only voting presenters
+
 # 0.4.0
 * PGM meeting: generate input for Pascal's magical Pgm composer tool
 * Comments4 PGM meeting: generate cards to use during program comittee meeting 
