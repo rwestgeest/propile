@@ -47,21 +47,23 @@ describe ProgramEntriesController do
     end
   
     describe "POST create" do
+      def do_post
+        post :create, {:program_entry => valid_attributes}
+      end
       describe "with valid params" do
+
         it "creates a new ProgramEntry" do
-          expect {
-            post :create, {:program_entry => valid_attributes}
-          }.to change(ProgramEntry, :count).by(1)
+          expect { do_post }.to change(ProgramEntry, :count).by(1)
         end
   
         it "assigns a newly created program_entry as @program_entry" do
-          post :create, {:program_entry => valid_attributes}
+          do_post
           assigns(:program_entry).should be_a(ProgramEntry)
           assigns(:program_entry).should be_persisted
         end
   
         it "redirects to the created program_entry" do
-          post :create, {:program_entry => valid_attributes}
+          do_post
           response.should redirect_to(ProgramEntry.last)
         end
       end
@@ -70,18 +72,14 @@ describe ProgramEntriesController do
         before do
           # Trigger the behavior that occurs when invalid params are submitted
           ProgramEntry.any_instance.stub(:save).and_return(false)
+          do_post
         end
 
         it "assigns a newly created but unsaved program_entry as @program_entry" do
-          # Trigger the behavior that occurs when invalid params are submitted
-          post :create, {:program_entry => {}}
           assigns(:program_entry).should be_a_new(ProgramEntry)
         end
   
         it "re-renders the 'new' template" do
-          # Trigger the behavior that occurs when invalid params are submitted
-          ProgramEntry.any_instance.stub(:save).and_return(false)
-          post :create, {:program_entry => {}}
           response.should render_template("new")
         end
       end
