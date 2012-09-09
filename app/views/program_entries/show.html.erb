@@ -8,6 +8,7 @@
               <%= link_to @program_entry.session.title, @program_entry.session %> </div>
            <% end %> 
 
+  <div class="in_a_form"> Comment: <%= @program_entry.comment %> </div>
 
   <div class="alignright">
     Created: <%= l @program_entry.created_at %> -- Modified: <%= l @program_entry.updated_at %> 

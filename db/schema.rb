@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120905194539) do
+ActiveRecord::Schema.define(:version => 20120909121226) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                :limit => 150,                          :null => false
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(:version => 20120905194539) do
     t.integer  "session_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "comment"
   end
 
   add_index "program_entries", ["program_id"], :name => "index_program_entries_on_program_id"
