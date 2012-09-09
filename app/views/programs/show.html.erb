@@ -18,23 +18,29 @@ PAF = <%= @program.avgpaf.nil? ? "not yet calculated" : @program.avgpaf %>
   </tr>
 <%
     (1..maxSlot).each do |slot|
+      no_more_columns = false
 %>
   <tr>
   <th> slot <%=slot%> </th> 
   <% (1..maxTrack).each do |track|
       program_entry = @programMatrix[[slot,track]]
   %>
-     <td class="ProgramMatrix"> 
-       <% if program_entry.nil? || program_entry.session.nil? %>  
-         &nbsp;
-       <% else %> 
-         <%= link_to program_entry.session.id.to_s+"- "+program_entry.session.title , controller: 'program_entries', action: 'edit', id: program_entry.to_param %>
-         <p class=ProgramMatrix_presenters> <%= session_presenter_names(program_entry.session) %> </p>
-       <% end %> 
-       <% if !program_entry.nil? %> 
-         <%= program_entry.comment %>
-       <% end %> 
-     </td>
+     <% if no_more_columns %>  &nbsp; 
+     <% elsif program_entry.nil? %>  
+       <td class="ProgramMatrix" > &nbsp; </td>
+     <% else %> 
+       <td class="ProgramMatrix" <%= program_entry.span_entire_row==true ? "colspan=6" : "" %> > 
+         <% if !program_entry.session.nil? %>  
+           <%= link_to program_entry.session.id.to_s+"- "+program_entry.session.title, controller: 'program_entries', action: 'edit', id: program_entry.to_param %>
+           <p class=ProgramMatrix_presenters> <%= session_presenter_names(program_entry.session) %> </p>
+         <% end %> 
+         <% if !program_entry.comment.nil? %>  
+           <%= link_to program_entry.comment, controller: 'program_entries', action: 'edit', id: program_entry.to_param %>
+         <% end %> 
+       </td>
+       <% no_more_columns |= program_entry.span_entire_row %>
+     <% end %> 
+
   <% end %>
   </tr>
   <% end %>

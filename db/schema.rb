@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120909121226) do
+ActiveRecord::Schema.define(:version => 20120909123700) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                :limit => 150,                          :null => false
@@ -54,9 +54,10 @@ ActiveRecord::Schema.define(:version => 20120909121226) do
     t.integer  "slot"
     t.integer  "track"
     t.integer  "session_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.string   "comment"
+    t.boolean  "span_entire_row"
   end
 
   add_index "program_entries", ["program_id"], :name => "index_program_entries_on_program_id"
