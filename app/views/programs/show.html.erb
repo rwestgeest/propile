@@ -36,11 +36,7 @@ PAF = <%= @program.avgpaf.nil? ? "not yet calculated" : @program.avgpaf %>
            <%= link_to program_entry.session.id.to_s+"- "+program_entry.session.title, program_entry.session %>
            <p class=ProgramMatrix_presenters> <%= session_presenter_names(program_entry.session) %> </p>
          <% end %> 
-         <% if !program_entry.comment.nil? %>  
-           <%= link_to program_entry.comment, controller: 'program_entries', action: 'edit', id: program_entry.to_param %>
-         <% end %> 
-         <!--%= link_to "edit", controller: 'program_entries', action: 'edit', id: program_entry.to_param, class: => "ProgramMatrix_link"  %-->
-         <!--%= link_to "edit", {controller: 'program_entries', action: 'edit', id: program_entry.to_param},  class: => "ProgramMatrix_link" %-->
+         <%= program_entry.comment %>
          <%= link_to "edit", {controller: 'program_entries', action: 'edit', id: program_entry.to_param },  :class => "ProgramMatrix_edit_link"  %>
        </td>
        <% no_more_columns |= program_entry.span_entire_row %>
