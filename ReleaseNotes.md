@@ -1,3 +1,6 @@
+# 0.4.4
+* Fix release problems (stylesheet)
+
 # 0.4.3
 * generate csv with sessions that are selected in PGM
 * show program: some improvements
