@@ -230,4 +230,8 @@ h4 {
 td.ProgramMatrix {
   width:200px;
   height:50px;
+} 
+p.ProgramMatrix_presenters {
+ font-style:italic; 
+ font-size:smaller;
 }
