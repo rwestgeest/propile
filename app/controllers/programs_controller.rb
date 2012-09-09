@@ -1,3 +1,5 @@
+require 'csv'
+
 class ProgramsController < ApplicationController
   def index
     @programs = Program.all
@@ -49,22 +51,6 @@ class ProgramsController < ApplicationController
       format.json { render json: @program }
     end
   end
-
-  def calculate_paf
-    @program = Program.find(params[:id])
-    @program.calculatePaf
-
-    respond_to do |format|
-      if @program.save
-        format.html { redirect_to @program, notice: 'Program was successfully created.' }
-        format.json { render json: @program, status: :created, location: @program }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @program.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   def create
     @program = Program.new(params[:program])
 
@@ -110,6 +96,44 @@ class ProgramsController < ApplicationController
       format.html { redirect_to programs_url }
       format.json { head :no_content }
     end
+  end
+
+  def calculate_paf
+    @program = Program.find(params[:id])
+    @program.calculatePaf
+
+    respond_to do |format|
+      if @program.save
+        format.html { redirect_to @program, notice: 'Program was successfully created.' }
+        format.json { render json: @program, status: :created, location: @program }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @program.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def csv 
+    @program = Program.find(params[:id])
+    program_csv = CSV.generate(options = { :col_sep => ';' }) do |csv| 
+      #header row
+      csv << [ "Slot", "Track", 
+               "Title", "Subtitle",
+               "Presenter 1", "Presenter 2", 
+               "Type", "Topic", "Duration" 
+             ]
+      #data row
+      @program.program_entries.each do |entry| 
+        if ( !entry.session.nil? ) then
+          csv << [ entry.slot, entry.track,
+                   entry.session.title, entry.session.sub_title, 
+                   entry.session.first_presenter.name, (entry.session.second_presenter.nil? ? nil : entry.session.second_presenter.name), 
+                   entry.session.session_type, entry.session.topic, entry.session.duration
+                 ]
+        end
+      end
+    end
+    send_data(program_csv, :type => 'test/csv', :filename => 'program.csv') 
   end
 
 end

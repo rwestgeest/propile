@@ -6,6 +6,10 @@ PAF = <%= @program.avgpaf.nil? ? "not yet calculated" : @program.avgpaf %>
 <p> <%= link_to 'Calculate PAF for this program', controller: 'programs', action: 'calculate_paf', id: @program.to_param %> </p>
 </div>
 
+<div>
+<%= link_to 'Export CSV', csv_program_path %>
+</div>
+
 <table class="ProgramMatrix">
 <%  #YES TOO MUCH PGM HERE BUT I DONT HAVE TIME :-(
     maxSlot = @program.program_entries.collect{ |pe| pe.slot }.max

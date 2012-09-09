@@ -6,6 +6,7 @@ Propile::Application.routes.draw do
     resources :program_entries, :on => :member
     get 'copy', :on => :member
     get 'calculate_paf', :on => :member
+    get 'csv', :on => :member
   end
 
   resources :propile_configs
