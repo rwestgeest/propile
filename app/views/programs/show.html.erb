@@ -27,7 +27,9 @@ PAF = <%= @program.avgpaf.nil? ? "not yet calculated" : @program.avgpaf %>
   %>
      <% if no_more_columns %>  &nbsp; 
      <% elsif program_entry.nil? %>  
-       <td class="ProgramMatrix" > &nbsp; </td>
+       <td class="ProgramMatrix" > 
+         <%= link_to 'add', new_program_program_entry_path(@program), :class => "ProgramMatrix_edit_link"  %>  
+       </td>
      <% else %> 
        <td class="ProgramMatrix" <%= program_entry.span_entire_row==true ? "colspan=6" : "" %> > 
          <% if !program_entry.session.nil? %>  
