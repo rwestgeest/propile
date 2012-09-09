@@ -235,3 +235,7 @@ p.ProgramMatrix_presenters {
  font-style:italic; 
  font-size:smaller;
 }
+a.ProgramMatrix_edit_link {
+ font-size:smaller;
+ float:right;
+}
