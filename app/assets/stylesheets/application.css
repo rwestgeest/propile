@@ -231,11 +231,11 @@ td.ProgramMatrix {
   width:200px;
   height:50px;
 } 
-td.technology { background-color:#6B0; #green } 
-td.customer { background-color:#3CF; #blue } 
-td.cases { background-color:#FF9; #yellow } 
-td.team { background-color:#F8A; #pink } 
-td.process { background-color:#FFA822; #orange } 
+td.technology { background-color:#6B0; } 
+td.customer { background-color:#3CF; } 
+td.cases { background-color:#FF9; } 
+td.team { background-color:#F8A; } 
+td.process { background-color:#FFA822; } 
 
 p.ProgramMatrix_presenters {
  font-style:italic; 
