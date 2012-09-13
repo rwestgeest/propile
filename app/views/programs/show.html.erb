@@ -66,4 +66,12 @@ PAF = <%= @program.avgpaf.nil? ? "not yet calculated" : @program.avgpaf %>
 </div>
 
 <%= guarded_link_to 'Edit this program version-name', controller: 'programs', action: 'edit', id: @program.to_param %> |
-<%= link_to 'New entry in this program', new_program_program_entry_path(@program) %>  
+<%= link_to 'New entry in this program', new_program_program_entry_path(@program) %>  |
+<%= form_for(@program, :url => url_for(:action => 'insertRow')) do |f| %>
+  <div class="actions">
+    <%= text_field "field", "before" %> 
+    <%= f.submit "insert row"%>
+  </div>
+<% end %>
+<!--%= link_to 'Insert row in this program', insertRow_program_path %-->  |
+<%= link_to 'Insert column in this program', insertColumn_program_path %>  

@@ -136,4 +136,30 @@ class ProgramsController < ApplicationController
     send_data(program_csv, :type => 'test/csv', :filename => 'program.csv') 
   end
 
+  def insertRow
+    @program = Program.find(params[:id])
+    beforeRowIndex = params[:field][:before].to_i
+    @programMatrix = @program.getProgramEntryMatrix
+    
+    maxSlot = @program.program_entries.collect{ |pe| pe.slot }.max
+    maxTrack = @program.program_entries.collect{ |pe| pe.track }.max
+    (beforeRowIndex..maxSlot).each do |slot|
+      (1..maxTrack).each do |track|
+        program_entry = @programMatrix[[slot,track]]
+        if !program_entry.nil?
+          program_entry.slot += 1
+          program_entry.save
+        end
+      end
+    end
+    respond_to do |format|
+      format.html { redirect_to @program, notice: 'Program was successfully created.' }
+      format.json { render json: @program, status: :created, location: @program }
+    end
+  end
+
+  def insertColumn
+  end
+
+
 end

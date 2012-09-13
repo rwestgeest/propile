@@ -7,6 +7,8 @@ Propile::Application.routes.draw do
     get 'copy', :on => :member
     get 'calculate_paf', :on => :member
     get 'csv', :on => :member
+    put 'insertRow', :on => :member
+    get 'insertColumn', :on => :member
   end
 
   resources :propile_configs
