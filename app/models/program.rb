@@ -4,11 +4,53 @@ class Program < ActiveRecord::Base
   has_many :program_entries
 
   def getProgramEntryMatrix # rows=slots, cols=tracks
-    matrix = Hash.new
+    return unless @matrix.nil?
+    @matrix = Hash.new
     program_entries.each do |pe|
-      matrix[[pe.slot, pe.track]] = pe
+      @matrix[[pe.slot, pe.track]] = pe
     end
-    matrix
+    @matrix
+  end
+
+  def maxSlot
+    program_entries.collect{ |pe| pe.slot }.max
+  end
+
+  def maxTrack
+    program_entries.collect{ |pe| pe.track }.max
+  end
+
+  def eachSlot
+    (1..maxSlot).each do |slot|
+      yield(slot) 
+    end
+  end
+
+  def eachTrack
+    (1..maxTrack).each do |track|
+      yield(track) 
+    end
+  end
+
+  def entry(slot,track) 
+    getProgramEntryMatrix 
+    @matrix[[slot,track]]
+  end
+
+  def insertRow(beforeSlot)
+    getProgramEntryMatrix
+    
+    eachSlot do |slot|
+      if (slot>=beforeSlot) 
+        eachTrack do |track|
+          program_entry = entry(slot,track)
+          if !program_entry.nil?
+            program_entry.slot += 1
+            program_entry.save
+          end
+        end
+      end
+    end
   end
 
   def calculatePaf

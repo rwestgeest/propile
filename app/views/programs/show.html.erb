@@ -11,54 +11,29 @@ PAF = <%= @program.avgpaf.nil? ? "not yet calculated" : @program.avgpaf %>
 </div>
 
 <table class="ProgramMatrix">
-<%  #YES TOO MUCH PGM HERE BUT I DONT HAVE TIME :-(
-    maxSlot = @program.program_entries.collect{ |pe| pe.slot }.max
-    maxTrack = @program.program_entries.collect{ |pe| pe.track }.max
-%>
   <tr> <th></th>
-    <% (1..maxTrack).each do |track| %>
+    <% @program.eachTrack do |track| %>
       <th>Track <%= track %> </th>
     <% end %>
   </tr>
-<%
-    (1..maxSlot).each do |slot|
-      no_more_columns = false
-%>
+    <% @program.eachSlot do |slot|
+      no_more_columns_on_this_row = false
+    %>
   <tr>
   <th> slot <%=slot%> </th> 
-  <% (1..maxTrack).each do |track|
-      program_entry = @programMatrix[[slot,track]]
+  <% @program.eachTrack do |track| 
+      program_entry = @program.entry(slot,track)
   %>
-     <% if no_more_columns %>  &nbsp; 
-     <% elsif program_entry.nil? %>  
-       <td class="ProgramMatrix" > 
-         <%= link_to 'add', new_program_program_entry_path(@program), :class => "ProgramMatrix_edit_link"  %>  
-       </td>
+     <% if no_more_columns_on_this_row %>  &nbsp; 
      <% else %> 
-       <td class="ProgramMatrix <%=program_entry.topic_class%>" <%= program_entry.span_entire_row==true ? "colspan=6" : "" %> > 
-         <% if !program_entry.session.nil? %>  
-           <%= link_to program_entry.session.id.to_s+"- "+program_entry.session.title, program_entry.session %>
-           <p class=ProgramMatrix_presenters> <%= session_presenter_names(program_entry.session) %> </p>
-         <% end %> 
-         <%= program_entry.comment %>
-         <%= link_to "edit", {controller: 'program_entries', action: 'edit', id: program_entry.to_param },  :class => "ProgramMatrix_edit_link"  %>
-       </td>
-       <% no_more_columns |= program_entry.span_entire_row %>
+       <%= render 'program_entries/show_in_program_matrix', :program_entry => program_entry, :program => @program  %>
+       <% no_more_columns_on_this_row |= (!program_entry.nil? && program_entry.span_entire_row) %>
      <% end %> 
 
   <% end %>
   </tr>
   <% end %>
 </table>
-
-<!--
-<p>Program Entries:</p>
-<% if @program.program_entries.size==0 %> 
-  no entries yet.
-<% else %> 
-  <%= render 'program_entries/index', :program_entries => @program.program_entries  %>
-<% end %> 
--->
 
 <div class="alignright">
   Created: <%= l @program.created_at %> -- 
@@ -73,5 +48,4 @@ PAF = <%= @program.avgpaf.nil? ? "not yet calculated" : @program.avgpaf %>
     <%= f.submit "insert row"%>
   </div>
 <% end %>
-<!--%= link_to 'Insert row in this program', insertRow_program_path %-->  |
 <%= link_to 'Insert column in this program', insertColumn_program_path %>  

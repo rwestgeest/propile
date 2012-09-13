@@ -12,7 +12,6 @@ class ProgramsController < ApplicationController
 
   def show
     @program = Program.find(params[:id])
-    @programMatrix = @program.getProgramEntryMatrix
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @program }
@@ -138,22 +137,10 @@ class ProgramsController < ApplicationController
 
   def insertRow
     @program = Program.find(params[:id])
-    beforeRowIndex = params[:field][:before].to_i
-    @programMatrix = @program.getProgramEntryMatrix
-    
-    maxSlot = @program.program_entries.collect{ |pe| pe.slot }.max
-    maxTrack = @program.program_entries.collect{ |pe| pe.track }.max
-    (beforeRowIndex..maxSlot).each do |slot|
-      (1..maxTrack).each do |track|
-        program_entry = @programMatrix[[slot,track]]
-        if !program_entry.nil?
-          program_entry.slot += 1
-          program_entry.save
-        end
-      end
-    end
+    @program.insertRow(params[:field][:before].to_i)
+
     respond_to do |format|
-      format.html { redirect_to @program, notice: 'Program was successfully created.' }
+      format.html { redirect_to @program, notice: 'Row was successfully inserted.' }
       format.json { render json: @program, status: :created, location: @program }
     end
   end
