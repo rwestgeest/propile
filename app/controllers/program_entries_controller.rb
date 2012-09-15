@@ -20,6 +20,8 @@ class ProgramEntriesController < ApplicationController
   def new
     @program = Program.find(params[:program_id])
     @program_entry =  @program.program_entries.build()
+    @program_entry.slot = params[:slot]
+    @program_entry.track = params[:track]
 
     respond_to do |format|
       format.html # new.html.erb

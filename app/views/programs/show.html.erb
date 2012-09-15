@@ -24,7 +24,7 @@ PAF = <%= @program.avgpaf.nil? ? "not yet calculated" : @program.avgpaf %>
       <% @program.eachTrack do |track| program_entry = @program.entry(slot,track) %>
         <% if no_more_columns_on_this_row %>  &nbsp; 
         <% else %> 
-          <%= render 'program_entries/show_in_program_matrix', :program_entry => program_entry, :program => @program  %>
+          <%= render 'program_entries/show_in_program_matrix', :program_entry => program_entry, :program => @program, :slot => slot, :track => track  %>
           <% no_more_columns_on_this_row |= (!program_entry.nil? && program_entry.span_entire_row) %>
         <% end %> 
       <% end %>
