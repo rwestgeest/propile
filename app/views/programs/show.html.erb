@@ -11,28 +11,40 @@ PAF = <%= @program.avgpaf.nil? ? "not yet calculated" : @program.avgpaf %>
 </div>
 
 <table class="ProgramMatrix">
-  <tr> <th></th>
-    <% @program.eachTrack do |track| %>
-      <th>Track <%= track %> </th>
+  <tr> 
+    <th></th>
+    <% @program.eachTrack do |track| %> <th>Track <%= track %> </th> <% end %>
+    <th></th>
+  </tr>
+  <% @program.eachSlot do |slot|
+    no_more_columns_on_this_row = false
+  %>
+    <tr>
+      <th> slot <%=slot%> </th> 
+      <% @program.eachTrack do |track| program_entry = @program.entry(slot,track) %>
+        <% if no_more_columns_on_this_row %>  &nbsp; 
+        <% else %> 
+          <%= render 'program_entries/show_in_program_matrix', :program_entry => program_entry, :program => @program  %>
+          <% no_more_columns_on_this_row |= (!program_entry.nil? && program_entry.span_entire_row) %>
+        <% end %> 
+      <% end %>
+      <td class="ProgramMatrix" > 
+        <%= form_for(@program, :url => url_for(:action => 'insertSlot')) do |f| %>
+          <%= hidden_field_tag "field[before]", slot %> <%= f.submit "insert slot"%>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  <tr>
+    <td> </td>
+    <% @program.eachTrack do |track| %> 
+      <td class="ProgramMatrix" > 
+        <%= form_for(@program, :url => url_for(:action => 'insertTrack')) do |f| %>
+          <%= hidden_field_tag "field[before]", track %> <%= f.submit "insert track"%>
+        <% end %>
+      </td> 
     <% end %>
   </tr>
-    <% @program.eachSlot do |slot|
-      no_more_columns_on_this_row = false
-    %>
-  <tr>
-  <th> slot <%=slot%> </th> 
-  <% @program.eachTrack do |track| 
-      program_entry = @program.entry(slot,track)
-  %>
-     <% if no_more_columns_on_this_row %>  &nbsp; 
-     <% else %> 
-       <%= render 'program_entries/show_in_program_matrix', :program_entry => program_entry, :program => @program  %>
-       <% no_more_columns_on_this_row |= (!program_entry.nil? && program_entry.span_entire_row) %>
-     <% end %> 
-
-  <% end %>
-  </tr>
-  <% end %>
 </table>
 
 <div class="alignright">
@@ -42,15 +54,3 @@ PAF = <%= @program.avgpaf.nil? ? "not yet calculated" : @program.avgpaf %>
 
 <%= guarded_link_to 'Edit this program version-name', controller: 'programs', action: 'edit', id: @program.to_param %> |
 <%= link_to 'New entry in this program', new_program_program_entry_path(@program) %>  |
-<%= form_for(@program, :url => url_for(:action => 'insertSlot')) do |f| %>
-  <div class="actions">
-    <%= text_field "field", "before" %> 
-    <%= f.submit "insert row"%>
-  </div>
-<% end %>
-<%= form_for(@program, :url => url_for(:action => 'insertTrack')) do |f| %>
-  <div class="actions">
-    <%= text_field "field", "before" %> 
-    <%= f.submit "insert track"%>
-  </div>
-<% end %>
