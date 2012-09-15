@@ -13,10 +13,12 @@ class Program < ActiveRecord::Base
   end
 
   def maxSlot
+    return 0 unless !program_entries.nil? && !program_entries.empty?
     program_entries.collect{ |pe| pe.slot }.max
   end
 
   def maxTrack
+    return 0 unless !program_entries.nil? && !program_entries.empty?
     program_entries.collect{ |pe| pe.track }.max
   end
 
@@ -39,7 +41,6 @@ class Program < ActiveRecord::Base
 
   def insertRow(beforeSlot)
     getProgramEntryMatrix
-    
     eachSlot do |slot|
       if (slot>=beforeSlot) 
         eachTrack do |track|

@@ -102,4 +102,53 @@ describe Program do
     end
   end
 
+  describe "maxSlot" do
+    let(:program) { FactoryGirl.build :program  }
+    context "when no slots in program " do
+      it "maxSlot should be 0 " do
+        program.maxSlot.should == 0
+      end
+    end
+    context "when a slot in program " do
+      it "maxSlot should be number of slot " do
+        a_program_entry_for(program, 5)
+        program.maxSlot.should == 5
+      end
+    end
+    context "when 2 slots in program " do
+      it "maxSlot should be max slot " do
+        a_program_entry_for(program, 5)
+        a_program_entry_for(program, 10)
+        program.maxSlot.should == 10
+      end
+    end
+    def a_program_entry_for(program, slot)
+      FactoryGirl.create(:program_entry, :program => program, :slot => slot)
+    end
+  end
+
+  describe "maxTrack" do
+    let(:program) { FactoryGirl.build :program  }
+    context "when no tracks in program " do
+      it "maxTrack should be 0 " do
+        program.maxTrack.should == 0
+      end
+    end
+    context "when a track in program " do
+      it "maxTrack should be number of track " do
+        a_program_entry_for(program, 5)
+        program.maxTrack.should == 5
+      end
+    end
+    context "when 2 tracks in program " do
+      it "maxTrack should be max track " do
+        a_program_entry_for(program, 5)
+        a_program_entry_for(program, 10)
+        program.maxTrack.should == 10
+      end
+    end
+    def a_program_entry_for(program, track)
+      FactoryGirl.create(:program_entry, :program => program, :track => track)
+    end
+  end
 end
