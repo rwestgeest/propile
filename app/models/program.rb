@@ -1,7 +1,7 @@
 class Program < ActiveRecord::Base
   attr_accessible :version
   attr_accessible :avgpaf
-  has_many :program_entries
+  has_many :program_entries, :autosave => true
 
   def programEntryMatrix # rows=slots, cols=tracks
     return @matrix unless @matrix.nil?
@@ -32,14 +32,12 @@ class Program < ActiveRecord::Base
 
   def insertSlot(beforeSlot)
     programEntryMatrix
-    eachSlot do |slot|
-      if (slot>=beforeSlot) 
-        eachTrack do |track|
-          program_entry = entry(slot,track)
-          if !program_entry.nil?
-            program_entry.slot += 1
-            program_entry.save
-          end
+    (beforeSlot..maxSlot).each do |slot|
+      eachTrack do |track|
+        program_entry = entry(slot,track)
+        if !program_entry.nil?
+          program_entry.slot += 1
+          #program_entry.save
         end
       end
     end

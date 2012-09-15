@@ -214,14 +214,21 @@ describe Program do
       end
     end
     context "when 1 entry in program on slot 1" do
+      it "insertSlot 1 should NOT insert an entry " do
+        entry = a_program_entry_in_slot(program, 1)
+        program.insertSlot(1).program_entries.size.should == 1
+      end
       it "insertSlot 1 should move entry to next slot" do
         entry = a_program_entry_in_slot(program, 1)
         program.insertSlot(1).maxSlot.should == 2
+        program.program_entries.size.should == 1
+        program.save
         entry.reload.slot.should == 2
       end
       it "insertSlot 2 should do nothing" do
         entry = a_program_entry_in_slot(program, 1)
         program.insertSlot(2).maxSlot.should == 1
+        program.save
         entry.reload.slot.should == 1
       end
     end
@@ -230,6 +237,7 @@ describe Program do
         entry_on_slot_2 = a_program_entry_in_slot(program, 2)
         entry_on_slot_5 = a_program_entry_in_slot(program, 5)
         program.insertSlot(1).maxSlot.should == 6
+        program.save
         entry_on_slot_2.reload.slot.should == 3
         entry_on_slot_5.reload.slot.should == 6
       end
@@ -237,6 +245,7 @@ describe Program do
         entry_on_slot_2 = a_program_entry_in_slot(program, 2)
         entry_on_slot_5 = a_program_entry_in_slot(program, 5)
         program.insertSlot(4).maxSlot.should == 6
+        program.save
         entry_on_slot_2.reload.slot.should == 2
         entry_on_slot_5.reload.slot.should == 6
       end
@@ -244,6 +253,7 @@ describe Program do
         entry_on_slot_2 = a_program_entry_in_slot(program, 2)
         entry_on_slot_5 = a_program_entry_in_slot(program, 5)
         program.insertSlot(6).maxSlot.should == 5
+        program.save
         entry_on_slot_2.reload.slot.should == 2
         entry_on_slot_5.reload.slot.should == 5
       end
