@@ -1,6 +1,7 @@
 <%= form_for(@program) do |f| %>
   <%= errors_for @program %>
 
+
   <div>
     <%= f.label :version %> 
   </div>
@@ -8,6 +9,14 @@
     <%= text_field :program, :version, :size => "100" %> 
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "update version string" %>
   </div>
+<hr>
+
+<%= render 'programs/program_matrix', :program => @program, :editable => true %>
+
+
 <% end %>
+
+<%= link_to 'New entry in this program', new_program_program_entry_path(@program) %>   |
+

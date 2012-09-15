@@ -1,0 +1,62 @@
+<% if editable %> 
+  <div>
+    PAF = <%= @program.avgpaf.nil? ? "not yet calculated" : @program.avgpaf %> &nbsp; | &nbsp;
+      <%= link_to '(re-)calculate PAF for this program', controller: 'programs', action: 'calculate_paf', id: @program.to_param %>   &nbsp; | &nbsp;
+    <%= link_to 'Export CSV', csv_program_path %>
+  </div>
+<% end %> 
+
+<div>
+<table class="ProgramMatrix">
+  <tr> 
+    <% if editable %> 
+      <th></th>
+      <% @program.eachTrack do |track| %> <th>Track <%= track %> </th> <% end %>
+      <th></th> 
+    <% end %> 
+  </tr>
+  <% @program.eachSlot do |slot|
+    no_more_columns_on_this_row = false
+  %>
+    <tr>
+      <% if editable %> 
+        <th> slot <%=slot%> </th> 
+      <% end %> 
+      <% @program.eachTrack do |track| program_entry = @program.entry(slot,track) %>
+        <% if no_more_columns_on_this_row %>  &nbsp; 
+        <% else %> 
+          <%= render 'program_entries/show_in_program_matrix', :program_entry => program_entry, :program => @program, :slot => slot, :track => track, :editable => editable  %>
+          <% no_more_columns_on_this_row |= (!program_entry.nil? && program_entry.span_entire_row) %>
+        <% end %> 
+      <% end %>
+      <% if editable %> 
+        <td class="ProgramMatrix" > 
+          <%= form_for(@program, :url => url_for(:action => 'insertSlot')) do |f| %>
+            <%= hidden_field_tag "field[before]", slot %> <%= f.submit "insert slot"%>
+          <% end %>
+          <%= form_for(@program, :url => url_for(:action => 'removeSlot')) do |f| %>
+            <%= hidden_field_tag "field[slot]", slot %> <%= f.submit "remove slot"%>
+          <% end %>
+        </td>
+      <% end %> 
+    </tr>
+  <% end %>
+  <% if editable %> 
+    <tr>
+      <td> </td>
+      <% @program.eachTrack do |track| %> 
+        <td class="ProgramMatrix" > 
+          <%= form_for(@program, :url => url_for(:action => 'insertTrack')) do |f| %>
+            <%= hidden_field_tag "field[before]", track %> <%= f.submit "insert track"%>
+          <% end %>
+          <%= form_for(@program, :url => url_for(:action => 'removeTrack')) do |f| %>
+            <%= hidden_field_tag "field[track]", track %> <%= f.submit "remove track"%>
+          <% end %>
+        </td> 
+      <% end %>
+    </tr>
+  <% end %> 
+</table>
+
+</div>
+

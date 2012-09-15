@@ -1,14 +1,23 @@
      <% if program_entry.nil? %>  
        <td class="ProgramMatrix" > 
-         <%= link_to 'add', new_program_program_entry_path(program, :slot => slot, :track => track  ), :class => "ProgramMatrix_edit_link" %>  
+         <% if editable %> 
+           <%= link_to 'add', new_program_program_entry_path(program, :slot => slot, :track => track  ), :class => "ProgramMatrix_edit_link" %>  
+         <% end %> 
        </td>
      <% else %> 
-       <td class="ProgramMatrix <%=program_entry.topic_class%>" <%= program_entry.span_entire_row==true ? "colspan="+@program.maxTrack.to_s : "" %> > 
+       <td class="ProgramMatrix <%=program_entry.topic_class%>" <%= program_entry.span_entire_row==true ? "colspan="+(@program.maxTrack-1).to_s : "" %> > 
          <% if !program_entry.session.nil? %>  
-           <%= link_to program_entry.session.id.to_s+"- "+program_entry.session.title, program_entry.session %>
-           <p class=ProgramMatrix_presenters> <%= session_presenter_names(program_entry.session) %> </p>
+           <% if editable %> 
+             <%= link_to program_entry.session.id.to_s+"- "+program_entry.session.title, program_entry.session %>
+             <p class=ProgramMatrix_presenters> <%= session_presenter_names(program_entry.session) %> </p>
+            <% else %> 
+             <%= program_entry.session.title %>
+             <p class=ProgramMatrix_presenters> <%= program_entry.session.presenter_names %> </p>
+            <% end %> 
          <% end %> 
          <%= program_entry.comment %>
-         <%= link_to "edit", {controller: 'program_entries', action: 'edit', id: program_entry.to_param },  :class => "ProgramMatrix_edit_link"  %>
+         <% if editable %> 
+           <%= link_to "edit", {controller: 'program_entries', action: 'edit', id: program_entry.to_param },  :class => "ProgramMatrix_edit_link"  %>
+         <% end %> 
        </td>
      <% end %> 
