@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe Program do
 
+  let(:program) { FactoryGirl.build :program  }
+
   describe "saving" do
     it "is possible" do
       program = FactoryGirl.create :program
@@ -28,7 +30,6 @@ describe Program do
   end
 
   describe  "calculateAvgPafForPresenters" do
-    let(:program) { FactoryGirl.build :program  }
     let(:presenter) { FactoryGirl.build :presenter  }
     context "for empty presenter list" do
       it "returns emtpy 0" do
@@ -38,7 +39,6 @@ describe Program do
   end
 
   describe "calculatePafForPresenters" do
-    let(:program) { FactoryGirl.build :program  }
     let(:presenter) { FactoryGirl.build :presenter  }
     context "for empty presenter list" do
       it "returns emtpy paf list" do
@@ -57,7 +57,6 @@ describe Program do
 
 
   describe "calculatePafForOnePresenter" do
-    let(:program) { FactoryGirl.build :program  }
     let(:vote1) { FactoryGirl.build :vote  }
     let(:vote2) { FactoryGirl.build :vote  }
     context "when presenter has not voted" do
@@ -103,7 +102,6 @@ describe Program do
   end
 
   describe "maxSlot" do
-    let(:program) { FactoryGirl.build :program  }
     context "when no slots in program " do
       it "maxSlot should be 0 " do
         program.maxSlot.should == 0
@@ -132,7 +130,6 @@ describe Program do
   end
 
   describe "eachSlot" do
-    let(:program) { FactoryGirl.build :program  }
     context "when no slots in program " do
       it "eachSlot should do nothing " do
         program.eachSlot {|i| fail}
@@ -149,7 +146,6 @@ describe Program do
   end
 
   describe "maxTrack" do
-    let(:program) { FactoryGirl.build :program  }
     context "when no tracks in program " do
       it "maxTrack should be 0 " do
         program.maxTrack.should == 0
@@ -171,7 +167,6 @@ describe Program do
   end
 
   describe "eachTrack" do
-    let(:program) { FactoryGirl.build :program  }
     context "when no tracks in program " do
       it "eachTrack should do nothing " do
         program.eachTrack {|i| fail}
@@ -187,6 +182,24 @@ describe Program do
     end
   end
 
+  describe "entry" do
+    context "when no entries in program " do
+      it "entry should return nil" do
+        program.entry(1,1).should be_nil
+      end
+      it "entry with incorrect coordinates should return nil" do
+        a_program_entry_in_slot_and_track(program, 1, 1)
+        program.entry(2,2).should be_nil
+      end
+      it "entry with correct coordinates should return the entry" do
+        entry = a_program_entry_in_slot_and_track(program, 1, 1)
+        program.entry(1,1).should == entry
+      end
+    end
+    def a_program_entry_in_slot_and_track(program, slot, track)
+      FactoryGirl.create(:program_entry, :program => program, :slot => slot, :track => track)
+    end
+  end
 
   def a_program_entry_in_slot(program, slot)
     FactoryGirl.create(:program_entry, :program => program, :slot => slot)

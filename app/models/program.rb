@@ -3,12 +3,10 @@ class Program < ActiveRecord::Base
   attr_accessible :avgpaf
   has_many :program_entries
 
-  def getProgramEntryMatrix # rows=slots, cols=tracks
-    return unless @matrix.nil?
+  def programEntryMatrix # rows=slots, cols=tracks
+    return @matrix unless @matrix.nil?
     @matrix = Hash.new
-    program_entries.each do |pe|
-      @matrix[[pe.slot, pe.track]] = pe
-    end
+    program_entries.each { |pe| @matrix[[pe.slot, pe.track]] = pe }
     @matrix
   end
 
@@ -18,9 +16,7 @@ class Program < ActiveRecord::Base
   end
 
   def eachSlot
-    (1..maxSlot).each do |slot|
-      yield(slot) 
-    end
+    (1..maxSlot).each { |slot| yield(slot) }
   end
 
   def maxTrack
@@ -29,18 +25,16 @@ class Program < ActiveRecord::Base
   end
 
   def eachTrack
-    (1..maxTrack).each do |track|
-      yield(track) 
-    end
+    (1..maxTrack).each { |track| yield(track) }
   end
 
   def entry(slot,track) 
-    getProgramEntryMatrix 
-    @matrix[[slot,track]]
+    return nil unless !program_entries.nil? 
+    programEntryMatrix() [[slot,track]]
   end
 
   def insertRow(beforeSlot)
-    getProgramEntryMatrix
+    programEntryMatrix
     eachSlot do |slot|
       if (slot>=beforeSlot) 
         eachTrack do |track|
