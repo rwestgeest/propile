@@ -312,4 +312,111 @@ describe Program do
       end
     end
   end
+
+  describe "removeSlot" do
+    context "when no entries in program " do
+      it "removeSlot 1 should do nothing" do
+        program.removeSlot(1).maxSlot.should == 0
+      end
+    end
+    context "when 1 entry in program on slot 2" do
+      it "removeSlot 3 should NOT remove an entry " do
+        entry = a_program_entry_in_slot(program, 2)
+        program.removeSlot(3).program_entries.size.should == 1
+      end
+      it "removeSlot 2 should destroy entry" do
+        entry = a_program_entry_in_slot(program, 2)
+        program.removeSlot(2).save
+        program.maxSlot.should == 0
+        program.program_entries.size.should == 0
+        ProgramEntry.all.should be_empty
+      end
+      it "removeSlot 1 should move entry one row up" do
+        entry = a_program_entry_in_slot(program, 2)
+        program.removeSlot(1).save
+        program.maxSlot.should == 1
+        entry.reload.slot.should == 1
+      end
+    end
+    context "when 2 entries in program on different slots" do
+      it "removeSlot before entry 1 should move both entries one row up" do
+        entry_on_slot_2 = a_program_entry_in_slot(program, 2)
+        entry_on_slot_5 = a_program_entry_in_slot(program, 5)
+        program.removeSlot(1).save
+        program.maxSlot.should == 4
+        entry_on_slot_2.reload.slot.should == 1
+        entry_on_slot_5.reload.slot.should == 4
+      end
+      it "removeSlot between the entries should move only entry 2 up" do
+        entry_on_slot_2 = a_program_entry_in_slot(program, 2)
+        entry_on_slot_5 = a_program_entry_in_slot(program, 5)
+        program.removeSlot(4).save
+        program.maxSlot.should == 4
+        entry_on_slot_2.reload.slot.should == 2
+        entry_on_slot_5.reload.slot.should == 4
+      end
+      it "removeSlot after entry 2 should do nothing" do
+        entry_on_slot_2 = a_program_entry_in_slot(program, 2)
+        entry_on_slot_5 = a_program_entry_in_slot(program, 5)
+        program.removeSlot(6).save
+        program.maxSlot.should == 5
+        entry_on_slot_2.reload.slot.should == 2
+        entry_on_slot_5.reload.slot.should == 5
+      end
+    end
+  end
+
+  describe "removeTrack" do
+    context "when no entries in program " do
+      it "removeTrack 1 should do nothing" do
+        program.removeTrack(1).maxTrack.should == 0
+      end
+    end
+    context "when 1 entry in program on track 2" do
+      it "removeTrack 3 should NOT remove an entry " do
+        entry = a_program_entry_in_track(program, 2)
+        program.removeTrack(3).program_entries.size.should == 1
+      end
+      it "removeTrack 2 should destroy entry" do
+        entry = a_program_entry_in_track(program, 2)
+        program.removeTrack(2).save
+        program.maxTrack.should == 0
+        program.program_entries.size.should == 0
+        ProgramEntry.all.should be_empty
+      end
+      it "removeTrack 1 should move entry one row up" do
+        entry = a_program_entry_in_track(program, 2)
+        program.removeTrack(1).save
+        program.maxTrack.should == 1
+        entry.reload.track.should == 1
+      end
+    end
+    context "when 2 entries in program on different tracks" do
+      it "removeTrack before entry 1 should move both entries one row up" do
+        entry_on_track_2 = a_program_entry_in_track(program, 2)
+        entry_on_track_5 = a_program_entry_in_track(program, 5)
+        program.removeTrack(1).save
+        program.maxTrack.should == 4
+        entry_on_track_2.reload.track.should == 1
+        entry_on_track_5.reload.track.should == 4
+      end
+      it "removeTrack between the entries should move only entry 2 up" do
+        entry_on_track_2 = a_program_entry_in_track(program, 2)
+        entry_on_track_5 = a_program_entry_in_track(program, 5)
+        program.removeTrack(4).save
+        program.maxTrack.should == 4
+        entry_on_track_2.reload.track.should == 2
+        entry_on_track_5.reload.track.should == 4
+      end
+      it "removeTrack after entry 2 should do nothing" do
+        entry_on_track_2 = a_program_entry_in_track(program, 2)
+        entry_on_track_5 = a_program_entry_in_track(program, 5)
+        program.removeTrack(6).save
+        program.maxTrack.should == 5
+        entry_on_track_2.reload.track.should == 2
+        entry_on_track_5.reload.track.should == 5
+      end
+    end
+  end
+
 end

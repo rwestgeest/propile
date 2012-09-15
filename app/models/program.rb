@@ -42,12 +42,62 @@ class Program < ActiveRecord::Base
     self
   end
 
+  def removeSlotOK(slotToRemove)
+    eachTrack do |track|
+      program_entry = entry(slotToRemove,track)
+      if !program_entry.nil?
+        program_entry.mark_for_destruction
+      end
+    end
+    (slotToRemove+1..maxSlot).each do |slot|
+      eachTrack do |track|
+        program_entry = entry(slot,track)
+        if !program_entry.nil?
+          program_entry.slot -= 1
+        end
+      end
+    end
+    self
+  end
+
+  def removeSlot(slotToRemove)
+    (slotToRemove..maxSlot).each do |slot|
+      eachTrack do |track|
+        program_entry = entry(slot,track)
+        if !program_entry.nil?
+          if slot==slotToRemove 
+            program_entry.mark_for_destruction 
+          else
+            program_entry.slot -= 1
+          end
+        end
+      end
+    end
+    self
+  end
+
   def insertTrack(beforeTrack)
     (beforeTrack..maxTrack).each do |track|
       eachSlot do |slot|
         program_entry = entry(slot,track)
         if !program_entry.nil?
           program_entry.track += 1
+        end
+      end
+    end
+    self
+  end
+
+  def removeTrack(trackToRemove)
+    (trackToRemove..maxTrack).each do |track|
+      eachSlot do |slot|
+        program_entry = entry(slot,track)
+        if !program_entry.nil?
+          if track==trackToRemove 
+            program_entry.mark_for_destruction 
+          else
+            program_entry.track -= 1
+          end
         end
       end
     end
