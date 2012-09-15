@@ -135,9 +135,9 @@ class ProgramsController < ApplicationController
     send_data(program_csv, :type => 'test/csv', :filename => 'program.csv') 
   end
 
-  def insertRow
+  def insertSlot
     @program = Program.find(params[:id])
-    @program.insertRow(params[:field][:before].to_i)
+    @program.insertSlot(params[:field][:before].to_i)
 
     respond_to do |format|
       format.html { redirect_to @program, notice: 'Row was successfully inserted.' }

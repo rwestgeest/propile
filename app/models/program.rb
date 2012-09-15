@@ -30,10 +30,6 @@ class Program < ActiveRecord::Base
     programEntryMatrix() [[slot,track]]
   end
 
-  def insertRow(beforeSlot)
-    insertSlot(beforeSlot)
-  end 
-
   def insertSlot(beforeSlot)
     programEntryMatrix
     eachSlot do |slot|
