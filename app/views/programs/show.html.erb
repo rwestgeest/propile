@@ -32,6 +32,9 @@ PAF = <%= @program.avgpaf.nil? ? "not yet calculated" : @program.avgpaf %>
         <%= form_for(@program, :url => url_for(:action => 'insertSlot')) do |f| %>
           <%= hidden_field_tag "field[before]", slot %> <%= f.submit "insert slot"%>
         <% end %>
+        <%= form_for(@program, :url => url_for(:action => 'removeSlot')) do |f| %>
+          <%= hidden_field_tag "field[slot]", slot %> <%= f.submit "remove slot"%>
+        <% end %>
       </td>
     </tr>
   <% end %>
@@ -41,6 +44,9 @@ PAF = <%= @program.avgpaf.nil? ? "not yet calculated" : @program.avgpaf %>
       <td class="ProgramMatrix" > 
         <%= form_for(@program, :url => url_for(:action => 'insertTrack')) do |f| %>
           <%= hidden_field_tag "field[before]", track %> <%= f.submit "insert track"%>
+        <% end %>
+        <%= form_for(@program, :url => url_for(:action => 'removeTrack')) do |f| %>
+          <%= hidden_field_tag "field[track]", track %> <%= f.submit "remove track"%>
         <% end %>
       </td> 
     <% end %>

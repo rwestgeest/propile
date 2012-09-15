@@ -9,6 +9,8 @@ Propile::Application.routes.draw do
     get 'csv', :on => :member
     put 'insertSlot', :on => :member
     put 'insertTrack', :on => :member
+    put 'removeSlot', :on => :member
+    put 'removeTrack', :on => :member
   end
 
   resources :propile_configs

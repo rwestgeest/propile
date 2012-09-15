@@ -150,6 +150,22 @@ class ProgramsController < ApplicationController
     end
   end
 
+  def removeSlot
+    @program = Program.find(params[:id])
+    @program.removeSlot(params[:field][:slot].to_i)
+
+    respond_to do |format|
+      if @program.save
+        format.html { redirect_to @program, notice: 'Slot was successfully removed.' }
+        format.json { render json: @program, status: :created, location: @program }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @program.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+
   def insertTrack
     @program = Program.find(params[:id])
     @program.insertTrack(params[:field][:before].to_i)
@@ -157,6 +173,22 @@ class ProgramsController < ApplicationController
     respond_to do |format|
       if @program.save
         format.html { redirect_to @program, notice: 'Track was successfully inserted.' }
+        format.json { render json: @program, status: :created, location: @program }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @program.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+
+  def removeTrack
+    @program = Program.find(params[:id])
+    @program.removeTrack(params[:field][:track].to_i)
+
+    respond_to do |format|
+      if @program.save
+        format.html { redirect_to @program, notice: 'Track was successfully removed.' }
         format.json { render json: @program, status: :created, location: @program }
       else
         format.html { render action: "new" }
