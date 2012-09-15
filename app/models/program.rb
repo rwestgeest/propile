@@ -31,13 +31,23 @@ class Program < ActiveRecord::Base
   end
 
   def insertSlot(beforeSlot)
-    programEntryMatrix
     (beforeSlot..maxSlot).each do |slot|
       eachTrack do |track|
         program_entry = entry(slot,track)
         if !program_entry.nil?
           program_entry.slot += 1
-          #program_entry.save
+        end
+      end
+    end
+    self
+  end
+
+  def insertTrack(beforeTrack)
+    (beforeTrack..maxTrack).each do |track|
+      eachSlot do |slot|
+        program_entry = entry(slot,track)
+        if !program_entry.nil?
+          program_entry.track += 1
         end
       end
     end

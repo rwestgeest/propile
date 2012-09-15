@@ -207,55 +207,55 @@ describe Program do
     end
   end
 
-  describe "insertSlot" do
+  describe "insertTrack" do
     context "when no entries in program " do
-      it "insertSlot 1 should do nothing" do
-        program.insertSlot(1).maxSlot.should == 0
+      it "insertTrack 1 should do nothing" do
+        program.insertTrack(1).maxTrack.should == 0
       end
     end
-    context "when 1 entry in program on slot 1" do
-      it "insertSlot 1 should NOT insert an entry " do
-        entry = a_program_entry_in_slot(program, 1)
-        program.insertSlot(1).program_entries.size.should == 1
+    context "when 1 entry in program on track 1" do
+      it "insertTrack 1 should NOT insert an entry " do
+        entry = a_program_entry_in_track(program, 1)
+        program.insertTrack(1).program_entries.size.should == 1
       end
-      it "insertSlot 1 should move entry to next slot" do
-        entry = a_program_entry_in_slot(program, 1)
-        program.insertSlot(1).maxSlot.should == 2
+      it "insertTrack 1 should move entry to next track" do
+        entry = a_program_entry_in_track(program, 1)
+        program.insertTrack(1).maxTrack.should == 2
         program.program_entries.size.should == 1
         program.save
-        entry.reload.slot.should == 2
+        entry.reload.track.should == 2
       end
-      it "insertSlot 2 should do nothing" do
-        entry = a_program_entry_in_slot(program, 1)
-        program.insertSlot(2).maxSlot.should == 1
+      it "insertTrack 2 should do nothing" do
+        entry = a_program_entry_in_track(program, 1)
+        program.insertTrack(2).maxTrack.should == 1
         program.save
-        entry.reload.slot.should == 1
+        entry.reload.track.should == 1
       end
     end
-    context "when 2 entries in program on different slots" do
-      it "insertSlot before entry 1 should move both entries to next slot" do
-        entry_on_slot_2 = a_program_entry_in_slot(program, 2)
-        entry_on_slot_5 = a_program_entry_in_slot(program, 5)
-        program.insertSlot(1).maxSlot.should == 6
+    context "when 2 entries in program on different tracks" do
+      it "insertTrack before entry 1 should move both entries to next track" do
+        entry_on_track_2 = a_program_entry_in_track(program, 2)
+        entry_on_track_5 = a_program_entry_in_track(program, 5)
+        program.insertTrack(1).maxTrack.should == 6
         program.save
-        entry_on_slot_2.reload.slot.should == 3
-        entry_on_slot_5.reload.slot.should == 6
+        entry_on_track_2.reload.track.should == 3
+        entry_on_track_5.reload.track.should == 6
       end
-      it "insertSlot between the entries should move only entry 2 to next slot" do
-        entry_on_slot_2 = a_program_entry_in_slot(program, 2)
-        entry_on_slot_5 = a_program_entry_in_slot(program, 5)
-        program.insertSlot(4).maxSlot.should == 6
+      it "insertTrack between the entries should move only entry 2 to next track" do
+        entry_on_track_2 = a_program_entry_in_track(program, 2)
+        entry_on_track_5 = a_program_entry_in_track(program, 5)
+        program.insertTrack(4).maxTrack.should == 6
         program.save
-        entry_on_slot_2.reload.slot.should == 2
-        entry_on_slot_5.reload.slot.should == 6
+        entry_on_track_2.reload.track.should == 2
+        entry_on_track_5.reload.track.should == 6
       end
-      it "insertSlot after entry 2 should do nothing" do
-        entry_on_slot_2 = a_program_entry_in_slot(program, 2)
-        entry_on_slot_5 = a_program_entry_in_slot(program, 5)
-        program.insertSlot(6).maxSlot.should == 5
+      it "insertTrack after entry 2 should do nothing" do
+        entry_on_track_2 = a_program_entry_in_track(program, 2)
+        entry_on_track_5 = a_program_entry_in_track(program, 5)
+        program.insertTrack(6).maxTrack.should == 5
         program.save
-        entry_on_slot_2.reload.slot.should == 2
-        entry_on_slot_5.reload.slot.should == 5
+        entry_on_track_2.reload.track.should == 2
+        entry_on_track_5.reload.track.should == 5
       end
     end
   end
