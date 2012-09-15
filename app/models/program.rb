@@ -11,8 +11,7 @@ class Program < ActiveRecord::Base
   end
 
   def maxSlot
-    return 0 unless !program_entries.nil? && !program_entries.empty?
-    program_entries.collect{ |pe| pe.slot }.max
+    program_entries.collect{ |pe| pe.slot }.max || 0 
   end
 
   def eachSlot
@@ -20,8 +19,7 @@ class Program < ActiveRecord::Base
   end
 
   def maxTrack
-    return 0 unless !program_entries.nil? && !program_entries.empty?
-    program_entries.collect{ |pe| pe.track }.max
+    program_entries.collect{ |pe| pe.track }.max || 0
   end
 
   def eachTrack
@@ -29,11 +27,14 @@ class Program < ActiveRecord::Base
   end
 
   def entry(slot,track) 
-    return nil unless !program_entries.nil? 
     programEntryMatrix() [[slot,track]]
   end
 
   def insertRow(beforeSlot)
+    insertSlot(beforeSlot)
+  end 
+
+  def insertSlot(beforeSlot)
     programEntryMatrix
     eachSlot do |slot|
       if (slot>=beforeSlot) 
@@ -46,6 +47,7 @@ class Program < ActiveRecord::Base
         end
       end
     end
+    self
   end
 
   def calculatePaf

@@ -3,6 +3,12 @@ require 'spec_helper'
 describe Program do
 
   let(:program) { FactoryGirl.build :program  }
+  def a_program_entry_in_slot(program, slot)
+    FactoryGirl.create(:program_entry, :program => program, :slot => slot)
+  end
+  def a_program_entry_in_track(program, track)
+    FactoryGirl.create(:program_entry, :program => program, :track => track)
+  end
 
   describe "saving" do
     it "is possible" do
@@ -201,11 +207,47 @@ describe Program do
     end
   end
 
-  def a_program_entry_in_slot(program, slot)
-    FactoryGirl.create(:program_entry, :program => program, :slot => slot)
-  end
-  def a_program_entry_in_track(program, track)
-    FactoryGirl.create(:program_entry, :program => program, :track => track)
+  describe "insertSlot" do
+    context "when no entries in program " do
+      it "insertSlot 1 should do nothing" do
+        program.insertSlot(1).maxSlot.should == 0
+      end
+    end
+    context "when 1 entry in program on slot 1" do
+      it "insertSlot 1 should move entry to next slot" do
+        entry = a_program_entry_in_slot(program, 1)
+        program.insertSlot(1).maxSlot.should == 2
+        entry.reload.slot.should == 2
+      end
+      it "insertSlot 2 should do nothing" do
+        entry = a_program_entry_in_slot(program, 1)
+        program.insertSlot(2).maxSlot.should == 1
+        entry.reload.slot.should == 1
+      end
+    end
+    context "when 2 entries in program on different slots" do
+      it "insertSlot before entry 1 should move both entries to next slot" do
+        entry_on_slot_2 = a_program_entry_in_slot(program, 2)
+        entry_on_slot_5 = a_program_entry_in_slot(program, 5)
+        program.insertSlot(1).maxSlot.should == 6
+        entry_on_slot_2.reload.slot.should == 3
+        entry_on_slot_5.reload.slot.should == 6
+      end
+      it "insertSlot between the entries should move only entry 2 to next slot" do
+        entry_on_slot_2 = a_program_entry_in_slot(program, 2)
+        entry_on_slot_5 = a_program_entry_in_slot(program, 5)
+        program.insertSlot(4).maxSlot.should == 6
+        entry_on_slot_2.reload.slot.should == 2
+        entry_on_slot_5.reload.slot.should == 6
+      end
+      it "insertSlot after entry 2 should do nothing" do
+        entry_on_slot_2 = a_program_entry_in_slot(program, 2)
+        entry_on_slot_5 = a_program_entry_in_slot(program, 5)
+        program.insertSlot(6).maxSlot.should == 5
+        entry_on_slot_2.reload.slot.should == 2
+        entry_on_slot_5.reload.slot.should == 5
+      end
+    end
   end
 
 end
