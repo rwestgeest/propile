@@ -140,12 +140,29 @@ class ProgramsController < ApplicationController
     @program.insertSlot(params[:field][:before].to_i)
 
     respond_to do |format|
-      format.html { redirect_to @program, notice: 'Row was successfully inserted.' }
-      format.json { render json: @program, status: :created, location: @program }
+      if @program.save
+        format.html { redirect_to @program, notice: 'Slot was successfully inserted.' }
+        format.json { render json: @program, status: :created, location: @program }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @program.errors, status: :unprocessable_entity }
+      end
     end
   end
 
-  def insertColumn
+  def insertTrack
+    @program = Program.find(params[:id])
+    @program.insertTrack(params[:field][:before].to_i)
+
+    respond_to do |format|
+      if @program.save
+        format.html { redirect_to @program, notice: 'Track was successfully inserted.' }
+        format.json { render json: @program, status: :created, location: @program }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @program.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
 

@@ -102,6 +102,36 @@ describe ProgramsController do
       end
     end
   
+    describe "PUT insertSlot" do
+      describe "with valid params" do
+        it "assigns the requested program as @program" do
+          program = Program.create! valid_attributes
+          put :insertSlot, {:id => program.to_param, :field => { :before => 1} }
+          assigns(:program).should eq(program)
+        end
+        it "redirects to the program" do
+          program = Program.create! valid_attributes
+          put :insertSlot, {:id => program.to_param, :field => { :before => 1} }
+          response.should redirect_to(program)
+        end
+      end
+    end
+  
+    describe "PUT insertTrack" do
+      describe "with valid params" do
+        it "assigns the requested program as @program" do
+          program = Program.create! valid_attributes
+          put :insertTrack, {:id => program.to_param, :field => { :before => 1} }
+          assigns(:program).should eq(program)
+        end
+        it "redirects to the program" do
+          program = Program.create! valid_attributes
+          put :insertTrack, {:id => program.to_param, :field => { :before => 1} }
+          response.should redirect_to(program)
+        end
+      end
+    end
+
     describe "PUT update" do
       describe "with valid params" do
         it "updates the requested program" do

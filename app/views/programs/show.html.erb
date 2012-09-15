@@ -48,4 +48,9 @@ PAF = <%= @program.avgpaf.nil? ? "not yet calculated" : @program.avgpaf %>
     <%= f.submit "insert row"%>
   </div>
 <% end %>
-<%= link_to 'Insert column in this program', insertColumn_program_path %>  
+<%= form_for(@program, :url => url_for(:action => 'insertTrack')) do |f| %>
+  <div class="actions">
+    <%= text_field "field", "before" %> 
+    <%= f.submit "insert track"%>
+  </div>
+<% end %>
