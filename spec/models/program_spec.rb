@@ -111,19 +111,40 @@ describe Program do
     end
     context "when a slot in program " do
       it "maxSlot should be number of slot " do
-        a_program_entry_for(program, 5)
+        a_program_entry_in_slot(program, 5)
         program.maxSlot.should == 5
       end
     end
     context "when 2 slots in program " do
       it "maxSlot should be max slot " do
-        a_program_entry_for(program, 5)
-        a_program_entry_for(program, 10)
+        a_program_entry_in_slot(program, 5)
+        a_program_entry_in_slot(program, 10)
         program.maxSlot.should == 10
       end
     end
-    def a_program_entry_for(program, slot)
-      FactoryGirl.create(:program_entry, :program => program, :slot => slot)
+    context "when 2 entries in program on same slot" do
+      it "maxSlot should be max slot " do
+        a_program_entry_in_slot(program, 5)
+        a_program_entry_in_slot(program, 5)
+        program.maxSlot.should == 5
+      end
+    end
+  end
+
+  describe "eachSlot" do
+    let(:program) { FactoryGirl.build :program  }
+    context "when no slots in program " do
+      it "eachSlot should do nothing " do
+        program.eachSlot {|i| fail}
+      end
+    end
+    context "when a slot in program " do
+      it "eachSlot should do something for each slot -- empty or not" do
+        arr = []
+        a_program_entry_in_slot(program, 5)
+        program.eachSlot {|i| arr << i }
+        arr.size.should equal 5
+      end
     end
   end
 
@@ -136,19 +157,42 @@ describe Program do
     end
     context "when a track in program " do
       it "maxTrack should be number of track " do
-        a_program_entry_for(program, 5)
+        a_program_entry_in_track(program, 5)
         program.maxTrack.should == 5
       end
     end
     context "when 2 tracks in program " do
       it "maxTrack should be max track " do
-        a_program_entry_for(program, 5)
-        a_program_entry_for(program, 10)
+        a_program_entry_in_track(program, 5)
+        a_program_entry_in_track(program, 10)
         program.maxTrack.should == 10
       end
     end
-    def a_program_entry_for(program, track)
-      FactoryGirl.create(:program_entry, :program => program, :track => track)
+  end
+
+  describe "eachTrack" do
+    let(:program) { FactoryGirl.build :program  }
+    context "when no tracks in program " do
+      it "eachTrack should do nothing " do
+        program.eachTrack {|i| fail}
+      end
+    end
+    context "when a track in program " do
+      it "eachTrack should do something for each track -- empty or not" do
+        arr = []
+        a_program_entry_in_track(program, 5)
+        program.eachTrack {|i| arr << i }
+        arr.size.should equal 5
+      end
     end
   end
+
+
+  def a_program_entry_in_slot(program, slot)
+    FactoryGirl.create(:program_entry, :program => program, :slot => slot)
+  end
+  def a_program_entry_in_track(program, track)
+    FactoryGirl.create(:program_entry, :program => program, :track => track)
+  end
+
 end

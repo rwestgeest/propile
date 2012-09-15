@@ -17,15 +17,15 @@ class Program < ActiveRecord::Base
     program_entries.collect{ |pe| pe.slot }.max
   end
 
-  def maxTrack
-    return 0 unless !program_entries.nil? && !program_entries.empty?
-    program_entries.collect{ |pe| pe.track }.max
-  end
-
   def eachSlot
     (1..maxSlot).each do |slot|
       yield(slot) 
     end
+  end
+
+  def maxTrack
+    return 0 unless !program_entries.nil? && !program_entries.empty?
+    program_entries.collect{ |pe| pe.track }.max
   end
 
   def eachTrack
