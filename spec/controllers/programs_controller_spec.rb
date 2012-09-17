@@ -183,7 +183,7 @@ describe ProgramsController do
         it "redirects to the program" do
           program = Program.create! valid_attributes
           put :update, {:id => program.to_param, :program => valid_attributes}
-          response.should redirect_to(program)
+          response.should redirect_to( :action => 'edit' )
         end
       end
   

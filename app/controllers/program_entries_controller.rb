@@ -52,7 +52,7 @@ class ProgramEntriesController < ApplicationController
 
     respond_to do |format|
       if @program_entry.update_attributes(params[:program_entry])
-        format.html { redirect_to @program_entry.program, notice: 'Program entry was successfully updated.' }
+        format.html { redirect_to  :controller => 'programs', :action => 'edit', :id =>  @program_entry.program.id  }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
