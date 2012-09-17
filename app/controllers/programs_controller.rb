@@ -103,10 +103,10 @@ class ProgramsController < ApplicationController
 
     respond_to do |format|
       if @program.save
-        format.html { redirect_to @program, notice: 'Program was successfully created.' }
+        format.html { redirect_to  :action => "edit" } 
         format.json { render json: @program, status: :created, location: @program }
       else
-        format.html { render action: "new" }
+        format.html { render action: "edit" }
         format.json { render json: @program.errors, status: :unprocessable_entity }
       end
     end
@@ -141,10 +141,10 @@ class ProgramsController < ApplicationController
 
     respond_to do |format|
       if @program.save
-        format.html { redirect_to @program, notice: 'Slot was successfully inserted.' }
+        format.html { redirect_to  :action => "edit" } 
         format.json { render json: @program, status: :created, location: @program }
       else
-        format.html { render action: "new" }
+        format.html { render action: "edit" }
         format.json { render json: @program.errors, status: :unprocessable_entity }
       end
     end
@@ -156,10 +156,10 @@ class ProgramsController < ApplicationController
 
     respond_to do |format|
       if @program.save
-        format.html { redirect_to @program, notice: 'Slot was successfully removed.' }
+        format.html { redirect_to  :action => "edit" } 
         format.json { render json: @program, status: :created, location: @program }
       else
-        format.html { render action: "new" }
+        format.html { render action: "edit" }
         format.json { render json: @program.errors, status: :unprocessable_entity }
       end
     end
@@ -172,10 +172,10 @@ class ProgramsController < ApplicationController
 
     respond_to do |format|
       if @program.save
-        format.html { redirect_to @program, notice: 'Track was successfully inserted.' }
+        format.html { redirect_to  :action => "edit" } 
         format.json { render json: @program, status: :created, location: @program }
       else
-        format.html { render action: "new" }
+        format.html { render action: "edit" }
         format.json { render json: @program.errors, status: :unprocessable_entity }
       end
     end
@@ -188,10 +188,10 @@ class ProgramsController < ApplicationController
 
     respond_to do |format|
       if @program.save
-        format.html { redirect_to @program, notice: 'Track was successfully removed.' }
+        format.html { redirect_to  :action => "edit" } 
         format.json { render json: @program, status: :created, location: @program }
       else
-        format.html { render action: "new" }
+        format.html { render action: "edit" }
         format.json { render json: @program.errors, status: :unprocessable_entity }
       end
     end

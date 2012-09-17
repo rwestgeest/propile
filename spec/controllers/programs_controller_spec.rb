@@ -112,7 +112,7 @@ describe ProgramsController do
         it "redirects to the program" do
           program = Program.create! valid_attributes
           put :insertSlot, {:id => program.to_param, :field => { :before => 1} }
-          response.should redirect_to(program)
+          response.should redirect_to( :action => 'edit' )
         end
       end
     end
@@ -127,7 +127,7 @@ describe ProgramsController do
         it "redirects to the program" do
           program = Program.create! valid_attributes
           put :removeSlot, {:id => program.to_param, :field => { :slot => 1} }
-          response.should redirect_to(program)
+          response.should redirect_to( :action => 'edit' )
         end
       end
     end
@@ -142,7 +142,7 @@ describe ProgramsController do
         it "redirects to the program" do
           program = Program.create! valid_attributes
           put :insertTrack, {:id => program.to_param, :field => { :before => 1} }
-          response.should redirect_to(program)
+          response.should redirect_to( :action => 'edit' )
         end
       end
     end
@@ -157,7 +157,7 @@ describe ProgramsController do
         it "redirects to the program" do
           program = Program.create! valid_attributes
           put :removeTrack, {:id => program.to_param, :field => { :track => 1} }
-          response.should redirect_to(program)
+          response.should redirect_to( :action => 'edit' )
         end
       end
     end
