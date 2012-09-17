@@ -38,7 +38,7 @@ class ProgramEntriesController < ApplicationController
 
     respond_to do |format|
       if @program_entry.save
-        format.html { redirect_to @program_entry, notice: 'Program entry was successfully created.' }
+        format.html { redirect_to  :controller => 'programs', :action => 'edit', :id =>  @program_entry.program.id  }
         format.json { render json: @program_entry, status: :created, location: @program_entry }
       else
         format.html { render action: "new" }

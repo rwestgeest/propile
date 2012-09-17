@@ -8,10 +8,11 @@ describe ProgramEntriesController do
     login_as :maintainer
   
     def valid_attributes
-      FactoryGirl.attributes_for :program_entry
+      FactoryGirl.attributes_for(:program_entry).merge :program_id => program
     end
     
     let(:program_entry) { FactoryGirl.create :program_entry }
+    let(:program) { program_entry.program }
     def create_program_entry
       program_entry
     end
@@ -47,13 +48,19 @@ describe ProgramEntriesController do
     end
   
     describe "POST create" do
+      let(:program) { FactoryGirl.create :program }
+      def valid_creation_attributes
+        @valid_creation_attributes ||= FactoryGirl.attributes_for(:program_entry).merge :program_id => program
+        #@valid_creation_attributes ||= FactoryGirl.attributes_for(:program_entry)
+      end
       def do_post
-        post :create, {:program_entry => valid_attributes}
+        post :create, {:program_entry => valid_creation_attributes}
       end
       describe "with valid params" do
-
         it "creates a new ProgramEntry" do
-          expect { do_post }.to change(ProgramEntry, :count).by(1)
+          expect {
+            do_post
+          }.to change(ProgramEntry, :count).by(1)
         end
   
         it "assigns a newly created program_entry as @program_entry" do
@@ -62,9 +69,9 @@ describe ProgramEntriesController do
           assigns(:program_entry).should be_persisted
         end
   
-        it "redirects to the created program_entry" do
+        it "redirects to the edit of the program" do
           do_post
-          response.should redirect_to(ProgramEntry.last)
+          response.should redirect_to( :controller => 'programs', :action => 'edit', :id => ProgramEntry.last.program.id )
         end
       end
   
@@ -105,7 +112,6 @@ describe ProgramEntriesController do
         it "redirects to the program_entry" do
           put :update, {:id => program_entry.to_param, :program_entry => valid_attributes}
           response.should redirect_to( :controller => 'programs', :action => 'edit' )
-          #response.should redirect_to(program_entry.program)
         end
       end
   
