@@ -230,6 +230,7 @@ h4 {
 td.ProgramMatrix {
   width:200px;
   height:50px;
+  text-align:center;
 } 
 td.technology { background-color:#6B0; } 
 td.customer { background-color:#3CF; } 
