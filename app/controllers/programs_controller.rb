@@ -137,6 +137,7 @@ class ProgramsController < ApplicationController
 
   def insertSlot
     @program = Program.find(params[:id])
+    logger.error "insertSlot id=#{params[:id]}, beforeSlot=#{params[:field][:before].to_i}"
     @program.insertSlot(params[:field][:before].to_i)
 
     respond_to do |format|

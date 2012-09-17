@@ -1,11 +1,3 @@
-<% if editable %> 
-  <div>
-    PAF = <%= @program.avgpaf.nil? ? "not yet calculated" : @program.avgpaf %> &nbsp; | &nbsp;
-      <%= link_to '(re-)calculate PAF for this program', controller: 'programs', action: 'calculate_paf', id: @program.to_param %>   &nbsp; | &nbsp;
-    <%= link_to 'Export CSV', csv_program_path %>
-  </div>
-<% end %> 
-
 <div>
 <table class="ProgramMatrix">
   <tr> 
