@@ -11,6 +11,7 @@ Propile::Application.routes.draw do
     put 'insertTrack', :on => :member
     put 'removeSlot', :on => :member
     put 'removeTrack', :on => :member
+    get 'public', :on => :collection
   end
 
   resources :propile_configs

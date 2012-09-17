@@ -198,5 +198,13 @@ class ProgramsController < ApplicationController
     end
   end
 
+  def public
+    @program = Program.last
+
+    respond_to do |format|
+      format.html { render :layout => 'public' } # public.html.erb
+      format.json { render json: @program }
+    end
+  end
 
 end
