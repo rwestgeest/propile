@@ -1,3 +1,6 @@
+# 0.4.6
+* minor bug fixes in Program show and edit 
+
 # 0.4.5
 * insertRow and insertColumn 
 * difference between Program show and edit 
