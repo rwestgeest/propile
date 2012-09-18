@@ -1,3 +1,6 @@
+# 0.4.7 
+  Public Program matrix 
+
 # 0.4.6
 * minor bug fixes in Program show and edit 
 
