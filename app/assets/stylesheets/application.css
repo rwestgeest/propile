@@ -228,10 +228,16 @@ h4 {
 
 
 td.ProgramMatrix {
-  width:200px;
-  height:50px;
   text-align:center;
+  vertical-align:top;
+  padding: 0px;
+  margin: 0px;
 } 
+td.ProgramMatrix > p {
+  background-color: light-grey;
+  padding: 0px;
+  margin: 0px;
+}
 td.technology { background-color:#6B0; } 
 td.customer { background-color:#3CF; } 
 td.cases { background-color:#FF9; } 

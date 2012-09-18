@@ -16,7 +16,8 @@
              <p class=ProgramMatrix_presenters> <%= program_entry.session.presenter_names %> </p>
             <% end %> 
          <% end %> 
-         <%= program_entry.comment %>
+         <%= wikinize(program_entry.comment) %>
+         <!--%= program_entry.comment %-->
          <% if editable %> 
            <%= link_to "edit", {controller: 'program_entries', action: 'edit', id: program_entry.to_param },  :class => "ProgramMatrix_edit_link"  %>
          <% end %> 
