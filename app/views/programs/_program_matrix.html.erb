@@ -15,7 +15,7 @@
         <th> slot <%=slot%> </th> 
       <% end %> 
       <% @program.eachTrack do |track| program_entry = @program.entry(slot,track) %>
-        <% if no_more_columns_on_this_row %>  &nbsp; 
+        <% if no_more_columns_on_this_row %>  
         <% else %> 
           <%= render 'program_entries/show_in_program_matrix', :program_entry => program_entry, :program => @program, :slot => slot, :track => track, :editable => editable  %>
           <% no_more_columns_on_this_row |= (!program_entry.nil? && program_entry.span_entire_row) %>
