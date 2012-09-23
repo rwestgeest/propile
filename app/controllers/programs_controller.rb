@@ -210,7 +210,7 @@ class ProgramsController < ApplicationController
   end
 
   def public
-    @program = Program.last
+    @program = Program.activeProgram
 
     respond_to do |format|
       format.html { render :layout => 'public' } # public.html.erb
