@@ -1,8 +1,15 @@
 <%= title @program.version %> 
+  <div>
+    PAF = <%= @program.avgpaf.nil? ? "not yet calculated" : @program.avgpaf %> &nbsp; | &nbsp;
+    <%= link_to '(re-)calculate PAF for this program', controller: 'programs', action: 'calculate_paf', id: @program.to_param %>   &nbsp; | &nbsp;
+    <%= link_to 'Export CSV', csv_program_path %> &nbsp; | &nbsp;
+    <%= link_to 'New entry in this program', new_program_program_entry_path(@program) %>   &nbsp; | &nbsp;
+    <%= link_to 'Show', @program %> 
+  </div>
+<hr>
+<%= render 'form' %>
 <div class="alignright">
   Created: <%= l @program.created_at %> -- 
   Modified: <%= l @program.updated_at %> 
 </div>
-<%= render 'form' %>
 
-<%= link_to 'Show', @program %> 

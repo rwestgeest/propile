@@ -1,4 +1,6 @@
 <div>
+
+<% if !@program.program_entries.nil? && !@program.program_entries.empty? %> 
 <table class="ProgramMatrix">
   <tr> 
     <% if editable %> 
@@ -50,5 +52,6 @@
   <% end %> 
 </table>
 
+<% end %> 
 </div>
 
