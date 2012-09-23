@@ -21,6 +21,10 @@ class PresentersController < ApplicationController
 
   def public
     @presenter = Presenter.find(params[:id])
+    respond_to do |format|
+      format.html { render :layout => 'public' } # public.html.erb
+      format.json { render json: @presenter }
+    end
   end
 
   def new
