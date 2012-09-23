@@ -1,3 +1,7 @@
+# 0.4.8 
+  maintainers can edit sessions + presenters of a session 
+  minor bugs in public pgm page
+
 # 0.4.7 
   Public Program matrix 
 
