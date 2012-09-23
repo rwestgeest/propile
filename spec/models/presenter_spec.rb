@@ -66,4 +66,13 @@ describe Presenter do
     end
   end
 
+  describe 'has_session_in_active_program?' do
+    let(:presenter) { Presenter.new }
+    context "when no active program" do
+      it "returns false" do
+        presenter.has_session_in_active_program?.should == false
+      end
+    end
+  end
+
 end

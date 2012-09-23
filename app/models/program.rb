@@ -29,6 +29,14 @@ class Program < ActiveRecord::Base
     }
   end
 
+  def sessionsInProgram
+    program_entries.collect{|pe| if !pe.session.nil? then pe.session end } 
+  end 
+
+  def presentersInProgram
+    program_entries.collect{|pe| if !pe.session.nil? then pe.session.presenters end }.flatten.select{|pr| !pr.nil?}.to_set
+  end 
+
   def active?
     return false unless !activation.nil? 
     self == Program.activeProgram

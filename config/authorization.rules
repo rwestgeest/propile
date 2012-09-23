@@ -1,6 +1,7 @@
 role :maintainer, 0
 role :presenter, 1
 
+allow 'presenters#public'
 allow 'presenters', :at_least => :presenter
 allow 'presenters#edit', :at_least => :presenter do |account, params|
   account.maintainer? || account.presenter.id == params['id'].to_i

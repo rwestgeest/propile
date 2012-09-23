@@ -419,16 +419,18 @@ describe Program do
     end
   end
 
+  def active_program_now
+    active_program(DateTime.now)
+  end
+  def active_program (activation_date)
+    FactoryGirl.create(:program, :activation => activation_date) 
+  end
   describe "active?" do
-    def active_program (activation_date)
-      FactoryGirl.create(:program, :activation => activation_date) 
-    end
-
     it "default no program is active" do
       program.active?.should ==  false
     end
     it "activated program is active" do
-      active_program(DateTime.now).active?.should == true
+      active_program_now.active?.should == true
     end
     it "last activated program is active" do
       p1 = active_program ( DateTime.new(2012,1,1) )
@@ -438,4 +440,57 @@ describe Program do
     end
   end
 
+  describe "sessionsInProgram" do
+    def a_program_entry_for(program)
+      FactoryGirl.create(:program_entry, :program => program)
+    end
+    it "for empty program contains no sessions" do
+      active_program_now.sessionsInProgram.should be_empty
+    end
+    it "for program with session contains that session" do
+      p = active_program_now
+      program_entry = a_program_entry_for(p)
+      p.sessionsInProgram.should == [program_entry.session]
+    end
+    it "for program with session contains no other sessions" do
+      p = active_program_now
+      program_entry = a_program_entry_for(p)
+      another_session = FactoryGirl.create(:session_with_presenter)
+      p.sessionsInProgram.should == [program_entry.session]
+    end
+  end
+
+  describe "presentersInProgram" do
+    it "for empty program contains no presenters" do
+      active_program_now.presentersInProgram.should be_empty
+    end
+    it "for program with session contains presenters for that session" do
+      p = active_program_now
+      program_entry = a_program_entry_for_session_with_2_presenters(p)
+      presentersInProgram = p.presentersInProgram
+      presentersInProgram.size.should == 2
+      presentersInProgram.should include program_entry.session.first_presenter 
+      presentersInProgram.should include program_entry.session.second_presenter 
+    end
+    it "for program with session contains every presenter only once" do
+      p = active_program_now
+      program_entry = a_program_entry_for(p)
+      a_program_entry_for_session(p, another_session_for_presenter(program_entry.session.first_presenter))
+      presentersInProgram = p.presentersInProgram
+      presentersInProgram.size.should == 1
+      presentersInProgram.should include program_entry.session.first_presenter 
+    end
+    def another_session_for_presenter(presenter)
+      FactoryGirl.create(:session, :first_presenter_email => presenter.email )
+    end
+    def a_program_entry_for(program)
+      FactoryGirl.create(:program_entry, :program => program)
+    end
+    def a_program_entry_for_session_with_2_presenters(program)
+      a_program_entry_for_session(program, FactoryGirl.create(:session_with_2_presenters) )
+    end
+    def a_program_entry_for_session(program, session)
+      FactoryGirl.create(:program_entry, :program => program, :session => session)
+    end
+  end
 end

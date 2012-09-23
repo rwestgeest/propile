@@ -21,6 +21,9 @@ class PresentersController < ApplicationController
 
   def public
     @presenter = Presenter.find(params[:id])
+    if !@presenter.has_session_in_active_program?
+      raise "no valid presenter"
+    end
     respond_to do |format|
       format.html { render :layout => 'public' } # public.html.erb
       format.json { render json: @presenter }
