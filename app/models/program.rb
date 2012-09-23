@@ -1,7 +1,31 @@
 class Program < ActiveRecord::Base
   attr_accessible :version
   attr_accessible :avgpaf
+  attr_accessible :activation
   has_many :program_entries, :autosave => true
+
+  def activate
+    self.activation = DateTime.now
+    self
+  end
+
+  def self.activeProgram
+    Program.all.max { |p1, p2| 
+      p1.activation.nil? ? -1 : 
+        ( p2.activation.nil? ? 1 : 
+          ( p1.activation <=> p2.activation )
+        )
+    }
+  end
+
+  def active?
+    return false unless !activation.nil? 
+    p "active?"
+    p self
+    p Program.activeProgram
+    p self == Program.activeProgram
+    self == Program.activeProgram
+  end
 
   def programEntryMatrix # rows=slots, cols=tracks
     return @matrix unless @matrix.nil?

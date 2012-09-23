@@ -419,4 +419,23 @@ describe Program do
     end
   end
 
+  describe "active?" do
+    def active_program (activation_date)
+      FactoryGirl.create(:program, :activation => activation_date) 
+    end
+
+    it "default no program is active" do
+      program.active?.should ==  false
+    end
+    it "activated program is active" do
+      active_program(DateTime.now).active?.should == true
+    end
+    it "last activated program is active" do
+      p1 = active_program ( DateTime.new(2012,1,1) )
+      p2 = active_program ( DateTime.new(2012,2,2) )
+      p1.active?.should == false
+      p2.active?.should == true
+    end
+  end
+
 end
