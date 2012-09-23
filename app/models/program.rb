@@ -20,10 +20,6 @@ class Program < ActiveRecord::Base
 
   def active?
     return false unless !activation.nil? 
-    p "active?"
-    p self
-    p Program.activeProgram
-    p self == Program.activeProgram
     self == Program.activeProgram
   end
 
