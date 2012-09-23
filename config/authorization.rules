@@ -1,23 +1,19 @@
 role :maintainer, 0
 role :presenter, 1
+
 allow 'presenters', :at_least => :presenter
 allow 'presenters#edit', :at_least => :presenter do |account, params|
   account.maintainer? || account.presenter.id == params['id'].to_i
 end
 
-allow 'propile_configs', :at_least => :maintainer
 allow 'comments', :at_least => :presenter
 allow 'reviews', :at_least => :presenter
-
-allow 'votes', :at_least => :presenter
-allow 'votes#csv', :at_least => :maintainer
-allow 'votes#csv_paf_sessions', :at_least => :maintainer
-allow 'votes#csv_paf_presenters', :at_least => :maintainer
 
 allow 'sessions', :at_least => :presenter
 allow 'sessions#edit', :at_least => :presenter do |account, params|
   account.presenter.has_session?(params['id'])
 end
+allow 'sessions#edit', :at_least => :maintainer
 allow 'reviews#edit', :at_least => :presenter do |account, params|
   account.presenter.has_review?(params['id'])
 end
@@ -26,9 +22,16 @@ allow 'comments#edit', :at_least => :presenter do |account, params|
 end
 allow 'account/password', :at_least => :presenter
 allow 'sessions#new', :at_least => :maintainer
-allow 'votes#index', :at_least => :maintainer
 allow 'sessions#pcm_cards', :at_least => :maintainer
 #allow 'sessions#new'
+
+allow 'propile_configs', :at_least => :maintainer
+
+allow 'votes', :at_least => :presenter
+allow 'votes#csv', :at_least => :maintainer
+allow 'votes#csv_paf_sessions', :at_least => :maintainer
+allow 'votes#csv_paf_presenters', :at_least => :maintainer
+allow 'votes#index', :at_least => :maintainer
 
 allow 'programs#public'
 allow 'program', :at_least => :maintainer
