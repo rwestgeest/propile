@@ -23,10 +23,11 @@
     </tr>
     <tr> 
       <td class="sessiontable" >  
-        <%= f.text_area :first_presenter_email, :cols => "48", :rows => "1", :disabled => "true" %> 
+        <%= f.text_area :first_presenter_email, :cols => "48", :rows => "1", :disabled =>  (current_account.role != "maintainer") %> 
       </td>
       <td class="sessiontable">  
-        <%= f.text_area :second_presenter_email, :cols => "48", :rows => "1", :disabled => "true" %> 
+        <%= current_account.role == "maintainer" %> 
+	<%= f.text_area :second_presenter_email, :cols => "48", :rows => "1", :disabled =>  (current_account.role != "maintainer") %> 
       </td>
     </tr>
   </table >

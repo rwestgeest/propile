@@ -32,6 +32,10 @@ describe ActionGuard do
   it "should not authorize session edit when session is not mine" do
     ActionGuard.should_not authorize(my_account).to_perform_action("sessions#edit?id=#{session.id}")
   end
+  it "should authorize session edit when session is not mine but I'm a maintainer" do
+    my_account.update_attribute :role, "maintainer"
+    ActionGuard.should authorize(my_account).to_perform_action("sessions#edit?id=#{session.id}")
+  end
   it "should authorize session edit when session is mine" do
     session.update_attribute :first_presenter_email, me.email
     ActionGuard.should authorize(my_account).to_perform_action("sessions#edit?id=#{session.id}")
