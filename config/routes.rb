@@ -30,7 +30,9 @@ Propile::Application.routes.draw do
   resources :comments
 
 
-  resources :presenters
+  resources :presenters do
+    get 'public', :on => :member
+  end
 
   resources :reviews do
     resources :comments, :on => :member

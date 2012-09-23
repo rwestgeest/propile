@@ -6,5 +6,6 @@
 </div>
 <%= render 'form' %>
 
-<%= link_to 'Show', @presenter %> |
+<%= link_to 'Show', @presenter %> &nbsp; | &nbsp;
+<%= link_to 'Public view', controller: 'presenters', action: 'public', id: @presenter.to_param %>   &nbsp; | &nbsp;
 <%= link_to 'Back', presenters_path %>

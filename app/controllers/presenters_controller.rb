@@ -17,7 +17,10 @@ class PresentersController < ApplicationController
     @presenter = Presenter.find(params[:id])
     @you_are_current_user = (current_presenter == @presenter)
     @sessions_reviewed_by_you = (@presenter.reviews.all.collect { |r|  Session.find(r.session_id) } )
+  end
 
+  def public
+    @presenter = Presenter.find(params[:id])
   end
 
   def new
