@@ -52,20 +52,12 @@ class ProgramsController < ApplicationController
   end
   def create
     @program = Program.new(params[:program])
+    @program.init_with_entries
 
     respond_to do |format|
       if @program.save
-        8.times {|slot| 
-          5.times {|track| 
-            pe = ProgramEntry.new
-            pe.slot=slot+1
-            pe.track=track+1
-            @program.program_entries<<pe
-          }  
-        }
-        @program.save
-        format.html { redirect_to @program, notice: 'Program was successfully created.' }
-        format.json { render json: @program, status: :created, location: @program }
+        format.html { redirect_to programs_url }
+        format.json { head :no_content }
       else
         format.html { render action: "new" }
         format.json { render json: @program.errors, status: :unprocessable_entity }

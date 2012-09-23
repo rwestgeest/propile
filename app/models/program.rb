@@ -2,7 +2,18 @@ class Program < ActiveRecord::Base
   attr_accessible :version
   attr_accessible :avgpaf
   attr_accessible :activation
-  has_many :program_entries, :autosave => true
+  has_many :program_entries, :autosave => true, :dependent => :destroy
+
+  def init_with_entries
+    8.times {|slot| 
+      5.times {|track| 
+        pe = ProgramEntry.new
+        pe.slot=slot+1
+        pe.track=track+1
+        program_entries<<pe
+      }  
+    }
+  end 
 
   def activate
     self.activation = DateTime.now

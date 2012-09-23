@@ -76,9 +76,9 @@ describe ProgramsController do
           assigns(:program).should be_persisted
         end
   
-        it "redirects to the created program" do
+        it "redirects to the program list" do
           post :create, {:propile_config => valid_attributes}
-          response.should redirect_to(Program.last)
+          response.should redirect_to(programs_url)
         end
       end
   
