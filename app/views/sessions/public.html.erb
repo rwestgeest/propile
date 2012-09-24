@@ -1,4 +1,21 @@
-<%= render 'sessions/show_short', :session => @session  %>
+<h2>
+  <%= @session.title  %> 
+</h2>
+<h3>
+  <%= @session.sub_title  %> 
+</h3>
+
+<div> 
+  by <%= session_presenter_names_public(@session) %> 
+<hr>
+</div>
+
+
+<h4>Short:</h4>
+<div class="outlined"> 
+  <%= wikinize(  @session.short_description )  %>
+</div>
+
 
 <div>
 <table class="propertytable" >
