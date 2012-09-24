@@ -44,6 +44,7 @@ Propile::Application.routes.draw do
     get 'thanks', :on => :member
     get 'csv', :on => :collection
     get 'pcm_cards', :on => :collection
+    get 'public', :on => :member
   end
 
   namespace :account do

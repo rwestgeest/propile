@@ -8,6 +8,7 @@
 <%= render :partial => 'form', :locals => { :session => "@session"  }  %>
 
 <div> 
-  <%= link_to 'Show', @session %> |
+  <%= link_to 'Show', @session %> &nbsp; | &nbsp;
+  <%= link_to 'Public view', controller: 'sessions', action: 'public', id: @session.to_param %>   &nbsp; | &nbsp;
   <%= link_to 'Back', sessions_path %>
 </div>

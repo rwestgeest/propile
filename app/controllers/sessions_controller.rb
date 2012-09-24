@@ -33,6 +33,17 @@ class SessionsController < ApplicationController
     @my_vote = Vote.vote_of_presenter_for(current_presenter.id, params[:id]) 
   end
 
+  def public
+    @session = Session.find(params[:id])
+    #if !@session.in_active_program?
+      #raise "no valid session"
+    #end
+    respond_to do |format|
+      format.html { render :layout => 'public' } # public.html.erb
+      format.json { render json: @session }
+    end
+  end
+
   def new
     @session = Session.new
   end

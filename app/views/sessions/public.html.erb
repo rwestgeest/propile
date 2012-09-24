@@ -1,0 +1,43 @@
+<%= render 'sessions/show_short', :session => @session  %>
+
+<div>
+<table class="propertytable" >
+<tr>
+  <td colspan="2"> Goal of the session: <%= @session.session_goal %>  </td>
+</tr>
+<tr>
+  <td> Session Type: <%= @session.session_type %> </td>
+  <td> Max participants: <%= @session.max_participants %>  </td>
+</tr>
+<tr>
+  <td> Topic: <%= @session.topic %> </td>
+  <td> Laptops required: <%= @session.laptops_required %>  </td>
+</tr>
+<tr>
+  <td> Duration: <%= @session.duration %>  </td>
+  <td> Other limitations: <%= @session.other_limitations %>  </td>
+</tr>
+<tr>
+  <td> Intended audience: <%= @session.intended_audience %>  </td>
+  <td> Experience level: <%= @session.experience_level %> </td>
+</tr>
+</table>
+</div>
+
+
+<div>
+  <h4>Detailed Description</h4>
+  <div class="lessoutlined"> 
+    <%= wikinize( @session.description) %>
+  </div>
+</div>
+
+
+<div class="alignright">
+  Created: <%= l @session.created_at %> -- 
+  Modified: <%= l @session.updated_at %> 
+</div>
+
+
+<%= link_to 'Back to program', public_programs_path %> 
+
