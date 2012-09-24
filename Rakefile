@@ -31,3 +31,9 @@ desc "Get the production database to local development"
 task "get_prod_db" do
   sh 'scp agilesystems@propile.xpday.net:propile-prod/data/production.sqlite3 data/development.sqlite3'
 end
+
+desc "Get the production database to remote test"
+task "get_prod_db_to_test" do
+  sh 'ssh agilesystems@propile.xpday.net cp -v propile-test/data/development.sqlite3 propile-test/data/development.sqlite3.backup'
+  sh 'ssh agilesystems@propile.xpday.net cp -v propile-prod/data/production.sqlite3 propile-test/data/development.sqlite3'
+end
