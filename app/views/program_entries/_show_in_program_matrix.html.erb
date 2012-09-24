@@ -12,7 +12,7 @@
              <%= link_to program_entry.session.id.to_s+"- "+program_entry.session.title, program_entry.session %>
              <p class=ProgramMatrix_presenters> <%= session_presenter_names(program_entry.session) %> </p>
             <% else %> 
-             <%= program_entry.session.title %>
+             <%= link_to program_entry.session.title, controller: 'sessions', action: 'public', id: program_entry.session.to_param %> 
              <p class=ProgramMatrix_presenters> <%= session_presenter_names_public(program_entry.session) %> </p>
             <% end %> 
          <% end %> 
