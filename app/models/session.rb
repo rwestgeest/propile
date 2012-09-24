@@ -45,4 +45,9 @@ class Session < ActiveRecord::Base
   def presenter_has_voted_for?(presenter_id) 
     votes.exists?( :presenter_id => presenter_id ) 
   end
+
+  def in_active_program?
+    active_program = Program.activeProgram
+    active_program.nil? ? false : active_program.sessionsInProgram.include?(self)
+  end
 end
