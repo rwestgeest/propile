@@ -10,6 +10,7 @@ end
 allow 'comments', :at_least => :presenter
 allow 'reviews', :at_least => :presenter
 
+allow 'sessions#public'
 allow 'sessions', :at_least => :presenter
 allow 'sessions#edit', :at_least => :presenter do |account, params|
   account.maintainer? || account.presenter.has_session?(params['id'])
