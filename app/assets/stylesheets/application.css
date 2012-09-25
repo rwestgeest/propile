@@ -99,6 +99,10 @@ th {
   background-color: lightgrey;
 }
 
+td.propertyname {
+  font-weight:bold;
+}
+
 td.nowrap {
   white-space:nowrap;
 }

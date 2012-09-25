@@ -20,28 +20,34 @@
 <div>
 <table class="propertytable" >
 <tr>
-  <td colspan="2"> Goal of the session: <%= @session.session_goal %>  </td>
+  <td class="propertyname">Goal of the session: </td><td><%= @session.session_goal %>  </td>
 </tr>
 <tr>
-  <td> Session Type: <%= @session.session_type %> </td>
-  <td> Max participants: <%= @session.max_participants %>  </td>
+  <td class="propertyname">Intended audience:</td><td> <%= @session.intended_audience %>  
+       (see <a href="http://www.xpday.net/Xpday2012/Personas.html" target="_new">Personas</a>)</td>
 </tr>
 <tr>
-  <td> Topic: <%= @session.topic %> </td>
-  <td> Laptops required: <%= @session.laptops_required %>  </td>
+  <td class="propertyname">Experience level:</td><td> <%= @session.experience_level %> </td>
 </tr>
 <tr>
-  <td> Duration: <%= @session.duration %>  </td>
-  <td> Other limitations: <%= @session.other_limitations %>  </td>
+  <td class="propertyname">Session Type:</td><td> <%= @session.session_type %> </td>
 </tr>
 <tr>
-  <td> Intended audience: <%= @session.intended_audience %>  </td>
-  <td> Experience level: <%= @session.experience_level %> </td>
+  <td class="propertyname">Topic:</td><td> <%= @session.topic %> </td>
+</tr>
+<tr>
+  <td class="propertyname">Duration:</td><td> <%= @session.duration %>  </td>
+</tr>
+<tr>
+  <td class="propertyname">Max participants:</td><td> <%= @session.max_participants %>  </td>
+</tr>
+<tr>
+  <td class="propertyname">Laptops required:</td><td> <%= @session.laptops_required %>  </td>
 </tr>
 </table>
 </div>
 
-
+<br><br>
 <div>
   <h4>Detailed Description</h4>
   <div class="lessoutlined"> 
