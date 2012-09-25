@@ -1,3 +1,11 @@
+# 0.4.9 
+  make a get_prod_db_to_test in Rakefile 
+  public program page: include legend for colors
+  bug: program destroy: should also destroy associated program entries 
+  mark program as "current" in config 
+  public program-matrix with public bios 
+  public program-matrix with public session descriptions 
+
 # 0.4.8 
   maintainers can edit sessions + presenters of a session 
   minor bugs in public pgm page
