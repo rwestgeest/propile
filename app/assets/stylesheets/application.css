@@ -242,6 +242,13 @@ td.ProgramMatrix > p {
   padding: 0px;
   margin: 0px;
 }
+td.ProgramMatrix  a {
+  color: black;
+  text-decoration: none;
+}
+td.ProgramMatrix  a:hover {
+  color: purple;
+}
 td.technology { background-color:#6B0; } 
 td.customer { background-color:#3CF; } 
 td.cases { background-color:#FF9; } 
