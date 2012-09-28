@@ -50,4 +50,17 @@ class Session < ActiveRecord::Base
     active_program = Program.activeProgram
     active_program.nil? ? false : active_program.sessionsInProgram.include?(self)
   end
+
+  def topic_class
+    return "" if topic.nil?
+    topic_downcase = topic.downcase
+    topic_class = case
+      when topic_downcase.include?("techn")  then "technology"
+      when topic_downcase.include?("customer") || topic.include?("planning")  then "customer"
+      when topic_downcase.include?("case") || topic.include?("intro")  then "cases"
+      when topic_downcase.include?("team") || topic.include?("individual")  then "team"
+      when topic_downcase.include?("process") || topic.include?("improv")  then "process"
+      else ""
+    end
+  end
 end

@@ -6,15 +6,7 @@ class ProgramEntry < ActiveRecord::Base
   attr_accessible :session_id, :program_id
   
   def topic_class
-    topic = session ? session.topic.downcase : ""
-    topic_class = case  
-      when topic.include?("techn")  then "technology"
-      when topic.include?("customer") || topic.include?("planning")  then "customer"
-      when topic.include?("case") || topic.include?("intro")  then "cases"
-      when topic.include?("team") || topic.include?("individual")  then "team"
-      when topic.include?("process") || topic.include?("improv")  then "process"
-      else ""
-    end
+    topic = session ? session.topic_class : ""
   end
 
 end

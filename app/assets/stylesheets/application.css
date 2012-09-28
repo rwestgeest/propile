@@ -249,11 +249,12 @@ td.ProgramMatrix  a {
 td.ProgramMatrix  a:hover {
   color: purple;
 }
-td.technology { background-color:#6B0; } 
-td.customer { background-color:#3CF; } 
-td.cases { background-color:#FF9; } 
-td.team { background-color:#F8A; } 
-td.process { background-color:#FFA822; } 
+
+.technology { background-color:#6B0; } 
+.customer { background-color:#3CF; } 
+.cases { background-color:#FF9; } 
+.team { background-color:#F8A; } 
+.process { background-color:#FFA822; } 
 
 p.ProgramMatrix_presenters {
  font-style:italic; 
