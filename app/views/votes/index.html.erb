@@ -1,24 +1,41 @@
-<p> 
-<%= link_to 'Export CSV', csv_votes_path %>
+<p>This page is for maintainers only
+</p>
+<p>
+A few weeks before the Program Committe meeting, you can activate the voting system on the <%= link_to 'Configurations', propile_configs_path %> page: 
+add a property with name "voting_active" and value "true"  <br>
+Note: This will speed up presenters to improve their sessions and add more reviews on other sessions.  :-) <br>
+We will use the votes to calcutate the PAF of proposed programs during the Program Committee Meeting (see <%= link_to "Programs", programs_path %>. 
+<br>
+Send out a mail to all presenters who have submitted a session and ask them to vote. <br>
+<br>
+Rules of the game: 
+<ul>
+<li> you can cast one vote per session</li>
+<li> you can cast 10 votes (or less)</li>
+<li> you cannot vote for your own session(s)</li>
+<li> your votes will not be visible to the other submitters, only to the program committee</li>
+</ul>
+Presenters can see a list of the sessions they have voted for on their own presenter's page (which should have their bio by now ;-). 
+Votes for a session are created and canceled on that session's details page.<br>
+<br>
 </p>
 <p> 
+If you want to analyze the votes, you can <%= link_to 'export a CSV', csv_votes_path %> 
+</p>
+<!--p>  We no longer need export of the 
 <%= link_to 'Export CSV PAF-sessions', csv_paf_sessions_votes_path %> &&
 <%= link_to 'Export CSV PAF-presenters', csv_paf_presenters_votes_path %>
-</p>
+</p-->
 <p> 
-<%= link_to 'Printable sessions for Program Committee Meeting', pcm_cards_sessions_path %> (works best in IE -- export-to-bdf works with up to 24 pages at the same time -- print setup: horizontal, 4 pages/sheet, margins of .9mm)
+Prepare for Program Committee Meeting with the <%= link_to 'Printable sessions for Program Committee Meeting', pcm_cards_sessions_path %> (works best in IE -- export-to-bdf works with up to 24 pages at the same time -- print setup: horizontal, 4 pages/sheet, margins of .9mm) -- doesn't work extremely well though, I will improve this later by printing a pdf directly. 
 </p>
-
-
-<h2>All Votes</h2>
-<%= render 'votes/index', :votes => @votes  %>
 
 <br>
 <br>
 <br>
 
 <div>
-<h2>Summary</h2>
+<h2>Summary of the votes per Session</h2>
 <table class="tablelist">
   <tr>
     <th></th>
@@ -37,6 +54,10 @@
 <% end %>
 </table>
 </div>
+
+
+<h2>All Votes</h2>
+<%= render 'votes/index', :votes => @votes  %>
 
 <p class="alignright"><a href="mailto:sessions@xpday.net">problems or questions</a> </p> 
 
