@@ -15,19 +15,18 @@
   <table class="sessiontable">
     <tr> 
       <td class="sessiontable" width="100px">  
-          <div> <%= f.label :first_presenter_email %>*: </div>
+          <div> <%= f.label :first_presenter_email %>*: <i><%= !current_account.maintainer? || "(editable for maintainers only)" %></i> </div>
       </td>
       <td class="sessiontable">  
-          <div> <%= f.label :second_presenter_email %>: </div>
+          <div> <%= f.label :second_presenter_email %>: <i><%= !current_account.maintainer? || "(editable for maintainers only)" %></i> </div>
       </td>
     </tr>
     <tr> 
       <td class="sessiontable" >  
-        <%= f.text_area :first_presenter_email, :cols => "48", :rows => "1", :disabled =>  (current_account.role != "maintainer") %> 
+        <%= f.text_area :first_presenter_email, :cols => "48", :rows => "1", :disabled =>  (!current_account.maintainer?) %> 
       </td>
       <td class="sessiontable">  
-        <%= current_account.role == "maintainer" %> 
-	<%= f.text_area :second_presenter_email, :cols => "48", :rows => "1", :disabled =>  (current_account.role != "maintainer") %> 
+	<%= f.text_area :second_presenter_email, :cols => "48", :rows => "1", :disabled =>  (!current_account.maintainer?) %> 
       </td>
     </tr>
   </table >
