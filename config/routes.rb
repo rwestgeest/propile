@@ -19,8 +19,6 @@ Propile::Application.routes.draw do
 
   resources :votes do
     get 'csv', :on => :collection
-    get 'csv_paf_sessions', :on => :collection
-    get 'csv_paf_presenters', :on => :collection
   end
 
   resources :pages, :only => :show
