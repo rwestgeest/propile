@@ -14,7 +14,7 @@
 
 <hr>
 
-<% if @you_are_current_user==true && PropileConfig.is_set( "voting_active") %> 
+<% if @you_are_current_user==true && PropileConfig.voting_active?  %> 
   <h2>Your votes </h2>
   <div>(only you can see this)</div>
   <% if @presenter.votes.empty? %> 

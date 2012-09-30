@@ -16,4 +16,26 @@ describe PropileConfig do
     end
   end
 
+  describe "set" do
+    it "to true -> is_set will return true" do
+      PropileConfig.set("set_it_now", "true")
+      PropileConfig.is_set("set_it_now").should == true
+    end
+    it "to true for existing value -> is_set will return true" do
+      PropileConfig.set("set_it_now", "true")
+      PropileConfig.set("set_it_now", "true")
+      PropileConfig.is_set("set_it_now").should == true
+    end
+    it "to true for existing value that was false-> is_set will return true" do
+      PropileConfig.set("set_it_now", "false")
+      PropileConfig.set("set_it_now", "true")
+      PropileConfig.is_set("set_it_now").should == true
+    end
+    it "to false for existing value that was true-> is_set will return false" do
+      PropileConfig.set("set_it_now", "true")
+      PropileConfig.set("set_it_now", "false")
+      PropileConfig.is_set("set_it_now").should == false
+    end
+  end
+
 end

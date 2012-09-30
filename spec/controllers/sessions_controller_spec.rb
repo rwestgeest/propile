@@ -10,6 +10,18 @@ describe SessionsController do
       get :new, {}
       assigns(:session).should be_a_new(Session)
     end
+#    context "when submit_session is active" do
+#      it "assigns a new session as @session" do
+#        FactoryGirl.create :propile_config, :name => "submit_session_active", :value => "true" 
+#        get :new, {}
+#        assigns(:session).should be_a_new(Session)
+#      end
+#    end
+#    context "when submit_session is not active" do
+#      it "raises an exception" do
+#        lambda {get(:new, {})}.should raise_error
+#      end
+#    end
   end
 
   describe "GET thanks" do

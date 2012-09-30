@@ -45,6 +45,7 @@ class SessionsController < ApplicationController
   end
 
   def new
+    #if !PropileConfig.submit_session_active? then raise "Session submission is closed" end
     @session = Session.new
   end
 
