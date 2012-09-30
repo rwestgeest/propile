@@ -1,3 +1,6 @@
+# 0.4.10
+  maintainer can change email of presenter
+  some small improvements: all about views and readability and usability
 # 0.4.9 
   make a get_prod_db_to_test in Rakefile 
   public program page: include legend for colors
