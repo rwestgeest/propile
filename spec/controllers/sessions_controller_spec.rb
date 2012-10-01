@@ -5,7 +5,7 @@ describe SessionsController do
   it_should_behave_like "a guarded resource controller", :presenter, :maintainer,
                                         :except => [:new, :create]
 
-  describe "GET new", focus: true do
+  describe "GET new" do
     # it "assigns a new session as @session" do
     #   get :new, {}
     #   assigns(:session).should be_a_new(Session)
