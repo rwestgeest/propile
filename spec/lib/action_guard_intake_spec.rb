@@ -23,9 +23,11 @@ describe ActionGuard do
     parameters_hash['action'] = action || 'index'
     parameters_hash
   end
+
   let(:session) { FactoryGirl.create :session_with_presenter }
   let(:me) { FactoryGirl.create :presenter  }
   let(:my_account) { me.account }
+
   it "should authorize session index" do
     ActionGuard.should authorize(my_account).to_perform_action("sessions")
   end

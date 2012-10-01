@@ -5,23 +5,31 @@ describe SessionsController do
   it_should_behave_like "a guarded resource controller", :presenter, :maintainer,
                                         :except => [:new, :create]
 
-  describe "GET new" do
-    it "assigns a new session as @session" do
-      get :new, {}
-      assigns(:session).should be_a_new(Session)
+  describe "GET new", focus: true do
+    # it "assigns a new session as @session" do
+    #   get :new, {}
+    #   assigns(:session).should be_a_new(Session)
+    # end
+    context "when submit_session is active" do
+      it "assigns a new session as @session" do
+        FactoryGirl.create :propile_config, :name => "submit_session_active", :value => "true" 
+        get :new, {}
+        assigns(:session).should be_a_new(Session)
+      end
     end
-#    context "when submit_session is active" do
-#      it "assigns a new session as @session" do
-#        FactoryGirl.create :propile_config, :name => "submit_session_active", :value => "true" 
-#        get :new, {}
-#        assigns(:session).should be_a_new(Session)
-#      end
-#    end
-#    context "when submit_session is not active" do
-#      it "raises an exception" do
-#        lambda {get(:new, {})}.should raise_error
-#      end
-#    end
+    context "when submit_session is not active" do
+      it "raises an exception" do
+        get :new, {}
+        response.should redirect_to(new_account_session_path)
+      end
+      context "but when logged in as maintainer" do
+        login_as :maintainer
+        it "renders new" do
+          get :new, {}
+          response.should render_template('new')
+        end
+      end
+    end
   end
 
   describe "GET thanks" do

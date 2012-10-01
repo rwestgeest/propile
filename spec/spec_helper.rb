@@ -19,6 +19,7 @@ RSpec.configure do |config|
   # automatically. This will be the default behavior in future versions of
   # rspec-rails.
   config.infer_base_class_for_anonymous_controllers = false
+  config.filter_run_including :focus => true
   config.filter_run_excluding :broken => true
   config.filter_run 
   config.run_all_when_everything_filtered = true

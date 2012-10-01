@@ -5,7 +5,7 @@
 #   git config --global core.excludesfile ~/.gitignore_global
 
 *~
-
+tags
 # Ignore bundler config
 /.bundle
 /.sass-cache

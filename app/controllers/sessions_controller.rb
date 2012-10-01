@@ -1,7 +1,7 @@
 require 'csv'
 
 class SessionsController < ApplicationController
-  skip_before_filter :authorize_action, :only => [:new, :create, :thanks, :csv]
+  skip_before_filter :authorize_action, :only => [:create, :thanks, :csv]
   helper_method :sort_column, :sort_direction
 
   def index
