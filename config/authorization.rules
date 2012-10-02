@@ -23,8 +23,6 @@ allow 'comments#edit', :at_least => :presenter do |account, params|
 end
 allow 'account/password', :at_least => :presenter
 allow 'sessions#pcm_cards', :at_least => :maintainer
-#allow 'sessions#new', :at_least => :maintainer
-#allow 'sessions#new'
 allow 'sessions#new' do |account, params|
   (account && account.maintainer?) || PropileConfig.submit_session_active? 
 end
