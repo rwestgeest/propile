@@ -1,34 +1,27 @@
 <p>This page is for maintainers only
 </p>
-<h1>Listing propile_configs</h1>
-
-<p>
-To <b>activate submitting sessions</b>: add a property with name "submit_session_active" and value "true".<br>
-To <b>activate voting</b>: add a property with name "voting_active" and value "true".
-</p>
+<h1>Configuration</h1>
 
 <table>
   <tr>
-    <th>Name</th>
-    <th>Value</th>
-    <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @propile_configs.each do |propile_config| %>
+    <td> Session submission active: </td> 
+    <td> <%= PropileConfig.submit_session_active? %>  </td> 
+    <td> 
+      <%= form_for(@propile_configs, :url => url_for(:action => 'toggle_submit_session_active') ) do |f| %>
+        <%= f.submit 'toggle' %> 
+      <% end %>
+    </td>
+  </tr> 
   <tr>
-    <td><%= propile_config.name %></td>
-    <td><%= propile_config.value %></td>
-    <td><%= propile_config.description %></td>
-    <td><%= link_to 'Show', propile_config %></td>
-    <td><%= link_to 'Edit', edit_propile_config_path(propile_config) %></td>
-    <td><%= link_to 'Destroy', propile_config, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
+    <td> Voting active: </td> 
+    <td> <%= PropileConfig.voting_active? %> </td> 
+    <td> 
+      <%= form_for(@propile_configs, :url => url_for(:action => 'toggle_voting_active') ) do |f| %>
+        <%= f.submit 'toggle' %> 
+      <% end %>
+    </td>
+  </tr> 
 </table>
 
-<br />
-
-<%= link_to 'New Propile config', new_propile_config_path %>
+<br>
+<br>

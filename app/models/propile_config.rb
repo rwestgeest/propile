@@ -23,6 +23,10 @@ class PropileConfig < ActiveRecord::Base
   def self.submit_session_active=(prop_value)
     set( "submit_session_active", prop_value )
   end
+  
+  def self.toggle_submit_session_active
+    set( "submit_session_active", (!submit_session_active?).to_s )
+  end
 
   def self.voting_active?
     is_set( "voting_active" )
@@ -30,6 +34,10 @@ class PropileConfig < ActiveRecord::Base
 
   def self.voting_active=(prop_value)
     set( "voting_active", prop_value )
+  end
+
+  def self.toggle_voting_active
+    set( "voting_active", (!voting_active?).to_s )
   end
 
 end

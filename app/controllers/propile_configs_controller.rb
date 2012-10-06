@@ -67,4 +67,20 @@ class PropileConfigsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def toggle_submit_session_active
+    PropileConfig.toggle_submit_session_active
+    respond_to do |format|
+      format.html { redirect_to propile_configs_url }
+      format.json { head :no_content }
+    end
+  end
+
+  def toggle_voting_active
+    PropileConfig.toggle_voting_active
+    respond_to do |format|
+      format.html { redirect_to propile_configs_url }
+      format.json { head :no_content }
+    end
+  end
 end

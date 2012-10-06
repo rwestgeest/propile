@@ -15,7 +15,10 @@ Propile::Application.routes.draw do
     get 'public', :on => :collection
   end
 
-  resources :propile_configs
+  resources :propile_configs do
+    put 'toggle_submit_session_active', :on => :collection
+    put 'toggle_voting_active', :on => :collection
+  end
 
   resources :votes do
     get 'csv', :on => :collection
