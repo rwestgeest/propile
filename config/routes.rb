@@ -16,8 +16,7 @@ Propile::Application.routes.draw do
   end
 
   resources :propile_configs do
-    put 'toggle_submit_session_active', :on => :collection
-    put 'toggle_voting_active', :on => :collection
+    put 'toggle', :on => :collection
   end
 
   resources :votes do

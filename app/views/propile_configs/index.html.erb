@@ -7,7 +7,8 @@
     <td> Session submission active: </td> 
     <td> <%= PropileConfig.submit_session_active? %>  </td> 
     <td> 
-      <%= form_for(@propile_configs, :url => url_for(:action => 'toggle_submit_session_active') ) do |f| %>
+      <%= form_for(@propile_configs, :url => url_for(:action => 'toggle') ) do |f| %>
+        <%= hidden_field_tag "field[prop_name]", PropileConfig::SUBMIT_SESSION_ACTIVE %> 
         <%= f.submit 'toggle' %> 
       <% end %>
     </td>
@@ -16,7 +17,8 @@
     <td> Voting active: </td> 
     <td> <%= PropileConfig.voting_active? %> </td> 
     <td> 
-      <%= form_for(@propile_configs, :url => url_for(:action => 'toggle_voting_active') ) do |f| %>
+      <%= form_for(@propile_configs, :url => url_for(:action => 'toggle') ) do |f| %>
+        <%= hidden_field_tag "field[prop_name]", PropileConfig::VOTING_ACTIVE %> 
         <%= f.submit 'toggle' %> 
       <% end %>
     </td>

@@ -68,19 +68,14 @@ class PropileConfigsController < ApplicationController
     end
   end
 
-  def toggle_submit_session_active
-    PropileConfig.toggle_submit_session_active
+  def toggle
+    prop_name = params[:field][:prop_name]
+    PropileConfig.toggle(prop_name)
+
     respond_to do |format|
       format.html { redirect_to propile_configs_url }
       format.json { head :no_content }
     end
   end
 
-  def toggle_voting_active
-    PropileConfig.toggle_voting_active
-    respond_to do |format|
-      format.html { redirect_to propile_configs_url }
-      format.json { head :no_content }
-    end
-  end
 end
