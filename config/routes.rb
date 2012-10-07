@@ -45,6 +45,7 @@ Propile::Application.routes.draw do
     get 'csv', :on => :collection
     get 'pcm_cards', :on => :collection
     get 'public', :on => :member
+    get 'card_pdf', :on => :member
   end
 
   namespace :account do

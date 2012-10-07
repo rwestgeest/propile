@@ -1,4 +1,5 @@
 require 'csv'
+require 'prawn'
 
 class SessionsController < ApplicationController
   skip_before_filter :authorize_action, :only => [:create, :thanks, :csv]
@@ -131,5 +132,42 @@ class SessionsController < ApplicationController
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
+  def card_pdf
+    @session = Session.find(params[:id])
+    file_name = "session_#{@session.id}.pdf"
+    Prawn::Document.generate file_name, 
+                    :page_size => 'A6', :page_layout => :landscape, 
+                    :top_margin => 10, :bottom_margin => 10, 
+                    :left_margin => 20, :right_margin => 20 do |pdf| 
+      pdf.font_size 10
+      pdf.text "99:99 - 99:99", :align => :center
+      pdf.bounding_box([0, 250], :width => 380) do 
+        pdf.text @session.title, :align => :center, :size => 18
+        pdf.text @session.sub_title, :align => :center
+      end
+      pdf.bounding_box([0, 190], :width => 380) do 
+        pdf.text @session.short_description, :align => :justify
+      end
+      pdf.bounding_box([0, 35], :width => 60) do 
+        pdf.text "Presenters: "
+        pdf.text "Format: " 
+        pdf.text "Room: " 
+      end
+      pdf.bounding_box([60, 35], :width => 360) do 
+        pdf.text @session.presenter_names
+        pdf.text @session.session_type
+        pdf.text "<todo>"
+      end
+    end
+    send_file( file_name)
+  end
 
+
+end
+
+class SessionPdf < Prawn::Document
+  def initialize(session)
+    #@session=session
+    text "blabla", :align => :center
+  end
 end

@@ -10,6 +10,8 @@ gem "action-guard", "~> 1.2.0"
 gem 'guid'
 gem 'sqlite3'
 gem "recaptcha", :require => "recaptcha/rails"
+gem 'prawn'
+ 
 
 group :test do
   gem 'ZenTest'

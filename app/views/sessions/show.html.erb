@@ -11,7 +11,10 @@
   </div>
 <% end %>
 
+<%= guarded_link_to 'printable card (PDF)', controller: 'sessions', action: 'card_pdf', id: @session.to_param, format: "pdf" %> 
+
 <%= render 'sessions/show_short', :session => @session  %>
+
 
 <div>
 <table class="propertytable" >
