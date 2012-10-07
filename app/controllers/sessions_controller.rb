@@ -134,7 +134,7 @@ class SessionsController < ApplicationController
 
   def card_pdf
     @session = Session.find(params[:id])
-    file_name = "session_#{@session.id}.pdf"
+    file_name = "tmp/session_#{@session.id}.pdf"
     Prawn::Document.generate file_name, 
                     :page_size => 'A6', :page_layout => :landscape, 
                     :top_margin => 10, :bottom_margin => 10, 
