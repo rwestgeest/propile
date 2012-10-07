@@ -172,4 +172,16 @@ describe Session do
       end
     end
   end 
+
+  describe "generatePdf" do
+    let(:session) { FactoryGirl.build(:session_with_presenter, 
+                                      :sub_title => "the sub title", 
+                                      :short_description => "the short description", 
+                                      :session_type => "the session type") }
+    it "returns a pdf file" do
+      pdf = session.generatePdf("tmp/session_test.pdf")
+      pdf.should_not be_nil
+      pdf.class.should equal File
+    end
+  end
 end

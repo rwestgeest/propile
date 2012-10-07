@@ -1,3 +1,5 @@
+require 'prawn'
+
 class Session < ActiveRecord::Base
   belongs_to :first_presenter, :class_name => 'Presenter'
   belongs_to :second_presenter, :class_name => 'Presenter'
@@ -61,6 +63,37 @@ class Session < ActiveRecord::Base
       when topic_downcase.include?("team") || topic.include?("individual")  then "team"
       when topic_downcase.include?("process") || topic.include?("improv")  then "process"
       else ""
+    end
+  end
+
+  def generatePdf(file_name)
+    Prawn::Document.generate file_name, 
+                    :page_size => 'A6', :page_layout => :landscape, 
+                    :top_margin => 10, :bottom_margin => 10, 
+                    :left_margin => 20, :right_margin => 20 do |pdf| 
+      generatePdfContent(pdf)
+    end
+  end
+
+  def generatePdfContent(pdf)
+    pdf.font_size 10
+    pdf.text "99:99 - 99:99", :align => :center
+    pdf.bounding_box([0, 250], :width => 380) do 
+      pdf.text title, :align => :center, :size => 18
+      pdf.text sub_title, :align => :center
+    end
+    pdf.bounding_box([0, 190], :width => 380) do 
+      pdf.text short_description, :align => :justify
+    end
+    pdf.bounding_box([0, 35], :width => 60) do 
+      pdf.text "Presenters: "
+      pdf.text "Format: " 
+      pdf.text "Room: " 
+    end
+    pdf.bounding_box([60, 35], :width => 360) do 
+      pdf.text presenter_names
+      pdf.text session_type
+      pdf.text "<todo>"
     end
   end
 end
