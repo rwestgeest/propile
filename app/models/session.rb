@@ -80,20 +80,16 @@ class Session < ActiveRecord::Base
     pdf.text "99:99 - 99:99", :align => :center
     pdf.bounding_box([0, 250], :width => 380) do 
       pdf.text title, :align => :center, :size => 18
-      pdf.text sub_title, :align => :center
+      pdf.text sub_title, :align => :center, :style => :italic, :size => 8
     end
     pdf.bounding_box([0, 190], :width => 380) do 
       pdf.text short_description, :align => :justify
     end
-    pdf.bounding_box([0, 35], :width => 60) do 
-      pdf.text "Presenters: "
-      pdf.text "Format: " 
-      pdf.text "Room: " 
-    end
-    pdf.bounding_box([60, 35], :width => 360) do 
-      pdf.text presenter_names
-      pdf.text session_type
-      pdf.text "<todo>"
-    end
+    pdf.draw_text "Presenters:", :at => [0, 29], :width => 60
+    pdf.draw_text "Format: ", :at => [0, 17], :width => 60 
+    pdf.draw_text "Room: ", :at => [0, 5], :width => 60 
+    pdf.draw_text presenter_names, :at => [60, 29], :width => 320
+    pdf.draw_text session_type, :at => [60, 17], :width => 320
+    pdf.draw_text "<todo>", :at => [60, 5], :width => 320
   end
 end
