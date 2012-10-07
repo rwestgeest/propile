@@ -1,5 +1,4 @@
 require 'csv'
-require 'prawn'
 
 class SessionsController < ApplicationController
   skip_before_filter :authorize_action, :only => [:create, :thanks, :csv]
@@ -32,6 +31,16 @@ class SessionsController < ApplicationController
     @session = Session.find(params[:id])
     @current_presenter_has_voted_for_this_session = Vote.presenter_has_voted_for?(current_presenter.id, params[:id]) 
     @my_vote = Vote.vote_of_presenter_for(current_presenter.id, params[:id]) 
+    
+    respond_to do |format|
+      format.html { render }
+      format.json { render json: @session }
+      format.pdf do 
+        file_name = "tmp/session_#{@session.id}.pdf"
+        pdf = @session.generatePdf(file_name)
+        send_file( file_name)
+      end
+    end
   end
 
   def public
@@ -130,13 +139,6 @@ class SessionsController < ApplicationController
 
   def sort_direction
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
-  end
-
-  def card_pdf
-    @session = Session.find(params[:id])
-    file_name = "tmp/session_#{@session.id}.pdf"
-    pdf = @session.generatePdf(file_name)
-    send_file( file_name)
   end
 
 end

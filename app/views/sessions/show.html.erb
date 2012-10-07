@@ -5,13 +5,11 @@
     You have voted for this session 
     --> <%= link_to 'Destroy this vote', @my_vote, method: :delete %>
   <% else %>
-    <!--%= link_to 'Vote for this session', new_session_vote_path(@session) %-->  
     <%= link_to 'Vote for this session', session_votes_path(@session), method: :post %>
   <% end %>
   </div>
 <% end %>
 
-<%= guarded_link_to 'printable card (PDF)', controller: 'sessions', action: 'card_pdf', id: @session.to_param, format: "pdf" %> 
 
 <%= render 'sessions/show_short', :session => @session  %>
 
@@ -102,6 +100,7 @@
 
 <%= guarded_link_to 'Edit this session', controller: 'sessions', action: 'edit', id: @session.to_param %> |
 <%= link_to 'New Review on this session', new_session_review_path(@session) %>  |
+<%= link_to 'printable card (PDF)', controller: 'sessions', action: 'show', id: @session.to_param, format: "pdf" %> |
 <%= link_to 'Back to list of sessions', sessions_path %> 
 
 </div>
