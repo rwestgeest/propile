@@ -493,4 +493,13 @@ describe Program do
       FactoryGirl.create(:program_entry, :program => program, :session => session)
     end
   end
+
+  describe "generatePdf" do
+    it "returns emtpy pdf for empty program" do 
+      pdf = program.generatePdf("tmp/program_test.pdf")
+      pdf.should_not be_nil
+      pdf.class.should equal File
+    end
+  end
+
 end
