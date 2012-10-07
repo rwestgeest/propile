@@ -15,6 +15,11 @@ class ProgramsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @program }
+      format.pdf do 
+        file_name = "tmp/program.pdf"
+        pdf = @program.generatePdf(file_name)
+        send_file( file_name)
+      end
     end
   end
 

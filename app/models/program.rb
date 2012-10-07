@@ -1,3 +1,5 @@
+require "prawn"
+
 class Program < ActiveRecord::Base
   attr_accessible :version
   attr_accessible :avgpaf
@@ -151,6 +153,20 @@ class Program < ActiveRecord::Base
       end
     end
     slotsForPresenter.size
+  end
+
+  def generatePdf(file_name)
+    Prawn::Document.generate file_name, 
+                    :page_size => 'A6', :page_layout => :landscape, 
+                    :top_margin => 10, :bottom_margin => 10, 
+                    :left_margin => 20, :right_margin => 20 do |pdf| 
+      program_entries.each do |pe| 
+        if !pe.session.nil?  
+          pe.session.generatePdfContent(pdf) 
+          pdf.start_new_page
+        end   
+      end
+    end
   end
 
 end
