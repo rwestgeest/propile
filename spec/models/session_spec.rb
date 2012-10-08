@@ -184,4 +184,23 @@ describe Session do
       pdf.class.should equal File
     end
   end
+
+  describe "printable_max_participants" do
+    let(:session) { FactoryGirl.build(:session_with_presenter) }
+    it "if empty max_participants returns nothing" do 
+      session.printable_max_participants.should be_nil
+    end
+    it "if max_participants is unlimited returns nothing" do 
+      session.max_participants = "unlimited"
+      session.printable_max_participants.should be_nil
+    end
+    it "if max_participants is a number returns that number" do 
+      session.max_participants = "30"
+      session.printable_max_participants.should == "Max: 30"
+    end
+    it "if max_participants is a number and some extra blabla returns only the number" do 
+      session.max_participants = "30 (6 groups of 5)"
+      session.printable_max_participants.should == "Max: 30"
+    end
+  end
 end

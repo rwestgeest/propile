@@ -75,6 +75,12 @@ class Session < ActiveRecord::Base
     end
   end
 
+  def printable_max_participants
+    if !max_participants.nil? and !max_participants.empty?  and max_participants.to_i>0
+	"Max: " + max_participants.to_i.to_s
+    end
+  end
+
   def generatePdfContent(pdf)
     pdf.font_size 10
     pdf.text "99:99 - 99:99", :align => :center
@@ -91,8 +97,6 @@ class Session < ActiveRecord::Base
     pdf.draw_text presenter_names, :at => [60, 29], :width => 320
     pdf.draw_text session_type, :at => [60, 17], :width => 320
     pdf.draw_text "<todo>", :at => [60, 5], :width => 320
-    if !max_participants.nil? and !max_participants.empty?  and max_participants.to_i>0
-	pdf.draw_text "Max: "+max_participants.to_i.to_s, :at => [345, 29] 
-    end
+    pdf.draw_text printable_max_participants, :at => [345, 29] 
   end
 end
