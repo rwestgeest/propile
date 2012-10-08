@@ -188,11 +188,11 @@ describe Session do
   describe "printable_max_participants" do
     let(:session) { FactoryGirl.build(:session_with_presenter) }
     it "if empty max_participants returns nothing" do 
-      session.printable_max_participants.should be_nil
+      session.printable_max_participants.should == ""
     end
     it "if max_participants is unlimited returns nothing" do 
       session.max_participants = "unlimited"
-      session.printable_max_participants.should be_nil
+      session.printable_max_participants.should == ""
     end
     it "if max_participants is a number returns that number" do 
       session.max_participants = "30"
@@ -207,19 +207,19 @@ describe Session do
   describe "printable_laptops_required" do
     let(:session) { FactoryGirl.build(:session_with_presenter) }
     it "if empty laptops_required returns nothing" do 
-      session.printable_laptops_required.should be_nil
+      session.printable_laptops_required.should == ""
     end
     it "if max_participants is no returns nothing" do 
       session.laptops_required = "no"
-      session.printable_laptops_required.should be_nil
+      session.printable_laptops_required.should == ""
     end
     it "if max_participants is No returns nothing" do 
       session.laptops_required = "No"
-      session.printable_laptops_required.should be_nil
+      session.printable_laptops_required.should == ""
     end
     it "if max_participants is Nope returns nothing" do 
       session.laptops_required = "Nope"
-      session.printable_laptops_required.should be_nil
+      session.printable_laptops_required.should == ""
     end
   end
 end

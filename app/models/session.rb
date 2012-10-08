@@ -76,15 +76,11 @@ class Session < ActiveRecord::Base
   end
 
   def printable_max_participants
-    if !max_participants.nil? and !max_participants.empty?  and max_participants.to_i>0
-	"Max: " + max_participants.to_i.to_s
-    end
+    (!max_participants.nil? and !max_participants.empty?  and max_participants.to_i>0) ?  "Max: " + max_participants.to_i.to_s : ""
   end
 
   def printable_laptops_required
-    if !laptops_required.nil? and !laptops_required.upcase.include?("NO")
-      "bring laptop"
-    end
+    (!laptops_required.nil? and !laptops_required.upcase.include?("NO")) ?  "bring laptop" : ""
   end
 
   def generatePdfContent(pdf)
@@ -97,13 +93,19 @@ class Session < ActiveRecord::Base
     pdf.bounding_box([0, 190], :width => 380) do 
       pdf.text short_description, :align => :justify if !short_description.nil? 
     end
-    pdf.draw_text "Presenters:", :at => [0, 29], :width => 60
-    pdf.draw_text "Format: ", :at => [0, 17], :width => 60 
-    pdf.draw_text "Room: ", :at => [0, 5], :width => 60 
-    pdf.draw_text presenter_names, :at => [60, 29], :width => 320
-    pdf.draw_text session_type, :at => [60, 17], :width => 320
-    pdf.draw_text "<todo>", :at => [60, 5], :width => 320
-    pdf.draw_text printable_max_participants, :at => [345, 29] 
-    pdf.draw_text printable_laptops_required, :at => [330, 17] 
+    pdf.bounding_box([0, 29], :width => 380, :height => 36 ) do 
+      pdf.text "Presenters:"
+      pdf.text "Format: "
+      pdf.text "Room: "
+    end
+    pdf.bounding_box([60, 29], :width => 320, :height => 36 ) do 
+      pdf.text presenter_names
+      pdf.text session_type.truncate(60)
+      pdf.text "<todo>"
+    end
+    pdf.bounding_box([300, 29], :width => 80, :height => 36 ) do 
+      pdf.text printable_max_participants, :align => :right
+      pdf.text printable_laptops_required, :align => :right
+    end
   end
 end
