@@ -81,6 +81,12 @@ class Session < ActiveRecord::Base
     end
   end
 
+  def printable_laptops_required
+    if !laptops_required.nil? and !laptops_required.upcase.include?("NO")
+      "bring laptop"
+    end
+  end
+
   def generatePdfContent(pdf)
     pdf.font_size 10
     pdf.text "99:99 - 99:99", :align => :center
@@ -98,5 +104,6 @@ class Session < ActiveRecord::Base
     pdf.draw_text session_type, :at => [60, 17], :width => 320
     pdf.draw_text "<todo>", :at => [60, 5], :width => 320
     pdf.draw_text printable_max_participants, :at => [345, 29] 
+    pdf.draw_text printable_laptops_required, :at => [330, 17] 
   end
 end

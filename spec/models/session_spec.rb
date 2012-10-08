@@ -203,4 +203,23 @@ describe Session do
       session.printable_max_participants.should == "Max: 30"
     end
   end
+
+  describe "printable_laptops_required" do
+    let(:session) { FactoryGirl.build(:session_with_presenter) }
+    it "if empty laptops_required returns nothing" do 
+      session.printable_laptops_required.should be_nil
+    end
+    it "if max_participants is no returns nothing" do 
+      session.laptops_required = "no"
+      session.printable_laptops_required.should be_nil
+    end
+    it "if max_participants is No returns nothing" do 
+      session.laptops_required = "No"
+      session.printable_laptops_required.should be_nil
+    end
+    it "if max_participants is Nope returns nothing" do 
+      session.laptops_required = "Nope"
+      session.printable_laptops_required.should be_nil
+    end
+  end
 end
