@@ -234,4 +234,5 @@ describe Session do
       session.printable_laptops_required.should == ""
     end
   end
+
 end

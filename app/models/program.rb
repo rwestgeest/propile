@@ -162,7 +162,7 @@ class Program < ActiveRecord::Base
                     :left_margin => 20, :right_margin => 20 do |pdf| 
       program_entries.each do |pe| 
         if !pe.session.nil?  
-          pe.session.generate_pdf_content(pdf) 
+          pe.session.program_card_content(pdf) 
           pdf.start_new_page
         end   
       end
