@@ -1,3 +1,5 @@
+<%= render 'sessions/action_links_for_show', :session => @session  %>
+
 <% if PropileConfig.voting_active?  %> 
 
   <div class="flashy">
@@ -98,9 +100,6 @@
 </div>
 
 
-<%= guarded_link_to 'Edit this session', controller: 'sessions', action: 'edit', id: @session.to_param %> |
-<%= link_to 'New Review on this session', new_session_review_path(@session) %>  |
-<%= link_to 'printable card (PDF)', controller: 'sessions', action: 'show', id: @session.to_param, format: "pdf" %> |
-<%= link_to 'Back to list of sessions', sessions_path %> 
+<%= render 'sessions/action_links_for_show', :session => @session  %>
 
 </div>
