@@ -37,7 +37,19 @@ class SessionsController < ApplicationController
       format.json { render json: @session }
       format.pdf do 
         file_name = "tmp/session_#{@session.id}.pdf"
-        pdf = @session.generatePdf(file_name)
+        pdf = @session.generate_pdf(file_name)
+        send_file( file_name)
+      end
+    end
+  end
+
+  def program_board_card
+    @session = Session.find(params[:id])
+    
+    respond_to do |format|
+      format.pdf do 
+        file_name = "tmp/session_#{@session.id}.pdf"
+        pdf = @session.generate_program_board_card_pdf(file_name)
         send_file( file_name)
       end
     end

@@ -155,14 +155,14 @@ class Program < ActiveRecord::Base
     slotsForPresenter.size
   end
 
-  def generatePdf(file_name)
+  def generate_pdf(file_name)
     Prawn::Document.generate file_name, 
                     :page_size => 'A6', :page_layout => :landscape, 
                     :top_margin => 10, :bottom_margin => 10, 
                     :left_margin => 20, :right_margin => 20 do |pdf| 
       program_entries.each do |pe| 
         if !pe.session.nil?  
-          pe.session.generatePdfContent(pdf) 
+          pe.session.generate_pdf_content(pdf) 
           pdf.start_new_page
         end   
       end

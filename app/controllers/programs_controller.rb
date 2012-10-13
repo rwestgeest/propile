@@ -17,7 +17,7 @@ class ProgramsController < ApplicationController
       format.json { render json: @program }
       format.pdf do 
         file_name = "tmp/program.pdf"
-        pdf = @program.generatePdf(file_name)
+        pdf = @program.generate_pdf(file_name)
         send_file( file_name)
       end
     end

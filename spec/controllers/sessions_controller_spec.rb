@@ -185,6 +185,14 @@ describe SessionsController do
       end
     end
 
+    describe "GET program_board_card" do
+      it "assigns the requested session as @session" do
+        session = FactoryGirl.create :session_with_presenter
+        get :show, {:id => session.to_param}
+        assigns(:session).should eq(session)
+      end
+    end
+
     describe "GET edit" do
       it "assigns the requested session as @session" do
         session = FactoryGirl.create :session_with_presenter

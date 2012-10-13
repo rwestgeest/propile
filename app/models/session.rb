@@ -66,12 +66,22 @@ class Session < ActiveRecord::Base
     end
   end
 
-  def generatePdf(file_name)
+  def generate_program_board_card_pdf(file_name)
     Prawn::Document.generate file_name, 
                     :page_size => 'A6', :page_layout => :landscape, 
                     :top_margin => 10, :bottom_margin => 10, 
                     :left_margin => 20, :right_margin => 20 do |pdf| 
-      generatePdfContent(pdf)
+      generate_pdf_content(pdf)
+    end
+  end
+
+
+  def generate_pdf(file_name)
+    Prawn::Document.generate file_name, 
+                    :page_size => 'A6', :page_layout => :landscape, 
+                    :top_margin => 10, :bottom_margin => 10, 
+                    :left_margin => 20, :right_margin => 20 do |pdf| 
+      generate_pdf_content(pdf)
     end
   end
 
@@ -83,7 +93,7 @@ class Session < ActiveRecord::Base
     (!laptops_required.nil? and !laptops_required.upcase.include?("NO")) ?  "bring laptop" : ""
   end
 
-  def generatePdfContent(pdf)
+  def generate_pdf_content(pdf)
     pdf.font_size 10
     pdf.text "99:99 - 99:99", :align => :center
     pdf.bounding_box([0, 250], :width => 380) do 

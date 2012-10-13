@@ -494,9 +494,9 @@ describe Program do
     end
   end
 
-  describe "generatePdf" do
+  describe "generate_pdf" do
     it "returns emtpy pdf for empty program" do 
-      pdf = program.generatePdf("tmp/program_test.pdf")
+      pdf = program.generate_pdf("tmp/program_test.pdf")
       pdf.should_not be_nil
       pdf.class.should equal File
     end
