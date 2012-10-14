@@ -48,6 +48,14 @@ describe ProgramsController do
       end
     end
   
+    describe "GET program_board_cards" do
+      it "assigns the requested program as @program" do
+        session = FactoryGirl.create :session_with_presenter
+        get :show, {:id => program.to_param}
+        assigns(:program).should eq(program)
+      end
+    end
+
     describe "GET new" do
       it "assigns a new program as @program" do
         get :new, {}

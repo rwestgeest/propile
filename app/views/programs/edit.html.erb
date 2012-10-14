@@ -5,7 +5,8 @@
     <%= link_to 'Export CSV', csv_program_path %> &nbsp; | &nbsp;
     <%= link_to 'New entry in this program', new_program_program_entry_path(@program) %>   &nbsp; | &nbsp;
     <%= link_to 'Show', @program %> &nbsp; | &nbsp;
-    <%= link_to 'printable program cards (PDF)', controller: 'programs', action: 'show', id: @program.to_param, format: "pdf" %> 
+    <%= link_to 'printable program cards (PDF)', controller: 'programs', action: 'program_board_cards', id: @program.to_param, format: "pdf" %> &nbsp; | &nbsp;
+    <%= link_to 'printable program descriptions (PDF)', controller: 'programs', action: 'show', id: @program.to_param, format: "pdf" %> 
   </div>
 <hr>
 <%= render 'form' %>

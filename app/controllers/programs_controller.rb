@@ -16,8 +16,20 @@ class ProgramsController < ApplicationController
       format.html # show.html.erb
       format.json { render json: @program }
       format.pdf do 
-        file_name = "tmp/program.pdf"
+        file_name = "tmp/program_#{@program.id}.pdf"
         pdf = @program.generate_pdf(file_name)
+        send_file( file_name)
+      end
+    end
+  end
+
+
+  def program_board_cards
+    @program = Program.find(params[:id])
+    respond_to do |format|
+      format.pdf do 
+        file_name = "tmp/program_cards_#{@program.id}.pdf"
+        pdf = @program.generate_program_board_cards_pdf(file_name)
         send_file( file_name)
       end
     end
