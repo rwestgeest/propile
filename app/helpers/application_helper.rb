@@ -51,9 +51,9 @@ module ApplicationHelper
 
   def wikinize( text )
     return "" unless text and not text.empty?
-    if not text.index(/^\* /).nil?  #list
+    if text =~ /^\* /  #list
       text = text.gsub(/^\* (.*)/, '<li>\1</li>')
-      text = text.gsub( /<\/li>\n<li>/, '</li><li>' )
+      text = text.gsub( /<\/li>\n<li>/, '</li><li>' ) #put all bullets in 1 list on same line
       text = text.gsub( /^<li>/, '<ul><li>').gsub( /<\/li>$/, '</li></ul>' )
     end
     text = text.gsub( /\*([^*\n]*)\*/, '<b>\1</b>' ) #bold
