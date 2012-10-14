@@ -48,17 +48,13 @@ describe PdfHelper do
     end
   end
 
-  describe "wikinize_for_pdf list" do
-    it "nil returns empty string" do
-       pdf_helper.wikinize_for_pdf_string_with_list(nil).should == ""
+  describe "split_list_string" do
+    it "bulleted list returns array with the list items" do
+       pdf_helper.split_list_string("* een\n* twee").should == ["een", "twee"]
     end
 
-    it "empty string returns empty string" do
-       pdf_helper.wikinize_for_pdf_string_with_list("").should == ""
-    end
-
-    it "* starts ul" do
-       pdf_helper.wikinize_for_pdf_string_with_list("* een\n* twee").should == "een\ntwee"
+    it "bulleted list with ending eol returns array with the list items" do
+       pdf_helper.split_list_string("* een\n* twee\n").should == ["een", "twee"]
     end
   end
 
