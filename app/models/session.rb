@@ -121,17 +121,19 @@ class Session < ActiveRecord::Base
       pdf_helper = PdfHelper.new()
       pdf_helper.wikinize_for_pdf(description, pdf)
     end
-    pdf.bounding_box([0, 39], :width => 380, :height => 46 ) do 
+    pdf.bounding_box([0, 58], :width => 380, :height => 58 ) do 
       pdf.text "Presenters:"
       pdf.text "Format: "
+      pdf.text "Topic: "
       pdf.text "Room: "
     end
-    pdf.bounding_box([70, 39], :width => 320, :height => 46 ) do 
+    pdf.bounding_box([70, 58], :width => 320, :height => 58 ) do 
       pdf.text presenter_names
       pdf.text session_type.truncate(60) if !session_type.nil? 
+      pdf.text topic
       pdf.text "<todo>"
     end
-    pdf.bounding_box([480, 39], :width => 80, :height => 46 ) do 
+    pdf.bounding_box([480, 58], :width => 80, :height => 58 ) do 
       pdf.text printable_max_participants, :align => :right
       pdf.text printable_laptops_required, :align => :right
     end
