@@ -48,7 +48,7 @@ describe PdfHelper do
     end
   end
 
-  describe "wikinize_for_pdf_new list" do
+  describe "wikinize_for_pdf list" do
     it "nil returns empty string" do
        pdf_helper.wikinize_for_pdf_string_with_list(nil).should == ""
     end
@@ -58,23 +58,7 @@ describe PdfHelper do
     end
 
     it "* starts ul" do
-       pdf_helper.wikinize_for_pdf_string_with_list("* een\n* twee").should == 
-                "\u2022 een\n\u2022 twee"
-    end
-
-    it "ul with string before" do
-       pdf_helper.wikinize_for_pdf_string_with_list("voila:\n* een\n* twee").should == 
-                "voila:\n\u2022 een\n\u2022 twee"
-    end
-
-    it "ul with string after" do
-       pdf_helper.wikinize_for_pdf_string_with_list("* een\n* twee\nen nog iets").should == 
-                "\u2022 een\n\u2022 twee\nen nog iets"
-    end
-
-    it "2 uls in a string" do
-       pdf_helper.wikinize_for_pdf_string_with_list("* een\n* twee\nblabla\n* nog \n* en nog").should == 
-                "\u2022 een\n\u2022 twee\nblabla\n\u2022 nog \n\u2022 en nog"
+       pdf_helper.wikinize_for_pdf_string_with_list("* een\n* twee").should == "een\ntwee"
     end
   end
 
