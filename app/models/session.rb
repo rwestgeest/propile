@@ -129,8 +129,8 @@ class Session < ActiveRecord::Base
     end
     pdf.bounding_box([70, 58], :width => 320, :height => 58 ) do 
       pdf.text presenter_names
-      pdf.text session_type.truncate(60) if !session_type.nil? 
-      pdf.text topic
+      pdf.text session_type.truncate(60) unless session_type.nil? 
+      pdf.text topic unless topic.nil? 
       pdf.text "<todo>"
     end
     pdf.bounding_box([480, 58], :width => 80, :height => 58 ) do 
