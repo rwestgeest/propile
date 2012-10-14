@@ -118,8 +118,8 @@ class Session < ActiveRecord::Base
       pdf.text sub_title, :align => :center, :style => :italic, :size => 14
     end
     pdf.bounding_box([0, 700], :width => 550) do 
-      pdf.text PdfHelper.wikinize_for_pdf(description), :align => :justify, :inline_format => true if !description.nil?
-      #pdf.text description, :align => :justify if !description.nil? 
+      pdf_helper = PdfHelper.new()
+      pdf_helper.wikinize_for_pdf(description, pdf)
     end
     pdf.bounding_box([0, 39], :width => 380, :height => 46 ) do 
       pdf.text "Presenters:"

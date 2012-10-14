@@ -1,70 +1,113 @@
 require 'spec_helper'
+require 'prawn'
 
 describe PdfHelper do
 
-  describe "wikinize_for_pdf" do
+  let!(:pdf_helper) { PdfHelper.new } 
+
+  describe "wikinize_for_pdf_simple_string" do
     it "nil returns empty string" do
-       PdfHelper.wikinize_for_pdf(nil).should == ""
+       pdf_helper.wikinize_for_pdf_simple_string(nil).should == ""
     end
 
     it "empty string returns empty string" do
-       PdfHelper.wikinize_for_pdf("").should == ""
+       pdf_helper.wikinize_for_pdf_simple_string("").should == ""
     end
 
     it "simple string is wrapped in <p>" do
-       PdfHelper.wikinize_for_pdf("simple string").should == "simple string"
+       pdf_helper.wikinize_for_pdf_simple_string("simple string").should == "simple string"
     end
 
     it "*word* returns bold" do
-       PdfHelper.wikinize_for_pdf("simple string with *bold* word").should == "simple string with <b>bold</b> word"
+       pdf_helper.wikinize_for_pdf_simple_string("simple string with *bold* word").should == "simple string with <b>bold</b> word"
     end
 
     it "*bold not closed returns *" do
-       PdfHelper.wikinize_for_pdf("simple string with *bold-not-closed word").should == 
+       pdf_helper.wikinize_for_pdf_simple_string("simple string with *bold-not-closed word").should == 
                 "simple string with *bold-not-closed word"
     end
 
     it "more than 1 bold word" do
-       PdfHelper.wikinize_for_pdf("can we have *more* than *only one* bold word?").should == 
+       pdf_helper.wikinize_for_pdf_simple_string("can we have *more* than *only one* bold word?").should == 
                 "can we have <b>more</b> than <b>only one</b> bold word?"
     end
 
     it "_word_ returns italic" do
-       PdfHelper.wikinize_for_pdf("simple string with _italic_ word").should == 
+       pdf_helper.wikinize_for_pdf_simple_string("simple string with _italic_ word").should == 
                 "simple string with <i>italic</i> word"
     end
 
     it "more than 1 italic word" do
-       PdfHelper.wikinize_for_pdf("can we have _more_ than _only one_ italic word?").should == 
+       pdf_helper.wikinize_for_pdf_simple_string("can we have _more_ than _only one_ italic word?").should == 
                 "can we have <i>more</i> than <i>only one</i> italic word?"
     end
 
     it "link is displayed underlined" do
-       PdfHelper.wikinize_for_pdf("klik hier: http://www.xpday.be").should == 
+       pdf_helper.wikinize_for_pdf_simple_string("klik hier: http://www.xpday.be").should == 
                 "klik hier: <u>http://www.xpday.be</u>"
     end
   end
 
-  describe "wikinize_for_pdf list" do
+  describe "wikinize_for_pdf_new list" do
+    it "nil returns empty string" do
+       pdf_helper.wikinize_for_pdf_string_with_list(nil).should == ""
+    end
+
+    it "empty string returns empty string" do
+       pdf_helper.wikinize_for_pdf_string_with_list("").should == ""
+    end
+
     it "* starts ul" do
-       PdfHelper.wikinize_for_pdf("* een\n* twee").should == 
-                "#{Prawn::Text::NBSP * 3}\u2022 een\n#{Prawn::Text::NBSP * 3}\u2022 twee"
+       pdf_helper.wikinize_for_pdf_string_with_list("* een\n* twee").should == 
+                "\u2022 een\n\u2022 twee"
     end
 
     it "ul with string before" do
-       PdfHelper.wikinize_for_pdf("voila:\n* een\n* twee").should == 
-                "voila:\n#{Prawn::Text::NBSP * 3}\u2022 een\n#{Prawn::Text::NBSP * 3}\u2022 twee"
+       pdf_helper.wikinize_for_pdf_string_with_list("voila:\n* een\n* twee").should == 
+                "voila:\n\u2022 een\n\u2022 twee"
     end
 
     it "ul with string after" do
-       PdfHelper.wikinize_for_pdf("* een\n* twee\nen nog iets").should == 
-                "#{Prawn::Text::NBSP * 3}\u2022 een\n#{Prawn::Text::NBSP * 3}\u2022 twee\nen nog iets"
+       pdf_helper.wikinize_for_pdf_string_with_list("* een\n* twee\nen nog iets").should == 
+                "\u2022 een\n\u2022 twee\nen nog iets"
     end
 
     it "2 uls in a string" do
-       PdfHelper.wikinize_for_pdf("* een\n* twee\nblabla\n* nog \n* en nog").should == 
-                "#{Prawn::Text::NBSP * 3}\u2022 een\n#{Prawn::Text::NBSP * 3}\u2022 twee\nblabla\n#{Prawn::Text::NBSP * 3}\u2022 nog \n#{Prawn::Text::NBSP * 3}\u2022 en nog"
+       pdf_helper.wikinize_for_pdf_string_with_list("* een\n* twee\nblabla\n* nog \n* en nog").should == 
+                "\u2022 een\n\u2022 twee\nblabla\n\u2022 nog \n\u2022 en nog"
     end
+  end
+
+  describe "split_text_in_simple_and_lists" do
+    it "nil returns empty array" do
+       pdf_helper.split_text_in_simple_and_lists(nil).should == []
+    end
+
+    it "empty string returns array with empty string" do
+       pdf_helper.split_text_in_simple_and_lists("").should == [""]
+    end
+
+    it "simple string returns array with that string" do
+       pdf_helper.split_text_in_simple_and_lists("ahaaaaa").should == ["ahaaaaa"]
+    end
+
+    it "simple + list returns array with 1 string and 1 list" do
+       pdf_helper.split_text_in_simple_and_lists("ahaaaaa\n* list 1\n* list 2").should == ["ahaaaaa\n", "* list 1\n* list 2"]
+    end
+
+    it "list returns array with 1 list" do
+       pdf_helper.split_text_in_simple_and_lists("* list 1\n* list 2").should == ["* list 1\n* list 2"]
+    end
+
+    it "simple + list + simple returns array with 1 string, 1 list and 1 string" do
+       pdf_helper.split_text_in_simple_and_lists("ahaaaaa\n* list 1\n* list 2\nooooo").should == ["ahaaaaa\n", "* list 1\n* list 2\n", "ooooo"]
+    end
+
+    it "simple + list + simple + list returns array with 1 string, 1 list, 1 string and 1 list" do
+       pdf_helper.split_text_in_simple_and_lists("ahaaaaa\n* list 1\n* list 2\nooooo\nkwak kwak\n* nog een list\* joep").should == 
+         ["ahaaaaa\n", "* list 1\n* list 2\n", "ooooo\nkwak kwak\n", "* nog een list\* joep"]
+    end
+
   end
 
 end
