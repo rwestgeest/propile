@@ -1,3 +1,5 @@
+# 0.4.11
+  printable cards and descriptions for the wall for sessions (pdf) 
 # 0.4.10
   maintainer can change email of presenter
   some small improvements: all about views and readability and usability
