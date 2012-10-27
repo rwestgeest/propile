@@ -178,10 +178,31 @@ class Program < ActiveRecord::Base
         if !pe.session.nil?  
           pe.session.program_card_content(pdf) 
           pdf.start_new_page
+          feedback_card_content(pdf) 
+          pdf.start_new_page
         end   
       end
     end
   end
 
+  def feedback_card_content(pdf) 
+    pdf.font_size 10
+    pdf.bounding_box([0, 270], :width => 380) do 
+      pdf.text "Feedback: the Perfection Game", :align => :center, :size => 18
+      pdf.text "the intention is that the session presenters can use your feedback to improve their session. ", :align => :center, :style => :italic, :size => 8
+    end
+    pdf.bounding_box([0, 230], :width => 380) do 
+      pdf.text "I give this session a ....... / 10", :align => :justify 
+      pdf.text "this means that you, having participated in this session, think that the session can be improved to get a 10/10. You will list those possible improvements below.", :align => :justify, :style => :italic, :size => 8
+    end
+    pdf.bounding_box([0, 190], :width => 380) do 
+      pdf.text "What I like: ", :align => :justify 
+      pdf.text "first list the things that you like about this session, why did it get the score you gave it?", :align => :justify, :style => :italic, :size => 8
+    end
+    pdf.bounding_box([0, 100], :width => 380) do 
+      pdf.text "I will give you a 10/10 if you improve these things: ", :align => :justify 
+      pdf.text "list improvements to the session: what does the session presenters need to change so that you will give them a 10/10?", :align => :justify, :style => :italic, :size => 8
+    end
+  end
 
 end
