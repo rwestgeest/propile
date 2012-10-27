@@ -3,5 +3,6 @@
 <%= link_to 'New Review on this session', new_session_review_path(@session) %>  |
 <%= link_to 'printable card (PDF)', controller: 'sessions', action: 'program_board_card', id: @session.to_param, format: "pdf" %> |
 <%= link_to 'printable description (PDF)', controller: 'sessions', action: 'show', id: @session.to_param, format: "pdf" %> |
+<%= link_to 'Public view', controller: 'sessions', action: 'public', id: session.to_param %> |
 <%= link_to 'Back to list of sessions', sessions_path %> 
 
