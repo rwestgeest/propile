@@ -3,7 +3,7 @@
     <%= link_to 'Export CSV', csv_program_path %> &nbsp; | &nbsp;
     <%= link_to 'New entry in this program', new_program_program_entry_path(@program) %>   &nbsp; | &nbsp;
     <%= link_to 'Show', @program %> &nbsp; | &nbsp;
-    <%= link_to 'Public view (TODO)', @program %> 
+    <%= link_to 'Public view', controller: 'programs', action: 'public_show', id: @program.to_param %>
   </div>
   <br>
   <div class="outlined">

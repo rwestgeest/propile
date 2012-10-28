@@ -228,4 +228,13 @@ class ProgramsController < ApplicationController
     end
   end
 
+  def public_show
+    @program = Program.find(params[:id])
+
+    respond_to do |format|
+      format.html { render :action => 'public', :layout => 'public' } # public.html.erb
+      format.json { render json: @program }
+    end
+  end
+
 end

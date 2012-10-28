@@ -13,6 +13,7 @@ Propile::Application.routes.draw do
     put 'removeTrack', :on => :member
     get 'activate', :on => :member
     get 'public', :on => :collection
+    get 'public_show', :on => :member
     get 'program_board_cards', :on => :member
   end
 
