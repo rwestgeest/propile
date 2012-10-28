@@ -165,10 +165,10 @@ class Program < ActiveRecord::Base
                     :page_size => 'A4', :page_layout => :portrait, 
                     :top_margin => 10, :bottom_margin => 10, 
                     :left_margin => 20, :right_margin => 20 do |pdf| 
-      program_entries.each do |pe| 
+      program_entries.each_with_index do |pe, i| 
         if !pe.session.nil?  
+          pdf.start_new_page if i>0
           pe.session.printable_description_content(pdf)
-          pdf.start_new_page
         end   
       end
     end
@@ -179,20 +179,18 @@ class Program < ActiveRecord::Base
                     :page_size => 'A6', :page_layout => :landscape, 
                     :top_margin => 10, :bottom_margin => 10, 
                     :left_margin => 20, :right_margin => 20 do |pdf| 
-      program_entries_for_topic(topic).each do |pe| 
+      program_entries_for_topic(topic).each_with_index do |pe, i| 
         if !pe.session.nil?  
+          pdf.start_new_page if i>0
           pe.session.program_card_content(pdf) 
-          pdf.start_new_page
-          if !topic.nil?
-            feedback_card_content(pdf) 
-            pdf.start_new_page
-          end
+          add_feedback_card_content(pdf) if !topic.nil?
         end   
       end
     end
   end
 
-  def feedback_card_content(pdf) 
+  def add_feedback_card_content(pdf) 
+    pdf.start_new_page
     pdf.font_size 10
     pdf.bounding_box([0, 270], :width => 380) do 
       pdf.text "Feedback: the Perfection Game", :align => :center, :size => 18

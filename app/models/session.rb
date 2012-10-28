@@ -60,10 +60,10 @@ class Session < ActiveRecord::Base
     topic_downcase = topic.downcase
     topic_class = case
       when topic_downcase.include?("techn")  then :technology
-      when topic_downcase.include?("customer") || topic.include?("planning")  then :customer
-      when topic_downcase.include?("case") || topic.include?("intro")  then :cases
-      when topic_downcase.include?("team") || topic.include?("individual")  then :team
-      when topic_downcase.include?("process") || topic.include?("improv")  then :process
+      when topic_downcase.include?("customer") || topic_downcase.include?("planning")  then :customer
+      when topic_downcase.include?("case") || topic_downcase.include?("intro")  then :cases
+      when topic_downcase.include?("team") || topic_downcase.include?("individual")  then :team
+      when topic_downcase.include?("process") || topic_downcase.include?("improv")  then :process
       else :other
     end
   end

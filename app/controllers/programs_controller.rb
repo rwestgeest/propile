@@ -30,7 +30,7 @@ class ProgramsController < ApplicationController
     respond_to do |format|
       format.pdf do 
         file_name = "tmp/program_cards_#{@program.id}_#{topic}.pdf"
-        pdf = @program.generate_program_board_cards_pdf(file_name, topic)
+        pdf = @program.generate_program_board_cards_pdf(file_name, topic.to_sym)
         send_file( file_name)
       end
     end
