@@ -444,18 +444,29 @@ describe Program do
     def a_program_entry_for(program)
       FactoryGirl.create(:program_entry, :program => program)
     end
-    it "for empty program contains no sessions" do
+    def a_program_entry_without_session_for(program)
+      FactoryGirl.create(:program_entry, :program => program, :session => nil)
+    end
+    it "for empty program returns emtpy list " do
       active_program_now.sessionsInProgram.should be_empty
     end
-    it "for program with session contains that session" do
+    it "for program with session returns that session" do
       p = active_program_now
       program_entry = a_program_entry_for(p)
       p.sessionsInProgram.should == [program_entry.session]
     end
-    it "for program with session contains no other sessions" do
+    it "for program with session returns no other sessions" do
       p = active_program_now
       program_entry = a_program_entry_for(p)
       another_session = FactoryGirl.create(:session_with_presenter)
+      p.program_entries.size.should == 1
+      p.sessionsInProgram.should == [program_entry.session]
+    end
+    it "for program with non-session entries does not return anything " do
+      p = active_program_now
+      program_entry = a_program_entry_for(p)
+      a_program_entry_without_session_for(p)
+      p.program_entries.size.should == 2
       p.sessionsInProgram.should == [program_entry.session]
     end
   end
@@ -467,18 +478,20 @@ describe Program do
     it "for program with session contains presenters for that session" do
       p = active_program_now
       program_entry = a_program_entry_for_session_with_2_presenters(p)
-      presentersInProgram = p.presentersInProgram
-      presentersInProgram.size.should == 2
-      presentersInProgram.should include program_entry.session.first_presenter 
-      presentersInProgram.should include program_entry.session.second_presenter 
+      p.presentersInProgram.to_a.should == [program_entry.session.first_presenter, program_entry.session.second_presenter]
     end
     it "for program with session contains every presenter only once" do
       p = active_program_now
       program_entry = a_program_entry_for(p)
       a_program_entry_for_session(p, another_session_for_presenter(program_entry.session.first_presenter))
-      presentersInProgram = p.presentersInProgram
-      presentersInProgram.size.should == 1
-      presentersInProgram.should include program_entry.session.first_presenter 
+      p.presentersInProgram.to_a.should == [program_entry.session.first_presenter]
+    end
+    it "for program with non-session entries does not return anything" do
+      p = active_program_now
+      program_entry = a_program_entry_for(p)
+      a_program_entry_without_session_for(p)
+      p.program_entries.size.should == 2
+      p.presentersInProgram.to_a.should == [program_entry.session.first_presenter ]
     end
     def another_session_for_presenter(presenter)
       FactoryGirl.create(:session, :first_presenter_email => presenter.email )
@@ -491,6 +504,9 @@ describe Program do
     end
     def a_program_entry_for_session(program, session)
       FactoryGirl.create(:program_entry, :program => program, :session => session)
+    end
+    def a_program_entry_without_session_for(program)
+      FactoryGirl.create(:program_entry, :program => program, :session => nil)
     end
   end
 
@@ -508,6 +524,9 @@ describe Program do
       session_for_topic = FactoryGirl.create(:session_with_presenter, :topic => topic)
       FactoryGirl.create(:program_entry, :program => program, :session => session_for_topic)
     end
+    def a_program_entry_without_session_for(program)
+      FactoryGirl.create(:program_entry, :program => program, :session => nil)
+    end
     context "with nil parameter" do
       it "returns emtpy list for empty program" do 
         program_entries = program.program_entries_for_topic(nil)
@@ -519,6 +538,11 @@ describe Program do
         program_entries.should_not be_empty
         program_entries.size.should be(1)
         program_entries.should include(pe)
+      end
+      it "returns no program_entries that have no session" do 
+        a_program_entry_without_session_for(program)
+        program_entries = program.program_entries_for_topic(nil)
+        program_entries.should be_empty
       end
     end
     context "with unexisting topic as a parameter" do
@@ -550,6 +574,11 @@ describe Program do
         program_entries.size.should be(2)
         program_entries.should include(pe1)
         program_entries.should include(pe2)
+      end
+      it "returns no program_entries that have no session" do 
+        a_program_entry_without_session_for(program)
+        program_entries = program.program_entries_for_topic("process")
+        program_entries.should be_empty
       end
     end
     context "with other as a parameter" do

@@ -32,7 +32,7 @@ class Program < ActiveRecord::Base
   end
 
   def sessionsInProgram
-    program_entries.collect{|pe| if !pe.session.nil? then pe.session end } 
+    program_entries.collect {|pe| pe.session if !pe.session.nil?}.select{|s| s if !s.nil?}
   end 
 
   def presentersInProgram
@@ -156,8 +156,7 @@ class Program < ActiveRecord::Base
   end
 
   def program_entries_for_topic(topic)
-    return program_entries if topic.nil? 
-    program_entries.select{|pe| if !pe.session.nil? and !topic.nil? and pe.session.topic_class==topic then pe end } 
+    program_entries.select{|pe| if !pe.session.nil? and (topic.nil? or pe.session.topic_class==topic) then pe end } 
   end
 
   def generate_pdf(file_name)
