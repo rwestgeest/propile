@@ -12,13 +12,12 @@
 <tr><td colspan="7"> <%= link_to 'printable program descriptions (PDF)', controller: 'programs', action: 'show', id: @program.to_param, format: "pdf" %> </td></tr>
 <tr><td colspan="7"> <%= link_to 'printable program cards all (PDF)', controller: 'programs', action: 'program_board_cards', id: @program.to_param, format: "pdf" %> </td></tr>
 <tr><td >printable program cards per topic (+back):</td>
-    <td class="technology"> <%= link_to 'Technology and Technique', controller: 'programs', action: 'program_board_cards', id: @program.to_param, topic: :technology, format: "pdf" %> </td>
-    <td class="team"> <%= link_to 'Team and Individual', controller: 'programs', action: 'program_board_cards', id: @program.to_param, topic: :team, format: "pdf" %> </td>
-    <td class="process"> <%= link_to 'Process and Improvement', controller: 'programs', action: 'program_board_cards', id: @program.to_param, topic: :process, format: "pdf" %> </td>
-    <td class="customer"> <%= link_to 'Customer and Planning', controller: 'programs', action: 'program_board_cards', id: @program.to_param, topic: :customer, format: "pdf" %> </td>
-    <td class="cases"> <%= link_to 'Intro\'s and Cases', controller: 'programs', action: 'program_board_cards', id: @program.to_param, topic: :cases, format: "pdf" %> </td>
-    <td class="other"> <%= link_to 'Other', controller: 'programs', action: 'program_board_cards', id: @program.to_param, topic: "", format: "pdf" %> </td>
-    <td >Other</td>
+    <td class="technology"> <%= link_to 'Technology and Technique', controller: 'programs', action: 'program_board_cards', id: @program.to_param, topic: "technology", format: "pdf" %> </td>
+    <td class="team"> <%= link_to 'Team and Individual', controller: 'programs', action: 'program_board_cards', id: @program.to_param, topic: "team", format: "pdf" %> </td>
+    <td class="process"> <%= link_to 'Process and Improvement', controller: 'programs', action: 'program_board_cards', id: @program.to_param, topic: "process", format: "pdf" %> </td>
+    <td class="customer"> <%= link_to 'Customer and Planning', controller: 'programs', action: 'program_board_cards', id: @program.to_param, topic: "customer", format: "pdf" %> </td>
+    <td class="cases"> <%= link_to 'Intro\'s and Cases', controller: 'programs', action: 'program_board_cards', id: @program.to_param, topic: "cases", format: "pdf" %> </td>
+    <td class="other"> <%= link_to 'Other', controller: 'programs', action: 'program_board_cards', id: @program.to_param, topic: "other", format: "pdf" %> </td>
 </tr>
 </table>
 <hr>
