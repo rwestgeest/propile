@@ -2,15 +2,25 @@
   <%= errors_for @program %>
 
 
-  <div>
-    <%= f.label :version %> 
+<div class="outlined">
+  <h3>Program properties</h3>
+  <table class="propertytable">
+  <tr > <td><%= f.label :version %>      </td>
+        <td><%= text_field :program, :version, :size => "100" %> 
+            <i>only displayed in program list</i></td></tr>
+  <tr > <td><%= f.label :room_row %>     </td>
+        <td><%= text_field :program, :room_row, :size => "3" %> 
+            <i>this row contains the room-descriptions for the different tracks</i></td></tr>
+  <tr > <td><%= f.label :hour_column %>  </td>
+        <td><%= text_field :program, :hour_column, :size => "3" %> 
+            <i>this column contains the starting hours for the different slots</i></td></tr>
+  </table>
+  <div >
+    <%= f.submit "update properties" %>
   </div>
-  <div>
-    <%= text_field :program, :version, :size => "100" %> 
-  </div>
-  <div class="actions">
-    <%= f.submit "update version string" %>
-  </div>
+</div>
+  <br>
+  <br>
 
 <% end %>
 

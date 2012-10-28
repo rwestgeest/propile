@@ -26,10 +26,10 @@
       <% if editable %> 
         <td class="ProgramMatrix" > 
           <%= form_for(@program, :url => url_for(:action => 'insertSlot')) do |f| %>
-            <%= hidden_field_tag "field[before]", slot %> <%= f.submit "insert slot"%>
+            <%= hidden_field_tag "field[before]", slot %> <%= f.submit "+"%>
           <% end %>
           <%= form_for(@program, :url => url_for(:action => 'removeSlot')) do |f| %>
-            <%= hidden_field_tag "field[slot]", slot %> <%= f.submit "remove slot"%>
+            <%= hidden_field_tag "field[slot]", slot %> <%= f.submit "-"%>
           <% end %>
         </td>
       <% end %> 
@@ -41,10 +41,10 @@
       <% @program.eachTrack do |track| %> 
         <td class="ProgramMatrix" > 
           <%= form_for(@program, :url => url_for(:action => 'insertTrack')) do |f| %>
-            <%= hidden_field_tag "field[before]", track %> <%= f.submit "insert track"%>
+            <%= hidden_field_tag "field[before]", track %> <%= f.submit "+"%>
           <% end %>
           <%= form_for(@program, :url => url_for(:action => 'removeTrack')) do |f| %>
-            <%= hidden_field_tag "field[track]", track %> <%= f.submit "remove track"%>
+            <%= hidden_field_tag "field[track]", track %> <%= f.submit "-"%>
           <% end %>
         </td> 
       <% end %>
