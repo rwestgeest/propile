@@ -76,9 +76,9 @@ class Session < ActiveRecord::Base
     (!laptops_required.nil? and !laptops_required.upcase.include?("NO")) ?  "bring laptop" : ""
   end
 
-  def program_card_content(pdf)
+  def program_card_content(pdf, room="<TODO>", hour="99:99 - 99:99")
     pdf.font_size 10
-    pdf.text "99:99 - 99:99", :align => :center
+    pdf.text hour, :align => :center
     pdf.bounding_box([0, 250], :width => 380) do 
       pdf.text title, :align => :center, :size => 18
       pdf.text sub_title, :align => :center, :style => :italic, :size => 8
@@ -94,7 +94,7 @@ class Session < ActiveRecord::Base
     pdf.bounding_box([60, 29], :width => 320, :height => 36 ) do 
       pdf.text presenter_names
       pdf.text session_type.truncate(60)if !session_type.nil? 
-      pdf.text "<todo>"
+      pdf.text room
     end
     pdf.bounding_box([300, 29], :width => 80, :height => 36 ) do 
       pdf.text printable_max_participants, :align => :right
@@ -111,9 +111,9 @@ class Session < ActiveRecord::Base
     end
   end
 
-  def printable_description_content(pdf)
+  def printable_description_content(pdf, room="<TODO>", hour="99:99 - 99:99")
     pdf.font_size 12
-    pdf.text "99:99 - 99:99", :align => :center
+    pdf.text hour, :align => :center
     pdf.bounding_box([0, 800], :width => 550) do 
       pdf.text title, :align => :center, :size => 24
       pdf.text sub_title, :align => :center, :style => :italic, :size => 14
@@ -132,7 +132,7 @@ class Session < ActiveRecord::Base
       pdf.text presenter_names
       pdf.text session_type.truncate(60) unless session_type.nil? 
       pdf.text topic unless topic.nil? 
-      pdf.text "<todo>"
+      pdf.text room
     end
     pdf.bounding_box([480, 58], :width => 80, :height => 58 ) do 
       pdf.text printable_max_participants, :align => :right

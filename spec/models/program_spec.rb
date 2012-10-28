@@ -9,6 +9,9 @@ describe Program do
   def a_program_entry_in_track(program, track)
     FactoryGirl.create(:program_entry, :program => program, :track => track)
   end
+  def a_program_entry_in_slot_and_track(program, slot, track)
+    FactoryGirl.create(:program_entry, :program => program, :slot => slot, :track => track)
+  end
 
   describe "saving" do
     it "is possible" do
@@ -201,9 +204,6 @@ describe Program do
         entry = a_program_entry_in_slot_and_track(program, 1, 1)
         program.entry(1,1).should == entry
       end
-    end
-    def a_program_entry_in_slot_and_track(program, slot, track)
-      FactoryGirl.create(:program_entry, :program => program, :slot => slot, :track => track)
     end
   end
 
@@ -445,7 +445,7 @@ describe Program do
       FactoryGirl.create(:program_entry, :program => program)
     end
     def a_program_entry_without_session_for(program)
-      FactoryGirl.create(:program_entry, :program => program, :session => nil)
+      FactoryGirl.create(:program_entry_wo_session, :program => program)
     end
     it "for empty program returns emtpy list " do
       active_program_now.sessionsInProgram.should be_empty
@@ -519,7 +519,6 @@ describe Program do
   end
 
   describe "program_entries_for_topic" do
-    let(:session) { FactoryGirl.create :session }
     def a_program_entry_for(program, topic)
       session_for_topic = FactoryGirl.create(:session_with_presenter, :topic => topic)
       FactoryGirl.create(:program_entry, :program => program, :session => session_for_topic)
@@ -592,4 +591,70 @@ describe Program do
     end
   end
 
+  describe "room_for_program_entry" do
+    context "for program that does not have a room-row"  do
+      it "returns default " do 
+        pe = a_program_entry_in_slot_and_track(program, 2, 2)
+        program.room_for_program_entry(pe).should == "<TODO>"
+      end
+    end
+    context "for program with room-row"  do
+      def room_description_for(program, track, description)
+        FactoryGirl.create(:program_entry_wo_session, :program => program, :slot => program.room_row, :track => track, :comment => description) 
+      end
+      it "returns default if room-row does not contain comment for program-entry" do 
+        program.room_row = 1
+        pe = a_program_entry_in_slot_and_track(program, 2, 2)
+        program.room_for_program_entry(pe).should == "<TODO>"
+      end
+      it "returns given room if room-row does contain comment for program-entry" do 
+        program.room_row = 1
+        room_description_for(program, 3, "Fabulous Room" )
+        pe = a_program_entry_in_slot_and_track(program, 2, 3)
+        program.program_entries.size.should == 2
+        program.room_for_program_entry(pe).should == "Fabulous Room"
+      end
+    end
+  end
+
+  describe "hour_for_program_entry" do
+    context "for program that does not have a hour-column"  do
+      it "returns default " do 
+        pe = a_program_entry_in_slot_and_track(program, 2, 2)
+        program.hour_for_program_entry(pe).should == "99:99 - 99:99"
+      end
+    end
+    context "for program with hour-columb"  do
+      def hour_description_for(program, slot, description)
+        FactoryGirl.create(:program_entry_wo_session, :program => program, :slot => slot, :track => program.hour_column, :comment => description) 
+      end
+      it "returns default if hour-column does not contain comment for program-entry" do 
+        program.hour_column = 1
+        pe = a_program_entry_in_slot_and_track(program, 2, 2)
+        program.hour_for_program_entry(pe).should == "99:99 - 99:99"
+      end
+      it "returns given hour if hour-column does contain all info for program-entry" do 
+        program.hour_column = 0
+        hour_description_for(program, 2, "8:25" )
+        hour_description_for(program, 3, "10:55" )
+        pe = a_program_entry_in_slot_and_track(program, 2, 3)
+        program.program_entries.size.should == 3
+        program.hour_for_program_entry(pe).should == "8:25 - 10:55" 
+      end
+      it "returns given hour if hour-column does contain starting hour but not ending hour" do 
+        program.hour_column = 0
+        hour_description_for(program, 2, "8:25" )
+        pe = a_program_entry_in_slot_and_track(program, 2, 3)
+        program.program_entries.size.should == 2
+        program.hour_for_program_entry(pe).should == "8:25 - 99:99" 
+      end
+      it "returns given hour if hour-column does contain ending hour but not starting hour" do 
+        program.hour_column = 0
+        hour_description_for(program, 3, "10:55" )
+        pe = a_program_entry_in_slot_and_track(program, 2, 3)
+        program.program_entries.size.should == 2
+        program.hour_for_program_entry(pe).should == "99:99 - 10:55" 
+      end
+    end
+  end
 end

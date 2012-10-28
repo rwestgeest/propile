@@ -4,6 +4,7 @@ class Program < ActiveRecord::Base
   attr_accessible :version
   attr_accessible :avgpaf
   attr_accessible :activation
+  attr_accessible :room_row, :hour_column
   has_many :program_entries, :autosave => true, :dependent => :destroy
 
   def init_with_entries
@@ -32,7 +33,7 @@ class Program < ActiveRecord::Base
   end
 
   def sessionsInProgram
-    program_entries.collect {|pe| pe.session if !pe.session.nil?}.select{|s| s if !s.nil?}
+    program_entries.collect {|pe| pe.session if !pe.session.nil?}.select{|s| !s.nil?}
   end 
 
   def presentersInProgram
@@ -156,7 +157,20 @@ class Program < ActiveRecord::Base
   end
 
   def program_entries_for_topic(topic)
-    program_entries.select{|pe| if !pe.session.nil? and (topic.nil? or pe.session.topic_class==topic) then pe end } 
+    program_entries.select{|pe| !pe.session.nil? and (topic.nil? or pe.session.topic_class==topic) } 
+  end
+
+  def room_for_program_entry(program_entry)
+    room_description_entry = entry(room_row, program_entry.track) 
+    room_description_entry.nil? ?  "<TODO>"  : room_description_entry.comment
+  end
+
+  def hour_for_program_entry(program_entry)
+    starting_hour_description = entry(program_entry.slot, hour_column)
+    ending_hour_description = entry(program_entry.slot+1, hour_column)
+    starting_hour = starting_hour_description.nil? ?  "99:99" : starting_hour_description.comment
+    ending_hour = ending_hour_description.nil? ?  "99:99" : ending_hour_description.comment
+    "#{starting_hour} - #{ending_hour}"
   end
 
   def generate_pdf(file_name)
@@ -167,7 +181,7 @@ class Program < ActiveRecord::Base
       program_entries.each_with_index do |pe, i| 
         if !pe.session.nil?  
           pdf.start_new_page if i>0
-          pe.session.printable_description_content(pdf)
+          pe.session.printable_description_content(pdf, room_for_program_entry(pe), hour_for_program_entry(pe))
         end   
       end
     end
@@ -181,7 +195,7 @@ class Program < ActiveRecord::Base
       program_entries_for_topic(topic).each_with_index do |pe, i| 
         if !pe.session.nil?  
           pdf.start_new_page if i>0
-          pe.session.program_card_content(pdf) 
+          pe.session.program_card_content(pdf, room_for_program_entry(pe), hour_for_program_entry(pe)) 
           add_feedback_card_content(pdf) if !topic.nil?
         end   
       end
