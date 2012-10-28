@@ -5,9 +5,22 @@
     <%= link_to 'Export CSV', csv_program_path %> &nbsp; | &nbsp;
     <%= link_to 'New entry in this program', new_program_program_entry_path(@program) %>   &nbsp; | &nbsp;
     <%= link_to 'Show', @program %> &nbsp; | &nbsp;
-    <%= link_to 'printable program cards (PDF)', controller: 'programs', action: 'program_board_cards', id: @program.to_param, format: "pdf" %> &nbsp; | &nbsp;
-    <%= link_to 'printable program descriptions (PDF)', controller: 'programs', action: 'show', id: @program.to_param, format: "pdf" %> 
   </div>
+<br>
+<table border="1">
+<tr><td colspan="7" class="propertyname">printable stuff for this program version:</td></tr>
+<tr><td colspan="7"> <%= link_to 'printable program cards all (PDF)', controller: 'programs', action: 'program_board_cards', id: @program.to_param, format: "pdf" %> </td></tr>
+<tr><td colspan="7"> <%= link_to 'printable program descriptions (PDF)', controller: 'programs', action: 'show', id: @program.to_param, format: "pdf" %> </td></tr>
+<tr><td >printable program cards per topic:</td>
+    <td class="technology"> <%= link_to 'Technology and Technique', controller: 'programs', action: 'program_board_cards', id: @program.to_param, topic: :technology, format: "pdf" %> </td>
+    <td class="team"> <%= link_to 'Team and Individual', controller: 'programs', action: 'program_board_cards', id: @program.to_param, topic: :team, format: "pdf" %> </td>
+    <td class="process"> <%= link_to 'Process and Improvement', controller: 'programs', action: 'program_board_cards', id: @program.to_param, topic: :process, format: "pdf" %> </td>
+    <td class="customer"> <%= link_to 'Customer and Planning', controller: 'programs', action: 'program_board_cards', id: @program.to_param, topic: :customer, format: "pdf" %> </td>
+    <td class="cases"> <%= link_to 'Intro\'s and Cases', controller: 'programs', action: 'program_board_cards', id: @program.to_param, topic: :cases, format: "pdf" %> </td>
+    <td class="other"> <%= link_to 'Other', controller: 'programs', action: 'program_board_cards', id: @program.to_param, topic: "", format: "pdf" %> </td>
+    <td >Other</td>
+</tr>
+</table>
 <hr>
 <%= render 'form' %>
 <div class="alignright">

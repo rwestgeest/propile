@@ -55,15 +55,16 @@ class Session < ActiveRecord::Base
   end
 
   def topic_class
+    #remark: these classes and the rules should be configurable
     return "" if topic.nil?
     topic_downcase = topic.downcase
     topic_class = case
-      when topic_downcase.include?("techn")  then "technology"
-      when topic_downcase.include?("customer") || topic.include?("planning")  then "customer"
-      when topic_downcase.include?("case") || topic.include?("intro")  then "cases"
-      when topic_downcase.include?("team") || topic.include?("individual")  then "team"
-      when topic_downcase.include?("process") || topic.include?("improv")  then "process"
-      else ""
+      when topic_downcase.include?("techn")  then :technology
+      when topic_downcase.include?("customer") || topic.include?("planning")  then :customer
+      when topic_downcase.include?("case") || topic.include?("intro")  then :cases
+      when topic_downcase.include?("team") || topic.include?("individual")  then :team
+      when topic_downcase.include?("process") || topic.include?("improv")  then :process
+      else :other
     end
   end
 

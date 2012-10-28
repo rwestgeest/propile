@@ -502,4 +502,65 @@ describe Program do
     end
   end
 
+  describe "program_entries_for_topic" do
+    let(:session) { FactoryGirl.create :session }
+    def a_program_entry_for(program, topic)
+      session_for_topic = FactoryGirl.create(:session_with_presenter, :topic => topic)
+      FactoryGirl.create(:program_entry, :program => program, :session => session_for_topic)
+    end
+    context "with nil parameter" do
+      it "returns emtpy list for empty program" do 
+        program_entries = program.program_entries_for_topic(nil)
+        program_entries.should be_empty
+      end
+      it "returns all program_entries with a session for program with sessions" do 
+        pe = a_program_entry_for(program,"blabla")
+        program_entries = program.program_entries_for_topic(nil)
+        program_entries.should_not be_empty
+        program_entries.size.should be(1)
+        program_entries.should include(pe)
+      end
+    end
+    context "with unexisting topic as a parameter" do
+      it "returns emtpy list for empty program" do 
+        program_entries = program.program_entries_for_topic(:blabla)
+        program_entries.should be_empty
+      end
+      it "returns emtpy list even for program with sessions with that unexisting topic" do 
+        pe = a_program_entry_for(program,"blabla")
+        program_entries = program.program_entries_for_topic(:blabla)
+        program_entries.should be_empty
+      end
+    end
+    context "with existing topic as a parameter" do
+      it "returns emtpy list for empty program" do 
+        program_entries = program.program_entries_for_topic(:technology)
+        program_entries.should be_empty
+      end
+      it "returns emtpy list for program with sessions with only other topics" do 
+        pe = a_program_entry_for(program,"Technology stuvv")
+        program_entries = program.program_entries_for_topic(:process)
+        program_entries.should be_empty
+      end
+      it "returns program_entries for program that has sessions with chosen topic" do 
+        pe1 = a_program_entry_for(program,"Methodology and improvement ")
+        pe2 = a_program_entry_for(program,"Process and other thngs ")
+        program_entries = program.program_entries_for_topic(:process)
+        program_entries.should_not be_empty
+        program_entries.size.should be(2)
+        program_entries.should include(pe1)
+        program_entries.should include(pe2)
+      end
+    end
+    context "with other as a parameter" do
+      it "returns program_entries for program that has sessions with non-standard topic" do 
+        pe = a_program_entry_for(program,"special")
+        program_entries = program.program_entries_for_topic(:other)
+        program_entries.should_not be_empty
+        program_entries.size.should be(1)
+        program_entries.should include(pe)
+      end
+    end
+  end
+
 end

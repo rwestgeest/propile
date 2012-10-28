@@ -155,6 +155,11 @@ class Program < ActiveRecord::Base
     slotsForPresenter.size
   end
 
+  def program_entries_for_topic(topic)
+    return program_entries if topic.nil? 
+    program_entries.select{|pe| if !pe.session.nil? and !topic.nil? and pe.session.topic_class==topic then pe end } 
+  end
+
   def generate_pdf(file_name)
     Prawn::Document.generate file_name, 
                     :page_size => 'A4', :page_layout => :portrait, 
@@ -169,17 +174,19 @@ class Program < ActiveRecord::Base
     end
   end
 
-  def generate_program_board_cards_pdf(file_name)
+  def generate_program_board_cards_pdf(file_name, topic=nil)
     Prawn::Document.generate file_name, 
                     :page_size => 'A6', :page_layout => :landscape, 
                     :top_margin => 10, :bottom_margin => 10, 
                     :left_margin => 20, :right_margin => 20 do |pdf| 
-      program_entries.each do |pe| 
+      program_entries_for_topic(topic).each do |pe| 
         if !pe.session.nil?  
           pe.session.program_card_content(pdf) 
           pdf.start_new_page
-          feedback_card_content(pdf) 
-          pdf.start_new_page
+          if !topic.nil?
+            feedback_card_content(pdf) 
+            pdf.start_new_page
+          end
         end   
       end
     end
