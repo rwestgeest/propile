@@ -523,29 +523,29 @@ describe Program do
     end
     context "with unexisting topic as a parameter" do
       it "returns emtpy list for empty program" do 
-        program_entries = program.program_entries_for_topic(:blabla)
+        program_entries = program.program_entries_for_topic("blabla")
         program_entries.should be_empty
       end
       it "returns emtpy list even for program with sessions with that unexisting topic" do 
         pe = a_program_entry_for(program,"blabla")
-        program_entries = program.program_entries_for_topic(:blabla)
+        program_entries = program.program_entries_for_topic("blabla")
         program_entries.should be_empty
       end
     end
     context "with existing topic as a parameter" do
       it "returns emtpy list for empty program" do 
-        program_entries = program.program_entries_for_topic(:technology)
+        program_entries = program.program_entries_for_topic("technology")
         program_entries.should be_empty
       end
       it "returns emtpy list for program with sessions with only other topics" do 
         pe = a_program_entry_for(program,"Technology stuvv")
-        program_entries = program.program_entries_for_topic(:process)
+        program_entries = program.program_entries_for_topic("process")
         program_entries.should be_empty
       end
       it "returns program_entries for program that has sessions with chosen topic" do 
         pe1 = a_program_entry_for(program,"Methodology and improvement ")
         pe2 = a_program_entry_for(program,"Process and other thngs ")
-        program_entries = program.program_entries_for_topic(:process)
+        program_entries = program.program_entries_for_topic("process")
         program_entries.should_not be_empty
         program_entries.size.should be(2)
         program_entries.should include(pe1)
@@ -555,7 +555,7 @@ describe Program do
     context "with other as a parameter" do
       it "returns program_entries for program that has sessions with non-standard topic" do 
         pe = a_program_entry_for(program,"special")
-        program_entries = program.program_entries_for_topic(:other)
+        program_entries = program.program_entries_for_topic("other")
         program_entries.should_not be_empty
         program_entries.size.should be(1)
         program_entries.should include(pe)

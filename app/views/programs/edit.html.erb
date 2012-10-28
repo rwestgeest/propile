@@ -9,9 +9,9 @@
 <br>
 <table border="1">
 <tr><td colspan="7" class="propertyname">printable stuff for this program version:</td></tr>
-<tr><td colspan="7"> <%= link_to 'printable program cards all (PDF)', controller: 'programs', action: 'program_board_cards', id: @program.to_param, format: "pdf" %> </td></tr>
 <tr><td colspan="7"> <%= link_to 'printable program descriptions (PDF)', controller: 'programs', action: 'show', id: @program.to_param, format: "pdf" %> </td></tr>
-<tr><td >printable program cards per topic:</td>
+<tr><td colspan="7"> <%= link_to 'printable program cards all (PDF)', controller: 'programs', action: 'program_board_cards', id: @program.to_param, format: "pdf" %> </td></tr>
+<tr><td >printable program cards per topic (+back):</td>
     <td class="technology"> <%= link_to 'Technology and Technique', controller: 'programs', action: 'program_board_cards', id: @program.to_param, topic: :technology, format: "pdf" %> </td>
     <td class="team"> <%= link_to 'Team and Individual', controller: 'programs', action: 'program_board_cards', id: @program.to_param, topic: :team, format: "pdf" %> </td>
     <td class="process"> <%= link_to 'Process and Improvement', controller: 'programs', action: 'program_board_cards', id: @program.to_param, topic: :process, format: "pdf" %> </td>

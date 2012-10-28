@@ -29,8 +29,8 @@ class ProgramsController < ApplicationController
     topic = params[:topic]
     respond_to do |format|
       format.pdf do 
-        file_name = "tmp/program_cards_#{@program.id}_#{topic}.pdf"
-        pdf = @program.generate_program_board_cards_pdf(file_name, topic.to_sym)
+        file_name = "tmp/program_cards_#{@program.id}#{"_"+topic if !topic.nil?}.pdf"
+        pdf = @program.generate_program_board_cards_pdf(file_name, topic)
         send_file( file_name)
       end
     end
