@@ -8,7 +8,6 @@ class PdfHelper
   def wikinize_for_pdf(description, pdf)
     split_text_in_simple_and_lists(description).each { |simple_or_list| 
       if simple_or_list =~ CONTAINS_LIST_PATTERN
-        pdf.move_down pdf.font_size
         split_list_string(simple_or_list).each do |list_item| 
           pdf.text "#{Prawn::Text::NBSP*3}\u2022"
           pdf.move_up pdf.font_size

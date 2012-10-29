@@ -1,3 +1,5 @@
+# 0.4.12
+  printable cards and descriptions for the wall for sessions (pdf)  -> improvements
 # 0.4.11
   printable cards and descriptions for the wall for sessions (pdf) 
 # 0.4.10
