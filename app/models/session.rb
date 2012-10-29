@@ -73,7 +73,7 @@ class Session < ActiveRecord::Base
   end
 
   def printable_laptops_required
-    (!laptops_required.nil? and !laptops_required.upcase.include?("NO")) ?  "bring laptop" : ""
+    (!laptops_required.nil? and !laptops_required.empty? and !laptops_required.upcase.include?("NO")) ?  "bring laptop" : ""
   end
 
   def program_card_content(pdf, room="<TODO>", hour="99:99 - 99:99")
@@ -84,7 +84,7 @@ class Session < ActiveRecord::Base
       pdf.text sub_title, :align => :center, :style => :italic, :size => 8
     end
     pdf.bounding_box([0, 190], :width => 380) do 
-      pdf.text short_description, :align => :justify if !short_description.nil? 
+      PdfHelper.new().wikinize_for_pdf(short_description, pdf) if !short_description.nil? 
     end
     pdf.bounding_box([0, 29], :width => 380, :height => 36 ) do 
       pdf.text "Presenters:"
@@ -119,8 +119,7 @@ class Session < ActiveRecord::Base
       pdf.text sub_title, :align => :center, :style => :italic, :size => 14
     end
     pdf.bounding_box([0, 700], :width => 550) do 
-      pdf_helper = PdfHelper.new()
-      pdf_helper.wikinize_for_pdf(description, pdf)
+      PdfHelper.new().wikinize_for_pdf(description, pdf)
     end
     pdf.bounding_box([0, 58], :width => 380, :height => 58 ) do 
       pdf.text "Presenters:"

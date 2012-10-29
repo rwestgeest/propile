@@ -218,7 +218,11 @@ describe Session do
 
   describe "printable_laptops_required" do
     let(:session) { FactoryGirl.build(:session_with_presenter) }
+    it "if nil laptops_required returns nothing" do 
+      session.printable_laptops_required.should == ""
+    end
     it "if empty laptops_required returns nothing" do 
+      session.laptops_required = ""
       session.printable_laptops_required.should == ""
     end
     it "if max_participants is no returns nothing" do 
