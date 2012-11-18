@@ -79,7 +79,7 @@ class Session < ActiveRecord::Base
   def program_card_content(pdf, room="<TODO>", hour="99:99 - 99:99")
     pdf.font_size 10
     pdf.text hour, :align => :center
-    pdf.bounding_box([0, 250], :width => 380) do 
+    pdf.bounding_box([0, 245], :width => 380) do 
       pdf.text title, :align => :center, :size => 18
       pdf.text sub_title, :align => :center, :style => :italic, :size => 8
     end
