@@ -38,6 +38,13 @@ class PresentersController < ApplicationController
     @presenter = Presenter.find(params[:id])
   end
 
+  def toggle_maintainer_role
+    @presenter = Presenter.find(params[:id])
+    @presenter.account.maintainer= !@presenter.account.maintainer? 
+    @presenter.account.save!
+    redirect_to @presenter, notice: 'Presenter was successfully updated.'
+  end
+
   def create
     @presenter = Presenter.new(params[:presenter])
 

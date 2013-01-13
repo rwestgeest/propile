@@ -7,6 +7,17 @@ describe Account do
     end
   end
 
+  describe 'role setter' do
+    let(:account) { Account.new }
+    it 'becomes maintainer when the role is set to maintainer' do
+      account.maintainer=false
+      account.should_not be_maintainer
+    end
+    it 'becomes maintainer when the role is set to maintainer' do
+      account.maintainer=true
+      account.should be_maintainer
+    end
+  end
 
   describe 'generate_authentication_token' do
     let!(:existing_account) { FactoryGirl.create :maintainer_account }

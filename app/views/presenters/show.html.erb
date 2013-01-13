@@ -11,6 +11,15 @@
   Modified: <%= l @presenter.updated_at %> 
 </div>
 <%= guarded_link_to 'Edit bio', controller: 'presenters', action: 'edit', id: @presenter.to_param %> &nbsp;
+<% if current_account.maintainer? %>
+  <%= form_for(@presenter, :url => url_for(:action => 'toggle_maintainer_role') ) do |f| %>
+    <div >
+      maintainer: <%= @presenter.account.maintainer? %> 
+      <%= f.submit 'toggle' %> 
+    </div>
+  <% end %>
+<% end %>
+
 
 <hr>
 

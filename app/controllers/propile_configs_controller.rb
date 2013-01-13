@@ -1,6 +1,7 @@
 class PropileConfigsController < ApplicationController
   def index
     @propile_configs = PropileConfig.all
+    @presenters = Presenter.all
 
     respond_to do |format|
       format.html # index.html.erb

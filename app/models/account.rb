@@ -20,6 +20,10 @@ class Account < ActiveRecord::Base
     role == Maintainer
   end
 
+  def maintainer= becomes_maintainer
+    self.role =  becomes_maintainer ? Maintainer : Presenter 
+  end
+
   def send_reset_message
     Postman.deliver(:account_reset, self)
   end
@@ -35,4 +39,5 @@ class Account < ActiveRecord::Base
     return '/account/password/edit' if !confirmed? || reset?
     return '/sessions'
   end
+
 end

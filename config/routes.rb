@@ -34,6 +34,7 @@ Propile::Application.routes.draw do
 
   resources :presenters do
     get 'public', :on => :member
+    put 'toggle_maintainer_role', :on => :member
   end
 
   resources :reviews do
