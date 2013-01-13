@@ -1,3 +1,6 @@
+# 0.4.14
+  try to extract public program files 
+  bug fix: can't remove 2nd presenter, not even as maintainer 
 # 0.4.13
   printable cards and descriptions for the wall for sessions (pdf)  -> improvements
 # 0.4.12

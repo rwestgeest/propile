@@ -85,6 +85,18 @@ describe Session do
       session.first_presenter_email
     end
     it_should_behave_like "a_lazy_presenter_creator"
+
+    context "when presenter is set" do
+      before { set_email_value_to "some_new_presenter@example.com" }
+      it "is not allowed to set first presenter to nil" do
+        set_email_value_to nil
+        email_value.should == "some_new_presenter@example.com" 
+      end
+      it "is not allowed to set first presenter to empty" do
+        set_email_value_to ""
+        email_value.should == "some_new_presenter@example.com" 
+      end
+    end
   end
 
   describe "second presenter_email" do
@@ -100,6 +112,18 @@ describe Session do
       session.second_presenter_email
     end
     it_should_behave_like "a_lazy_presenter_creator"
+
+    context "when presenter is set" do
+      before { set_email_value_to "some_new_presenter@example.com" }
+      it "is allowed to set second presenter to nil" do
+        set_email_value_to nil
+        email_value.should == ""
+      end
+      it "is allowed to set second presenter to empty" do
+        set_email_value_to ""
+        email_value.should == ""
+      end
+    end
   end
 
   describe "presenter_names" do
