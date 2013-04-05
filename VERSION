@@ -1,2 +1,2 @@
 0.4.16 improvements to program page + print session desc per topic + add
-extract_public_program script
+extract_public_program script + session id on card and desc 

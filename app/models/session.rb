@@ -99,6 +99,8 @@ class Session < ActiveRecord::Base
   def program_card_content(pdf, room="<TODO>", hour="99:99 - 99:99")
     pdf.font_size 10
     pdf.text hour, :align => :center
+    pdf.move_up 12
+    pdf.text id.to_s, :align => :right
     pdf.bounding_box([0, 245], :width => 380) do 
       pdf.text title, :align => :center, :size => 18
       pdf.text sub_title, :align => :center, :style => :italic, :size => 8
@@ -134,6 +136,8 @@ class Session < ActiveRecord::Base
   def printable_description_content(pdf, room="<TODO>", hour="99:99 - 99:99")
     pdf.font_size 12
     pdf.text hour, :align => :center
+    pdf.move_up 14
+    pdf.text id.to_s, :align => :right
     pdf.bounding_box([0, 800], :width => 550) do 
       pdf.text title, :align => :center, :size => 24
       pdf.text sub_title, :align => :center, :style => :italic, :size => 14
