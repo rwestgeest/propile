@@ -206,17 +206,28 @@ class Program < ActiveRecord::Base
     pdf.start_new_page
     pdf.font_size 10
     pdf.bounding_box([0, 270], :width => 380) do 
-      pdf.text "<b>Feedback</b> <font size='8'>(the Perfection Game)</font>", :align => :center, :size => 18, :inline_format => true
+      pdf.text "<b>Feedback</b>", :align => :center, :size => 18, :inline_format => true
+    end
+    pdf.bounding_box([230, 270], :width => 150) do 
+      pdf.font_size 15
+      pdf.font_size 15
+      pdf.rotate(270, :origin => [70,-70]) do
+        pdf.text "<b>:-(</b>", :align => :left, :inline_format => true
+        pdf.text "   ", :align => :left
+        pdf.text "<b>:-|</b>", :align => :left, :inline_format => true
+        pdf.text "   ", :align => :left
+        pdf.text "<b>:-)</b>", :align => :left, :inline_format => true
+      end
+    end
+    pdf.font_size 10
+    pdf.bounding_box([0, 240], :width => 380) do 
+      pdf.text "<b>What I like about this session: </b>", :align => :justify, :inline_format => true
+    end
+    pdf.bounding_box([0, 140], :width => 380) do 
+      pdf.text "<b>What I think you can improve: </b>", :align => :justify, :inline_format => true
+    end
+    pdf.bounding_box([0, 10], :width => 380) do 
       pdf.text "<i><font size='8'>the intention is that the session presenters can use your feedback to improve their session.</font></i> ", :align => :center, :inline_format => true 
-    end
-    pdf.bounding_box([0, 230], :width => 380) do 
-      pdf.text "<b>I give this session a ....... / 10</b><i><font size='8'> (this means that you, having participated in this session, think that the session can be improved to get a 10/10. You will list those possible improvements below.) </font></i> ", :align => :justify, :inline_format => true 
-    end
-    pdf.bounding_box([0, 200], :width => 380) do 
-      pdf.text "<b>What I like: </b><i><font size='8'> first list the things that you like about this session, why did it get the score you gave it?</font></i> ", :align => :justify, :inline_format => true
-    end
-    pdf.bounding_box([0, 110], :width => 380) do 
-      pdf.text "<b>I will give you a 10/10 if you improve these things: </b><i><font size='8'> list improvements to the session: what does the session presenters need to change so that you will give them a 10/10?</font></i> ", :align => :justify, :inline_format => true
     end
   end
 
