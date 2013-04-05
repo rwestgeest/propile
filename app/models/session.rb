@@ -65,6 +65,7 @@ class Session < ActiveRecord::Base
      "process"=>"Process and Improvement", 
      "other"=>"Other"}
   end
+
   def self.available_topics
     ["technology","customer","cases","team","process","other"]
   end

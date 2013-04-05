@@ -12,12 +12,13 @@ class ProgramsController < ApplicationController
 
   def show
     @program = Program.find(params[:id])
+    topic = params[:topic]
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @program }
       format.pdf do 
-        file_name = "tmp/program_#{@program.id}.pdf"
-        pdf = @program.generate_pdf(file_name)
+        file_name = "tmp/program_#{@program.id}#{"_"+topic if !topic.nil?}.pdf"
+        pdf = @program.generate_pdf(file_name, topic)
         send_file( file_name)
       end
     end

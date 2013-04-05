@@ -173,12 +173,12 @@ class Program < ActiveRecord::Base
     "#{starting_hour} - #{ending_hour}"
   end
 
-  def generate_pdf(file_name)
+  def generate_pdf(file_name, topic=nil)
     Prawn::Document.generate file_name, 
                     :page_size => 'A4', :page_layout => :portrait, 
                     :top_margin => 10, :bottom_margin => 10, 
                     :left_margin => 20, :right_margin => 20 do |pdf| 
-      program_entries.each_with_index do |pe, i| 
+      program_entries_for_topic(topic).each_with_index do |pe, i| 
         if !pe.session.nil?  
           pdf.start_new_page if i>0
           pe.session.printable_description_content(pdf, room_for_program_entry(pe), hour_for_program_entry(pe))
