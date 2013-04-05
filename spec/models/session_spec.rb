@@ -178,6 +178,29 @@ describe Session do
     end
   end
 
+  describe "self topic_name" do
+    context "nil topic" do 
+      it "returns Other" do 
+        Session.topic_name(nil).should == "Other" 
+      end 
+    end
+    context "emtpy topic" do 
+      it "returns Other" do 
+        Session.topic_name("").should == "Other" 
+      end 
+    end
+    context "non existent topic" do 
+      it "returns Other" do 
+        Session.topic_name("blabla").should == "Other" 
+      end 
+    end
+    context "existent topic" do 
+      it "returns name from hash" do 
+        Session.topic_name("technology").should == "Technology and Technique" 
+      end 
+    end
+  end
+
   describe "in_active_program?" do 
     let(:session) { FactoryGirl.build(:session_with_presenter) }
     let (:activeProgram) { FactoryGirl.create(:program, :activation => DateTime.now) }

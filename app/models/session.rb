@@ -57,8 +57,20 @@ class Session < ActiveRecord::Base
     active_program.nil? ? false : active_program.sessionsInProgram.include?(self)
   end
 
+  def self.available_topics_and_names
+    {"technology"=>"Technology and Technique", 
+     "customer"=>"Customer and Planning", 
+     "cases"=>"Intro's and Cases", 
+     "team"=>"Team and Individual", 
+     "process"=>"Process and Improvement", 
+     "other"=>"Other"}
+  end
   def self.available_topics
     ["technology","customer","cases","team","process","other"]
+  end
+
+  def self.topic_name(topic_class)
+    available_topics_and_names[topic_class] || "Other"
   end
 
   def topic_class
