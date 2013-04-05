@@ -1,6 +1,7 @@
 # 0.4.16 
   improvements to program page
   print session desc per topic
+  add extract_public_program script
 # 0.4.15
   same as 0.4.14 but deploy failed
 # 0.4.14
