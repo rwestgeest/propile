@@ -57,6 +57,10 @@ class Session < ActiveRecord::Base
     active_program.nil? ? false : active_program.sessionsInProgram.include?(self)
   end
 
+  def self.available_topics
+    ["technology","customer","cases","team","process","other"]
+  end
+
   def topic_class
     #remark: these classes and the rules should be configurable
     return "" if topic.nil?

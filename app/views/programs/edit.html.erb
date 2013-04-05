@@ -1,40 +1,58 @@
 <%= title @program.version %> 
   <div>
-    <%= link_to 'Export CSV', csv_program_path %> &nbsp; | &nbsp;
-    <%= link_to 'New entry in this program', new_program_program_entry_path(@program) %>   &nbsp; | &nbsp;
     <%= link_to 'Show', @program %> &nbsp; | &nbsp;
     <%= link_to 'Public view', controller: 'programs', action: 'public_show', id: @program.to_param %>
   </div>
-  <br>
-  <div class="outlined">
-    Average PAF = <%= @program.avgpaf.nil? ? "not yet calculated" : @program.avgpaf %> &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;
-    <%= link_to '(re-)calculate PAF for this program', controller: 'programs', action: 'calculate_paf', id: @program.to_param %>   
-  </div>
+<br>
 <br>
 
+<h3>Info for this program version:</h3>
+<div>
+    <%= link_to 'Export CSV', csv_program_path %> 
+  <i> contains slot, track, title, subtitle, presenters, type, topic, duration</i><br>
+</div>
+<br>
+
+<h3>Printable stuff for this program version:</h3>
+<div>
+Session Descriptions: <i>longer description, an A4 for each session, we put them somewhere on the wall </i><br>
+Session Card: <i>short description on an A6 card, we put them on the Program Board</i>
+</div>
 <table class="tablelist">
-  <tr><td colspan="7" class="propertyname">printable stuff for this program version:</td></tr>
-  <tr><td colspan="7"> <%= link_to 'printable program descriptions (PDF)', controller: 'programs', action: 'show', id: @program.to_param, format: "pdf" %> </td></tr>
-  <tr><td colspan="7"> <%= link_to 'printable program cards all (PDF)', controller: 'programs', action: 'program_board_cards', id: @program.to_param, format: "pdf" %> </td></tr>
-  <tr><td >printable program cards per topic (+back):</td>
-    <td class="technology"> 
-      <%= link_to 'Technology and Technique', controller: 'programs', action: 'program_board_cards', id: @program.to_param, topic: "technology", format: "pdf" %> </td>
-    <td class="team"> 
-      <%= link_to 'Team and Individual', controller: 'programs', action: 'program_board_cards', id: @program.to_param, topic: "team", format: "pdf" %> </td>
-    <td class="process"> 
-      <%= link_to 'Process and Improvement', controller: 'programs', action: 'program_board_cards', id: @program.to_param, topic: "process", format: "pdf" %> </td>
-    <td class="customer"> 
-      <%= link_to 'Customer and Planning', controller: 'programs', action: 'program_board_cards', id: @program.to_param, topic: "customer", format: "pdf" %> </td>
-    <td class="cases"> 
-      <%= link_to 'Intro\'s and Cases', controller: 'programs', action: 'program_board_cards', id: @program.to_param, topic: "cases", format: "pdf" %> </td>
-    <td class="other"> 
-      <%= link_to 'Other', controller: 'programs', action: 'program_board_cards', id: @program.to_param, topic: "other", format: "pdf" %> </td>
+  <tr>
+    <th > Session Descriptions (PDF)</td>
+    <th > Session Cards (PDF) </td>
+  </tr>
+  <% for t in Session.available_topics do %> 
+    <tr>
+      <td class="<%=t%>"> 
+        TODO <!--%= link_to t, controller: 'programs', action: 'show', id: @program.to_param, topic: t, format: "pdf" %--> </td>
+      <td class="<%=t%>"> 
+        <%= link_to t, controller: 'programs', action: 'program_board_cards', id: @program.to_param, topic: t, format: "pdf" %> </td>
+    </tr>
+  <% end %> 
+  <tr>
+    <td><%= link_to 'all', controller: 'programs', action: 'show', id: @program.to_param, format: "pdf" %> </td>
+    <td><%= link_to 'all', controller: 'programs', action: 'program_board_cards', id: @program.to_param, format: "pdf" %> </td>
   </tr>
 </table>
 <hr>
+<br>
+<h3>Modify this program version:</h3>
+<div> <i>
+  A program is a matrix of slot/track cells. <br>
+  Add/remove slots/tracks with the +/- signs --> you create new empty cells.  <br>
+  Add a new program entry in a cell, and connect with an existing session or just enter a comment.  <br>
+  Move program entries to another cell: edit and change slot/track.  <br>
+</i> </div>
 <%= render 'form' %>
+<br>
+<div class="outlined">
+  Average PAF = <%= @program.avgpaf.nil? ? "not yet calculated" : @program.avgpaf %> &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;
+  <%= link_to '(re-)calculate PAF for this program', controller: 'programs', action: 'calculate_paf', id: @program.to_param %>   
+</div>
+
 <div class="alignright">
   Created: <%= l @program.created_at %> -- 
   Modified: <%= l @program.updated_at %> 
 </div>
-

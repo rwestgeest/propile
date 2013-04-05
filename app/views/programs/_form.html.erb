@@ -1,7 +1,17 @@
+<%= errors_for @program %>
+
+<div>
+  <%= link_to 'New entry in this program', new_program_program_entry_path(@program) %>   
+</div>
+<%= render 'programs/program_matrix', :program => @program, :editable => true %>
+<div>
+  <%= link_to 'New entry in this program', new_program_program_entry_path(@program) %>   
+</div>
+
+
 <%= form_for(@program) do |f| %>
-  <%= errors_for @program %>
-
-
+<br>
+<br>
 <div class="outlined">
   <h3>Program properties</h3>
   <table class="propertytable">
@@ -19,12 +29,9 @@
     <%= f.submit "update properties" %>
   </div>
 </div>
-  <br>
-  <br>
 
 <% end %>
 
-<%= render 'programs/program_matrix', :program => @program, :editable => true %>
 
 
 

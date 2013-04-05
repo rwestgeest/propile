@@ -172,6 +172,12 @@ describe Session do
   describe "presenter_has_voted_for?", :broken => true do
   end
 
+  describe "available_topics" do
+    it "returns 6 topics" do
+      Session.available_topics.size.should == 6
+    end
+  end
+
   describe "in_active_program?" do 
     let(:session) { FactoryGirl.build(:session_with_presenter) }
     let (:activeProgram) { FactoryGirl.create(:program, :activation => DateTime.now) }

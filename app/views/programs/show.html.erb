@@ -1,5 +1,8 @@
 
 <h1> Program Version: <%= @program.version %> </h1>
+<div><%= link_to 'Edit', controller: 'programs', action: 'edit', id: @program.to_param %>
+</div>
+<br><br>
 
 <%= render 'programs/program_matrix', :program => @program, :editable => false %>
 
