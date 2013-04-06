@@ -539,12 +539,12 @@ describe Program do
     end
     it "returns emtpy csv for empty program" do 
       csv = program.generate_materials_csv
-      csv.should == "Id;Title;Room;Hour;Max participants;Laptops Required;Other limitations;Room setup;Materials needed\n"
+      csv.should == "Id;Title;Room;Hour;Max participants;Laptops Required;Other limitations;Room setup;Materials needed;Intended audience\n"
     end
-    it "returns valid csv with 8 columns for empty program" do 
+    it "returns valid csv with 10 columns for empty program" do 
       a_program_entry_with_session_for(program)
       csv = program.generate_materials_csv
-      csv.should =~ /\n(.*;){8}[^;]*\n/
+      csv.should =~ /\n(.*;){9}[^;]*\n/
     end
   end
 

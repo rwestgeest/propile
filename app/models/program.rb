@@ -259,17 +259,18 @@ class Program < ActiveRecord::Base
       csv << [ "Id", 
                "Title", "Room", "Hour",
                "Max participants", "Laptops Required", "Other limitations", 
-               "Room setup", "Materials needed"
+               "Room setup", "Materials needed", "Intended audience"
              ]
       #data row
       program_entries.each do |entry|
-        if !entry.session.nil? then
+        session = entry.session
+        if !session.nil? then
           room = room_for_program_entry(entry)
           hour = hour_for_program_entry(entry)
-          csv << [ entry.session.id, 
-                   entry.session.title, room, hour, 
-                   entry.session.max_participants, entry.session.laptops_required, entry.session.other_limitations, 
-                   entry.session.room_setup, entry.session.materials_needed
+          csv << [ session.id, 
+                   session.title, room, hour, 
+                   session.max_participants, session.laptops_required, session.other_limitations, 
+                   session.room_setup, session.materials_needed, session.intended_audience
                  ]
         end
       end
