@@ -8,8 +8,14 @@
 
 <h3>Info for this program version:</h3>
 <div>
-    <%= link_to 'Export CSV', csv_program_path %> 
-  <i> contains slot, track, title, subtitle, presenters, type, topic, duration</i><br>
+  number of presenters: <%= @program.presentersInProgram.size %> <br>
+  number of sessions: <%= @program.sessionsInProgram.size %> <br>
+</div>
+<div>
+  <%= link_to 'Export CSV', csv_program_path %> 
+  <i> contains Slot, Track, Title, Subtitle, Presenters, Type, Topic, Duration</i><br>
+  <%= link_to 'Materials CSV', materials_csv_program_path %> 
+  <i> contains Id, Title, Room, Hour, Max participants, Laptops Required, Other limitations, Room setup, Materials needed </i><br>
 </div>
 <br>
 

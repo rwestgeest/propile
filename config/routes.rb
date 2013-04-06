@@ -7,6 +7,7 @@ Propile::Application.routes.draw do
     get 'copy', :on => :member
     get 'calculate_paf', :on => :member
     get 'csv', :on => :member
+    get 'materials_csv', :on => :member
     put 'insertSlot', :on => :member
     put 'insertTrack', :on => :member
     put 'removeSlot', :on => :member
