@@ -1,4 +1,5 @@
 require "prawn"
+require 'csv'
 
 class Program < ActiveRecord::Base
   attr_accessible :version
@@ -228,6 +229,27 @@ class Program < ActiveRecord::Base
     end
     pdf.bounding_box([0, 10], :width => 380) do 
       pdf.text "<i><font size='8'>the intention is that the session presenters can use your feedback to improve their session.</font></i> ", :align => :center, :inline_format => true 
+    end
+  end
+
+  def generate_csv
+    program_csv = CSV.generate(options = { :col_sep => ';' }) do |csv| 
+      #header row
+      csv << [ "Slot", "Track", 
+               "Title", "Subtitle",
+               "Presenter 1", "Presenter 2", 
+               "Type", "Topic", "Duration" 
+             ]
+      #data row
+      program_entries.each do |entry| 
+        if ( !entry.session.nil? ) then
+          csv << [ entry.slot, entry.track,
+                   entry.session.title, entry.session.sub_title, 
+                   entry.session.first_presenter.name, (entry.session.second_presenter.nil? ? nil : entry.session.second_presenter.name), 
+                   entry.session.session_type, entry.session.topic, entry.session.duration
+                 ]
+        end
+      end
     end
   end
 

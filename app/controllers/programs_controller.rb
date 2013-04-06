@@ -125,24 +125,7 @@ class ProgramsController < ApplicationController
 
   def csv 
     @program = Program.find(params[:id])
-    program_csv = CSV.generate(options = { :col_sep => ';' }) do |csv| 
-      #header row
-      csv << [ "Slot", "Track", 
-               "Title", "Subtitle",
-               "Presenter 1", "Presenter 2", 
-               "Type", "Topic", "Duration" 
-             ]
-      #data row
-      @program.program_entries.each do |entry| 
-        if ( !entry.session.nil? ) then
-          csv << [ entry.slot, entry.track,
-                   entry.session.title, entry.session.sub_title, 
-                   entry.session.first_presenter.name, (entry.session.second_presenter.nil? ? nil : entry.session.second_presenter.name), 
-                   entry.session.session_type, entry.session.topic, entry.session.duration
-                 ]
-        end
-      end
-    end
+    program_csv = @program.generate_csv
     send_data(program_csv, :type => 'test/csv', :filename => 'program.csv') 
   end
 

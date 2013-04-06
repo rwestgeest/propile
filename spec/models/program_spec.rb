@@ -518,6 +518,21 @@ describe Program do
     end
   end
 
+  describe "generate_csv" do
+    def a_program_entry_with_session_for(program)
+      FactoryGirl.create(:program_entry, :program => program)
+    end
+    it "returns emtpy csv for empty program" do 
+      csv = program.generate_csv
+      csv.should == "Slot;Track;Title;Subtitle;Presenter 1;Presenter 2;Type;Topic;Duration\n"
+    end
+    it "returns emtpy csv for empty program" do 
+      a_program_entry_with_session_for(program)
+      csv = program.generate_csv
+      csv.should =~ /Slot;Track;Title;Subtitle;Presenter 1;Presenter 2;Type;Topic;Duration\n.*\n/
+    end
+  end
+
   describe "program_entries_for_topic" do
     def a_program_entry_for(program, topic)
       session_for_topic = FactoryGirl.create(:session_with_presenter, :topic => topic)
