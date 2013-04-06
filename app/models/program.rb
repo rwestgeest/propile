@@ -253,4 +253,27 @@ class Program < ActiveRecord::Base
     end
   end
 
+  def generate_materials_csv
+    materials_csv = CSV.generate(options = { :col_sep => ';' }) do |csv| 
+      #header row
+      csv << [ "Id", 
+               "Title", "Room", "Hour",
+               "Max participants", "Laptops Required", "Other limitations", 
+               "Room setup", "Materials needed"
+             ]
+      #data row
+      program_entries.each do |entry|
+        if !entry.session.nil? then
+          room = room_for_program_entry(entry)
+          hour = hour_for_program_entry(entry)
+          csv << [ entry.session.id, 
+                   entry.session.title, room, hour, 
+                   entry.session.max_participants, entry.session.laptops_required, entry.session.other_limitations, 
+                   entry.session.room_setup, entry.session.materials_needed
+                 ]
+        end
+      end
+    end
+  end
+
 end
