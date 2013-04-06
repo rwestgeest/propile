@@ -126,13 +126,13 @@ class ProgramsController < ApplicationController
   def csv 
     @program = Program.find(params[:id])
     program_csv = @program.generate_csv
-    send_data(program_csv, :type => 'test/csv', :filename => 'program.csv') 
+    send_data(program_csv, :type => 'test/csv', :filename => "program_#{@program.id}.csv") 
   end
 
   def materials_csv
     @program = Program.find(params[:id])
     materials_csv = @program.generate_materials_csv
-    send_data(materials_csv, :type => 'test/csv', :filename => 'materials.csv') 
+    send_data(materials_csv, :type => 'test/csv', :filename => "materials_#{@program.id}.csv") 
   end
 
   def insertSlot

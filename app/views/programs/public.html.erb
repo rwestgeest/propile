@@ -13,6 +13,8 @@
 <table border="1">
 <tr><td class="propertyname">Legend</td></tr>
 <%for topic in Session.available_topics do %>
-  <tr><td class="<%=topic%>"><%=Session.topic_name(topic)%></td></tr>
+  <% if ! @program.program_entries_for_topic(topic).empty? then %> 
+    <tr><td class="<%=topic%>"><%=Session.topic_name(topic)%></td></tr>
+  <% end %> 
 <%end%>
 </table>

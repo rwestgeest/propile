@@ -29,6 +29,7 @@ Session Card: <i>short description on an A6 card, we put them on the Program Boa
   <tr>
     <th > Session Descriptions (PDF)</td>
     <th > Session Cards (PDF) </td>
+    <th > &nbsp; </td>
   </tr>
   <% for topic in Session.available_topics do %> 
     <tr>
@@ -36,11 +37,13 @@ Session Card: <i>short description on an A6 card, we put them on the Program Boa
         <%= link_to topic, controller: 'programs', action: 'show', id: @program.to_param, topic: topic, format: "pdf" %> </td>
       <td class="<%=topic%>"> 
         <%= link_to topic, controller: 'programs', action: 'program_board_cards', id: @program.to_param, topic: topic, format: "pdf" %> </td>
+      <td class="<%=topic%>"> <%= @program.program_entries_for_topic(topic).size %> </td>
     </tr>
   <% end %> 
   <tr>
     <td><%= link_to 'all', controller: 'programs', action: 'show', id: @program.to_param, format: "pdf" %> </td>
     <td><%= link_to 'all', controller: 'programs', action: 'program_board_cards', id: @program.to_param, format: "pdf" %> </td>
+    <td> <%= @program.sessionsInProgram.size %> </td>
   </tr>
 </table>
 <hr>
