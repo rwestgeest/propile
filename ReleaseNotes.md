@@ -4,6 +4,7 @@
   add extract_public_program script
   session id on card and desc 
   simplify feedback form on back side of the session cards
+  wikinize: display link with name; more possiblities for links
 # 0.4.15
   same as 0.4.14 but deploy failed
 # 0.4.14

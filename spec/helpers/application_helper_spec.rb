@@ -78,10 +78,37 @@ describe ApplicationHelper do
        wikinize("can we have _more_ than _only one_ italic word?").should == 
                 "<p>can we have <i>more</i> than <i>only one</i> italic word?</p>"
     end
+  end
 
+  describe "wikinize links" do
     it "link is displayed in a clickable way"  do
        wikinize("klik hier: http://www.xpday.be").should == 
                 "<p>klik hier: <a href=\"http://www.xpday.be\">http://www.xpday.be</a></p>"
+    end
+
+    it "link in beginning of line is displayed in a clickable way"  do
+       wikinize("http://www.xpday.be").should == 
+                "<p><a href=\"http://www.xpday.be\">http://www.xpday.be</a></p>"
+    end
+
+    it "link ending by blank is displayed in a clickable way"  do
+       wikinize("klik hier: http://www.xpday.be ").should == 
+                "<p>klik hier: <a href=\"http://www.xpday.be\">http://www.xpday.be</a> </p>"
+    end
+
+    it "link ending by special char is displayed in a clickable way"  do
+       wikinize("xpday (http://www.xpday.be) ").should == 
+                "<p>xpday (<a href=\"http://www.xpday.be\">http://www.xpday.be</a>) </p>"
+    end
+
+    it "link containing / is displayed in a clickable way"  do
+       wikinize("xpday (http://www.xpday.be/frontpage ").should == 
+                "<p>xpday (<a href=\"http://www.xpday.be/frontpage\">http://www.xpday.be/frontpage</a> </p>"
+    end
+
+    it "link with name is displayed in a clickable way"  do
+       wikinize("bla [[http://www.xpday.be HOI]]").should == 
+                "<p>bla <a href=\"http://www.xpday.be\">HOI</a></p>"
     end
   end
 
