@@ -1,3 +1,1 @@
-0.4.16 improvements to program page + print session desc per topic + add
-extract_public_program script + session id on card and desc  + simplify
-feedback form on back side of the session cards + wikinize: display link with name; more possiblities for links + program edit: collapsible divs
+0.4.17 public presenter page: add list of sessions for this presenter

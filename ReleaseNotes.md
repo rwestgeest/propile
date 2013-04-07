@@ -1,3 +1,5 @@
+# 0.4.17 
+  public presenter page: add list of sessions for this presenter
 # 0.4.16 
   improvements to program page
   print session desc per topic

@@ -5,13 +5,11 @@
   <%= wikinize(@presenter.bio) %> 
 </div>
 
-<%= link_to 'Back to program', public_programs_path %> 
-
 <br>
 <br>
-
-
 <div style="float:right;">
   <h4>Sessions by <%= @presenter.name  %> </h4>
-  <%= render 'program_entries/list', :entries => Program.activeProgram.programEntriesForPresenter(@presenter), :sortable => true  %>
+  <%= render 'program_entries/list', :entries => Program.activeProgram.programEntriesForPresenter(@presenter) %>
 </div>
+<br>
+<%= link_to 'Back to program', public_programs_path %> 
