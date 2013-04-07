@@ -272,9 +272,23 @@ input.collapsebutton {
   padding:0px;
   border:0px;
   background-color:#F3F3F3;
-  box-shadow: 1px 1px 2px #888888;
+  box-shadow: 2px 1px 2px #888888;
 }
 input.collapsebutton:hover { 
-	background: honeydew;
+	background: lavender;
+}
+
+
+input.adddelete_button {
+  height:15px;
+  width:15px;
+  font-size:15px;
+  padding:0px;
+  border:0px;
+  background-color:#F3F3F3;
+  box-shadow: 2px 1px 2px #888888;
+}
+input.adddelete_button:hover { 
+	background: lavender;
 }
 
