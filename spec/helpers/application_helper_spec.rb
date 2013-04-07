@@ -186,4 +186,17 @@ describe ApplicationHelper do
     end
   end
 
+  describe "collapse_button" do 
+    context "default initially collapsed" do
+      it "returns a string to create a button to use with a div with a unique id" do
+        collapse_button("test").should == %q/<input class="collapsebutton" type="button" id="testButton" value='+' onclick="showHide('test')" >/
+      end
+    end
+    context "default initlially no collapsed" do
+      it "returns a string to create a button to use with a div with a unique id" do
+        collapse_button("test", false).should == %q/<input class="collapsebutton" type="button" id="testButton" value='-' onclick="showHide('test')" >/
+      end
+    end
+  end
+
 end

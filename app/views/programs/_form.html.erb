@@ -1,18 +1,8 @@
 <%= errors_for @program %>
 
-<div>
-  <%= link_to 'New entry in this program', new_program_program_entry_path(@program) %>   
-</div>
-<%= render 'programs/program_matrix', :program => @program, :editable => true %>
-<div>
-  <%= link_to 'New entry in this program', new_program_program_entry_path(@program) %>   
-</div>
-
-
 <%= form_for(@program) do |f| %>
 <br>
 <br>
-<h3>Program properties</h3>
 <div class="outlined">
   <table class="propertytable">
   <tr > <td><%= f.label :version %>      </td>

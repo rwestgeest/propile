@@ -1,5 +1,18 @@
 <div>
 
+<% if editable %> 
+  <i>
+    A program is a matrix of slot/track cells. <br>
+    Add/remove slots/tracks with the +/- signs --> you create new empty cells.  <br>
+    Add a new program entry in a cell, and connect with an existing session or just enter a comment.  <br>
+    Move program entries to another cell: edit and change slot/track.  <br>
+  </i> 
+
+  <div>
+    <%= link_to 'New entry in this program', new_program_program_entry_path(@program) %>   
+  </div>
+<% end %>
+
 <% if !@program.program_entries.nil? && !@program.program_entries.empty? %> 
 <table class="ProgramMatrix">
   <tr> 
@@ -53,5 +66,11 @@
 </table>
 
 <% end %> 
+
+<% if editable %> 
+  <div>
+    <%= link_to 'New entry in this program', new_program_program_entry_path(@program) %>   
+  </div>
+<% end %>
 </div>
 

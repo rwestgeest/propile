@@ -13,3 +13,15 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+ function showHide(elementId) {
+    var div = document.getElementById(elementId);
+    var button = document.getElementById(elementId+"Button");
+    if (div.style.display == 'none') {
+      div.style.display = 'block';
+      button.value = '-';
+    } else {
+      div.style.display = 'none';
+      button.value = '+';
+    }
+ }

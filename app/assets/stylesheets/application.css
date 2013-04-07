@@ -264,3 +264,17 @@ a.ProgramMatrix_edit_link {
  font-size:smaller;
  float:right;
 }
+
+input.collapsebutton {
+  height:15px;
+  width:15px;
+  font-size:15px;
+  padding:0px;
+  border:0px;
+  background-color:#F3F3F3;
+  box-shadow: 1px 1px 2px #888888;
+}
+input.collapsebutton:hover { 
+	background: honeydew;
+}
+

@@ -88,4 +88,12 @@ module ApplicationHelper
         ( link_to session.presenters[1].name, controller: 'presenters', action: 'public', id: session.presenters[1].id ) )
   end
 
+  def collapse_button(div_id, initially_collapsed=true)
+    default_value = (initially_collapsed ? "+" : "-")
+    raw(%Q{<input class="collapsebutton" type="button" id="#{div_id}Button" value='#{default_value}' onclick="showHide('#{div_id}')" >})
+  end
+
+  def collapse_button_initially_open(div_id)
+    collapse_button(div_id, false)
+  end
 end
