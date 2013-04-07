@@ -63,9 +63,18 @@ body {
   color: #f00;
 }
 
+a {
+	text-decoration: none;
+  color:black;
+}
+a:hover { 
+  color:seagreen;
+	background: lightGrey;
+}
+
 table.tablelist {
   border-collapse:collapse;
-  border: 2px solid grey;
+  border: 2px solid lavender;
   text-align: left;
 }
 
@@ -96,7 +105,7 @@ td, th {
 }
 
 th {
-  background-color: lightgrey;
+  background-color: ghostwhite;
 }
 
 td.propertyname {
@@ -147,7 +156,7 @@ div.outlined > p {
 
 div.lessoutlined {
   border: 1px solid lavender;
-  background-color: honeydew;
+  background-color: ghostwhite;
   margin: 0px 0px;
   padding: 5px 10px;
   font-family: Sans-serif;

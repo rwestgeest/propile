@@ -471,6 +471,27 @@ describe Program do
     end
   end
 
+  describe "programEntriesForPresenter" do
+    def a_program_entry_for(program)
+      FactoryGirl.create(:program_entry, :program => program)
+    end
+    let(:presenter) { FactoryGirl.build :presenter  }
+    it "for empty program returns emtpy list " do
+      active_program_now.programEntriesForPresenter(presenter).should be_empty
+    end
+    it "for program with session returns that session" do
+      p = active_program_now
+      program_entry = a_program_entry_for(p)
+      p.programEntriesForPresenter(program_entry.session.first_presenter).should == [program_entry]
+    end
+    it "for program with several sessions returns only session for this presenter" do
+      p = active_program_now
+      program_entry = a_program_entry_for(p)
+      anther_program_entry = a_program_entry_for(p)
+      p.programEntriesForPresenter(program_entry.session.first_presenter).should == [program_entry]
+    end
+  end
+
   describe "presentersInProgram" do
     it "for empty program contains no presenters" do
       active_program_now.presentersInProgram.should be_empty

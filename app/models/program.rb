@@ -34,7 +34,11 @@ class Program < ActiveRecord::Base
   end
 
   def sessionsInProgram
-    program_entries.collect {|pe| pe.session if !pe.session.nil?}.select{|s| !s.nil?}
+    program_entries.collect {|pe| pe.session }.select{|s| !s.nil?}
+  end 
+
+  def programEntriesForPresenter(presenter)
+    program_entries.select{|pe| !pe.session.nil? and pe.session.presenters.include?(presenter)}
   end 
 
   def presentersInProgram

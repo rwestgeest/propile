@@ -56,4 +56,5 @@ class Presenter < ActiveRecord::Base
     active_program = Program.activeProgram
     active_program.nil? ? false : active_program.presentersInProgram.include?(self)
   end
+
 end

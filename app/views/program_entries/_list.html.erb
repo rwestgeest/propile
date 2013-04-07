@@ -1,0 +1,15 @@
+<table class="tablelist">
+  <tr>
+    <th> <%= sortable ? sortable("title") : "Title"  %> </th>
+    <th> <%= sortable ? sortable("presenters", "Presenter(s)") : "Presenter(s)" %> </th>
+  </tr>
+
+<% entries.each_with_index do |entry, i| %>
+  <tr>
+    <td class=<%=entry.session.topic_class%> ><%= link_to entry.session.title, controller: 'sessions', action: 'public', id: entry.session.to_param %> </td>
+    <td> <%= session_presenter_names(entry.session) %> </td>
+  </tr>
+<% end %>
+</table>
+
+
