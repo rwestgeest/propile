@@ -2,10 +2,10 @@
 
 <% if editable %> 
   <i>
-    A program is a matrix of slot/track cells. <br>
-    Add/remove slots/tracks with the +/- signs --> you create new empty cells.  <br>
-    Add a new program entry in a cell, and connect with an existing session or just enter a comment.  <br>
-    Move program entries to another cell: edit and change slot/track.  <br>
+    A program is a matrix of slot/track cells. <br />
+    Add/remove slots/tracks with the +/- signs --> you create new empty cells.  <br />
+    Add a new program entry in a cell, and connect with an existing session or just enter a comment.  <br />
+    Move program entries to another cell: edit and change slot/track.  <br />
   </i> 
 
   <div>
@@ -15,13 +15,13 @@
 
 <% if !@program.program_entries.nil? && !@program.program_entries.empty? %> 
 <table class="ProgramMatrix">
-  <tr> 
-    <% if editable %> 
+  <% if editable %>
+    <tr>
       <th></th>
       <% @program.eachTrack do |track| %> <th>Track <%= track %> </th> <% end %>
       <th></th> 
-    <% end %> 
-  </tr>
+    </tr>
+  <% end %>
   <% @program.eachSlot do |slot|
     no_more_columns_on_this_row = false
   %>

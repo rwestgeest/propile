@@ -1,0 +1,23 @@
+     <% if program_entry.nil? %>  
+       <td class="ProgramMatrix" > 
+         
+       </td>
+     <% else %> 
+       <td class="ProgramMatrix <%=program_entry.topic_class%>" <%= program_entry.span_entire_row==true ? "colspan="+(@program.maxTrack+1-program_entry.track).to_s : "" %> > 
+         <% if !program_entry.session.nil? %>  
+
+           <a href="#session_<%=program_entry.session.to_param%>"><%= h program_entry.session.title %></a>
+
+           <p class=ProgramMatrix_presenters>
+             <% if  program_entry.session.presenters[0] %>
+               <a href="#presenter_<%=  program_entry.session.presenters[0].id %>"><%= h  program_entry.session.presenters[0].name %></a>
+             <% end %>
+             <% if  program_entry.session.presenters[1] %>
+               &amp; <br /><a href="#presenter_<%=  program_entry.session.presenters[1].id %>"><%= h  program_entry.session.presenters[1].name %></a>
+             <% end %>
+           </p>
+  
+         <% end %>
+           <strong><%= wikinize(program_entry.comment) %></strong>
+       </td>
+     <% end %> 

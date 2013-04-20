@@ -16,6 +16,7 @@ Propile::Application.routes.draw do
     get 'public', :on => :collection
     get 'public_show', :on => :member
     get 'program_board_cards', :on => :member
+    get 'export', :on => :collection
   end
 
   resources :propile_configs do

@@ -227,4 +227,13 @@ class ProgramsController < ApplicationController
     end
   end
 
+  def export
+    @program = Program.activeProgram
+
+    respond_to do |format|
+      format.html { render :layout => 'export' } # format.html.erb
+      format.json { render json: @program }
+    end
+  end
+
 end

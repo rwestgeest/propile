@@ -69,6 +69,14 @@ describe ProgramsController do
         assigns(:program).should eq(program)
       end
     end
+
+    describe "GET export" do
+       it "assigns the requested program as @program" do
+         program.activate
+        get :export
+        assigns(:program).should eq(program)
+      end
+    end
   
     describe "POST create" do
       describe "with valid params" do
