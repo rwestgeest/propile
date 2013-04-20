@@ -7,7 +7,7 @@ gem "haml-rails"
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem "action-guard", "~> 1.2.0"
-gem 'guid'
+#gem 'guid'
 gem 'sqlite3'
 gem "recaptcha", :require => "recaptcha/rails"
 gem 'prawn'

@@ -1,10 +1,11 @@
 require 'bcrypt'
 require 'securerandom'
-require 'guid'
+#require 'guid'
 module TokenGenerator 
   def self.generate_token
     #SecureRandom.hex(16)
-    String(Guid.new)
+    #String(Guid.new)
+    String(SecureRandom.uuid)
   end
 end
 
