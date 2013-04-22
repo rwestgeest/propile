@@ -1,6 +1,6 @@
 
 <a name="top">&nbsp;</a>
-<%= render 'programs/program_matrix_export.html.erb', :program => @program , :format => :html %>
+<%= render 'programs/program_matrix_export', :formats => [:html], :program => @program  %>
 
 <br />
 <br />
@@ -35,7 +35,7 @@
                </h3>
              </td>
            </tr>
-           <%= render :partial => 'sessions/export_description.html.erb',:locals => { :this_session => program_entry.session }  %>
+           <%= render :partial => 'sessions/export_description.html', :formats => [:html],:locals => { :this_session => program_entry.session }  %>
          </table>
 <br />
 <a href="#top">Back to program</a><br />
@@ -63,7 +63,7 @@
                <h3><a name="presenter_<%=  program_entry.session.presenters[1].id %>"></a><%= h  program_entry.session.presenters[1].name %></h3>
                <p><%= wikinize program_entry.session.presenters[1].bio %></p>
                <br /><a href="#top">Back to program</a><br /><hr />
-               <% presenters << program_entry.session.presenters[0].id %>
+               <% presenters << program_entry.session.presenters[1].id %>
              <% end %>
 
 <%

@@ -232,7 +232,7 @@ class ProgramsController < ApplicationController
 
     respond_to do |format|
       format.html { render :layout => 'export' } 
-      format.text { render :template => '/programs/export.html.erb' , :layout => false , :content_type => 'text/plain' , :format => :html }
+      format.text { render :layout => false , :content_type => 'text/plain' , :formats => [:html] } # just the html, mam
       format.json { render json: @program }
     end
   end

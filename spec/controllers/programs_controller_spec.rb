@@ -85,7 +85,9 @@ describe ProgramsController do
         get :export, :format => :text
         assigns(:program).should eq(program)
         response.should be_success
-        response.body.should  match(/cookie/)
+        response.body.should  match(/Legend/)
+        response.body.should  match(/Session descriptions/)
+        response.body.should  match(/Presenters/)
       end
     end
   
