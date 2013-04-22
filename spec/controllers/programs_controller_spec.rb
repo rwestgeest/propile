@@ -72,9 +72,20 @@ describe ProgramsController do
 
     describe "GET export" do
        it "assigns the requested program as @program" do
-         program.activate
+        program.activate
         get :export
         assigns(:program).should eq(program)
+      end
+    end
+
+    describe "GET export as text" do
+       render_views
+       it "assigns the requested program as @program" do
+        program.activate
+        get :export, :format => :text
+        assigns(:program).should eq(program)
+        response.should be_success
+        response.body.should  match(/cookie/)
       end
     end
   

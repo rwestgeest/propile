@@ -6,10 +6,10 @@ There is max 1 <b>active</b> program, which can be viewed by the public.
 </p>
 
 <p> 
-One measure of a good program is that everyone who has voted can attend many of their selected sessions. The more the better. <br>
+One measure of a good program is that everyone who has voted can attend many of their selected sessions. The more the better. <br />
 A person's <b>Program Attendance Factor (PAF)</b>  indicates how many preferred sessions a person can attend. 
 To be able to attend, the session must be in the program AND it can't be scheduled at the same time as another preferred session. 
-Thus, the PAF is a number between 0 (none of my sessions on the program) and 8 (all my sessions on the program and scheduled in non-overlapping slots).<br>
+Thus, the PAF is a number between 0 (none of my sessions on the program) and 8 (all my sessions on the program and scheduled in non-overlapping slots).<br />
 A Program's Program Attendance Factor is the average over all the voters. 
 </p>
 
@@ -46,10 +46,16 @@ A Program's Program Attendance Factor is the average over all the voters.
 <% end %>
 </table>
 
-<br>
+<br />
 <p>
 <%= link_to 'New Program from scratch', new_program_path %> -> an empty program is created with 8 rows and 5 columns.  You can also create a new program as a copy from an existing program. As a start, to come to the best program at the Program Committee Meeting, it is best to just stick with the tracks/slots you want to have in the program. Later you can also dress your program with non-session-rows to include "Registration" and "Lunch", and with a "Times" Column. 
 </p>
 <p>
 <%= link_to 'Public view on Active Program', public_programs_path %> -> gives you a public view on the program that was <b>activated</b> most recently. A public view is viewable by anyone, and doesn't have the Propile headings and menu bars, so that we can include this page in our public website (eg with an iframe). It links to public views of sessions and presenters. 
+</p>
+<p>
+<%= link_to 'Peview Wiki2Go view on Active Program', export_programs_path %> -> gives you a html preview on the program that was <b>activated</b> most recently.
+</p>
+<p>
+<%= link_to 'Export to Wiki2Go view on Active Program', '/programs/export.text'  %> -> gives you a text of the program that was <b>activated</b> most recently, ready for import into Wiki2Go.
 </p>

@@ -1,6 +1,6 @@
 
 <a name="top">&nbsp;</a>
-<%= render 'programs/program_matrix_export', :program => @program %>
+<%= render 'programs/program_matrix_export.html.erb', :program => @program , :format => :html %>
 
 <br />
 <br />
@@ -19,23 +19,24 @@
      @program.eachTrack do |track|
        program_entry = @program.entry(slot,track)
        if !program_entry.nil? && !program_entry.session.nil? && !sessions.include?(program_entry.session.id) %>
-<table class="ProgramCard <%=  program_entry.topic_class%>"><tr>
-    <td colspan="2">
-         <h2><a name="session_<%=  program_entry.session.to_param%>"></a><%= h program_entry.session.title %></h2>
-         <h3><%= program_entry.session.sub_title  %></h3>
+         <table class="ProgramCard <%=  program_entry.topic_class%>">
+           <tr>
+             <td colspan="2">
+               <h2><a name="session_<%=  program_entry.session.to_param%>"></a><%= h program_entry.session.title %></h2>
+               <h3><%= program_entry.session.sub_title  %></h3>
 
-<h3>
-             <% if  program_entry.session.presenters[0] %>
-               <a href="#presenter_<%=  program_entry.session.presenters[0].id %>"><%= h  program_entry.session.presenters[0].name %></a>
-             <% end %>
-             <% if  program_entry.session.presenters[1] %>
-               &amp; <a href="#presenter_<%=  program_entry.session.presenters[1].id %>"><%= h  program_entry.session.presenters[1].name %></a>
-             <% end %>
-</h3>
-    </td>
-  </tr>
-<%= render :partial => 'sessions/export_description',:locals => { :this_session => program_entry.session }  %>
-    </table>
+               <h3>
+                 <% if  program_entry.session.presenters[0] %>
+                   <a href="#presenter_<%=  program_entry.session.presenters[0].id %>"><%= h  program_entry.session.presenters[0].name %></a>
+                 <% end %>
+                 <% if  program_entry.session.presenters[1] %>
+                   &amp; <a href="#presenter_<%=  program_entry.session.presenters[1].id %>"><%= h  program_entry.session.presenters[1].name %></a>
+                 <% end %>
+               </h3>
+             </td>
+           </tr>
+           <%= render :partial => 'sessions/export_description.html.erb',:locals => { :this_session => program_entry.session }  %>
+         </table>
 <br />
 <a href="#top">Back to program</a><br />
 <hr />
