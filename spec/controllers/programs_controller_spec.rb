@@ -71,18 +71,16 @@ describe ProgramsController do
     end
 
     describe "GET export" do
-       it "assigns the requested program as @program" do
-        program.activate
-        get :export
+      it "assigns the requested program as @program" do
+        get :export, {:id => program.to_param}
         assigns(:program).should eq(program)
       end
     end
 
-    describe "GET export as text" do
-       render_views
-       it "assigns the requested program as @program" do
-        program.activate
-        get :export, :format => :text
+    describe "GET export of specific programas text" do
+      render_views
+      it "assigns the requested program as @program" do
+        get :export, :id => program.to_param, :format => :text
         assigns(:program).should eq(program)
         response.should be_success
         response.body.should  match(/Legend/)

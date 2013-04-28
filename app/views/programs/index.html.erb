@@ -28,6 +28,8 @@ A Program's Program Attendance Factor is the average over all the voters.
     <th></th>
     <th></th>
     <th></th>
+    <th></th>
+    <th></th>
   </tr>
 
 <% @programs.each_with_index do |program, i| %>
@@ -41,7 +43,9 @@ A Program's Program Attendance Factor is the average over all the voters.
     <td> <%= link_to 'Edit', controller: 'programs', action: 'edit', id: program.to_param %></td> 
     <td> <%= link_to 'Copy', controller: 'programs', action: 'copy', id: program.to_param %></td> 
     <td> <%= link_to 'Destroy', program, method: :delete %> </td>
-    <td> <%= link_to 'Activate', controller: 'programs', action: 'activate', id: program.to_param %></td> 
+    <td> <%= link_to 'Activate', controller: 'programs', action: 'activate', id: program.to_param %></td>
+    <td> <%= link_to 'Preview', controller: 'programs', action: 'export', id: program.to_param %></td>
+    <td> <%= link_to 'Export', controller: 'programs', action: 'export', id: program.to_param, format: :text %></td>
   </tr>
 <% end %>
 </table>
@@ -52,10 +56,4 @@ A Program's Program Attendance Factor is the average over all the voters.
 </p>
 <p>
 <%= link_to 'Public view on Active Program', public_programs_path %> -> gives you a public view on the program that was <b>activated</b> most recently. A public view is viewable by anyone, and doesn't have the Propile headings and menu bars, so that we can include this page in our public website (eg with an iframe). It links to public views of sessions and presenters. 
-</p>
-<p>
-<%= link_to 'Peview Wiki2Go view on Active Program', export_programs_path %> -> gives you a html preview on the program that was <b>activated</b> most recently.
-</p>
-<p>
-<%= link_to 'Export to Wiki2Go view on Active Program', '/programs/export.text'  %> -> gives you a text of the program that was <b>activated</b> most recently, ready for import into Wiki2Go.
 </p>

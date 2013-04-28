@@ -19,3 +19,5 @@ tags
 /log/*.log
 /tmp
 
+# Ignore Netbeans project files
+/nbproject/*

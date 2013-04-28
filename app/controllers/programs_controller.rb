@@ -228,7 +228,7 @@ class ProgramsController < ApplicationController
   end
 
   def export
-    @program = Program.activeProgram
+    @program = Program.find(params[:id])
 
     respond_to do |format|
       format.html { render :layout => 'export' } 
