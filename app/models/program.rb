@@ -4,7 +4,7 @@ require 'csv'
 class Program < ActiveRecord::Base
   attr_accessible :version
   attr_accessible :avgpaf
-  attr_accessible :activation
+  attr_accessible :exported_at
   attr_accessible :room_row, :hour_column
   has_many :program_entries, :autosave => true, :dependent => :destroy
 

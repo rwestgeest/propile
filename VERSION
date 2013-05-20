@@ -1,1 +1,1 @@
-0.4.18 remove all public + pgm activation stuff (after Pascal's new export functionality)
+0.4.18 remove all public + pgm activation stuff (after Pascal's new export functionality) + re-use activation col as exported_at

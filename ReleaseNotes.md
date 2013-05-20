@@ -1,5 +1,6 @@
 # 0.4.18 
   remove all public + pgm activation stuff (after Pascal's new export functionality)
+  re-use activation col as exported_at
 # 0.4.17 
   public presenter page: add list of sessions for this presenter
 # 0.4.16 

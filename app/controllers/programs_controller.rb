@@ -203,7 +203,11 @@ class ProgramsController < ApplicationController
 
     respond_to do |format|
       format.html { render :layout => 'export' } 
-      format.text { render :layout => false , :content_type => 'text/plain' , :formats => [:html] } # just the html, mam
+      format.text do 
+        @program.exported_at = Time.now
+        @program.save
+        render :layout => false , :content_type => 'text/plain' , :formats => [:html] # just the html, mam
+      end
       format.json { render json: @program }
     end
   end
