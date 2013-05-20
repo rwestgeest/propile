@@ -1,4 +1,4 @@
 propile
 =======
 
-Community Confernece Program Compiler 
+Community Conference Program Compiler
