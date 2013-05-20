@@ -257,13 +257,9 @@ describe Session do
       session.laptops_required = "no"
       session.printable_laptops_required.should == ""
     end
-    it "if max_participants is No returns nothing" do 
-      session.laptops_required = "No"
-      session.printable_laptops_required.should == ""
-    end
-    it "if max_participants is Nope returns nothing" do 
-      session.laptops_required = "Nope"
-      session.printable_laptops_required.should == ""
+    it "if max_participants is yes returns non-empty string" do 
+      session.laptops_required = "yes"
+      session.printable_laptops_required.should == "bring laptop"
     end
   end
 

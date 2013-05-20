@@ -18,7 +18,16 @@ class Session < ActiveRecord::Base
   validates :first_presenter, :presence => true
   validates :first_presenter_email, :format => { :with => Presenter::EMAIL_REGEXP }
   validates :second_presenter_email, :format => { :with => Presenter::EMAIL_REGEXP }
+  validates :laptops_required, :inclusion => { :in => ["yes", "no"], :message => "has invalid value: %{value}. Enter yes or no." }
 
+  after_initialize :assign_defaults_on_new_session, if: 'new_record?'
+
+  private
+  def assign_defaults_on_new_session
+    self.laptops_required = "no"
+  end
+
+  public
   def first_presenter_email
     first_presenter && first_presenter.email || ''
   end
@@ -88,7 +97,7 @@ class Session < ActiveRecord::Base
   end
 
   def printable_laptops_required
-    (!laptops_required.nil? and !laptops_required.empty? and !laptops_required.upcase.include?("NO")) ?  "bring laptop" : ""
+    (laptops_required and laptops_required == "yes") ?  "bring laptop" : ""
   end
 
   def program_card_content(pdf, room="<TODO>", hour="99:99 - 99:99")

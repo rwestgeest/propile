@@ -82,7 +82,7 @@
         <%= text_area :session, :topic, :cols => "48", :rows => "1"  %> 
       </td>
       <td class="sessiontable">  
-        <%= text_area :session, :laptops_required, :cols => "48", :rows => "1"  %> 
+        <%= f.select :laptops_required, ['yes', 'no'] %>
       </td>
     </tr>
     <tr> 
