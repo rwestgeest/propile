@@ -13,8 +13,6 @@ Propile::Application.routes.draw do
     put 'removeSlot', :on => :member
     put 'removeTrack', :on => :member
     get 'activate', :on => :member
-    get 'public', :on => :collection
-    get 'public_show', :on => :member
     get 'program_board_cards', :on => :member
     get 'export', :on => :collection
   end
@@ -35,7 +33,6 @@ Propile::Application.routes.draw do
 
 
   resources :presenters do
-    get 'public', :on => :member
     put 'toggle_maintainer_role', :on => :member
   end
 
@@ -50,7 +47,6 @@ Propile::Application.routes.draw do
     get 'csv', :on => :collection
     get 'pcm_cards', :on => :collection
     get 'program_board_card', :on => :member
-    get 'public', :on => :member
   end
 
   namespace :account do

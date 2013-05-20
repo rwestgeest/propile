@@ -79,15 +79,6 @@ module ApplicationHelper
     s += (session.presenters[1].nil? ? "" : (link_to session.presenters[1].name, session.presenters[1]) )
   end
 
-  def session_presenter_names_public(session) 
-    return "" unless session.presenters && session.presenters[0]
-    s = (session.presenters[0] && 
-        ( link_to session.presenters[0].name, controller: 'presenters', action: 'public', id: session.presenters[0].id ) )
-    s += session.presenters[1].nil? ? "" : " & " 
-    s += (session.presenters[1].nil? ? "" : 
-        ( link_to session.presenters[1].name, controller: 'presenters', action: 'public', id: session.presenters[1].id ) )
-  end
-
   def collapse_button(div_id, initially_collapsed=true)
     default_value = (initially_collapsed ? "+" : "-")
     raw(%Q{<input class="collapsebutton" type="button" id="#{div_id}Button" value='#{default_value}' onclick="showHide('#{div_id}')" >})

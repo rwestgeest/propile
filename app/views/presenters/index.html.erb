@@ -7,7 +7,6 @@
     <th> <%= sortable "created_at", "Created" %> </th>
     <th> <%= sortable "updated_at", "Modified" %> </th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @presenters.each_with_index do |presenter, i| %>
@@ -18,7 +17,6 @@
     <td class="nowrap" ><%= l presenter.created_at %> </td>
     <td class="nowrap" ><%= l presenter.updated_at %> </td>
     <td><%= guarded_link_to 'Edit', controller: 'presenters', action: 'edit', id: presenter.to_param %></td> 
-    <td><%= guarded_link_to 'Public view', controller: 'presenters', action: 'public', id: presenter.to_param %> </td>   
   </tr>
 <% end %>
 </table>

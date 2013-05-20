@@ -1,7 +1,6 @@
 role :maintainer, 0
 role :presenter, 1
 
-allow 'presenters#public'
 allow 'presenters', :at_least => :presenter
 allow 'presenters#edit', :at_least => :presenter do |account, params|
   account.maintainer? || account.presenter.id == params['id'].to_i
@@ -11,7 +10,6 @@ allow 'presenter#toggle_maintainer_role', :at_least => :maintainer
 allow 'comments', :at_least => :presenter
 allow 'reviews', :at_least => :presenter
 
-allow 'sessions#public'
 allow 'sessions', :at_least => :presenter
 allow 'sessions#edit', :at_least => :presenter do |account, params|
   account.maintainer? || account.presenter.has_session?(params['id'])
@@ -36,7 +34,6 @@ allow 'votes#csv_paf_sessions', :at_least => :maintainer
 allow 'votes#csv_paf_presenters', :at_least => :maintainer
 allow 'votes#index', :at_least => :maintainer
 
-allow 'programs#public'
 allow 'program', :at_least => :maintainer
 allow 'program_entries', :at_least => :maintainer
 

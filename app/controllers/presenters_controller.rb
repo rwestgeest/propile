@@ -19,17 +19,6 @@ class PresentersController < ApplicationController
     @sessions_reviewed_by_you = (@presenter.reviews.all.collect { |r|  Session.find(r.session_id) } )
   end
 
-  def public
-    @presenter = Presenter.find(params[:id])
-    if !@presenter.has_session_in_active_program?
-      raise "no valid presenter"
-    end
-    respond_to do |format|
-      format.html { render :layout => 'public' } # public.html.erb
-      format.json { render json: @presenter }
-    end
-  end
-
   def new
     @presenter = Presenter.new
   end

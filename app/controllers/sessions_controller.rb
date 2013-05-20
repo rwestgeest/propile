@@ -55,17 +55,6 @@ class SessionsController < ApplicationController
     end
   end
 
-  def public
-    @session = Session.find(params[:id])
-    if !@session.in_active_program?
-      raise "no valid session"
-    end
-    respond_to do |format|
-      format.html { render :layout => 'public' } # public.html.erb
-      format.json { render json: @session }
-    end
-  end
-
   def new
     #if !PropileConfig.submit_session_active? then raise "Session submission is closed" end
     @session = Session.new
