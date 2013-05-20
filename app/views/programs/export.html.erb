@@ -6,7 +6,7 @@
 <br />
 <table border="1" class="ProgramMatrix">
 <tr><td class="propertyname">Legend</td></tr>
-<%for topic in Session.available_topics do %>
+<%for topic in Session::AVAILABLE_TOPICS do %>
   <% if ! @program.program_entries_for_topic(topic).empty? then %> 
     <tr><td class="<%=topic%>"><%=Session.topic_name(topic)%></td></tr>
   <% end %> 

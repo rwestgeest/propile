@@ -172,12 +172,6 @@ describe Session do
   describe "presenter_has_voted_for?", :broken => true do
   end
 
-  describe "available_topics" do
-    it "returns 6 topics" do
-      Session.available_topics.size.should == 6
-    end
-  end
-
   describe "self topic_name" do
     context "nil topic" do 
       it "returns Other" do 

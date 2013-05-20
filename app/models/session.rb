@@ -2,6 +2,16 @@ require 'prawn'
 require 'pdf_helper'
 
 class Session < ActiveRecord::Base
+  AVAILABLE_TOPICS = ["technology","customer","cases","team","process","other"]
+  AVAILABLE_TOPICS_AND_NAMES = { "technology"=>"Technology and Technique", 
+                                 "customer"=>"Customer and Planning", 
+                                 "cases"=>"Intro's and Cases", 
+                                 "team"=>"Team and Individual", 
+                                 "process"=>"Process and Improvement", 
+                                 "other"=>"Other"}
+  AVAILABLE_LAPTOPS_REQUIRED = ["no","yes"]
+
+
   belongs_to :first_presenter, :class_name => 'Presenter'
   belongs_to :second_presenter, :class_name => 'Presenter'
 
@@ -18,9 +28,10 @@ class Session < ActiveRecord::Base
   validates :first_presenter, :presence => true
   validates :first_presenter_email, :format => { :with => Presenter::EMAIL_REGEXP }
   validates :second_presenter_email, :format => { :with => Presenter::EMAIL_REGEXP }
-  validates :laptops_required, :inclusion => { :in => ["yes", "no"], :message => "has invalid value: %{value}. Enter yes or no." }
+  validates :laptops_required, :inclusion => { :in => AVAILABLE_LAPTOPS_REQUIRED, :message => "has invalid value: %{value}. Enter yes or no." }
 
   after_initialize :assign_defaults_on_new_session, if: 'new_record?'
+
 
   private
   def assign_defaults_on_new_session
@@ -61,21 +72,8 @@ class Session < ActiveRecord::Base
     votes.exists?( :presenter_id => presenter_id ) 
   end
 
-  def self.available_topics_and_names
-    {"technology"=>"Technology and Technique", 
-     "customer"=>"Customer and Planning", 
-     "cases"=>"Intro's and Cases", 
-     "team"=>"Team and Individual", 
-     "process"=>"Process and Improvement", 
-     "other"=>"Other"}
-  end
-
-  def self.available_topics
-    ["technology","customer","cases","team","process","other"]
-  end
-
   def self.topic_name(topic_class)
-    available_topics_and_names[topic_class] || "Other"
+    AVAILABLE_TOPICS_AND_NAMES[topic_class] || "Other"
   end
 
   def topic_class
