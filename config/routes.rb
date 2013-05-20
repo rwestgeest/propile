@@ -12,7 +12,6 @@ Propile::Application.routes.draw do
     put 'insertTrack', :on => :member
     put 'removeSlot', :on => :member
     put 'removeTrack', :on => :member
-    get 'activate', :on => :member
     get 'program_board_cards', :on => :member
     get 'export', :on => :collection
   end

@@ -201,31 +201,6 @@ describe Session do
     end
   end
 
-  describe "in_active_program?" do 
-    let(:session) { FactoryGirl.build(:session_with_presenter) }
-    let (:activeProgram) { FactoryGirl.create(:program, :activation => DateTime.now) }
-    def a_program_entry_for(program)
-      FactoryGirl.create(:program_entry, :program => program)
-    end
-    context "when no active program" do
-      it "returns false" do
-        session.in_active_program?.should == false
-      end
-    end
-    context "when active program but session not in it" do
-      it "returns false" do
-        activeProgram
-        session.in_active_program?.should == false
-      end
-    end
-    context "when active program contains session " do
-      it "returns false" do
-        session_in_program = a_program_entry_for(activeProgram).session
-        session_in_program.in_active_program?.should == true
-      end
-    end
-  end 
-
   describe "generate_pdf" do
     let(:session) { FactoryGirl.build(:session_with_presenter, 
                                       :sub_title => "the sub title", 

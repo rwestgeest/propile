@@ -19,20 +19,6 @@ class Program < ActiveRecord::Base
     }
   end 
 
-  def activate
-    self.activation = DateTime.now
-    self
-  end
-
-  def self.activeProgram
-    Program.all.max { |p1, p2| 
-      p1.activation.nil? ? -1 : 
-        ( p2.activation.nil? ? 1 : 
-          ( p1.activation <=> p2.activation )
-        )
-    }
-  end
-
   def sessionsInProgram
     program_entries.collect {|pe| pe.session }.select{|s| !s.nil?}
   end 
@@ -44,11 +30,6 @@ class Program < ActiveRecord::Base
   def presentersInProgram
     program_entries.collect{|pe| if !pe.session.nil? then pe.session.presenters end }.flatten.select{|pr| !pr.nil?}.to_set
   end 
-
-  def active?
-    return false unless !activation.nil? 
-    self == Program.activeProgram
-  end
 
   def programEntryMatrix # rows=slots, cols=tracks
     return @matrix unless @matrix.nil?

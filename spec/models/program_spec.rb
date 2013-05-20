@@ -419,27 +419,6 @@ describe Program do
     end
   end
 
-  def active_program_now
-    active_program(DateTime.now)
-  end
-  def active_program (activation_date)
-    FactoryGirl.create(:program, :activation => activation_date) 
-  end
-  describe "active?" do
-    it "default no program is active" do
-      program.active?.should ==  false
-    end
-    it "activated program is active" do
-      active_program_now.active?.should == true
-    end
-    it "last activated program is active" do
-      p1 = active_program ( DateTime.new(2012,1,1) )
-      p2 = active_program ( DateTime.new(2012,2,2) )
-      p1.active?.should == false
-      p2.active?.should == true
-    end
-  end
-
   describe "sessionsInProgram" do
     def a_program_entry_for(program)
       FactoryGirl.create(:program_entry, :program => program)
@@ -448,22 +427,22 @@ describe Program do
       FactoryGirl.create(:program_entry_wo_session, :program => program)
     end
     it "for empty program returns emtpy list " do
-      active_program_now.sessionsInProgram.should be_empty
+      program.sessionsInProgram.should be_empty
     end
     it "for program with session returns that session" do
-      p = active_program_now
+      p = program
       program_entry = a_program_entry_for(p)
       p.sessionsInProgram.should == [program_entry.session]
     end
     it "for program with session returns no other sessions" do
-      p = active_program_now
+      p = program
       program_entry = a_program_entry_for(p)
       another_session = FactoryGirl.create(:session_with_presenter)
       p.program_entries.size.should == 1
       p.sessionsInProgram.should == [program_entry.session]
     end
     it "for program with non-session entries does not return anything " do
-      p = active_program_now
+      p = program
       program_entry = a_program_entry_for(p)
       a_program_entry_without_session_for(p)
       p.program_entries.size.should == 2
@@ -477,15 +456,15 @@ describe Program do
     end
     let(:presenter) { FactoryGirl.build :presenter  }
     it "for empty program returns emtpy list " do
-      active_program_now.programEntriesForPresenter(presenter).should be_empty
+      program.programEntriesForPresenter(presenter).should be_empty
     end
     it "for program with session returns that session" do
-      p = active_program_now
+      p = program
       program_entry = a_program_entry_for(p)
       p.programEntriesForPresenter(program_entry.session.first_presenter).should == [program_entry]
     end
     it "for program with several sessions returns only session for this presenter" do
-      p = active_program_now
+      p = program
       program_entry = a_program_entry_for(p)
       anther_program_entry = a_program_entry_for(p)
       p.programEntriesForPresenter(program_entry.session.first_presenter).should == [program_entry]
@@ -494,21 +473,21 @@ describe Program do
 
   describe "presentersInProgram" do
     it "for empty program contains no presenters" do
-      active_program_now.presentersInProgram.should be_empty
+      program.presentersInProgram.should be_empty
     end
     it "for program with session contains presenters for that session" do
-      p = active_program_now
+      p = program
       program_entry = a_program_entry_for_session_with_2_presenters(p)
       p.presentersInProgram.to_a.should == [program_entry.session.first_presenter, program_entry.session.second_presenter]
     end
     it "for program with session contains every presenter only once" do
-      p = active_program_now
+      p = program
       program_entry = a_program_entry_for(p)
       a_program_entry_for_session(p, another_session_for_presenter(program_entry.session.first_presenter))
       p.presentersInProgram.to_a.should == [program_entry.session.first_presenter]
     end
     it "for program with non-session entries does not return anything" do
-      p = active_program_now
+      p = program
       program_entry = a_program_entry_for(p)
       a_program_entry_without_session_for(p)
       p.program_entries.size.should == 2

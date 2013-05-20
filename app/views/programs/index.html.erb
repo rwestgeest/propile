@@ -2,7 +2,6 @@
 </p>
 
 <p> You can create different flavours of a program and then decide which one is the best. 
-There is max 1 <b>active</b> program, which can be viewed by the public.
 </p>
 
 <p> 
@@ -19,12 +18,10 @@ A Program's Program Attendance Factor is the average over all the voters.
 <table class="tablelist">
   <tr>
     <th></th>
-    <th> Active </th>
     <th> Version </th>
     <th> PAF </th>
     <th> Created </th>
     <th> Modified </th>
-    <th></th>
     <th></th>
     <th></th>
     <th></th>
@@ -35,7 +32,6 @@ A Program's Program Attendance Factor is the average over all the voters.
 <% @programs.each_with_index do |program, i| %>
   <tr >
     <td> <%= i+1 %> </td>
-    <td> <%= program.active? ? "YES" : ""  %> </td>
     <td> <%= link_to program.version, program %></td>
     <td> <%= program.avgpaf %></td>
     <td class="nowrap" ><%= l program.created_at %> </td>
@@ -43,7 +39,6 @@ A Program's Program Attendance Factor is the average over all the voters.
     <td> <%= link_to 'Edit', controller: 'programs', action: 'edit', id: program.to_param %></td> 
     <td> <%= link_to 'Copy', controller: 'programs', action: 'copy', id: program.to_param %></td> 
     <td> <%= link_to 'Destroy', program, method: :delete %> </td>
-    <td> <%= link_to 'Activate', controller: 'programs', action: 'activate', id: program.to_param %></td>
     <td> <%= link_to 'Preview', controller: 'programs', action: 'export', id: program.to_param %></td>
     <td> <%= link_to 'Export', controller: 'programs', action: 'export', id: program.to_param, format: :text %></td>
   </tr>

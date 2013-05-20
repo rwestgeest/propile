@@ -52,9 +52,4 @@ class Presenter < ActiveRecord::Base
     self.account ||= Account.new
   end
 
-  def has_session_in_active_program?
-    active_program = Program.activeProgram
-    active_program.nil? ? false : active_program.presentersInProgram.include?(self)
-  end
-
 end

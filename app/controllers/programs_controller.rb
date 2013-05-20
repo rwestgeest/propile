@@ -198,17 +198,6 @@ class ProgramsController < ApplicationController
     end
   end
 
-  def activate
-    @program = Program.find(params[:id])
-    @program.activate
-    @program.save
-
-    respond_to do |format|
-        format.html { redirect_to programs_url }
-        format.json { head :no_content }
-    end
-  end
-
   def export
     @program = Program.find(params[:id])
 
