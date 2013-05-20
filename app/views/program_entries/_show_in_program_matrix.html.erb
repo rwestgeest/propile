@@ -5,7 +5,7 @@
          <% end %> 
        </td>
      <% else %> 
-       <td class="ProgramMatrix <%=program_entry.topic_class%>" 
+       <td class="ProgramMatrix <%=program_entry.topic%>" 
          <%= program_entry.span_entire_row==true ? "colspan="+(@program.maxTrack+1-program_entry.track).to_s : "" %> > 
          <% if !program_entry.session.nil? %>  
            <%= link_to program_entry.session.id.to_s+"- "+program_entry.session.title, program_entry.session %>

@@ -2,14 +2,16 @@ require 'prawn'
 require 'pdf_helper'
 
 class Session < ActiveRecord::Base
-  AVAILABLE_TOPICS = ["technology","customer","cases","team","process","other"]
   AVAILABLE_TOPICS_AND_NAMES = { "technology"=>"Technology and Technique", 
                                  "customer"=>"Customer and Planning", 
                                  "cases"=>"Intro's and Cases", 
                                  "team"=>"Team and Individual", 
                                  "process"=>"Process and Improvement", 
                                  "other"=>"Other"}
-  AVAILABLE_LAPTOPS_REQUIRED = ["no","yes"]
+  AVAILABLE_TOPICS_AND_NAMES_FOR_SELECT = AVAILABLE_TOPICS_AND_NAMES.invert
+  AVAILABLE_TOPICS = AVAILABLE_TOPICS_AND_NAMES.keys
+  AVAILABLE_TOPIC_NAMES = AVAILABLE_TOPICS_AND_NAMES.values
+  AVAILABLE_LAPTOPS_REQUIRED = { "no" => "no", "yes" => "yes"}
 
 
   belongs_to :first_presenter, :class_name => 'Presenter'
@@ -28,15 +30,8 @@ class Session < ActiveRecord::Base
   validates :first_presenter, :presence => true
   validates :first_presenter_email, :format => { :with => Presenter::EMAIL_REGEXP }
   validates :second_presenter_email, :format => { :with => Presenter::EMAIL_REGEXP }
-  validates :laptops_required, :inclusion => { :in => AVAILABLE_LAPTOPS_REQUIRED, :message => "has invalid value: %{value}. Enter yes or no." }
-
-  after_initialize :assign_defaults_on_new_session, if: 'new_record?'
-
-
-  private
-  def assign_defaults_on_new_session
-    self.laptops_required = "no"
-  end
+  validates :topic, :inclusion => { :in => AVAILABLE_TOPICS_AND_NAMES_FOR_SELECT.values, :message => "has invalid value: %{value}. Enter a valid topic." }, :allow_blank => true
+  validates :laptops_required, :inclusion => { :in => AVAILABLE_LAPTOPS_REQUIRED.values, :message => "has invalid value: %{value}. Enter yes or no." }, :allow_blank => true 
 
   public
   def first_presenter_email
@@ -72,22 +67,12 @@ class Session < ActiveRecord::Base
     votes.exists?( :presenter_id => presenter_id ) 
   end
 
-  def self.topic_name(topic_class)
-    AVAILABLE_TOPICS_AND_NAMES[topic_class] || "Other"
+  def self.topic_name(topic)
+    AVAILABLE_TOPICS_AND_NAMES[topic] || "Other"
   end
 
-  def topic_class
-    #remark: these classes and the rules should be configurable
-    return "" if topic.nil?
-    topic_downcase = topic.downcase
-    topic_class = case
-      when topic_downcase.include?("techn")  then "technology"
-      when topic_downcase.include?("customer") || topic_downcase.include?("planning")  then "customer"
-      when topic_downcase.include?("case") || topic_downcase.include?("intro")  then "cases"
-      when topic_downcase.include?("team") || topic_downcase.include?("individual")  then "team"
-      when topic_downcase.include?("process") || topic_downcase.include?("improv")  then "process"
-      else "other"
-    end
+  def topic_name
+    AVAILABLE_TOPICS_AND_NAMES[topic] || "Other"
   end
 
   def printable_max_participants
@@ -156,7 +141,7 @@ class Session < ActiveRecord::Base
     pdf.bounding_box([70, 58], :width => 320, :height => 58 ) do 
       pdf.text presenter_names
       pdf.text session_type.truncate(60) unless session_type.nil? 
-      pdf.text topic unless topic.nil? 
+      pdf.text topic_name 
       pdf.text room
     end
     pdf.bounding_box([480, 58], :width => 80, :height => 58 ) do 

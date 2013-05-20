@@ -19,7 +19,7 @@
      @program.eachTrack do |track|
        program_entry = @program.entry(slot,track)
        if !program_entry.nil? && !program_entry.session.nil? && !sessions.include?(program_entry.session.id) %>
-         <table class="ProgramCard <%=  program_entry.topic_class%>">
+         <table class="ProgramCard <%=  program_entry.topic%>">
            <tr>
              <td colspan="2">
                <h2><a name="session_<%=  program_entry.session.to_param%>"></a><%= h program_entry.session.title %></h2>

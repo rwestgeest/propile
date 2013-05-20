@@ -84,7 +84,7 @@ class SessionsController < ApplicationController
       @sessions.each do |session| 
         csv << [ session.title, session.sub_title, 
                  session.presenter_names, session.created_at, session.updated_at,
-                 session.session_type, session.topic, session.duration, 
+                 session.session_type, session.topic_name, session.duration, 
                  session.reviews.size,
                  session.session_goal, 
                  session.intended_audience, session.experience_level,

@@ -143,7 +143,7 @@ class Program < ActiveRecord::Base
   end
 
   def program_entries_for_topic(topic)
-    program_entries.select{|pe| !pe.session.nil? and (topic.nil? or pe.session.topic_class==topic) } 
+    program_entries.select{|pe| !pe.session.nil? and (topic.nil? or pe.session.topic==topic) } 
   end
 
   def room_for_program_entry(program_entry)
@@ -231,7 +231,7 @@ class Program < ActiveRecord::Base
           csv << [ entry.session.id, entry.slot, entry.track,
                    entry.session.title, entry.session.sub_title, 
                    entry.session.first_presenter.name, (entry.session.second_presenter.nil? ? nil : entry.session.second_presenter.name), 
-                   entry.session.session_type, entry.session.topic, entry.session.duration
+                   entry.session.session_type, entry.session.topic_name, entry.session.duration
                  ]
         end
       end

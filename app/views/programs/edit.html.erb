@@ -27,12 +27,14 @@
       <th > Session Cards (PDF) </td>
       <th > &nbsp; </td>
     </tr>
-    <% for topic in Session::AVAILABLE_TOPICS do %> 
+    <% for topic in Session::AVAILABLE_TOPICS do 
+         topic_name = Session.topic_name(topic)
+    %> 
       <tr>
         <td class="<%=topic%>"> 
-          <%= link_to topic, controller: 'programs', action: 'show', id: @program.to_param, topic: topic, format: "pdf" %> </td>
+          <%= link_to topic_name, controller: 'programs', action: 'show', id: @program.to_param, topic: topic, format: "pdf" %> </td>
         <td class="<%=topic%>"> 
-          <%= link_to topic, controller: 'programs', action: 'program_board_cards', id: @program.to_param, topic: topic, format: "pdf" %> </td>
+          <%= link_to topic_name, controller: 'programs', action: 'program_board_cards', id: @program.to_param, topic: topic, format: "pdf" %> </td>
         <td class="<%=topic%>"> <%= @program.program_entries_for_topic(topic).size %> </td>
       </tr>
     <% end %> 

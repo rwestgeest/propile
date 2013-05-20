@@ -5,8 +5,8 @@ class ProgramEntry < ActiveRecord::Base
   attr_accessible :slot, :track, :comment, :span_entire_row
   attr_accessible :session_id, :program_id
   
-  def topic_class
-    topic = session ? session.topic_class : ""
+  def topic
+    topic = session ? session.topic : ""
   end
 
 end
