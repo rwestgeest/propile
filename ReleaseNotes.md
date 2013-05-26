@@ -2,6 +2,7 @@
   remove all public + pgm activation stuff (after Pascal's new export functionality)
   re-use activation col as exported_at
   restrictions on session fields (laptops_required, topic)
+  start new conference
 # 0.4.17 
   public presenter page: add list of sessions for this presenter
 # 0.4.16 
