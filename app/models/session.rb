@@ -41,17 +41,16 @@ class Session < ActiveRecord::Base
   def second_presenter_email
     second_presenter && second_presenter.email || ''
   end
-
   def first_presenter_email=(value)
     return unless value and not value.empty? #not allowed to remove first presenter
-    self.first_presenter = Presenter.includes(:account).where('lower(accounts.email) = ?', value.downcase).first || Presenter.new(:email => value)
+    self.first_presenter = Presenter.includes(:account).where('lower(accounts.email) = ?', value.downcase).first  || Presenter.create_from_archived_presenter(value)
   end
 
   def second_presenter_email=(value)
     if value.nil? or value.empty?
       self.second_presenter = nil 
     else
-      self.second_presenter = Presenter.includes(:account).where('lower(accounts.email) = ?', value.downcase).first || Presenter.new(:email => value)
+      self.second_presenter = Presenter.includes(:account).where('lower(accounts.email) = ?', value.downcase).first  || Presenter.create_from_archived_presenter(value)
     end
   end
 

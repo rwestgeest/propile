@@ -31,6 +31,17 @@ describe Session do
           expect {session.save!}.to change(Presenter, :count).by(1)
         end
       end
+      context "and presenter does not exist but presenter is archived" do
+        it "creates the presenter from the archive" do
+          archived_presenter = FactoryGirl.create :archived_presenter, :bio => "the bio"
+          set_email_value_to archived_presenter.email
+          session.save
+          presenter = Presenter.includes(:account).where('accounts.email = ?', archived_presenter.email).first 
+          presenter.should_not be_nil
+          presenter.name.should == archived_presenter.name
+          presenter.bio.should == archived_presenter.bio
+        end
+      end
 
       context "and presenter exists" do
         let!(:presenter) { FactoryGirl.create :presenter }
