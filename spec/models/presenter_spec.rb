@@ -66,4 +66,24 @@ describe Presenter do
     end
   end
 
+  describe "is_active?" do
+    it "presenter without session is not active" do
+      Presenter.new(:name => "rob").should_not be_active
+    end
+    it "presenter with session is active" do
+      session = FactoryGirl.create :session_with_presenter
+      session.first_presenter.should be_active
+    end
+    it "second presenter with session is active" do
+      session = FactoryGirl.create :session_with_2_presenters
+      session.second_presenter.should be_active
+    end
+    it "maintainer is active" do
+      maintainer = Presenter.new(:name => "rob")
+      maintainer.account.maintainer=true
+      maintainer.should be_active
+    end
+  end
+
+
 end

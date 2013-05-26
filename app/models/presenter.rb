@@ -7,7 +7,7 @@ class Presenter < ActiveRecord::Base
   has_many :votes
   belongs_to :account
 
-  attr_accessible :bio, :email, :name
+  attr_accessible :bio, :email, :name, :active
 
   validates :email, :presence => true,
                     :format => { :with => EMAIL_REGEXP }
@@ -46,6 +46,10 @@ class Presenter < ActiveRecord::Base
 
   def has_vote?(vote_id)
     votes.find_by_id(vote_id) 
+  end
+
+  def active?
+    account.maintainer? || !sessions.empty?
   end
 
   def lazy_account
