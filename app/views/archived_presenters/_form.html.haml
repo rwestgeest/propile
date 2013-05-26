@@ -1,0 +1,10 @@
+= form_for @archived_presenter do |f|
+  -if @archived_presenter.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@archived_presenter.errors.count, "error")} prohibited this archived_presenter from being saved:"
+      %ul
+        - @archived_presenter.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save'

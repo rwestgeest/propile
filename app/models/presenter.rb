@@ -52,4 +52,15 @@ class Presenter < ActiveRecord::Base
     self.account ||= Account.new
   end
 
+
+  def self.archive_all
+    self.all.each do |presenter|
+      archived = ArchivedPresenter.new.initialize_from(presenter)
+      archived.save
+      if  !presenter.account.maintainer? 
+        presenter.account.destroy
+        presenter.destroy
+      end
+    end
+  end
 end

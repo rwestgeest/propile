@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130520180715) do
+ActiveRecord::Schema.define(:version => 20130526161311) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                :limit => 150,                          :null => false
@@ -27,6 +27,16 @@ ActiveRecord::Schema.define(:version => 20130520180715) do
 
   add_index "accounts", ["authentication_token"], :name => "index_accounts_on_authentication_token"
   add_index "accounts", ["email"], :name => "index_accounts_on_email"
+
+  create_table "archived_presenters", :force => true do |t|
+    t.string   "name",       :limit => 100
+    t.string   "email",      :limit => 150
+    t.text     "bio"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "archived_presenters", ["email"], :name => "index_archived_presenters_on_email"
 
   create_table "comments", :force => true do |t|
     t.text     "body"

@@ -1,5 +1,7 @@
 Propile::Application.routes.draw do
 
+  resources :archived_presenters
+
   resources :program_entries
 
   resources :programs do
@@ -18,6 +20,7 @@ Propile::Application.routes.draw do
 
   resources :propile_configs do
     put 'toggle', :on => :collection
+    get 'start_conference', :on => :collection
   end
 
   resources :votes do

@@ -79,4 +79,20 @@ class PropileConfigsController < ApplicationController
     end
   end
 
+  def start_conference
+    Program.destroy_all
+    ProgramEntry.destroy_all
+    Vote.destroy_all
+    Comment.destroy_all
+    Review.destroy_all
+    Session.destroy_all
+    Presenter.archive_all
+    PropileConfig.submit_session_active=false
+    PropileConfig.voting_active=false
+
+    respond_to do |format|
+      format.html { redirect_to propile_configs_url, notice: 'New conference is started.' }
+      format.json { head :no_content }
+    end
+  end
 end

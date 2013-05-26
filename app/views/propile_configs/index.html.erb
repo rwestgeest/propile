@@ -25,6 +25,12 @@
   </tr> 
 </table>
 
+<div>
+  <br>
+  <%= button_to 'start new conference',  {action: 'start_conference'}, method: :get, confirm: "All programs and sessions will be deleted.\nAre you sure? "  %>   
+  <i>All programs, sessions and votes will be deleted. Presenters are moved to archive. </i>
+</div>
+
 <h1>Maintainers</h1>
 <table>
 <% @presenters.each_with_index do |presenter, i| %>

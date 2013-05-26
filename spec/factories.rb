@@ -5,6 +5,11 @@ FactoryGirl.define do
     sequence(:name) {|n| "presenter_#{n}"}
   end
 
+  factory :archived_presenter do
+    sequence(:email) {|n| "presenter_#{n}@example.com" }
+    sequence(:name) {|n| "presenter_#{n}"}
+  end
+
   factory :session do
     sequence(:title) {|n| "title_#{n}"}
     sequence(:description) {|n| "description_#{n}"}
@@ -24,6 +29,7 @@ FactoryGirl.define do
     association :session, factory: :session_with_presenter
     presenter
   end
+
 
   factory :comment do
     sequence(:body) {|n| "comment_body_#{n}"}

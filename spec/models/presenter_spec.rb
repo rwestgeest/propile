@@ -66,4 +66,45 @@ describe Presenter do
     end
   end
 
+  describe "archive_all" do
+    def compare_archived (archived_presenter, presenter)
+      archived_presenter.name.should == presenter.name
+      archived_presenter.email.should == presenter.email
+      archived_presenter.bio.should == presenter.bio
+    end
+
+    it "copies presenter to archived_presenter" do
+      presenter = FactoryGirl.create :presenter 
+      Presenter.archive_all
+      ArchivedPresenter.all.size.should == 1
+      compare_archived(ArchivedPresenter.all.first, presenter)
+    end
+    it "removes presenter from presenter" do
+      presenter = FactoryGirl.create :presenter 
+      Presenter.archive_all
+      Presenter.all.should be_empty
+    end
+    it "copies maintainer to archived_presenter" do
+      maintainer = FactoryGirl.create :presenter 
+      maintainer.account = FactoryGirl.create :confirmed_account
+      maintainer.save
+      Presenter.archive_all
+      ArchivedPresenter.all.size.should == 1
+      compare_archived(ArchivedPresenter.all.first, maintainer)
+    end
+    it "does not remove maintainer from presenter" do
+      maintainer = FactoryGirl.create :presenter 
+      maintainer.account = FactoryGirl.create :confirmed_account
+      maintainer.save
+      Presenter.archive_all
+      Presenter.all.size.should == 1
+    end
+    it "moves presenter to archived_presenter" do
+      presenter = FactoryGirl.create :presenter 
+      Presenter.archive_all
+      Presenter.all.should be_empty
+      ArchivedPresenter.all.size.should == 1
+      compare_archived(ArchivedPresenter.all.first, presenter)
+    end
+  end
 end
