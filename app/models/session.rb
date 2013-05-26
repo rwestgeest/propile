@@ -68,11 +68,11 @@ class Session < ActiveRecord::Base
   end
 
   def self.topic_name(topic)
-    AVAILABLE_TOPICS_AND_NAMES[topic] || "Other"
+    AVAILABLE_TOPICS_AND_NAMES[topic] || ""
   end
 
   def topic_name
-    AVAILABLE_TOPICS_AND_NAMES[topic] || "Other"
+    Session.topic_name(topic) 
   end
 
   def printable_max_participants

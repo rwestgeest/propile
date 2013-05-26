@@ -90,7 +90,7 @@ class SessionsController < ApplicationController
                  session.intended_audience, session.experience_level,
                  session.max_participants, session.laptops_required, session.other_limitations, session.room_setup, session.materials_needed,
                  session.short_description
-               ]
+               ].collect {|field| (field.blank?) ?  "(none)" : field }
       end
     end
     send_data(session_csv, :type => 'test/csv', :filename => 'sessions.csv') 

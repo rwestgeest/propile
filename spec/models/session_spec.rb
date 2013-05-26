@@ -174,18 +174,13 @@ describe Session do
 
   describe "self topic_name" do
     context "nil topic" do 
-      it "returns Other" do 
-        Session.topic_name(nil).should == "Other" 
+      it "returns blank" do 
+        Session.topic_name(nil).should == "" 
       end 
     end
     context "emtpy topic" do 
-      it "returns Other" do 
-        Session.topic_name("").should == "Other" 
-      end 
-    end
-    context "non existent topic" do 
-      it "returns Other" do 
-        Session.topic_name("blabla").should == "Other" 
+      it "returns blank" do 
+        Session.topic_name("").should == "" 
       end 
     end
     context "existent topic" do 
