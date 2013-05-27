@@ -55,7 +55,8 @@ class Presenter < ActiveRecord::Base
 
   def self.archive_all
     self.all.each do |presenter|
-      archived = ArchivedPresenter.new.initialize_from(presenter)
+      archived = ArchivedPresenter.find_by_email(presenter.email) || ArchivedPresenter.new
+      archived.fill_from(presenter)
       archived.save
       if  !presenter.account.maintainer? 
         presenter.account.destroy

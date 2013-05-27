@@ -99,10 +99,18 @@ describe Presenter do
       Presenter.archive_all
       Presenter.all.size.should == 1
     end
-    it "moves presenter to archived_presenter" do
+    it "moves maintainer to archived_presenter" do
       presenter = FactoryGirl.create :presenter 
       Presenter.archive_all
       Presenter.all.should be_empty
+      ArchivedPresenter.all.size.should == 1
+      compare_archived(ArchivedPresenter.all.first, presenter)
+    end
+    it "updates presenter in archived_presenter if it already exists " do
+      archived = FactoryGirl.create :archived_presenter
+      account = FactoryGirl.create :confirmed_account, :email => archived.email
+      presenter = FactoryGirl.create :presenter, :bio => "bla bla bla", :account => account
+      Presenter.archive_all
       ArchivedPresenter.all.size.should == 1
       compare_archived(ArchivedPresenter.all.first, presenter)
     end

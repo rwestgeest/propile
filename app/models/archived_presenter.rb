@@ -3,7 +3,7 @@ class ArchivedPresenter < ActiveRecord::Base
 
   validates :email, :presence => true
 
-  def initialize_from (presenter)
+  def fill_from (presenter)
     if presenter
       self.bio =  presenter.bio
       self.email = presenter.email
