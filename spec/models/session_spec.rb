@@ -253,13 +253,34 @@ describe Session do
       session.laptops_required = ""
       session.printable_laptops_required.should == ""
     end
-    it "if max_participants is no returns nothing" do 
+    it "if laptops_required is no returns nothing" do 
       session.laptops_required = "no"
       session.printable_laptops_required.should == ""
     end
-    it "if max_participants is yes returns non-empty string" do 
+    it "if laptops_required is yes returns non-empty string" do 
       session.laptops_required = "yes"
       session.printable_laptops_required.should == "bring laptop"
+    end
+  end
+
+  describe "duration" do
+    let(:session) { FactoryGirl.build(:session_with_presenter) }
+    it "if nil duration is valid" do 
+      session.duration.should == nil
+      session.should be_valid
+    end
+    it "if empty duration is valid" do 
+      session.duration == ""
+      session.duration.should == nil
+      session.should be_valid
+    end
+    it "if correct duration is valid" do 
+      session.duration = "120 min"
+      session.should be_valid
+    end
+    it "if incorrect duration is invalid" do 
+      session.duration = "1 min"
+      session.should be_invalid
     end
   end
 

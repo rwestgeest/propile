@@ -12,6 +12,7 @@ class Session < ActiveRecord::Base
   AVAILABLE_TOPICS = AVAILABLE_TOPICS_AND_NAMES.keys
   AVAILABLE_TOPIC_NAMES = AVAILABLE_TOPICS_AND_NAMES.values
   AVAILABLE_LAPTOPS_REQUIRED = { "no" => "no", "yes" => "yes"}
+  AVAILABLE_DURATION = [ "60 min", "90 min", "120 min", "180 min" ]
 
 
   belongs_to :first_presenter, :class_name => 'Presenter'
@@ -32,6 +33,7 @@ class Session < ActiveRecord::Base
   validates :second_presenter_email, :format => { :with => Presenter::EMAIL_REGEXP }
   validates :topic, :inclusion => { :in => AVAILABLE_TOPICS_AND_NAMES_FOR_SELECT.values, :message => "has invalid value: %{value}. Enter a valid topic." }, :allow_blank => true
   validates :laptops_required, :inclusion => { :in => AVAILABLE_LAPTOPS_REQUIRED.values, :message => "has invalid value: %{value}. Enter yes or no." }, :allow_blank => true 
+  validates :duration, :inclusion => { :in => AVAILABLE_DURATION, :message => "has invalid value: %{value}. " }, :allow_blank => true 
 
   public
   def first_presenter_email

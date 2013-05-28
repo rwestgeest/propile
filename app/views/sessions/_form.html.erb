@@ -88,7 +88,7 @@
     </tr>
     <tr> 
       <td class="sessiontable">  
-        <%= f.label :duration %>: <i> 30 min / 60 min / 90 min </i> 
+        <%= f.label :duration %>: 
       </td>
       <td class="sessiontable">  
         <%= f.label :other_limitations %>:
@@ -96,7 +96,7 @@
     </tr>
     <tr>
       <td class="sessiontable">  
-        <%= text_area :session, :duration, :cols => "48", :rows => "1"  %> 
+        <%= f.select :duration,  Session::AVAILABLE_DURATION, :include_blank => true %>
       </td>
       <td class="sessiontable">  
         <%= text_area :session, :other_limitations, :cols => "48", :rows => "1"  %> 
