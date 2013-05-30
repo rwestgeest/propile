@@ -3,6 +3,7 @@
   re-use activation col as exported_at
   restrictions on session fields (laptops_required, topic)
   start new conference
+  restrictions on session fields (duration)
 # 0.4.17 
   public presenter page: add list of sessions for this presenter
 # 0.4.16 

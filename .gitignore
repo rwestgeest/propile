@@ -12,12 +12,13 @@ tags
 /public/assets
 
 # Ignore the default SQLite database.
-/db/*.sqlite3
-/data/*.sqlite3
+/db/*.sqlite3*
+/data/*.sqlite3*
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+test.rb
 
 # Ignore Netbeans project files
 /nbproject/*
