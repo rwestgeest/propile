@@ -284,4 +284,25 @@ describe Session do
     end
   end
 
+  describe "max_participants" do
+    let(:session) { FactoryGirl.build(:session_with_presenter) }
+    it "if nil max_participants is valid" do 
+      session.max_participants.should == nil
+      session.should be_valid
+    end
+    it "if empty max_participants is valid" do 
+      session.max_participants == ""
+      session.max_participants.should == nil
+      session.should be_valid
+    end
+    it "if correct max_participants is valid" do 
+      session.max_participants = "120"
+      session.should be_valid
+    end
+    it "if incorrect max_participants is invalid" do 
+      session.max_participants = "bla"
+      session.should be_invalid
+    end
+  end
+
 end
