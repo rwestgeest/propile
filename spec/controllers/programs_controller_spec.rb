@@ -39,12 +39,14 @@ describe ProgramsController do
       me.email = "presenter@company.com"
       me.name = "Jane Presenter"
       me.bio = "I've led an interesting life"
+      me.should be_valid
       me.save
 
       friend = Presenter.new
       friend.email = "presenter2@company.com"
       friend.name = "John Presenter"
       friend.bio = "I've led a boring life"
+      friend.should be_valid
       friend.save
 
       session = Session.new
@@ -52,9 +54,10 @@ describe ProgramsController do
       session.description = "We're going to do things nobody's ever done before"
       session.topic = "team"
       session.laptops_required = 'no'
-      session.duration = "90"
+      session.duration = "90 min"
       session.first_presenter = me
       session.second_presenter = friend
+      session.should be_valid
       session.save
 
       entry = ProgramEntry.new
@@ -63,6 +66,7 @@ describe ProgramsController do
       entry.comment = "hocus pocus!"
       entry.session = session
       program.program_entries << entry
+      program.should be_valid
       program.save
     end
   
