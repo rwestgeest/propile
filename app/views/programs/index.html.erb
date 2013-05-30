@@ -41,8 +41,8 @@ A Program's Program Attendance Factor is the average over all the voters.
     <td> <%= link_to 'Edit', controller: 'programs', action: 'edit', id: program.to_param %></td> 
     <td> <%= link_to 'Copy', controller: 'programs', action: 'copy', id: program.to_param %></td> 
     <td> <%= link_to 'Destroy', program, method: :delete %> </td>
-    <td> <%= link_to 'Preview', controller: 'programs', action: 'export', id: program.to_param %></td>
-    <td> <%= link_to 'Export', controller: 'programs', action: 'export', id: program.to_param, format: :text %></td>
+    <td> <%= link_to 'Preview', controller: 'programs', action: 'preview', id: program.to_param %></td>
+    <td> <%= link_to 'Export', controller: 'programs', action: 'export', id: program.to_param %></td>
   </tr>
 <% end %>
 </table>

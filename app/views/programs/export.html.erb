@@ -1,6 +1,6 @@
 
 <a name="top">&nbsp;</a>
-<%= render 'programs/program_matrix_export', :formats => [:html], :program => @program  %>
+<%= render 'programs/program_matrix_export', :program => @program  %>
 
 <br />
 <br />
@@ -35,7 +35,7 @@
                </h3>
              </td>
            </tr>
-           <%= render :partial => 'sessions/export_description.html', :formats => [:html],:locals => { :this_session => program_entry.session }  %>
+           <%= render :partial => 'sessions/export_description',:locals => { :this_session => program_entry.session }  %>
          </table>
 <br />
 <a href="#top">Back to program</a><br />

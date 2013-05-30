@@ -69,4 +69,10 @@ class PresentersController < ApplicationController
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
+
+  def export
+    @presenters = Presenter.all
+    render :layout => false , :content_type => 'text/plain'  # just the html, mam
+  end
+
 end

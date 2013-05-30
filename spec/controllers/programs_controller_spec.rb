@@ -27,6 +27,44 @@ describe ProgramsController do
     def valid_attributes
       FactoryGirl.attributes_for :program
     end
+
+    def fill(program)
+      entry = ProgramEntry.new
+      entry.slot = 1
+      entry.track = 1
+      entry.comment = "helaba!"
+      program.program_entries << entry
+
+      me = Presenter.new
+      me.email = "presenter@company.com"
+      me.name = "Jane Presenter"
+      me.bio = "I've led an interesting life"
+      me.save
+
+      friend = Presenter.new
+      friend.email = "presenter2@company.com"
+      friend.name = "John Presenter"
+      friend.bio = "I've led a boring life"
+      friend.save
+
+      session = Session.new
+      session.title = "Experimental session"
+      session.description = "We're going to do things nobody's ever done before"
+      session.topic = "team"
+      session.laptops_required = 'no'
+      session.duration = "90"
+      session.first_presenter = me
+      session.second_presenter = friend
+      session.save
+
+      entry = ProgramEntry.new
+      entry.slot = 1
+      entry.track = 2
+      entry.comment = "hocus pocus!"
+      entry.session = session
+      program.program_entries << entry
+      program.save
+    end
   
     let(:program) { FactoryGirl.create :program }
     def create_program
@@ -70,22 +108,29 @@ describe ProgramsController do
       end
     end
 
-    describe "GET export" do
+    describe "GET preview" do
       it "assigns the requested program as @program" do
-        get :export, {:id => program.to_param}
+        get :preview, {:id => program.to_param}
         assigns(:program).should eq(program)
       end
     end
 
     describe "GET export of specific programas text" do
       render_views
+      
       it "assigns the requested program as @program" do
-        get :export, :id => program.to_param, :format => :text
+        fill(program)
+        
+        get :export, :id => program.to_param
         assigns(:program).should eq(program)
         response.should be_success
         response.body.should  match(/Legend/)
         response.body.should  match(/Session descriptions/)
         response.body.should  match(/Presenters/)
+        response.body.should match("<a href=\"#presenter_1\">Jane Presenter</a>")
+        response.body.should match("<a href=\"#presenter_2\">John Presenter</a>")
+        response.body.should match("<a href=\"#session_1\">Experimental session</a>")
+        #puts response.body
       end
     end
   

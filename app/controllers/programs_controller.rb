@@ -198,18 +198,25 @@ class ProgramsController < ApplicationController
     end
   end
 
-  def export
+  def preview
     @program = Program.find(params[:id])
 
     respond_to do |format|
-      format.html { render :layout => 'export' } 
-      format.text do 
-        @program.exported_at = Time.now
-        @program.save
-        render :layout => false , :content_type => 'text/plain' , :formats => [:html] # just the html, mam
-      end
+      format.html { render :layout => 'export', :template => 'programs/export' }
       format.json { render json: @program }
     end
   end
 
+  def export
+    @program = Program.find(params[:id])
+
+    respond_to do |format|
+      format.html do
+        @program.exported_at = Time.now
+        @program.save
+        render :layout => false , :content_type => 'text/plain'  # just the html, mam
+      end
+      format.json { render json: @program }
+    end
+  end
 end

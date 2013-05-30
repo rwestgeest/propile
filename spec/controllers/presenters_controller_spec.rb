@@ -135,6 +135,29 @@ describe PresentersController do
         response.should redirect_to(presenters_url)
       end
     end
+
+    describe "GET export" do
+      render_views
+      it "returns a text with pairs of presenter names and emails" do
+
+        jane = Presenter.new
+        jane.name = "Jane Presenter"
+        jane.email =  "jane@agileconsultancy.com"
+        jane.save
+
+        john = Presenter.new
+        john.name = "John Doe"
+        john.email = "johnny@company.com"
+        john.save
+        
+        get :export
+
+        output = response.body.split $/
+        output.length.should == 2
+        output[0].should == "Jane Presenter <jane@agileconsultancy.com>"
+        output[1].should == "John Doe <johnny@company.com>"
+      end
+    end
   end
 
 end

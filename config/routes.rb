@@ -15,7 +15,8 @@ Propile::Application.routes.draw do
     put 'removeSlot', :on => :member
     put 'removeTrack', :on => :member
     get 'program_board_cards', :on => :member
-    get 'export', :on => :collection
+    get 'export', :on => :member
+    get 'preview', :on => :member
   end
 
   resources :propile_configs do
@@ -36,6 +37,7 @@ Propile::Application.routes.draw do
 
   resources :presenters do
     put 'toggle_maintainer_role', :on => :member
+    get 'export', :on => :collection
   end
 
   resources :reviews do
