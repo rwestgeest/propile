@@ -305,4 +305,25 @@ describe Session do
     end
   end
 
+  describe "session_type" do
+    let(:session) { FactoryGirl.build(:session_with_presenter) }
+    it "if nil session_type is valid" do 
+      session.session_type.should == nil
+      session.should be_valid
+    end
+    it "if empty session_type is valid" do 
+      session.session_type == ""
+      session.session_type.should == nil
+      session.should be_valid
+    end
+    it "if correct session_type is valid" do 
+      session.session_type = "Discovery Session"
+      session.should be_valid
+    end
+    it "if incorrect session_type is invalid" do 
+      session.session_type = "bla"
+      session.should be_invalid
+    end
+  end
+
 end

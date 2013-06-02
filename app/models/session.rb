@@ -13,6 +13,7 @@ class Session < ActiveRecord::Base
   AVAILABLE_TOPIC_NAMES = AVAILABLE_TOPICS_AND_NAMES.values
   AVAILABLE_LAPTOPS_REQUIRED = { "no" => "no", "yes" => "yes"}
   AVAILABLE_DURATION = [ "30 min", "75 min", "150 min" ]
+  AVAILABLE_SESSION_TYPE = [ "Experience Report (30 min)", "Discovery Session", "Experiential Learning Session" ]
 
 
   belongs_to :first_presenter, :class_name => 'Presenter'
@@ -35,6 +36,7 @@ class Session < ActiveRecord::Base
   validates :laptops_required, :inclusion => { :in => AVAILABLE_LAPTOPS_REQUIRED.values, :message => "has invalid value: %{value}. Enter yes or no." }, :allow_blank => true 
   validates :duration, :inclusion => { :in => AVAILABLE_DURATION, :message => "has invalid value: %{value}. " }, :allow_blank => true 
   validates_numericality_of :max_participants, :allow_blank => true
+  validates :session_type, :inclusion => { :in => AVAILABLE_SESSION_TYPE, :message => "has invalid value: %{value}. " }, :allow_blank => true 
 
   public
   def first_presenter_email

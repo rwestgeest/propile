@@ -14,10 +14,10 @@
 <div > 
   <table class="sessiontable">
     <tr> 
-      <td class="sessiontable" width="100px">  
+      <td class="sessiontable_label" width="100px">  
           <div> <%= f.label :first_presenter_email %>*: <i><%= !current_account.maintainer? || "(editable for maintainers only)" %></i> </div>
       </td>
-      <td class="sessiontable">  
+      <td class="sessiontable_label">  
           <div> <%= f.label :second_presenter_email %>: <i><%= !current_account.maintainer? || "(editable for maintainers only)" %></i> </div>
       </td>
     </tr>
@@ -51,29 +51,32 @@
 <div>
   <table class="sessiontable">
     <tr> 
-      <td class="sessiontable" width="100px">  
+      <td class="sessiontable_label" width="100px">  
           <%= f.label :session_type %>: 
-          <i class="session_explanation"> can include presentations, simulations, games, workshops, open space...</i>
+          <i class="session_explanation"> 
+             Experience Report: can be a presentations, limited to 30 min. <br> 
+             Discovery Session: open-ended session (workshop, think-tank)<br>
+             Experiential Learning Session: where participants learn something by experience (simulation, game)</i>
       </td>
-      <td class="sessiontable">  
+      <td class="sessiontable_label">  
           <%= f.label :max_participants %>: 
       </td>
     </tr>
     <tr> 
       <td class="sessiontable" >  
-        <%= text_area :session, :session_type, :cols => "48", :rows => "1"  %> 
+        <%= f.select :session_type, Session::AVAILABLE_SESSION_TYPE, :include_blank => true %>
       </td>
       <td class="sessiontable">  
         <%= text_area :session, :max_participants, :cols => "48", :rows => "1"  %> 
       </td>
     </tr>
     <tr> 
-      <td class="sessiontable">  
+      <td class="sessiontable_label">  
         <%= f.label :topic %>: 
         <i> will determine the "color" of your session: Technology and Technique,
             Team and Individual, Process and Improvement, Customer and Planning, Cases and Intros </i> 
       </td>
-      <td class="sessiontable">  
+      <td class="sessiontable_label">  
         <%= f.label :laptops_required %>: 
         <i> for session participants </i> 
       </td>
@@ -87,10 +90,10 @@
       </td>
     </tr>
     <tr> 
-      <td class="sessiontable">  
+      <td class="sessiontable_label">  
         <%= f.label :duration %>: 
       </td>
-      <td class="sessiontable">  
+      <td class="sessiontable_label">  
         <%= f.label :other_limitations %>:
       </td>
     </tr>
@@ -103,10 +106,10 @@
       </td>
     </tr>
     <tr> 
-      <td class="sessiontable">  
+      <td class="sessiontable_label">  
         <%= f.label :room_setup %>: <i> eg: groups (=cabaret), theater, classroom</i> 
       </td>
-      <td class="sessiontable">  
+      <td class="sessiontable_label">  
         <%= f.label :intended_audience %>: 
         <i> who will benefit from this session? 
             Have a look at the <a href="http://www.xpday.net/Xpday2012/Personas.html" target="_new">Personas</a> 
@@ -122,11 +125,11 @@
       </td>
     </tr>
     <tr> 
-      <td class="sessiontable">  
+      <td class="sessiontable_label">  
         <%= f.label :materials_needed %>: 
         <i> extra stuff you need the organisers to arrange for your session </i> 
       </td>
-      <td class="sessiontable">  
+      <td class="sessiontable_label">  
         <%= f.label :experience_level %>: 
         <i> do you expect them to have certain knowledge or experience?</i> 
       </td>

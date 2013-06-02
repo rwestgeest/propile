@@ -125,9 +125,17 @@ table.sessiontable {
   #background-color: pink;
 }
 
+td.sessiontable_label {
+  border: 0px;
+  #background-color: yellow;
+  padding: 10px 10px 0px 0px;
+  vertical-align: bottom;
+}
+
 td.sessiontable {
   border: 0px;
-  padding: 5px 10px 0px 0px;
+  #background-color: pink;
+  padding: 0px 10px 10px 0px;
   vertical-align: bottom;
 }
 

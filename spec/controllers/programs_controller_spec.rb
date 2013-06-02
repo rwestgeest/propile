@@ -54,7 +54,7 @@ describe ProgramsController do
       session.description = "We're going to do things nobody's ever done before"
       session.topic = "team"
       session.laptops_required = 'no'
-      session.duration = "90 min"
+      session.duration = "75 min"
       session.first_presenter = me
       session.second_presenter = friend
       session.should be_valid
