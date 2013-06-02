@@ -3,18 +3,12 @@
 
 <%= f.hidden_field :session_id %>
 
+<div><i>The goal of a review is to help to improve this session proposal.</i></div>
 <%= render 'sessions/show_short', :session => @review.session  %>
 
 <hr>
 
 <h3>Review by: <%= @review.presenter.name %> </h3>
-
-
-  <div class="in_a_form">
-    I give this session a 
-    <%= f.text_field :score, :size => 3 %> / 10. 
-    <i>This means that you, as a reviewer, think that the session can be improved to get a 10/10. You will list those possible improvements below. </i> 
-  </div>
 
 
   <div class="in_a_form">
@@ -30,6 +24,13 @@
       <%= link_to '(formatting)', "/pages/formatting", :target => '_blank', :class => 'smalllink' %> 
     </div>
     <%= f.text_area :things_to_improve, :cols => 100, :rows => 10 %>
+  </div>
+
+  <div class="in_a_form">
+    I give this session  
+    <%= f.text_field :score, :size => 3 %> / 10. <br>
+    <i>This number indicates the ratio of "things you like" to "things to improve". <br>
+       If the session is almost perfect, you will give a number close to 10, so this means that the things to improve are only minor improvements.   </i> 
   </div>
 
   <div class="actions">
