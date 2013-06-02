@@ -275,7 +275,7 @@ describe Session do
       session.should be_valid
     end
     it "if correct duration is valid" do 
-      session.duration = "120 min"
+      session.duration = "150 min"
       session.should be_valid
     end
     it "if incorrect duration is invalid" do 

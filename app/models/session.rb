@@ -12,7 +12,7 @@ class Session < ActiveRecord::Base
   AVAILABLE_TOPICS = AVAILABLE_TOPICS_AND_NAMES.keys
   AVAILABLE_TOPIC_NAMES = AVAILABLE_TOPICS_AND_NAMES.values
   AVAILABLE_LAPTOPS_REQUIRED = { "no" => "no", "yes" => "yes"}
-  AVAILABLE_DURATION = [ "60 min", "90 min", "120 min", "180 min" ]
+  AVAILABLE_DURATION = [ "30 min", "75 min", "150 min" ]
 
 
   belongs_to :first_presenter, :class_name => 'Presenter'
