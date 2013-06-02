@@ -46,7 +46,6 @@ class PresentersController < ApplicationController
 
   def update
     @presenter = Presenter.find(params[:id])
-
     if @presenter.update_attributes(params[:presenter]) 
       if current_account.maintainer? 
         @presenter.account.email = params[:presenter][:email]

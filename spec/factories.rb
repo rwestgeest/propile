@@ -3,6 +3,7 @@ FactoryGirl.define do
   factory :presenter do
     sequence(:email) {|n| "presenter_#{n}@example.com" }
     sequence(:name) {|n| "presenter_#{n}"}
+    role Account::Presenter
   end
 
   factory :archived_presenter do
