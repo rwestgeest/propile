@@ -47,7 +47,12 @@ class PresentersController < ApplicationController
   def update
     @presenter = Presenter.find(params[:id])
 
-    if @presenter.update_attributes(params[:presenter])
+    if @presenter.update_attributes(params[:presenter]) 
+      if current_account.maintainer? 
+        @presenter.account.email = params[:presenter][:email]
+        @presenter.account.role = params[:presenter][:role]
+        @presenter.account.save!(:validate => false)
+      end
       redirect_to @presenter, notice: 'Presenter was successfully updated.'
     else
       render action: "edit"

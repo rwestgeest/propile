@@ -1,5 +1,9 @@
 <h2> <%= @presenter.name  %> </h2>
 <div> <%= @presenter.email %> </div>
+<% if current_account.maintainer? %>
+  <div> <i>maintainer: <%= @presenter.account.maintainer? %> <br> </i>
+  </div>
+<% end %>
 <hr>
 
 <div class="lessoutlined"> 
@@ -13,17 +17,10 @@
 
 <div>
   <%= guarded_link_to 'Edit bio', controller: 'presenters', action: 'edit', id: @presenter.to_param %> 
-  <i>only possible for presenter himself or for a maintainer</i>
-</div>
-<% if current_account.maintainer? %>
-  <%= form_for(@presenter, :url => url_for(:action => 'toggle_maintainer_role') ) do |f| %>
-    <div >
-      maintainer: <%= @presenter.account.maintainer? %> 
-      <%= f.submit 'toggle' %> 
-      <i>(only for maintainers)</i>
-    </div>
+  <% if current_account.maintainer? %>
+    <i>(only possible for presenter himself or for a maintainer)</i>
   <% end %>
-<% end %>
+</div>
 
 
 <hr>

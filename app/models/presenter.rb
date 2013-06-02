@@ -7,13 +7,16 @@ class Presenter < ActiveRecord::Base
   has_many :votes
   belongs_to :account
 
-  attr_accessible :bio, :email, :name
+  attr_accessible :bio, :email, :name, :role
 
   validates :email, :presence => true,
                     :format => { :with => EMAIL_REGEXP }
 
   delegate :email, :to => :lazy_account, :allow_nil => true
   delegate :email=, :to => :lazy_account
+
+  delegate :role, :to => :lazy_account, :allow_nil => true
+  delegate :role=, :to => :lazy_account
 
   def self.voting_presenters
     all.select {|p| !p.votes.empty? }
