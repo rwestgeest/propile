@@ -151,7 +151,7 @@ describe ApplicationHelper do
       let!(:session) { FactoryGirl.build(:session, :first_presenter_email => "presenter_1@example.com", :second_presenter_email => '')}
       it "returns email" do
         session.first_presenter.email.should == "presenter_1@example.com"
-	session_presenter_names(session).should match "link to presenter_1@example.com with #.Presenter .*"
+	      session_presenter_names(session).should match "link to presenter_1@example.com with #.Presenter .*"
       end
     end
     context "first and second presenter email set" do

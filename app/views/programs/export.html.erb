@@ -22,15 +22,15 @@
          <table class="ProgramCard <%=  program_entry.topic%>">
            <tr>
              <td colspan="2">
-               <h2><a name="session_<%=  program_entry.session.to_param%>"></a><%= h program_entry.session.title %></h2>
-               <h3><%= program_entry.session.sub_title  %></h3>
+               <h2><a name="session_<%=  program_entry.session.to_param%>"></a><%= w program_entry.session.title %></h2>
+               <h3><%= w program_entry.session.sub_title  %></h3>
 
                <h3>
                  <% if  program_entry.session.presenters[0] %>
-                   <a href="#presenter_<%=  program_entry.session.presenters[0].id %>"><%= h  program_entry.session.presenters[0].name %></a>
+                   <a href="#presenter_<%=  program_entry.session.presenters[0].id %>"><%= w  program_entry.session.presenters[0].name %></a>
                  <% end %>
                  <% if  program_entry.session.presenters[1] %>
-                   &amp; <a href="#presenter_<%=  program_entry.session.presenters[1].id %>"><%= h  program_entry.session.presenters[1].name %></a>
+                   &amp; <a href="#presenter_<%=  program_entry.session.presenters[1].id %>"><%= w  program_entry.session.presenters[1].name %></a>
                  <% end %>
                </h3>
              </td>
@@ -54,14 +54,14 @@
        program_entry = @program.entry(slot,track)
        if !program_entry.nil? && !program_entry.session.nil? %>
              <% if  program_entry.session.presenters[0] && !presenters.include?(program_entry.session.presenters[0].id) %>
-               <h3><a name="presenter_<%=  program_entry.session.presenters[0].id %>"></a><%= h  program_entry.session.presenters[0].name %></h3>
-               <p><%= wikinize program_entry.session.presenters[0].bio %></p>
+               <h3><a name="presenter_<%=  program_entry.session.presenters[0].id %>"></a><%= w  program_entry.session.presenters[0].name %></h3>
+               <%= wikinize program_entry.session.presenters[0].bio %>
                <br /><a href="#top">Back to program</a><br /><hr />
                <% presenters << program_entry.session.presenters[0].id %>
              <% end %>
              <% if  program_entry.session.presenters[1] && !presenters.include?(program_entry.session.presenters[1].id) %>
-               <h3><a name="presenter_<%=  program_entry.session.presenters[1].id %>"></a><%= h  program_entry.session.presenters[1].name %></h3>
-               <p><%= wikinize program_entry.session.presenters[1].bio %></p>
+               <h3><a name="presenter_<%=  program_entry.session.presenters[1].id %>"></a><%= w  program_entry.session.presenters[1].name %></h3>
+               <%= wikinize program_entry.session.presenters[1].bio %>
                <br /><a href="#top">Back to program</a><br /><hr />
                <% presenters << program_entry.session.presenters[1].id %>
              <% end %>

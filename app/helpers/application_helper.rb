@@ -1,5 +1,7 @@
 require 'menu'
 require 'uri'
+require 'htmlentities'
+
 include ActionView::Helpers::TextHelper
 
 module ApplicationHelper
@@ -52,6 +54,8 @@ module ApplicationHelper
 
   def wikinize( text )
     return "" unless text and not text.empty?
+    coder = HTMLEntities.new
+    text = coder.encode(text, :named)
     if text =~ /^\* /  #list
       text = text.gsub(/^\* (.*)/, '<li>\1</li>')
       text = text.gsub( /<\/li>\n<li>/, '</li><li>' ) #put all bullets in 1 list on same line
@@ -64,6 +68,11 @@ module ApplicationHelper
     text = text.gsub(/\[\[(.*)\]\]/, '\1</a>') #links  with name part 2
     simple_format( text )
   end
+
+  def w(text)
+    coder = HTMLEntities.new
+    coder.encode(text, :named).html_safe
+  end
   
   def sortable(column, title = nil)
     title ||= column.titleize
@@ -74,9 +83,9 @@ module ApplicationHelper
 
   def session_presenter_names(session) 
     return "" unless session.presenters && session.presenters[0]
-    s = (session.presenters[0] && ( link_to session.presenters[0].name, session.presenters[0] )  )
-    s += session.presenters[1].nil? ? "" : " & " 
-    s += (session.presenters[1].nil? ? "" : (link_to session.presenters[1].name, session.presenters[1]) )
+    s = (session.presenters[0] && ( link_to w(session.presenters[0].name), session.presenters[0] )  )
+    s += session.presenters[1].nil? ? "" : " & "
+    s += (session.presenters[1].nil? ? "" : (link_to w(session.presenters[1].name), session.presenters[1]) )
   end
 
   def collapse_button(div_id, initially_collapsed=true)

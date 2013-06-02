@@ -8,7 +8,7 @@
     <th> <%= sortable ? sortable("title") : "Title"  %> </th>
     <th> <%= sortable ? sortable("presenters", "Presenter(s)") : "Presenter(s)" %> </th>
     <th> <%= sortable ? sortable("reviewcount", "Reviews" ) : "Reviews" %> </th>
-    <th> <%= sortable ? sortable("topic") : "Topic" %> </td>
+    <th> <%= sortable ? sortable("topic") : "Topic" %> </th>
     <th> <%= sortable ? sortable("created_at", "Created" ) : "Created" %> </th>
     <th> <%= sortable ? sortable("updated_at", "Modified" ) : "Modified" %> </th>
     <th></th>
@@ -20,7 +20,7 @@
 <% if PropileConfig.voting_active?  %> 
     <td> <% if session.presenter_has_voted_for?(@current_account.presenter.id) %> YES  <% end %> </td>
 <% end %>
-    <td> <%= link_to session.title , session %></td>
+    <td> <%= link_to w(session.title) , session %></td>
     <td> <%= session_presenter_names(session) %> </td>
     <td> <%= session.reviews.count %> </td>
     <td class="<%= session.topic %>"> <%= session.topic_name %> </td>

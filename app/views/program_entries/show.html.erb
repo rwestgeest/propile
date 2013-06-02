@@ -5,9 +5,9 @@
   <div class="in_a_form"> Session: 
            <% if ! @program_entry.session.nil? %> 
               <%= @program_entry.session.id %>  
-              <%= link_to @program_entry.session.title, @program_entry.session %> </div>
+              <%= link_to w(@program_entry.session.title), @program_entry.session %> </div>
            <% end %> 
-  <div class="in_a_form"> Comment: <%= @program_entry.comment %> </div>
+  <div class="in_a_form"> Comment: <%= w @program_entry.comment %> </div>
   <div class="in_a_form"> Span entire row: <%= @program_entry.span_entire_row %> </div>
 
   <div class="alignright">

@@ -12,7 +12,7 @@
 <% @presenters.each_with_index do |presenter, i| %>
   <tr >
     <td> <%= i+1 %> </td>
-    <td> <%= link_to presenter.name, presenter %></td>
+    <td> <%= link_to w(presenter.name), presenter %></td>
     <td><%= presenter.email%> </td>
     <td class="nowrap" ><%= l presenter.created_at %> </td>
     <td class="nowrap" ><%= l presenter.updated_at %> </td>

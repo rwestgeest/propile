@@ -11,8 +11,8 @@
 <% votes.each_with_index do |vote, i| %>
   <tr>
     <td> <%= i+1 %> </td>
-    <td> <%= link_to vote.session.title , vote.session %></td>
-    <td> <%= link_to vote.presenter.name, vote.presenter %> </td>
+    <td> <%= link_to w(vote.session.title) , vote.session %></td>
+    <td> <%= link_to w(vote.presenter.name), vote.presenter %> </td>
     <td class="nowrap" ><%= l vote.created_at %> </td>
     <td> <%= link_to 'Destroy', vote, method: :delete %> </td>
   </tr>

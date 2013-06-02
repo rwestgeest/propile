@@ -9,6 +9,6 @@
 <div class="alignright">
   Comment Created: <%= l comment.created_at %> -- 
   Modified: <%= l comment.updated_at %>  
-  by <%= link_to comment.presenter.name, comment.presenter %>
+  by <%= link_to w(comment.presenter.name), comment.presenter %>
 </div>
 

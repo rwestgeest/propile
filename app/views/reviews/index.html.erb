@@ -11,8 +11,8 @@
 
 <% @reviews.each do |review| %>
   <tr>
-    <td><%= review.session && review.session.title %></td>
-    <td><%= review.presenter %></td>
+    <td><%= review.session && w(review.session.title) %></td>
+    <td><%= w review.presenter %></td>
     <td><%= review.score %></td>
     <td><%= link_to 'Show', review %></td>
     <td><%= guarded_link_to 'Edit', controller: 'reviews', action: 'edit', id: review  %></td>

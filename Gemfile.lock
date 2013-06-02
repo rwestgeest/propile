@@ -70,6 +70,7 @@ GEM
       railties (~> 3.0)
     hashery (2.0.1)
     hike (1.2.1)
+    htmlentities (4.3.1)
     i18n (0.6.0)
     journey (1.0.3)
     jquery-rails (2.0.2)
@@ -191,6 +192,7 @@ DEPENDENCIES
   execjs
   factory_girl_rails
   haml-rails
+  htmlentities
   jquery-rails
   prawn
   rails (= 3.2.3)

@@ -20,7 +20,7 @@
     <td> 
            <% if ! program_entry.session.nil? %> 
               <%= program_entry.session.id %>  
-              <%= link_to program_entry.session.title, program_entry.session %> </div>
+              <%= link_to w(program_entry.session.title), program_entry.session %> </div>
            <% end %> 
     </td>
     <td class="nowrap" ><%= l program_entry.created_at %> </td>

@@ -11,6 +11,7 @@ gem "action-guard", "~> 1.2.0"
 gem 'sqlite3'
 gem "recaptcha", :require => "recaptcha/rails"
 gem 'prawn'
+gem 'htmlentities'
  
 
 group :test do

@@ -10,7 +10,7 @@
   <%= render 'reviews/show', :review => @comment.review  %>
 
   <h4>
-    Comment by <%= @comment.presenter.name %> on this Review:
+    Comment by <%= w @comment.presenter.name %> on this Review:
   </h4>
   <div><%= link_to '(formatting)', "/pages/formatting", :target => '_blank', :class => 'smalllink' %> </div>
 

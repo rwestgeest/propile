@@ -2,30 +2,30 @@
   <div>
     <%= link_to 'Show', @program %>
   </div>
-<br>
+<br />
 
 <h3>Info for this program version <%= collapse_button ("programInfo") %> </h3>
 <div id="programInfo" style="display:none;">
-  number of presenters: <%= @program.presentersInProgram.size %> <br>
-  number of sessions: <%= @program.sessionsInProgram.size %> <br>
+  number of presenters: <%= @program.presentersInProgram.size %> <br />
+  number of sessions: <%= @program.sessionsInProgram.size %> <br />
   <%= link_to 'Export CSV', csv_program_path %> 
-    <i> contains Id, Slot, Track, Title, Subtitle, Presenters, Type, Topic, Duration</i><br>
+    <i> contains Id, Slot, Track, Title, Subtitle, Presenters, Type, Topic, Duration</i><br />
   <%= link_to 'Materials CSV', materials_csv_program_path %> 
-    <i> contains Id, Title, Room, Hour, Max participants, Laptops Required, Other limitations, Room setup, Materials needed, Intended Audience </i><br>
-  <hr>
+    <i> contains Id, Title, Room, Hour, Max participants, Laptops Required, Other limitations, Room setup, Materials needed, Intended Audience </i><br />
+  <hr />
 </div>
-<br>
+<br />
 
 <h3>Printable stuff for this program version  <%= collapse_button ("programPrintStuff") %> </h3>
 <div id="programPrintStuff" style="display:none;">
-  Session Descriptions: <i>longer description, an A4 for each session, we put them somewhere on the wall </i><br>
-  Session Card: <i>short description on an A6 card, we put them on the Program Board</i> <br>
+  Session Descriptions: <i>longer description, an A4 for each session, we put them somewhere on the wall </i><br />
+  Session Card: <i>short description on an A6 card, we put them on the Program Board</i> <br />
   <i>Print them by topic (colour) or all (to check if everything looks ok)</i>
   <table class="tablelist">
     <tr>
-      <th > Session Descriptions (PDF)</td>
-      <th > Session Cards (PDF) </td>
-      <th > &nbsp; </td>
+      <th > Session Descriptions (PDF)</th>
+      <th > Session Cards (PDF) </th>
+      <th > &nbsp; </th>
     </tr>
     <% for topic in Session::AVAILABLE_TOPICS do 
          topic_name = Session.topic_name(topic)
@@ -46,13 +46,13 @@
   </table>
   <hr>
 </div>
-<br>
+<br />
 
 <h3>Modify this program version <%= collapse_button_initially_open ("programMatrix") %> </h3>
 <div id="programMatrix" style="display:block;">
   <%= render 'programs/program_matrix', :program => @program, :editable => true %>
 </div>
-<br>
+<br />
 
 <h3>Program properties <%= collapse_button ("programProperties") %> </h3>
 <div id="programProperties" style="display:none;">
@@ -60,7 +60,7 @@
   Average PAF = <%= @program.avgpaf.nil? ? "not yet calculated" : @program.avgpaf %> &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;
   <%= link_to '(re-)calculate PAF for this program', controller: 'programs', action: 'calculate_paf', id: @program.to_param %>   
 </div>
-<br>
+<br />
 
 <div class="alignright">
   Created: <%= l @program.created_at %> -- 
