@@ -1,9 +1,5 @@
 
 
-<div class="reviewcontenttitle">
-  This session gets a <%= review.score %> / 10.
-</div>
-
 What I like:
 <div class="lessoutlined"> 
   <%= wikinize(review.things_i_like) %>
@@ -11,6 +7,9 @@ What I like:
 Improvement opportunities:
 <div class="lessoutlined"> 
   <%= wikinize(review.things_to_improve) %>
+</div>
+<div class="reviewcontenttitle">
+  This session gets a <%= review.score %> / 10.
 </div>
 
 <div class="alignright">
