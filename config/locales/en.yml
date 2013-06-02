@@ -26,5 +26,5 @@ en:
   sessions:
     captcha_error: "You have not filled in the captcha correctly"
   recaptcha-not-reachable: "Recaptcha was not reachable"
-  not_authorized: "You are nog authorized for this action"
+  not_authorized: "You are not authorized for this action"
 
