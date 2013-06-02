@@ -4,6 +4,24 @@ describe PresentersController do
   it_should_behave_like "a guarded resource controller", :maintainer, :presenter
 
   context "when logged in" do
+    login_as :presenter
+      let(:presenter) { FactoryGirl.create :presenter }
+      describe "email " do
+        it "is not possible when logged in as presenter " do
+          orig_email = presenter.email
+          put :update, {:id => presenter.to_param, :presenter => { :email => "new_email@company.com"} }
+          Presenter.find(presenter.to_param).email.should == orig_email
+        end
+      end
+      describe "role " do
+        it "is possible when logged in as presenter " do
+          put :update, {:id => presenter.to_param, :presenter => { :role => Account::Maintainer } }
+          Presenter.find(presenter.to_param).role.should == Account::Presenter
+        end
+      end
+  end
+
+  context "when logged in" do
     login_as :maintainer
     def valid_attributes
       FactoryGirl.attributes_for :presenter
@@ -85,10 +103,6 @@ describe PresentersController do
       describe "with valid params" do
         it "updates the requested presenter" do
           create_presenter
-          # Assuming there are no other presenters in the database, this
-          # specifies that the Presenter created on the previous line
-          # receives the :update_attributes message with whatever params are
-          # submitted in the request.
           Presenter.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
           put :update, {:id => presenter.to_param, :presenter => {'these' => 'params'}}
         end
@@ -101,6 +115,19 @@ describe PresentersController do
         it "redirects to the presenter" do
           put :update, {:id => presenter.to_param, :presenter => valid_attributes}
           response.should redirect_to(presenter)
+        end
+      end
+
+      describe "email " do
+        it "is possible when logged in as maintainer " do
+          put :update, {:id => presenter.to_param, :presenter => { :email => "new_email@company.com"} }
+          Presenter.find(presenter.to_param).email.should == "new_email@company.com"
+        end
+      end
+      describe "role " do
+        it "is possible when logged in as maintainer " do
+          put :update, {:id => presenter.to_param, :presenter => { :role => Account::Maintainer} }
+          Presenter.find(presenter.to_param).role.should == Account::Maintainer
         end
       end
 
