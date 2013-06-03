@@ -23,6 +23,7 @@
 
 <hr />
 
-<%= link_to 'Export presenters to mailman', export_presenters_path %>
+<%= guarded_link_to 'Export presenters to mailman', controller: 'presenters', action: 'export' %>
+
 
 

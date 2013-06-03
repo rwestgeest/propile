@@ -6,6 +6,7 @@ allow 'presenters#edit', :at_least => :presenter do |account, params|
   account.maintainer? || account.presenter.id == params['id'].to_i
 end
 allow 'presenter#toggle_maintainer_role', :at_least => :maintainer
+allow 'presenters#export', :at_least => :maintainer
 
 allow 'comments', :at_least => :presenter
 allow 'reviews', :at_least => :presenter
