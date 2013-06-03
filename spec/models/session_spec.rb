@@ -317,7 +317,7 @@ describe Session do
       session.should be_valid
     end
     it "if correct session_type is valid" do 
-      session.session_type = "Discovery Session"
+      session.session_type = "discovery session"
       session.should be_valid
     end
     it "if incorrect session_type is invalid" do 

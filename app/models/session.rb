@@ -13,7 +13,7 @@ class Session < ActiveRecord::Base
   AVAILABLE_TOPIC_NAMES = AVAILABLE_TOPICS_AND_NAMES.values
   AVAILABLE_LAPTOPS_REQUIRED = { "no" => "no", "yes" => "yes"}
   AVAILABLE_DURATION = [ "30 min", "75 min", "150 min" ]
-  AVAILABLE_SESSION_TYPE = [ "Experience Report (30 min)", "Discovery Session", "Experiential Learning Session" ]
+  AVAILABLE_SESSION_TYPE = [ "hands on coding/design/architecture session", "discovery session", "experiential learning session", "short experience report (30 min)"]
 
 
   belongs_to :first_presenter, :class_name => 'Presenter'
