@@ -1,7 +1,7 @@
 require 'csv'
 
 class SessionsController < ApplicationController
-  skip_before_filter :authorize_action, :only => [:create, :thanks, :csv]
+  skip_before_filter :authorize_action, :only => [:create, :thanks, :csv,:rss]
   helper_method :sort_column, :sort_direction
 
   def index
@@ -131,6 +131,10 @@ class SessionsController < ApplicationController
     @session.destroy
 
     redirect_to sessions_url 
+  end
+
+  def rss
+     @this_session = Session.find(params[:id])
   end
 
 

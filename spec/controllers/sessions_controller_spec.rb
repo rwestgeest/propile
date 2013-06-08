@@ -1,10 +1,32 @@
 require 'spec_helper'
 require 'csv'
+require 'rexml/document'
 
 describe SessionsController do
   it_should_behave_like "a guarded resource controller", :presenter, :maintainer,
-                                        :except => [:new, :create]
+    :except => [:new, :create, :rss]
 
+  describe "GET rss" do
+    render_views
+    
+    let(:session) { FactoryGirl.create :session_with_presenter }
+    it "returns an empty RSS xml " do
+      get :rss,:id => session.to_param,:format => :xml
+#      puts
+#      puts "-------------"
+#      puts response.body
+#      puts "-------------"
+
+      assigns(:this_session).should == session
+      doc = REXML::Document.new response.body
+      doc.elements['rss/channel/title'][0].should == "Propile: #{session.title} updates"
+      doc.elements.each("rss/channel/item") do |element|
+        element.elements["title"][0].should == session.title
+        element.elements["link"][0].should == ('http://test.host/sessions/' + session.id.to_s)
+      end
+    end
+  end
+   
   describe "GET new" do
     # it "assigns a new session as @session" do
     #   get :new, {}
@@ -12,7 +34,7 @@ describe SessionsController do
     # end
     context "when submit_session is active" do
       it "assigns a new session as @session" do
-        FactoryGirl.create :propile_config, :name => "submit_session_active", :value => "true" 
+        FactoryGirl.create :propile_config, :name => "submit_session_active", :value => "true"
         get :new, {}
         assigns(:session).should be_a_new(Session)
       end
@@ -100,7 +122,7 @@ describe SessionsController do
       end
     end
     describe "when captcha fails" do
-      before do 
+      before do
         Captcha.stub(:verified?).with(controller) { false }
         post :create, {:session => valid_creation_attributes}
       end
