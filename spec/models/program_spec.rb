@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'fileutils'
 
 describe Program do
 
@@ -511,7 +512,8 @@ describe Program do
   end
 
   describe "generate_pdf" do
-    it "returns emtpy pdf for empty program" do 
+    it "returns emtpy pdf for empty program" do
+      FileUtils.mkdir_p 'tmp'
       pdf = program.generate_pdf("tmp/program_test.pdf")
       pdf.should_not be_nil
       pdf.class.should equal File
