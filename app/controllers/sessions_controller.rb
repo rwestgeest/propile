@@ -6,17 +6,17 @@ class SessionsController < ApplicationController
 
   def index
     if sort_column=="reviewcount"
-      @sessions = Session.all.sort { 
+      @sessions = Session.includes(:reviews ,:first_presenter,:second_presenter).all.sort {
         |s1, s2| 
         size_compare = (s1.reviews.size <=> s2.reviews.size) 
         size_compare==0 ? (s1.created_at <=> s2.created_at) : size_compare
       } 
       @sessions = sort_direction=="asc" ? @sessions :  @sessions.reverse 
     elsif sort_column=="presenters"
-      @sessions = Session.all.sort_by { |s| s.presenter_names.upcase }  
+      @sessions = Session.includes(:reviews ,:first_presenter,:second_presenter).all.sort_by { |s| s.presenter_names.upcase }
       @sessions = sort_direction=="asc" ? @sessions :  @sessions.reverse 
     elsif sort_column=="voted"
-      @sessions = Session.all.sort { 
+      @sessions = Session.includes(:reviews ,:first_presenter,:second_presenter).all.sort {
         |s1, s2| 
         size_compare =  ( (s1.presenter_has_voted_for? current_presenter.id).to_s <=> (s2.presenter_has_voted_for? current_presenter.id).to_s )
         size_compare==0 ? (s1.created_at <=> s2.created_at) : size_compare
@@ -25,6 +25,7 @@ class SessionsController < ApplicationController
     else
       @sessions = Session.order( "upper("+sort_column+") " + sort_direction)
     end
+    @voting_active = PropileConfig.voting_active?
   end
 
   def show
