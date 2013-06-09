@@ -10,15 +10,48 @@ describe SessionsController do
     render_views
     
     let(:session) { FactoryGirl.create :session_with_presenter }
+
+    def login_with_basic_authentication
+      account = Account.new
+      account.email = "mail@example.com"
+      account.save
+      account.confirm_with_password :password => 'secret', :password_confirmation => 'secret'
+      request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials("mail@example.com", "secret")
+    end
+
+    def login_with_wrong_basic_authentication
+      account = Account.new
+      account.email = "mail@example.com"
+      account.save
+      account.confirm_with_password :password => 'secret', :password_confirmation => 'secret'
+      request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials("mail@example.com", "secretje")
+    end
+
+    it "doesn't give access without authentication" do
+      parameters = {:id => session.to_param,:format => :xml}
+      get(:rss,parameters,nil)
+      response.code.should == "401"
+    end
+
+     it "doesn't give access with incorrect authentication" do
+      parameters = {:id => session.to_param,:format => :xml}
+      login_with_wrong_basic_authentication
+      get(:rss,parameters,nil)
+      response.code.should == "401"
+    end
+
     it "returns a basic RSS for a session " do
-      get :rss,:id => session.to_param,:format => :xml
+
+      parameters = {:id => session.to_param,:format => :xml}
+      login_with_basic_authentication
+      get(:rss,parameters,nil)
+        
       #      puts
       #      puts "-------------"
       #      puts response.body
       #      puts "-------------"
 
       assigns(:this_session).should == session
-      puts assigns(:last_update).class
       assigns(:last_update).should == session.updated_at
       doc = REXML::Document.new response.body
       doc.elements['rss/channel/title'][0].should == "Propile: #{session.title} updates"
@@ -47,12 +80,14 @@ describe SessionsController do
       review1.updated_at = 3.days.ago
 
       session.save
+
+      login_with_basic_authentication
        
       get :rss,:id => session.to_param,:format => :xml
-#      puts
-#      puts "-------------"
-#      puts response.body
-#      puts "-------------"
+      #      puts
+      #      puts "-------------"
+      #      puts response.body
+      #      puts "-------------"
 
       assigns(:this_session).should == session
 
