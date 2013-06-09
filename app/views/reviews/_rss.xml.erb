@@ -1,8 +1,8 @@
 <item>
-  <title><%= @this_session.title%> - Review by <%= review.presenter.name %></title>
+  <title><![CDATA[<%= w this_session.title%> - Review by <%= w review.presenter.name %>]]></title>
   <link><%= url_for :action => 'show' , :controller => 'reviews' , :id => review , :only_path => false %></link>
   <description><![CDATA[
-    <p>Review of <a href="<%= url_for :action => 'show' , :controller => 'sessions' , :id => @this_session , :only_path => false %>"><%= @this_session.title%></a> by <%= review.presenter.name %></p>
+    <p>Review of <a href="<%= url_for :action => 'show' , :controller => 'sessions' , :id => this_session , :only_path => false %>"><%= w this_session.title%></a> by <%= w review.presenter.name %></p>
     <h3>This session gets a <%= review.score %> / 10.</h3>
     <h3>What I like:</h3>
     <%= wikinize(review.things_i_like) %>
@@ -17,5 +17,5 @@
   <guid><%= url_for :action => 'show' , :controller => 'reviews' , :id => review , :only_path => false %></guid>
 </item>
 <% review.comments.each do |comment| %>
-  <%= render 'comments/rss', :this_session => @this_session , :review => review , :comment => comment%>
+  <%= render 'comments/rss', :this_session => this_session , :review => review , :comment => comment%>
 <% end %>

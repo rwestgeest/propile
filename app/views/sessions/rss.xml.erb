@@ -1,9 +1,9 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0">
    <channel>
-      <title>Propile: <%= @this_session.title%> updates</title>
+      <title>Propile: <%= w @this_session.title%> updates</title>
       <link><%= url_for :action => 'show' , :controller => 'sessions' , :id => @this_session , :only_path => false %></link>
-      <description><%= @this_session.sub_title %></description>
+      <description><%= w @this_session.sub_title %></description>
       <language>en-us</language>
       <pubDate><%= @last_update.strftime("%a, %-d %b %Y %H:%I:%M GMT") %></pubDate>
       <lastBuildDate><%= @last_update.strftime("%a, %-d %b %Y %H:%I:%M GMT") %></lastBuildDate>

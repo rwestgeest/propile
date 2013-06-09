@@ -6,34 +6,72 @@ describe SessionsController do
   it_should_behave_like "a guarded resource controller", :presenter, :maintainer,
     :except => [:new, :create, :rss]
 
+  def login_with_basic_authentication
+    account = Account.new
+    account.email = "mail@example.com"
+    account.save
+    account.confirm_with_password :password => 'secret', :password_confirmation => 'secret'
+    request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials("mail@example.com", "secret")
+  end
+
+  def login_with_wrong_basic_authentication
+    account = Account.new
+    account.email = "mail@example.com"
+    account.save
+    account.confirm_with_password :password => 'secret', :password_confirmation => 'secret'
+    request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials("mail@example.com", "secretje")
+  end
+
+  describe "GET all activity rss" do
+    render_views
+
+    let(:session1) { FactoryGirl.create :session_with_presenter }
+    let(:session2) { FactoryGirl.create :session_with_presenter }
+
+    it "doesn't give access without authentication" do
+      get :activity_rss,:format => :xml
+      response.code.should == "401"
+    end
+
+    it "returns all sessions" do
+
+      session1.save
+      session2.save
+      login_with_basic_authentication
+      get :activity_rss,:format => :xml
+
+      #      puts
+      #      puts "-------------"
+      #      puts response.body
+      #      puts "-------------"
+
+      puts assigns(:sessions).inspect
+      assigns(:sessions).should have(2).items
+      assigns(:last_update).to_s.should == session.updated_at.to_s
+      doc = REXML::Document.new response.body
+      doc.elements['rss/channel/title'][0].should == "Propile: All updates"
+      doc.elements.each("rss/channel/item") do |element|
+        element.elements["title"][0].should == session1.title
+        element.elements["link"][0].should == ('http://test.host/sessions/' + session1.id.to_s)
+      end
+    end
+    
+    let(:session) { FactoryGirl.create :session_with_presenter }
+  end
+
   describe "GET rss" do
     render_views
     
     let(:session) { FactoryGirl.create :session_with_presenter }
 
-    def login_with_basic_authentication
-      account = Account.new
-      account.email = "mail@example.com"
-      account.save
-      account.confirm_with_password :password => 'secret', :password_confirmation => 'secret'
-      request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials("mail@example.com", "secret")
-    end
-
-    def login_with_wrong_basic_authentication
-      account = Account.new
-      account.email = "mail@example.com"
-      account.save
-      account.confirm_with_password :password => 'secret', :password_confirmation => 'secret'
-      request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials("mail@example.com", "secretje")
-    end
-
+  
     it "doesn't give access without authentication" do
       parameters = {:id => session.to_param,:format => :xml}
       get(:rss,parameters,nil)
       response.code.should == "401"
     end
 
-     it "doesn't give access with incorrect authentication" do
+    it "doesn't give access with incorrect authentication" do
       parameters = {:id => session.to_param,:format => :xml}
       login_with_wrong_basic_authentication
       get(:rss,parameters,nil)
@@ -52,7 +90,7 @@ describe SessionsController do
       #      puts "-------------"
 
       assigns(:this_session).should == session
-      assigns(:last_update).should == session.updated_at
+      assigns(:last_update).to_s.should == session.updated_at.to_s
       doc = REXML::Document.new response.body
       doc.elements['rss/channel/title'][0].should == "Propile: #{session.title} updates"
       doc.elements.each("rss/channel/item") do |element|

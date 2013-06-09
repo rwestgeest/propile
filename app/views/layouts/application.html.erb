@@ -1,46 +1,49 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Propile</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-<div>
-  <nav id="header-navigation">
-    <%= image_tag "logo-200.png", :size => "100x50" %> 
-    <% if signed_in? %> 
-      <%= "Signed in as" %>&nbsp;<%= link_to current_account.email , current_account.presenter %>
-      <%= current_account.maintainer? ? "(maintainer)" : "" %>
-      &nbsp;|&nbsp;
-      <%= link_to 'Change password', edit_account_password_path %>&nbsp;|&nbsp;
-      <%= link_to 'Sign out', account_session_path, :method => :delete %>
-    <% else %>
-      <%= link_to 'Sign in', new_account_session_path %>
+  <head>
+    <title>Propile</title>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <% if signed_in? %>
+      <%= auto_discovery_link_tag(:rss,controller: 'sessions', action: 'activity_rss', format: :xml) %>
     <% end %>
-  </nav>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div>
+      <nav id="header-navigation">
+        <%= image_tag "logo-200.png", :size => "100x50" %>
+        <% if signed_in? %>
+          <%= "Signed in as" %>&nbsp;<%= link_to current_account.email , current_account.presenter %>
+          <%= current_account.maintainer? ? "(maintainer)" : "" %>
+          &nbsp;|&nbsp;
+          <%= link_to 'Change password', edit_account_password_path %>&nbsp;|&nbsp;
+          <%= link_to 'Sign out', account_session_path, :method => :delete %>
+        <% else %>
+          <%= link_to 'Sign in', new_account_session_path %>
+        <% end %>
+      </nav>
 
-  <nav id="main-navigation">
-    <ul>
-      <%= menu(request) do |m| %>
-        <% m.tab("Home", 'pages') %>
-        <% m.tab("Sessions", "sessions") %>
-        <% m.tab("Presenters", "presenters") %>
-        <% m.tab("Create Session Proposal", "sessions#new") %>
-        <% m.tab("Votes", "votes") %>
-        <% m.tab("Programs", "programs") %>
-        <% m.tab("Configuration", "propile_configs") %>
-      <% end %>
-    </ul>
-  </nav>
-  <h1><%= yield :title %></h1>
-  <section id="flash_messages">
-    <%= flash_tags %>
-  </section>
-</div>
+      <nav id="main-navigation">
+        <ul>
+          <%= menu(request) do |m| %>
+            <% m.tab("Home", 'pages') %>
+            <% m.tab("Sessions", "sessions") %>
+            <% m.tab("Presenters", "presenters") %>
+            <% m.tab("Create Session Proposal", "sessions#new") %>
+            <% m.tab("Votes", "votes") %>
+            <% m.tab("Programs", "programs") %>
+            <% m.tab("Configuration", "propile_configs") %>
+          <% end %>
+        </ul>
+      </nav>
+      <h1><%= yield :title %></h1>
+      <section id="flash_messages">
+        <%= flash_tags %>
+      </section>
+    </div>
 
-<%= yield %>
+    <%= yield %>
 
-</body>
+  </body>
 </html>

@@ -1,7 +1,7 @@
 require 'csv'
 
 class SessionsController < ApplicationController
-  skip_before_filter :authorize_action, :only => [:create, :thanks, :csv,:rss]
+  skip_before_filter :authorize_action, :only => [:create, :thanks, :csv,:rss,:activity_rss]
   helper_method :sort_column, :sort_direction
 
   def index
@@ -147,6 +147,28 @@ class SessionsController < ApplicationController
         @last_update = [@last_update,review.updated_at].max
         review.comments.each do |comment|
           @last_update = [ @last_update,comment.updated_at ].max
+        end
+      end
+    end
+  end
+
+  def activity_rss
+    account = nil
+    authenticate_with_http_basic do |username,password|
+      account = Account.authenticate_by_email_and_password(username,password)
+    end
+    if account.nil? then
+      request_http_basic_authentication("Propile RSS feeds")
+    else
+      @sessions = Session.includes({:reviews => [{:comments => :presenter}, :presenter]},:first_presenter,:second_presenter).limit(200)
+      @last_update = Time.now
+      @sessions.each do |session|
+        @last_update = session.updated_at
+        session.reviews.each do |review|
+          @last_update = [@last_update,review.updated_at].max
+          review.comments.each do |comment|
+            @last_update = [ @last_update,comment.updated_at ].max
+          end
         end
       end
     end

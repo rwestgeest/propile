@@ -1,37 +1,37 @@
 <item>
-  <title><%= @this_session.title%></title>
-  <link><%= url_for :action => 'show' , :controller => 'sessions' , :id => @this_session , :only_path => false %></link>
+  <title><![CDATA[<%= w this_session.title%>]]></title>
+  <link><%= url_for :action => 'show' , :controller => 'sessions' , :id => this_session , :only_path => false %></link>
   <description><![CDATA[
-    <h2><%= w @this_session.title  %></h2>
-    <h3> <%= w @this_session.sub_title  %></h3>
-    <div>by <%= session_presenter_names(@this_session) %><hr /></div>
+    <h2><%= w this_session.title  %></h2>
+    <h3> <%= w this_session.sub_title  %></h3>
+    <div>by <%= session_presenter_names(this_session) %><hr /></div>
     <h4>Short:</h4>
     <div class="outlined">
-      <%= wikinize(  @this_session.short_description )  %>
+      <%= wikinize(  this_session.short_description )  %>
     </div>
     <table border="1" >
       <tr>
-        <td colspan="2"> Goal of the session: <%= @this_session.session_goal %>  </td>
+        <td colspan="2"> Goal of the session: <%= this_session.session_goal %>  </td>
       </tr>
       <tr>
-        <td> Session Type: <%= @this_session.session_type %> </td>
-        <td> Max participants: <%= @this_session.max_participants %>  </td>
+        <td> Session Type: <%= this_session.session_type %> </td>
+        <td> Max participants: <%= this_session.max_participants %>  </td>
       </tr>
       <tr>
-        <td> Topic: <span class="<%= @this_session.topic %>"> <%= @this_session.topic_name %> </span> </td>
-        <td> Laptops required: <%= @this_session.laptops_required %>  </td>
+        <td> Topic: <span class="<%= this_session.topic %>"> <%= this_session.topic_name %> </span> </td>
+        <td> Laptops required: <%= this_session.laptops_required %>  </td>
       </tr>
       <tr>
-        <td> Duration: <%= @this_session.duration %>  </td>
-        <td> Other limitations: <%= @this_session.other_limitations %>  </td>
+        <td> Duration: <%= this_session.duration %>  </td>
+        <td> Other limitations: <%= this_session.other_limitations %>  </td>
       </tr>
       <tr>
-        <td> Intended audience: <%= @this_session.intended_audience %>  </td>
-        <td> Room setup: <%= @this_session.room_setup %>  </td>
+        <td> Intended audience: <%= this_session.intended_audience %>  </td>
+        <td> Room setup: <%= this_session.room_setup %>  </td>
       </tr>
       <tr>
-        <td> Experience level: <%= @this_session.experience_level %> </td>
-        <td> Materials needed: <%= @this_session.materials_needed %> </td>
+        <td> Experience level: <%= this_session.experience_level %> </td>
+        <td> Materials needed: <%= this_session.materials_needed %> </td>
       </tr>
     </table>
 
@@ -39,7 +39,7 @@
     <div>
       <h4>Description</h4>
       <div class="lessoutlined">
-        <%= wikinize( @this_session.description) %>
+        <%= wikinize( this_session.description) %>
       </div>
     </div>
 
@@ -47,16 +47,16 @@
     <div>
       <h4>Outline or Timetable</h4>
       <div class="lessoutlined">
-        <%= wikinize( @this_session.outline_or_timetable) %>
+        <%= wikinize( this_session.outline_or_timetable) %>
       </div>
     </div>
 
     <div class="alignright">
-      Created: <%= l @this_session.created_at %> --
-      Modified: <%= l @this_session.updated_at %>
+      Created: <%= l this_session.created_at %> --
+      Modified: <%= l this_session.updated_at %>
     </div>
 
     ]]></description>
-  <pubDate><%= @this_session.updated_at.strftime("%a, %-d %b %Y %H:%I:%M GMT") %></pubDate>
-  <guid><%= url_for :action => 'show' , :controller => 'sessions' , :id => @this_session , :only_path => false %></guid>
+  <pubDate><%= this_session.updated_at.strftime("%a, %-d %b %Y %H:%I:%M GMT") %></pubDate>
+  <guid><%= url_for :action => 'show' , :controller => 'sessions' , :id => this_session , :only_path => false %></guid>
 </item>
