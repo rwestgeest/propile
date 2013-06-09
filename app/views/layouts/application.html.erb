@@ -4,9 +4,6 @@
   <title>Propile</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
-  <% if controller.controller_name == 'sessions' && controller.action_name = 'show' %>
-    <%= auto_discovery_link_tag(:rss,controller: 'sessions', action: 'rss', format: :xml, id: @session.to_param) %>
-  <% end %>
   <%= csrf_meta_tags %>
 </head>
 <body>
