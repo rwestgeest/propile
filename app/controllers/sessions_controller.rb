@@ -135,6 +135,13 @@ class SessionsController < ApplicationController
 
   def rss
      @this_session = Session.find(params[:id])
+     @last_update = @this_session.updated_at
+     @this_session.reviews.each do |review|
+       @last_update = [@last_update,review.updated_at].max
+       review.comments.each do |comment|
+         @last_update = [ @last_update,comment.updated_at ].max
+       end
+     end
   end
 
 

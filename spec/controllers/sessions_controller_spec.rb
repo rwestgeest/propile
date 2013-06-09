@@ -10,7 +10,44 @@ describe SessionsController do
     render_views
     
     let(:session) { FactoryGirl.create :session_with_presenter }
-    it "returns an empty RSS xml " do
+    it "returns a basic RSS for a session " do
+      get :rss,:id => session.to_param,:format => :xml
+      #      puts
+      #      puts "-------------"
+      #      puts response.body
+      #      puts "-------------"
+
+      assigns(:this_session).should == session
+      puts assigns(:last_update).class
+      assigns(:last_update).should == session.updated_at
+      doc = REXML::Document.new response.body
+      doc.elements['rss/channel/title'][0].should == "Propile: #{session.title} updates"
+      doc.elements.each("rss/channel/item") do |element|
+        element.elements["title"][0].should == session.title
+        element.elements["link"][0].should == ('http://test.host/sessions/' + session.id.to_s)
+      end
+    end
+ 
+
+    it "returns a full RSS for a session with reviews and comment " do
+      reviewer = Presenter.new :name => "Jane Presenter" , :email => "jane@company.com"
+      review1 = Review.new :score => "3" , :things_i_like => "something" , :things_to_improve => "some ideas"
+      review1.presenter = reviewer
+      session.reviews << review1
+
+      review2 = Review.new :score => "10" , :things_i_like => "Everything!"
+      review2.presenter = reviewer
+      session.reviews << review2
+
+      comment = review1.comments.create :body => "Thank you for the review"
+      comment.presenter = session.first_presenter
+      comment.save
+
+      session.updated_at = 5.days.ago
+      review1.updated_at = 3.days.ago
+
+      session.save
+       
       get :rss,:id => session.to_param,:format => :xml
 #      puts
 #      puts "-------------"
@@ -18,12 +55,22 @@ describe SessionsController do
 #      puts "-------------"
 
       assigns(:this_session).should == session
+
+      assigns(:last_update).should == comment.updated_at
       doc = REXML::Document.new response.body
       doc.elements['rss/channel/title'][0].should == "Propile: #{session.title} updates"
-      doc.elements.each("rss/channel/item") do |element|
-        element.elements["title"][0].should == session.title
-        element.elements["link"][0].should == ('http://test.host/sessions/' + session.id.to_s)
-      end
+      
+      items = REXML::XPath.match(doc,"//item")
+      
+      items.length.should == 4
+      
+      items[0].elements["title"][0].should == session.title
+      items[0].elements["link"][0].should == ('http://test.host/sessions/' + session.id.to_s)
+
+      items[1].elements["title"][0].should == "#{session.title} - Review by #{reviewer.name}"
+      items[1].elements["link"][0].should == ('http://test.host/reviews/' + review1.id.to_s)
+
+   
     end
   end
    

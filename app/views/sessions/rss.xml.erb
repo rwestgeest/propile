@@ -5,8 +5,8 @@
       <link><%= url_for :action => 'show' , :controller => 'sessions' , :id => @this_session , :only_path => false %></link>
       <description><%= @this_session.sub_title %></description>
       <language>en-us</language>
-      <pubDate><%= Time.now.strftime("%a, %-d %b %Y %H:%I:%M GMT") %></pubDate>
-      <lastBuildDate><%= Time.now.strftime("%a, %-d %b %Y %H:%I:%M GMT") %></lastBuildDate>
+      <pubDate><%= @last_update.strftime("%a, %-d %b %Y %H:%I:%M GMT") %></pubDate>
+      <lastBuildDate><%= @last_update.strftime("%a, %-d %b %Y %H:%I:%M GMT") %></lastBuildDate>
       <docs>http://blogs.law.harvard.edu/tech/rss</docs>
       <generator>Propile</generator>
       <managingEditor>sessions@xpday.net</managingEditor>
