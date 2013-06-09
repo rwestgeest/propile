@@ -45,15 +45,16 @@ describe SessionsController do
       #      puts response.body
       #      puts "-------------"
 
-      puts assigns(:sessions).inspect
       assigns(:sessions).should have(2).items
-      assigns(:last_update).to_s.should == session.updated_at.to_s
+      assigns(:last_update).to_s.should == session2.updated_at.to_s
       doc = REXML::Document.new response.body
       doc.elements['rss/channel/title'][0].should == "Propile: All updates"
+      titles = []
       doc.elements.each("rss/channel/item") do |element|
-        element.elements["title"][0].should == session1.title
-        element.elements["link"][0].should == ('http://test.host/sessions/' + session1.id.to_s)
+        titles <<  element.elements["title"][0]
       end
+      titles.should include(session1.title)
+      titles.should include(session2.title)
     end
     
     let(:session) { FactoryGirl.create :session_with_presenter }
@@ -129,7 +130,7 @@ describe SessionsController do
 
       assigns(:this_session).should == session
 
-      assigns(:last_update).should == comment.updated_at
+      assigns(:last_update).to_s.should == comment.updated_at.to_s
       doc = REXML::Document.new response.body
       doc.elements['rss/channel/title'][0].should == "Propile: #{session.title} updates"
       
