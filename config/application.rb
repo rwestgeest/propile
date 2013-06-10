@@ -72,5 +72,11 @@ module Propile
       g.webrat true
       g.view_specs false
     end
+
+    def self.mail_subject_prefix
+      "[Propile XP Days 2013] "
+    end
   end
+
+  
 end

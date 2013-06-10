@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'fileutils'
 
 describe Session do
   describe "saving" do 
@@ -207,6 +208,7 @@ describe Session do
                                       :short_description => "the short description", 
                                       :session_type => "the session type") }
     it "returns a pdf file" do
+      FileUtils.mkdir_p 'tmp'
       pdf = session.generate_pdf("tmp/session_test.pdf")
       pdf.should_not be_nil
       pdf.class.should equal File
@@ -219,6 +221,7 @@ describe Session do
                                       :short_description => "the short description", 
                                       :session_type => "the session type") }
     it "returns a pdf file" do
+      FileUtils.mkdir_p 'tmp'
       pdf = session.generate_program_board_card_pdf("tmp/session_test.pdf")
       pdf.should_not be_nil
       pdf.class.should equal File
