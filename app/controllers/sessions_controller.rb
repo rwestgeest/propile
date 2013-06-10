@@ -160,7 +160,7 @@ class SessionsController < ApplicationController
     if account.nil? then
       request_http_basic_authentication("Propile RSS feeds")
     else
-      @sessions = Session.includes({:reviews => [{:comments => :presenter}, :presenter]},:first_presenter,:second_presenter).limit(200)
+      @sessions = Session.includes({:reviews => [{:comments => {:presenter => :account}}, {:presenter => :account}]},{:first_presenter => :account},{:second_presenter => :account}).limit(200)
       @last_update = Time.now
       @sessions.each do |session|
         @last_update = session.updated_at
