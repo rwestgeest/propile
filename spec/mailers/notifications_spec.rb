@@ -9,7 +9,7 @@ describe Notifications do
     let(:mail) { Notifications.session_submit(presenter,session) }
 
     it "renders the headers" do
-      mail.subject.should eq(I18n.t('notifications.session_submit.subject'))
+      mail.subject.should eq(Propile::Application.mail_subject_prefix + I18n.t('notifications.session_submit.subject'))
       mail.to.should eq([presenter.email])
       mail.from.should eq([Notifications::FromAddress])
     end
@@ -41,7 +41,7 @@ describe Notifications do
     let(:session) { review.session }
     let(:mail) { Notifications.review_creation "to@mail.com", review }
     it "renders the headers" do
-      mail.subject.should  == "Review on session '#{session.title}'"
+      mail.subject.should  == Propile::Application.mail_subject_prefix + "Review on session '#{session.title}'"
       mail.to.should  == ['to@mail.com']
       mail.from.should == [ Notifications::FromAddress ]
     end
@@ -62,7 +62,7 @@ describe Notifications do
     let(:session) { review.session }
     let(:mail) { Notifications.comment_creation "to@mail.com", comment }
     it "renders the headers" do
-      mail.subject.should  == "Comment for review on session '#{session.title}'"
+      mail.subject.should  == Propile::Application.mail_subject_prefix + "Comment for review on session '#{session.title}'"
       mail.to.should  == ['to@mail.com']
       mail.from.should == [ Notifications::FromAddress ]
     end
