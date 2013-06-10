@@ -2,7 +2,8 @@
   <title><![CDATA[<%= w this_session.title%> - Review by <%= w review.presenter.name %>]]></title>
   <link><%= url_for :action => 'show' , :controller => 'reviews' , :id => review , :only_path => false %></link>
   <description><![CDATA[
-    <p>Review of <a href="<%= url_for :action => 'show' , :controller => 'sessions' , :id => this_session , :only_path => false %>"><%= w this_session.title%></a> by <%= w review.presenter.name %></p>
+    <p>Review of <a href="<%= url_for :action => 'show' , :controller => 'sessions' , :id => this_session , :only_path => false %>"><%= w this_session.title%></a> 
+      by <a href="<%= url_for :action => 'show' , :controller => 'presenters' , :id => review.presenter , :only_path => false %>"><%= w review.presenter.name %></a></p>
     <h3>This session gets a <%= review.score %> / 10.</h3>
     <h3>What I like:</h3>
     <%= wikinize(review.things_i_like) %>

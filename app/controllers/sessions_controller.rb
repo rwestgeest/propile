@@ -4,6 +4,8 @@ class SessionsController < ApplicationController
   skip_before_filter :authorize_action, :only => [:create, :thanks, :csv,:rss,:activity_rss]
   helper_method :sort_column, :sort_direction
 
+  COMPLETE_SESSION_INCLUDES = {:reviews => [{:comments => {:presenter => :account}}, {:presenter => :account}]},{:first_presenter => :account},{:second_presenter => :account}
+  
   def index
     if sort_column=="reviewcount"
       @sessions = Session.all.sort { 
@@ -141,7 +143,8 @@ class SessionsController < ApplicationController
     if account.nil? then
       request_http_basic_authentication("Propile RSS feeds")
     else
-      @this_session = Session.find(params[:id])
+      
+      @this_session = Session.includes(COMPLETE_SESSION_INCLUDES).find(params[:id])
       @last_update = @this_session.updated_at
       @this_session.reviews.each do |review|
         @last_update = [@last_update,review.updated_at].max
@@ -160,7 +163,7 @@ class SessionsController < ApplicationController
     if account.nil? then
       request_http_basic_authentication("Propile RSS feeds")
     else
-      @sessions = Session.includes({:reviews => [{:comments => {:presenter => :account}}, {:presenter => :account}]},{:first_presenter => :account},{:second_presenter => :account}).limit(200)
+      @sessions = Session.includes(COMPLETE_SESSION_INCLUDES).limit(200)
       @last_update = Time.now
       @sessions.each do |session|
         @last_update = session.updated_at

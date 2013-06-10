@@ -5,57 +5,37 @@
     <h2><%= w this_session.title  %></h2>
     <h3> <%= w this_session.sub_title  %></h3>
     <div>by <%= session_presenter_names(this_session) %><hr /></div>
-    <h4>Short:</h4>
-    <div class="outlined">
+    <div>
       <%= wikinize(  this_session.short_description )  %>
     </div>
+    <p><strong>Goal of the session</strong>: <%= w this_session.session_goal %> </p>
     <table border="1" >
       <tr>
-        <td colspan="2"> Goal of the session: <%= this_session.session_goal %>  </td>
+        <td> <strong>Session Type</strong>: <%= this_session.session_type %> </td>
+        <td> <strong>Max participants</strong>: <%= this_session.max_participants %>  </td>
       </tr>
       <tr>
-        <td> Session Type: <%= this_session.session_type %> </td>
-        <td> Max participants: <%= this_session.max_participants %>  </td>
+        <td> <strong>Topic</strong>: <%= this_session.topic_name %></td>
+        <td> <strong>Laptops required</strong>: <%= this_session.laptops_required %>  </td>
       </tr>
       <tr>
-        <td> Topic: <span class="<%= this_session.topic %>"> <%= this_session.topic_name %> </span> </td>
-        <td> Laptops required: <%= this_session.laptops_required %>  </td>
+        <td> <strong>Duration</strong>: <%= this_session.duration %>  </td>
+        <td> <strong>Other limitations</strong>: <%= this_session.other_limitations %>  </td>
       </tr>
       <tr>
-        <td> Duration: <%= this_session.duration %>  </td>
-        <td> Other limitations: <%= this_session.other_limitations %>  </td>
+        <td> <strong>Intended audience</strong>: <%= this_session.intended_audience %>  </td>
+        <td> <strong>Room setup</strong>: <%= this_session.room_setup %>  </td>
       </tr>
       <tr>
-        <td> Intended audience: <%= this_session.intended_audience %>  </td>
-        <td> Room setup: <%= this_session.room_setup %>  </td>
-      </tr>
-      <tr>
-        <td> Experience level: <%= this_session.experience_level %> </td>
-        <td> Materials needed: <%= this_session.materials_needed %> </td>
+        <td> <strong>Experience level</strong>: <%= this_session.experience_level %> </td>
+        <td> <strong>Materials needed</strong>: <%= this_session.materials_needed %> </td>
       </tr>
     </table>
-
-
-    <div>
-      <h4>Description</h4>
-      <div class="lessoutlined">
-        <%= wikinize( this_session.description) %>
-      </div>
-    </div>
-
-
-    <div>
-      <h4>Outline or Timetable</h4>
-      <div class="lessoutlined">
-        <%= wikinize( this_session.outline_or_timetable) %>
-      </div>
-    </div>
-
-    <div class="alignright">
-      Created: <%= l this_session.created_at %> --
-      Modified: <%= l this_session.updated_at %>
-    </div>
-
+    <h4>Description</h4>
+    <%= wikinize( this_session.description) %>
+    <h4>Outline or Timetable</h4>
+    <hr/>
+    <p>Created: <%= l this_session.created_at %> -- Modified: <%= l this_session.updated_at %></p>
     ]]></description>
   <pubDate><%= this_session.updated_at.strftime("%a, %-d %b %Y %H:%I:%M GMT") %></pubDate>
   <guid><%= url_for :action => 'show' , :controller => 'sessions' , :id => this_session , :only_path => false %></guid>
