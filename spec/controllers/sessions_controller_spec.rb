@@ -1,10 +1,153 @@
 require 'spec_helper'
 require 'csv'
+require 'rexml/document'
 
 describe SessionsController do
   it_should_behave_like "a guarded resource controller", :presenter, :maintainer,
-                                        :except => [:new, :create]
+    :except => [:new, :create, :rss]
 
+  def login_with_basic_authentication
+    account = Account.new
+    account.email = "mail@example.com"
+    account.save
+    account.confirm_with_password :password => 'secret', :password_confirmation => 'secret'
+    request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials("mail@example.com", "secret")
+  end
+
+  def login_with_wrong_basic_authentication
+    account = Account.new
+    account.email = "mail@example.com"
+    account.save
+    account.confirm_with_password :password => 'secret', :password_confirmation => 'secret'
+    request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials("mail@example.com", "secretje")
+  end
+
+  describe "GET all activity rss" do
+    render_views
+
+    let(:session1) { FactoryGirl.create :session_with_presenter }
+    let(:session2) { FactoryGirl.create :session_with_presenter }
+
+    it "doesn't give access without authentication" do
+      get :activity_rss,:format => :xml
+      response.code.should == "401"
+    end
+
+    it "returns all sessions" do
+
+      session1.save
+      session2.save
+      login_with_basic_authentication
+      get :activity_rss,:format => :xml
+
+      #      puts
+      #      puts "-------------"
+      #      puts response.body
+      #      puts "-------------"
+
+      assigns(:sessions).should have(2).items
+      assigns(:last_update).to_s.should == session2.updated_at.to_s
+      doc = REXML::Document.new response.body
+      doc.elements['rss/channel/title'][0].should == "Propile: All updates"
+      titles = []
+      doc.elements.each("rss/channel/item") do |element|
+        titles <<  element.elements["title"][0]
+      end
+      titles.should include(session1.title)
+      titles.should include(session2.title)
+    end
+    
+    let(:session) { FactoryGirl.create :session_with_presenter }
+  end
+
+  describe "GET rss" do
+    render_views
+    
+    let(:session) { FactoryGirl.create :session_with_presenter }
+
+  
+    it "doesn't give access without authentication" do
+      parameters = {:id => session.to_param,:format => :xml}
+      get(:rss,parameters,nil)
+      response.code.should == "401"
+    end
+
+    it "doesn't give access with incorrect authentication" do
+      parameters = {:id => session.to_param,:format => :xml}
+      login_with_wrong_basic_authentication
+      get(:rss,parameters,nil)
+      response.code.should == "401"
+    end
+
+    it "returns a basic RSS for a session " do
+
+      parameters = {:id => session.to_param,:format => :xml}
+      login_with_basic_authentication
+      get(:rss,parameters,nil)
+        
+      #      puts
+      #      puts "-------------"
+      #      puts response.body
+      #      puts "-------------"
+
+      assigns(:this_session).should == session
+      assigns(:last_update).to_s.should == session.updated_at.to_s
+      doc = REXML::Document.new response.body
+      doc.elements['rss/channel/title'][0].should == "Propile: #{session.title} updates"
+      doc.elements.each("rss/channel/item") do |element|
+        element.elements["title"][0].should == session.title
+        element.elements["link"][0].should == ('http://test.host/sessions/' + session.id.to_s)
+      end
+    end
+ 
+
+    it "returns a full RSS for a session with reviews and comment " do
+      reviewer = Presenter.new :name => "Jane Presenter" , :email => "jane@company.com"
+      review1 = Review.new :score => "3" , :things_i_like => "something" , :things_to_improve => "some ideas"
+      review1.presenter = reviewer
+      session.reviews << review1
+
+      review2 = Review.new :score => "10" , :things_i_like => "Everything!"
+      review2.presenter = reviewer
+      session.reviews << review2
+
+      comment = review1.comments.create :body => "Thank you for the review"
+      comment.presenter = session.first_presenter
+      comment.save
+
+      session.updated_at = 5.days.ago
+      review1.updated_at = 3.days.ago
+
+      session.save
+
+      login_with_basic_authentication
+       
+      get :rss,:id => session.to_param,:format => :xml
+      #      puts
+      #      puts "-------------"
+      #      puts response.body
+      #      puts "-------------"
+
+      assigns(:this_session).should == session
+
+      assigns(:last_update).to_s.should == comment.updated_at.to_s
+      doc = REXML::Document.new response.body
+      doc.elements['rss/channel/title'][0].should == "Propile: #{session.title} updates"
+      
+      items = REXML::XPath.match(doc,"//item")
+      
+      items.length.should == 4
+      
+      items[0].elements["title"][0].should == session.title
+      items[0].elements["link"][0].should == ('http://test.host/sessions/' + session.id.to_s)
+
+      items[1].elements["title"][0].should == "#{session.title} - Review by #{reviewer.name}"
+      items[1].elements["link"][0].should == ('http://test.host/reviews/' + review1.id.to_s)
+
+   
+    end
+  end
+   
   describe "GET new" do
     # it "assigns a new session as @session" do
     #   get :new, {}
@@ -12,7 +155,7 @@ describe SessionsController do
     # end
     context "when submit_session is active" do
       it "assigns a new session as @session" do
-        FactoryGirl.create :propile_config, :name => "submit_session_active", :value => "true" 
+        FactoryGirl.create :propile_config, :name => "submit_session_active", :value => "true"
         get :new, {}
         assigns(:session).should be_a_new(Session)
       end
@@ -100,7 +243,7 @@ describe SessionsController do
       end
     end
     describe "when captcha fails" do
-      before do 
+      before do
         Captcha.stub(:verified?).with(controller) { false }
         post :create, {:session => valid_creation_attributes}
       end

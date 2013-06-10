@@ -1,9 +1,11 @@
 require 'csv'
 
 class SessionsController < ApplicationController
-  skip_before_filter :authorize_action, :only => [:create, :thanks, :csv]
+  skip_before_filter :authorize_action, :only => [:create, :thanks, :csv,:rss,:activity_rss]
   helper_method :sort_column, :sort_direction
 
+  COMPLETE_SESSION_INCLUDES = {:reviews => [{:comments => {:presenter => :account}}, {:presenter => :account}]},{:first_presenter => :account},{:second_presenter => :account}
+  
   def index
     eager_loaded = [:reviews ,{:first_presenter => :account},{:second_presenter => :account}]
     if sort_column=="reviewcount"
@@ -78,24 +80,24 @@ class SessionsController < ApplicationController
     session_csv = CSV.generate(options = { :col_sep => ';' }) do |csv| 
       #header row
       csv << [ "Title", "Subtitle",
-               "Presenters", "Created", "Modified", 
-               "Type", "Topic", "Duration", 
-               "Reviews", 
-               "Goal", 
-               "Intended Audience", "Experience Level", 
-               "Max participants", "Laptops", "Other limitations", "Room setup", "Materials", 
-               "Short" ]
+        "Presenters", "Created", "Modified",
+        "Type", "Topic", "Duration",
+        "Reviews",
+        "Goal",
+        "Intended Audience", "Experience Level",
+        "Max participants", "Laptops", "Other limitations", "Room setup", "Materials",
+        "Short" ]
       #data row
       @sessions.each do |session| 
         csv << [ session.title, session.sub_title, 
-                 session.presenter_names, session.created_at, session.updated_at,
-                 session.session_type, session.topic_name, session.duration, 
-                 session.reviews.size,
-                 session.session_goal, 
-                 session.intended_audience, session.experience_level,
-                 session.max_participants, session.laptops_required, session.other_limitations, session.room_setup, session.materials_needed,
-                 session.short_description
-               ].collect {|field| (field.blank?) ?  "(none)" : field }
+          session.presenter_names, session.created_at, session.updated_at,
+          session.session_type, session.topic_name, session.duration,
+          session.reviews.size,
+          session.session_goal,
+          session.intended_audience, session.experience_level,
+          session.max_participants, session.laptops_required, session.other_limitations, session.room_setup, session.materials_needed,
+          session.short_description
+        ].collect {|field| (field.blank?) ?  "(none)" : field }
       end
     end
     send_data(session_csv, :type => 'test/csv', :filename => 'sessions.csv') 
@@ -136,6 +138,48 @@ class SessionsController < ApplicationController
     @session.destroy
 
     redirect_to sessions_url 
+  end
+
+  def rss
+    account = nil
+    authenticate_with_http_basic do |username,password|
+      account = Account.authenticate_by_email_and_password(username,password)
+    end
+    if account.nil? then
+      request_http_basic_authentication("Propile RSS feeds")
+    else
+      
+      @this_session = Session.includes(COMPLETE_SESSION_INCLUDES).find(params[:id])
+      @last_update = @this_session.updated_at
+      @this_session.reviews.each do |review|
+        @last_update = [@last_update,review.updated_at].max
+        review.comments.each do |comment|
+          @last_update = [ @last_update,comment.updated_at ].max
+        end
+      end
+    end
+  end
+
+  def activity_rss
+    account = nil
+    authenticate_with_http_basic do |username,password|
+      account = Account.authenticate_by_email_and_password(username,password)
+    end
+    if account.nil? then
+      request_http_basic_authentication("Propile RSS feeds")
+    else
+      @sessions = Session.includes(COMPLETE_SESSION_INCLUDES).limit(200)
+      @last_update = Time.now
+      @sessions.each do |session|
+        @last_update = session.updated_at
+        session.reviews.each do |review|
+          @last_update = [@last_update,review.updated_at].max
+          review.comments.each do |comment|
+            @last_update = [ @last_update,comment.updated_at ].max
+          end
+        end
+      end
+    end
   end
 
 

@@ -1,0 +1,13 @@
+<item>
+  <title><![CDATA[<%= w this_session.title%> - Review by <%= w review.presenter.name %> - Comment by <%=  w comment.presenter.name %>]]></title>
+  <link><%= url_for :action => 'show' , :controller => 'comments' , :id => comment, :only_path => false %></link>
+  <description><![CDATA[
+    <p>Comment by  <a href="<%= url_for :action => 'show' , :controller => 'presenters' , :id => comment.presenter , :only_path => false %>"><%=  w comment.presenter.name %></a>
+      on <a href="<%= url_for :action => 'show' , :controller => 'reviews' , :id => review , :only_path => false %>">review</a>
+      of <a href="<%= url_for :action => 'show' , :controller => 'sessions' , :id => this_session , :only_path => false %>"><%= w this_session.title%></a>
+      by <a href="<%= url_for :action => 'show' , :controller => 'presenters' , :id => review.presenter , :only_path => false %>"><%= w review.presenter.name %></a></p>
+    <%= wikinize( comment.body ) %>
+    ]]></description>
+  <pubDate><%= comment.updated_at.strftime("%a, %-d %b %Y %H:%I:%M GMT") %></pubDate>
+  <guid><%= url_for :action => 'show' , :controller => 'comments' , :id => comment, :only_path => false %></guid>
+</item>

@@ -55,7 +55,7 @@ module ApplicationHelper
   def wikinize( text )
     return "" unless text and not text.empty?
     coder = HTMLEntities.new
-    text = coder.encode(text, :named)
+    text = coder.encode(text, :named).gsub(/[\x0B]/,'')
     if text =~ /^\* /  #list
       text = text.gsub(/^\* (.*)/, '<li>\1</li>')
       text = text.gsub( /<\/li>\n<li>/, '</li><li>' ) #put all bullets in 1 list on same line
@@ -71,7 +71,7 @@ module ApplicationHelper
 
   def w(text)
     coder = HTMLEntities.new
-    coder.encode(text, :named).html_safe
+    coder.encode(text, :named).gsub(/[[:cntrl:]]/,'').html_safe
   end
   
   def sortable(column, title = nil)

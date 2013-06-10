@@ -31,106 +31,113 @@ describe ApplicationHelper do
 
   describe "wikinize" do
     it "nil returns empty string"  do
-       wikinize(nil).should == ""
+      wikinize(nil).should == ""
     end
 
     it "empty string returns empty string"  do
-       wikinize("").should == ""
+      wikinize("").should == ""
     end
 
     it "simple string is wrapped in <p>"  do
-       wikinize("simple string").should == "<p>simple string</p>"
+      wikinize("simple string").should == "<p>simple string</p>"
     end
 
     it "new-line returns <br/>"  do
-       wikinize("string\nwith newline").should == "<p>string\n<br />with newline</p>"
+      wikinize("string\nwith newline").should == "<p>string\n<br />with newline</p>"
     end
 
     it "2 new-lines return new <p>"  do
-       wikinize("string\n\nwith newline").should == "<p>string</p>\n\n<p>with newline</p>"
+      wikinize("string\n\nwith newline").should == "<p>string</p>\n\n<p>with newline</p>"
     end
 
     it "*word* returns bold"  do
-       wikinize("simple string with *bold* word").should == "<p>simple string with <b>bold</b> word</p>"
+      wikinize("simple string with *bold* word").should == "<p>simple string with <b>bold</b> word</p>"
     end
 
     it "*bold not closed returns *"  do
-       wikinize("simple string with *bold-not-closed word").should == 
-                "<p>simple string with *bold-not-closed word</p>"
+      wikinize("simple string with *bold-not-closed word").should ==
+        "<p>simple string with *bold-not-closed word</p>"
     end
 
     it "*bold not closed within this line returns *"  do
-       wikinize("simple string with *bold-not-closed on this line\n *word").should == 
-                "<p>simple string with *bold-not-closed on this line\n<br /> *word</p>"
+      wikinize("simple string with *bold-not-closed on this line\n *word").should ==
+        "<p>simple string with *bold-not-closed on this line\n<br /> *word</p>"
     end
 
     it "more than 1 bold word"  do
-       wikinize("can we have *more* than *only one* bold word?").should == 
-                "<p>can we have <b>more</b> than <b>only one</b> bold word?</p>"
+      wikinize("can we have *more* than *only one* bold word?").should ==
+        "<p>can we have <b>more</b> than <b>only one</b> bold word?</p>"
     end
 
     it "_word_ returns italic"  do
-       wikinize("simple string with _italic_ word").should == 
-                "<p>simple string with <i>italic</i> word</p>"
+      wikinize("simple string with _italic_ word").should ==
+        "<p>simple string with <i>italic</i> word</p>"
     end
 
     it "more than 1 italic word"  do
-       wikinize("can we have _more_ than _only one_ italic word?").should == 
-                "<p>can we have <i>more</i> than <i>only one</i> italic word?</p>"
+      wikinize("can we have _more_ than _only one_ italic word?").should ==
+        "<p>can we have <i>more</i> than <i>only one</i> italic word?</p>"
     end
   end
 
   describe "wikinize links" do
     it "link is displayed in a clickable way"  do
-       wikinize("klik hier: http://www.xpday.be").should == 
-                "<p>klik hier: <a href=\"http://www.xpday.be\">http://www.xpday.be</a></p>"
+      wikinize("klik hier: http://www.xpday.be").should ==
+        "<p>klik hier: <a href=\"http://www.xpday.be\">http://www.xpday.be</a></p>"
     end
 
     it "link in beginning of line is displayed in a clickable way"  do
-       wikinize("http://www.xpday.be").should == 
-                "<p><a href=\"http://www.xpday.be\">http://www.xpday.be</a></p>"
+      wikinize("http://www.xpday.be").should ==
+        "<p><a href=\"http://www.xpday.be\">http://www.xpday.be</a></p>"
     end
 
     it "link ending by blank is displayed in a clickable way"  do
-       wikinize("klik hier: http://www.xpday.be ").should == 
-                "<p>klik hier: <a href=\"http://www.xpday.be\">http://www.xpday.be</a> </p>"
+      wikinize("klik hier: http://www.xpday.be ").should ==
+        "<p>klik hier: <a href=\"http://www.xpday.be\">http://www.xpday.be</a> </p>"
     end
 
     it "link ending by special char is displayed in a clickable way"  do
-       wikinize("xpday (http://www.xpday.be) ").should == 
-                "<p>xpday (<a href=\"http://www.xpday.be\">http://www.xpday.be</a>) </p>"
+      wikinize("xpday (http://www.xpday.be) ").should ==
+        "<p>xpday (<a href=\"http://www.xpday.be\">http://www.xpday.be</a>) </p>"
     end
 
     it "link containing / is displayed in a clickable way"  do
-       wikinize("xpday (http://www.xpday.be/frontpage ").should == 
-                "<p>xpday (<a href=\"http://www.xpday.be/frontpage\">http://www.xpday.be/frontpage</a> </p>"
+      wikinize("xpday (http://www.xpday.be/frontpage ").should ==
+        "<p>xpday (<a href=\"http://www.xpday.be/frontpage\">http://www.xpday.be/frontpage</a> </p>"
     end
 
     it "link with name is displayed in a clickable way"  do
-       wikinize("bla [[http://www.xpday.be HOI]]").should == 
-                "<p>bla <a href=\"http://www.xpday.be\">HOI</a></p>"
+      wikinize("bla [[http://www.xpday.be HOI]]").should ==
+        "<p>bla <a href=\"http://www.xpday.be\">HOI</a></p>"
     end
   end
 
   describe "wikinize list" do
     it "* starts ul"  do
-       wikinize("* een\n* twee").should == 
-                "<p><ul><li>een</li><li>twee</li></ul></p>"
+      wikinize("* een\n* twee").should ==
+        "<p><ul><li>een</li><li>twee</li></ul></p>"
     end
 
     it "ul with string before" do
-       wikinize("voila:\n* een\n* twee").should == 
-                "<p>voila:\n<br /><ul><li>een</li><li>twee</li></ul></p>"
+      wikinize("voila:\n* een\n* twee").should ==
+        "<p>voila:\n<br /><ul><li>een</li><li>twee</li></ul></p>"
     end
 
     it "ul with string after" do
-       wikinize("* een\n* twee\nen nog iets").should == 
-                "<p><ul><li>een</li><li>twee</li></ul>\n<br />en nog iets</p>"
+      wikinize("* een\n* twee\nen nog iets").should ==
+        "<p><ul><li>een</li><li>twee</li></ul>\n<br />en nog iets</p>"
     end
 
     it "2 uls in a string"  do
-       wikinize("* een\n* twee\nblabla\n* nog \n* en nog").should == 
-                "<p><ul><li>een</li><li>twee</li></ul>\n<br />blabla\n<br /><ul><li>nog </li><li>en nog</li></ul></p>"
+      wikinize("* een\n* twee\nblabla\n* nog \n* en nog").should ==
+        "<p><ul><li>een</li><li>twee</li></ul>\n<br />blabla\n<br /><ul><li>nog </li><li>en nog</li></ul></p>"
+    end
+
+    it "cleans unprintable characters" do
+      dirty = "Magic board on the wall, \x0Bwho is the fairest of them all?"
+     
+      (w dirty).should == "Magic board on the wall, who is the fairest of them all?"
+      (wikinize dirty).should == "<p>Magic board on the wall, who is the fairest of them all?</p>"
     end
 
   end

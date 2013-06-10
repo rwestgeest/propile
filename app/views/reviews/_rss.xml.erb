@@ -1,0 +1,22 @@
+<item>
+  <title><![CDATA[<%= w this_session.title%> - Review by <%= w review.presenter.name %>]]></title>
+  <link><%= url_for :action => 'show' , :controller => 'reviews' , :id => review , :only_path => false %></link>
+  <description><![CDATA[
+    <p>Review of <a href="<%= url_for :action => 'show' , :controller => 'sessions' , :id => this_session , :only_path => false %>"><%= w this_session.title%></a> 
+      by <a href="<%= url_for :action => 'show' , :controller => 'presenters' , :id => review.presenter , :only_path => false %>"><%= w review.presenter.name %></a></p>
+    <h3>This session gets a <%= review.score %> / 10.</h3>
+    <h3>What I like:</h3>
+    <%= wikinize(review.things_i_like) %>
+    <h3>Improvement opportunities:</h3>
+    <%= wikinize(review.things_to_improve) %>
+
+    <p>Review Created: <%= l review.created_at %> <br />
+      Modified: <%= l review.updated_at %> <br />
+      by <%= link_to w(review.presenter.name), review.presenter %></p>
+    ]]></description>
+  <pubDate><%= review.updated_at.strftime("%a, %-d %b %Y %H:%I:%M GMT") %></pubDate>
+  <guid><%= url_for :action => 'show' , :controller => 'reviews' , :id => review , :only_path => false %></guid>
+</item>
+<% review.comments.each do |comment| %>
+  <%= render 'comments/rss', :this_session => this_session , :review => review , :comment => comment%>
+<% end %>

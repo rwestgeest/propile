@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Propile: All updates</title>
+    <link><%= url_for :action => 'index' , :controller => 'sessions' , :only_path => false %></link>
+    <description>All updates in Propile</description>
+    <language>en-us</language>
+    <pubDate><%= @last_update.strftime("%a, %-d %b %Y %H:%I:%M GMT") %></pubDate>
+    <lastBuildDate><%= @last_update.strftime("%a, %-d %b %Y %H:%I:%M GMT") %></lastBuildDate>
+    <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+    <generator>Propile</generator>
+    <managingEditor>sessions@xpday.net</managingEditor>
+    <webMaster>sessions@xpday.net</webMaster>
+    <% @sessions.each do |this_session| %>
+      <%= render 'sessions/session_rss' , :this_session => this_session %>
+
+      <% this_session.reviews.each do |review| %>
+        <%= render 'reviews/rss', :this_session => this_session , :review => review %>
+      <%  end %>
+    <% end  %>
+  </channel>
+</rss>
