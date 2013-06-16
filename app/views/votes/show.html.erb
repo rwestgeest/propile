@@ -2,14 +2,11 @@
 <%= content_for :sub_menu do %> 
   <%= link_to 'Back to Session', @vote.session %>
 <% end %>
-
-<%= render 'sessions/show_short', :session => @vote.session  %>
-<hr />
-
-<div class="alignright">
+<%= content_for :created_and_modified do %> 
   Vote Created: <%= l @vote.created_at %> -- 
   Modified: <%= l @vote.updated_at %> 
   by <%= @vote.presenter.name %>
-</div>
+<% end %>
 
+<%= render 'sessions/show_short', :session => @vote.session  %>
 

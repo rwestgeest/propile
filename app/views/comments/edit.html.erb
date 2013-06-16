@@ -3,10 +3,10 @@
   <%= link_to 'Back to Session', @comment.review.session %>
 <% end %>
 
-<%= render 'form' %>
-
-<div class="alignright">
+<%= content_for :created_and_modified do %> 
   Created: <%= l @comment.created_at %> -- 
   Modified: <%= l @comment.updated_at %> 
-</div>
+<% end %>
+
+<%= render 'form' %>
 

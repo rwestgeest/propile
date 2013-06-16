@@ -3,10 +3,10 @@
   <%= link_to 'Show', @program_entry %> 
   <%= link_to "Back to #{@program_entry.program.version}", @program_entry.program %> 
 <% end %>
-
-<div class="alignright">
+<%= content_for :created_and_modified do %> 
   Created: <%= l @program_entry.created_at %> -- 
   Modified: <%= l @program_entry.updated_at %> 
-</div>
+<% end %>
+
 <%= render 'form' %>
 

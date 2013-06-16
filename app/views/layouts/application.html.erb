@@ -50,8 +50,9 @@
 
     <%= yield %>
 
-    <hr />
+    <div class="alignright"> <%= yield :created_and_modified %> </div> 
+    <hr/>
     <div class="submenu"> <%= yield :sub_menu %> </div>
-    <p class="alignright"><a href="mailto:sessions@xpday.net">problems or questions</a> </p> 
+    <div class="alignright"> <a href="mailto:sessions@xpday.net">problems or questions</a> </div> 
   </body>
 </html>

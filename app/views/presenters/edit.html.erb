@@ -4,9 +4,10 @@
   <%= link_to 'Back to presenters', presenters_path %>
 <% end %>
 
-<div class="alignright">
+<%= content_for :created_and_modified do %> 
   Created: <%= l @presenter.created_at %> -- 
   Modified: <%= l @presenter.updated_at %> 
-</div>
+<% end %>
+
 <%= render 'form' %>
 

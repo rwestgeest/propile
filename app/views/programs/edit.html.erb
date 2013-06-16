@@ -2,7 +2,10 @@
 <%= content_for :sub_menu do %> 
     <%= link_to 'Show', @program %>
 <% end %>
-<br />
+<%= content_for :created_and_modified do %> 
+  Created: <%= l @program.created_at %> -- 
+  Modified: <%= l @program.updated_at %> 
+<% end %>
 
 <h3>Info for this program version <%= collapse_button ("programInfo") %> </h3>
 <div id="programInfo" style="display:none;">
@@ -62,7 +65,3 @@
 </div>
 <br />
 
-<div class="alignright">
-  Created: <%= l @program.created_at %> -- 
-  Modified: <%= l @program.updated_at %> 
-</div>

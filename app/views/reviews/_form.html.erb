@@ -46,9 +46,3 @@
 
 <% end %>
 
-<% if ! @review.created_at.nil? && !@review.updated_at.nil? %> 
-  <div class="alignright">
-    Created: <%= l @review.created_at %> -- Modified: <%= l @review.updated_at %> 
-  </div>
-<% end %> 
-

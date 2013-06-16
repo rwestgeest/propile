@@ -22,6 +22,12 @@
   <% end %>
 <% end %>
 
+<%= content_for :created_and_modified do %> 
+  Created: <%= l @session.created_at %> -- 
+  Modified: <%= l @session.updated_at %> 
+<% end %>
+
+
 <%= render 'sessions/show_short', :session => @session  %>
 
 
@@ -103,10 +109,6 @@
 </div>
 
 
-<div class="alignright">
-  Created: <%= l @session.created_at %> -- 
-  Modified: <%= l @session.updated_at %> 
-</div>
 
 
 

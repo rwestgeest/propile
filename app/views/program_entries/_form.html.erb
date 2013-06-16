@@ -16,9 +16,3 @@
 
 <% end %>
 
-<% if ! @program_entry.created_at.nil? && !@program_entry.updated_at.nil? %> 
-  <div class="alignright">
-    Created: <%= l @program_entry.created_at %> -- Modified: <%= l @program_entry.updated_at %> 
-  </div>
-<% end %> 
-

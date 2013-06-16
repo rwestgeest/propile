@@ -5,6 +5,10 @@
   <%= link_to "Back to #{@program_entry.program.version}", @program_entry.program %> 
 <% end %>
 
+<%= content_for :created_and_modified do %> 
+    Created: <%= l @program_entry.created_at %> -- Modified: <%= l @program_entry.updated_at %> 
+<% end %>
+
   <div class="in_a_form"> Slot: <%= @program_entry.slot %> </div>
   <div class="in_a_form"> Track: <%= @program_entry.track %> </div>
   <div class="in_a_form"> Session: 
@@ -15,7 +19,4 @@
   <div class="in_a_form"> Comment: <%= w @program_entry.comment %> </div>
   <div class="in_a_form"> Span entire row: <%= @program_entry.span_entire_row %> </div>
 
-  <div class="alignright">
-    Created: <%= l @program_entry.created_at %> -- Modified: <%= l @program_entry.updated_at %> 
-  </div>
 

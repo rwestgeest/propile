@@ -5,10 +5,10 @@
   <%= link_to 'Back', sessions_path %>
 <% end %>
 
-<div class="alignright">
+<%= content_for :created_and_modified do %> 
   Created: <%= l @session.created_at %> -- 
   Modified: <%= l @session.updated_at %> 
-</div>
+<% end %>
 
 <%= render :partial => 'form', :locals => { :session => "@session"  }  %>
 
