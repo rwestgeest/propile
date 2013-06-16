@@ -23,6 +23,10 @@ class PropileConfig < ActiveRecord::Base
     set( prop_name, (!is_set(prop_name)).to_s )
   end
 
+  def self.send_mails_active?
+    Propile::Application.config.action_mailer.delivery_method == :sendmail 
+  end
+
   def self.submit_session_active?
     is_set( SUBMIT_SESSION_ACTIVE )
   end
