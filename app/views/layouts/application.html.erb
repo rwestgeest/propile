@@ -39,8 +39,8 @@
       </nav>
     </div>
     <br/>
-    <div> <%= yield :sub_menu %> </div>
-    <div> <%= yield :extra_info %> </div>
+    <div class="submenu"> <%= yield :sub_menu %> </div>
+    <div > <%= yield :extra_info %> </div>
     <div class="title">
       <h1><%= yield :title %></h1>
       <section id="flash_messages">
@@ -51,7 +51,7 @@
     <%= yield %>
 
     <hr />
-    <div> <%= yield :sub_menu %> </div>
+    <div class="submenu"> <%= yield :sub_menu %> </div>
     <p class="alignright"><a href="mailto:sessions@xpday.net">problems or questions</a> </p> 
   </body>
 </html>

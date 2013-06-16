@@ -222,6 +222,14 @@ div.menu {
 div.title {
 }
 
+div.submenu a {
+	font-size: 90%;
+	text-decoration: none;
+  padding: 1px 6px;
+	margin: 3px 3px 0 0;
+}
+
+
 div.review {
   border: 1px solid lavender;
   margin: 5px 20px;

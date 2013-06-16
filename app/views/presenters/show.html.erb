@@ -1,6 +1,6 @@
 <%= title @presenter.name %>
 <%= content_for :sub_menu do %> 
-  <%= guarded_link_to 'Edit bio', controller: 'presenters', action: 'edit', id: @presenter.to_param %> &nbsp; | &nbsp;
+  <%= guarded_link_to 'Edit bio', controller: 'presenters', action: 'edit', id: @presenter.to_param %> 
   <%= link_to 'Back to presenters', presenters_path %> 
   <br/>
   <% if current_account.maintainer? %>

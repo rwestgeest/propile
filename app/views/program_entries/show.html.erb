@@ -1,7 +1,7 @@
 <%= title "Program version #{@program_entry.program.version}" %>
 
 <%= content_for :sub_menu do %> 
-  <%= link_to 'Edit', edit_program_entry_path(@program_entry) %> &nbsp; | &nbsp;
+  <%= link_to 'Edit', edit_program_entry_path(@program_entry) %> 
   <%= link_to "Back to #{@program_entry.program.version}", @program_entry.program %> 
 <% end %>
 

@@ -1,6 +1,6 @@
 <%= title "Review for: #{@review.session.title}" %> 
 <%= content_for :sub_menu do %> 
-  <%= guarded_link_to 'Edit', controller: 'reviews', action: 'edit', id: @review  %> &nbsp; | &nbsp;
+  <%= guarded_link_to 'Edit', controller: 'reviews', action: 'edit', id: @review  %> 
   <%= link_to 'Back to Session', @review.session %>
 <% end %>
 <%= render 'sessions/show_short', :session => @review.session  %>
