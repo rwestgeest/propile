@@ -1,3 +1,8 @@
+<%= content_for :sub_menu do %> 
+  <%= link_to 'Edit', edit_propile_config_path(@propile_config) %> |
+  <%= link_to 'Back', propile_configs_path %>
+<% end %>
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -16,5 +21,3 @@
 </p>
 
 
-<%= link_to 'Edit', edit_propile_config_path(@propile_config) %> |
-<%= link_to 'Back', propile_configs_path %>

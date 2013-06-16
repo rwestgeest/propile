@@ -1,6 +1,9 @@
 <%= title "Copy program" %>
 
+<%= content_for :sub_menu do %> 
+  <%= link_to 'Show', @program %> 
+<% end %>
+
 <%= render 'form' %>
 
-<%= link_to 'Show', @program %> 
 

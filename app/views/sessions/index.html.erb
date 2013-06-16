@@ -1,3 +1,6 @@
+<%= content_for :sub_menu do %> 
+  <%= link_to 'Export CSV', csv_sessions_path %>
+<% end %>
+
 <%= render 'sessions/index', :sessions => @sessions, :sortable => true  %>
 
-<%= link_to 'Export CSV', csv_sessions_path %>

@@ -1,8 +1,8 @@
+<%= title "Program Version: #{@program.version}" %>
 
-<h1> Program Version: <%= @program.version %> </h1>
-<div><%= link_to 'Edit', controller: 'programs', action: 'edit', id: @program.to_param %>
-</div>
-<br /><br />
+<%= content_for :sub_menu do %> 
+  <%= link_to 'Edit', controller: 'programs', action: 'edit', id: @program.to_param %>
+<% end %>
 
 <%= render 'programs/program_matrix', :program => @program, :editable => false %>
 

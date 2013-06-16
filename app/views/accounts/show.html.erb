@@ -1,4 +1,6 @@
 
+<%= content_for :sub_menu do %> 
+  <%= link_to 'Edit', edit_account_path(@account) %> |
+  <%= link_to 'Back', accounts_path %>
+<% end %>
 
-<%= link_to 'Edit', edit_account_path(@account) %> |
-<%= link_to 'Back', accounts_path %>

@@ -1,5 +1,7 @@
-<h1>New propile_config</h1>
+<%= title "New propile config %>
+<%= content_for :sub_menu do %> 
+  <%= link_to 'Back', propile_configs_path %>
+<% end %>
 
 <%= render 'form' %>
 
-<%= link_to 'Back', propile_configs_path %>

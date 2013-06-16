@@ -1,4 +1,7 @@
 <%= title "Listing comments" %>
+<%= content_for :sub_menu do %> 
+  <%= link_to 'Back', "/" %>
+<% end %>
 
 <table class="tablelist">
   <tr>
@@ -13,13 +16,11 @@
   <tr>
     <td><%= comment.review.session && w(comment.review.session.title) %></td>
     <td><%= comment.review.presenter && w(comment.review.presenter.name) %></td>
-    <td><%= w(comment.presenter) %></td>
+    <td><%= w(comment.presenter.name) %></td>
     <td><%= link_to 'Show', comment %></td>
     <td><%= guarded_link_to 'Edit', controller: 'comment', action: 'edit', id: comment %></td>
   </tr>
 <% end %>
 </table>
 
-<br />
 
-<%= link_to 'Back', "/" %>

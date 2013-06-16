@@ -1,6 +1,9 @@
 <% title "Editing account" %>
 
+<%= content_for :sub_menu do %> 
+  <%= link_to 'Show', @account %> |
+  <%= link_to 'Back', accounts_path %>
+<% end %>
+
 <%= render 'form' %>
 
-<%= link_to 'Show', @account %> |
-<%= link_to 'Back', accounts_path %>

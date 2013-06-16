@@ -1,5 +1,10 @@
 <%= title "Editing #{@session.title}" %>
 
+<%= content_for :sub_menu do %> 
+  <%= link_to 'Show', @session %> &nbsp; | &nbsp;
+  <%= link_to 'Back', sessions_path %>
+<% end %>
+
 <div class="alignright">
   Created: <%= l @session.created_at %> -- 
   Modified: <%= l @session.updated_at %> 
@@ -7,7 +12,3 @@
 
 <%= render :partial => 'form', :locals => { :session => "@session"  }  %>
 
-<div> 
-  <%= link_to 'Show', @session %> &nbsp; | &nbsp;
-  <%= link_to 'Back', sessions_path %>
-</div>

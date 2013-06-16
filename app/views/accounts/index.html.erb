@@ -1,13 +1,9 @@
 <% title "Accounts" %>
 
 <table>
-  <tr>
-    <th></th>
-    <th></th>
-  </tr>
-
 <% @accounts.each do |account| %>
   <tr>
+    <td><%= account.email %></td>
     <td><%= link_to 'Show', account %></td>
     <td><%= link_to 'Edit', edit_account_path(account) %></td>
   </tr>
@@ -16,4 +12,3 @@
 
 <br />
 
-<%= link_to 'New Account', new_account_path %>

@@ -1,5 +1,7 @@
-<b> <%= title "New Program" %></b>
+<%= title "New Program" %>
+<%= content_for :sub_menu do %> 
+  <%= link_to 'Back to programs', programs_path %>
+<% end %>
 
 <%= render 'form' %>
 
-<%= link_to 'Back', @programs %>
