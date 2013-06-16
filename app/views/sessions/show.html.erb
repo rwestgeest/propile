@@ -31,7 +31,8 @@
 <%= render 'sessions/show_short', :session => @session  %>
 
 
-<div>
+<h3><%= collapse_button_initially_open ("session_properties") %> </h3>
+<div id="session_properties" style="display:block;">
 <table class="propertytable" >
 <tr>
   <td colspan="2"> Goal of the session: <%= @session.session_goal %>  </td>
@@ -60,16 +61,17 @@
 </div>
 
 
-<div>
-  <h4>Description</h4>
+<br/>
+<h3><%= collapse_button_initially_open ("session_description") %> Description </h3>
+<div id="session_description" style="display:block;">
   <div class="lessoutlined"> 
     <%= wikinize( @session.description) %>
   </div>
 </div>
 
-
-<div>
-  <h4>Outline or Timetable</h4>
+<br/>
+<h3><%= collapse_button_initially_open ("session_outline") %> Outline or Timetable </h3>
+<div id="session_outline" style="display:block;">
   <div class="lessoutlined"> 
     <%= wikinize( @session.outline_or_timetable) %> 
   </div>
@@ -82,8 +84,9 @@
   no reviews yet.
 <% else %> 
 
-  <% @session.reviews.each do |review| %>
-  <div class="review">
+  <% @session.reviews.each_with_index do |review, i| %>
+  <%= collapse_button_initially_open ("session_review_#{i}") %> 
+  <div id="session_review_<%=i%>" style="display:block;" class="review">
     <%= render 'reviews/show', :review => review  %>
     <div class="alignright">
       <%= guarded_link_to 'Edit this review', controller: 'reviews', action: 'edit', id: review  %> &nbsp;
@@ -94,7 +97,8 @@
       <h3> Comments on this review: </h3>
       <div>
         <% review.comments.each do |comment| %>
-          <div class="comment">
+          <%= collapse_button_initially_open ("session_comment_#{i}") %> 
+          <div id="session_comment_<%=i%>" style="display:block;" class="comment">
             <%= render 'comments/show', :comment => comment  %>
             <div class="alignright">
               <%= guarded_link_to 'Edit this comment', controller: 'comments', action: 'edit', id: comment %> 
