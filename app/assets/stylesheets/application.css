@@ -216,6 +216,12 @@ pre {
   word-wrap: break-word;   
 }
 
+div.menu {
+}
+
+div.title {
+}
+
 div.review {
   border: 1px solid lavender;
   margin: 5px 20px;

@@ -10,7 +10,7 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <div>
+    <div class="menu">
       <nav id="header-navigation">
         <%= image_tag "logo-200.png", :size => "100x50" %>
         <% if signed_in? %>
@@ -37,6 +37,9 @@
           <% end %>
         </ul>
       </nav>
+    </div>
+    <br/>
+    <div class="title">
       <h1><%= yield :title %></h1>
       <section id="flash_messages">
         <%= flash_tags %>
