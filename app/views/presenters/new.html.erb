@@ -1,5 +1,7 @@
 <%= title "New presenter" %>
+<%= content_for :sub_menu do %> 
+  <%= link_to 'Back to presenters', presenters_path %>
+<% end %>
 
 <%= render 'form' %>
 
-<%= link_to 'Back', presenters_path %>

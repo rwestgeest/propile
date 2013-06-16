@@ -1,4 +1,13 @@
-<h2> <%= @presenter.name  %> </h2>
+<%= title @presenter.name %>
+<%= content_for :sub_menu do %> 
+  <%= guarded_link_to 'Edit bio', controller: 'presenters', action: 'edit', id: @presenter.to_param %> &nbsp; | &nbsp;
+  <%= link_to 'Back to presenters', presenters_path %> 
+  <br/>
+  <% if current_account.maintainer? %>
+    <i>(edit bio is only possible for presenter himself or for a maintainer)</i> 
+  <% end %> 
+<% end %>
+
 <div> <%= @presenter.email %> </div>
 <% if current_account.maintainer? %>
   <div> <i>maintainer: <%= @presenter.account.maintainer? %> <br> </i>
@@ -15,19 +24,13 @@
   Modified: <%= l @presenter.updated_at %> 
 </div>
 
-<div>
-  <%= guarded_link_to 'Edit bio', controller: 'presenters', action: 'edit', id: @presenter.to_param %> 
-  <% if current_account.maintainer? %>
-    <i>(only possible for presenter himself or for a maintainer)</i>
-  <% end %>
-</div>
 
 
 <hr>
 
 <% if @you_are_current_user==true && PropileConfig.voting_active?  %> 
   <h2>Your votes </h2>
-  <div>(only you can see this)</div>
+  <div><i>(only you can see this)</i></div>
   <% if @presenter.votes.empty? %> 
     You have not voted yet.
   <% else %> 
@@ -47,8 +50,5 @@
 
 <%= render 'sessions/index', :sessions => @sessions_reviewed_by_you, :sortable => false  %>
 
-<hr>
 
-<p class="alignright"><a href="mailto:sessions@xpday.net">problems or questions</a> </p> 
 
-<%= link_to 'Back to list of presenters', presenters_path %>

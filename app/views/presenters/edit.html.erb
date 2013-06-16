@@ -1,4 +1,8 @@
 <%= title "Editing presenter" %>
+<%= content_for :sub_menu do %> 
+  <%= link_to 'Show', @presenter %> &nbsp; | &nbsp;
+  <%= link_to 'Back to presenters', presenters_path %>
+<% end %>
 
 <div class="alignright">
   Created: <%= l @presenter.created_at %> -- 
@@ -6,5 +10,3 @@
 </div>
 <%= render 'form' %>
 
-<%= link_to 'Show', @presenter %> &nbsp; | &nbsp;
-<%= link_to 'Back', presenters_path %>
