@@ -1,3 +1,8 @@
+<%= title "Vote for: #{@vote.session.title}" %>
+<%= content_for :sub_menu do %> 
+  <%= link_to 'Back to Session', @vote.session %>
+<% end %>
+
 <%= render 'sessions/show_short', :session => @vote.session  %>
 <hr />
 
@@ -7,5 +12,4 @@
   by <%= @vote.presenter.name %>
 </div>
 
-<%= link_to 'Back to Session', @vote.session %> 
 

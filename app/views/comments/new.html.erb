@@ -1,5 +1,7 @@
-<b><%= title "New Comment on Review for:" %></b>
+<%= title "New Comment on Review for: #{@comment.review.session.title}" %>
+<%= content_for :sub_menu do %> 
+  <%= link_to 'Back to Session', @comment.review.session %>
+<% end %>
 
 <%= render 'form' %>
 
-<%= link_to 'Back to Session', @comment.review.session %>

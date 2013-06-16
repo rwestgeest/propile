@@ -1,11 +1,12 @@
-<b><%= title "Editing Comment on Review for:" %></b>
+<%= title "Edit Comment on Review for: #{@comment.review.session.title}" %>
+<%= content_for :sub_menu do %> 
+  <%= link_to 'Back to Session', @comment.review.session %>
+<% end %>
 
 <%= render 'form' %>
 
-<hr>
 <div class="alignright">
   Created: <%= l @comment.created_at %> -- 
   Modified: <%= l @comment.updated_at %> 
 </div>
 
-<%= link_to 'Back to Session', @comment.review.session %>

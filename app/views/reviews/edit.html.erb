@@ -1,7 +1,12 @@
-<b><%= title "Editing review for:" %> </b>
+<%= title "Editing review for: #{@review.session.title}" %> 
+
+<%= content_for :sub_menu do %> 
+  <%= link_to 'Back to Session', @review.session %>
+<% end %>
+
+<%= content_for :extra_info do %> 
+  <div><i>The goal of a review is to help to improve this session proposal.</i></div>
+<% end %>
 
 <%= render 'form' %>
 
-<hr />
-
-<%= link_to 'Back to Session', @review.session %>

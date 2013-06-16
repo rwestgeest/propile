@@ -39,6 +39,8 @@
       </nav>
     </div>
     <br/>
+    <%= yield :sub_menu %>
+    <%= yield :extra_info %>
     <div class="title">
       <h1><%= yield :title %></h1>
       <section id="flash_messages">
@@ -48,5 +50,7 @@
 
     <%= yield %>
 
+    <hr />
+    <%= yield :sub_menu %>
   </body>
 </html>
