@@ -1,3 +1,7 @@
+# 0.4.20 
+  improve layout of reviews
+  improve session feedback emails
+  Follow all updates to a session with RSS 
 # 0.4.19 
   "nog authorized" bug
 # 0.4.18 
