@@ -26,8 +26,7 @@ class SessionsController < ApplicationController
       } 
       @sessions = sort_direction=="asc" ? @sessions :  @sessions.reverse 
     else
-      @sessions = Session.includes(eager_loaded).order( "upper("+sort_column+") " + sort_direction)
-      #@sessions = Session.find(:all, :include => eager_loaded , :order => "upper("+sort_column+") " + sort_direction)
+      @sessions = Session.includes(eager_loaded).order( "upper("+sort_column+") " + sort_direction).all
     end
     @voting_active = PropileConfig.voting_active?
     @maintainer = current_account.maintainer?
