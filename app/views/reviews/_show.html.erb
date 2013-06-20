@@ -1,4 +1,5 @@
 
+<h3>Review  by <%= link_to w(review.presenter.name), review.presenter %> </h3>
 
 What I like:
 <div class="lessoutlined"> 
@@ -12,8 +13,10 @@ Improvement opportunities:
   This session gets a <%= review.score %> / 10.
 </div>
 
+<% if !review.new_record? %> 
 <div class="alignright">
   Review Created: <%= l review.created_at %> -- 
   Modified: <%= l review.updated_at %> 
   by <%= link_to w(review.presenter.name), review.presenter %>
 </div>
+<% end %>

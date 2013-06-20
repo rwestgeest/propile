@@ -12,6 +12,7 @@ class VotesController < ApplicationController
 
   def show
     @vote = Vote.find(params[:id])
+    @session = @vote.session
   end
 
   def new

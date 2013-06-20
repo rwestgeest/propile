@@ -5,9 +5,15 @@
 
 <%= render 'sessions/show_short', :session => @review.session  %>
 
+
+<h3><%= collapse_button_initially_open ("review_preview")%> Preview of the review</h3>
+  <div id="review_preview" class="review">
+    <%= render 'reviews/show', :review => @review  %>
+  </div>
+
+
 <hr />
 
-<h3>Review by: <%= w @review.presenter.name %> </h3>
 
 
   <div class="in_a_form">
@@ -34,13 +40,16 @@
 
   <br/>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Preview' %>
     <% if @review.new_record? %>
+      <%= f.submit "Create" %>
       <i>When you create the review, the session presenter(s) receive an email. 
       <% if Propile::Application.config.action_mailer.delivery_method == :test %>
         <br/>!!!  Mail is not sent in test environment !!!
       <% end %>
       </i>
+    <% else %>
+      <%= f.submit "Update" %>
     <% end %>
   </div>
 

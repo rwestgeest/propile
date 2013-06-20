@@ -5,21 +5,25 @@ class CommentsController < ApplicationController
 
   def show
     @comment = Comment.find(params[:id])
+    @session = @comment.review.session
   end
 
   def new
     @review  = Review.find(params[:review_id])
+    @session = @review.session
     @comment =  @review.comments.build()
     @comment.presenter = current_presenter
   end
 
   def edit
     @comment = Comment.find(params[:id])
+    @session = @comment.review.session
   end
 
   def create
     @comment = Comment.new(params[:comment])
     @comment.presenter = current_presenter
+    @session = @comment.review.session
 
     if @comment.save
        Postman.notify_comment_creation(@comment)
@@ -31,6 +35,7 @@ class CommentsController < ApplicationController
 
   def update
     @comment = Comment.find(params[:id])
+    @session = @comment.review.session
 
     if @comment.update_attributes(params[:comment])
        redirect_to @comment, notice: 'Comment was successfully updated.'

@@ -5,6 +5,7 @@ class ReviewsController < ApplicationController
 
   def show
     @review = Review.find(params[:id])
+    @session = @review.session
   end
 
   def new
@@ -15,12 +16,13 @@ class ReviewsController < ApplicationController
 
   def edit
     @review = Review.find(params[:id])
+    @session = @review.session
   end
 
   def create
     @review = Review.new(params[:review])
     @review.presenter = current_presenter
-    if @review.save
+    if params[:commit] != 'Preview' && @review.save
       Postman.notify_review_creation(@review)
       redirect_to @review, notice: 'Review was successfully created.'
     else
@@ -30,12 +32,20 @@ class ReviewsController < ApplicationController
   end
 
   def update
-    @review = Review.find(params[:id])
 
-    if @review.update_attributes(params[:review])
-      redirect_to @review, notice: 'Review was successfully updated.'
-    else
+    if params[:commit] == 'Preview' 
+      @review = Review.new(params[:review])
+      @review.presenter = current_presenter
+      @session = @review.session
       render action: "edit"
+    else 
+      @review = Review.find(params[:id])
+      @session = @review.session
+      if @review.update_attributes(params[:review])
+        redirect_to @review, notice: 'Review was successfully updated.'
+      else
+        render action: "edit"
+      end
     end
   end
 
