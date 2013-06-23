@@ -17,6 +17,7 @@ class PresentersController < ApplicationController
     @presenter = Presenter.find(params[:id])
     @you_are_current_user = (current_presenter == @presenter)
     @sessions_reviewed_by_you = (@presenter.reviews.all.collect { |r|  Session.find(r.session_id) } )
+    @previous_login_time = previous_login_time
   end
 
   def new
