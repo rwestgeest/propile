@@ -18,6 +18,7 @@
 <div> <%= @presenter.email %> </div>
 <% if current_account.maintainer? %>
   <div> <i>maintainer: <%= @presenter.account.maintainer? %> <br> </i> </div>
+  <div> <i>last login time: <%= @presenter.account.last_login %> <br> </i> </div>
 <% end %>
 <hr>
 
