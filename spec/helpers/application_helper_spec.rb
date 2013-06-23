@@ -110,6 +110,16 @@ describe ApplicationHelper do
       wikinize("bla [[http://www.xpday.be HOI]]").should ==
         "<p>bla <a href=\"http://www.xpday.be\">HOI</a></p>"
     end
+
+    it "two links on one line are displayed in a clickable way"  do
+      wikinize("bla [[http://www.xpday.be HOI]] and [[http://www.atbru.be Agile Tour Brussels]] also").should ==
+        "<p>bla <a href=\"http://www.xpday.be\">HOI</a> and <a href=\"http://www.atbru.be\">Agile Tour Brussels</a> also</p>"
+    end
+    
+    it "links in a bulleted list are displayed in a clickable way"  do
+      wikinize("* [[http://www.xpday.be HOI]] and\n* [[http://www.atbru.be Agile Tour Brussels]] also").should ==
+        "<p><ul><li><a href=\"http://www.xpday.be\">HOI</a> and</li><li><a href=\"http://www.atbru.be\">Agile Tour Brussels</a> also</li></ul></p>"
+    end
   end
 
   describe "wikinize list" do
