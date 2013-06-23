@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
   protected
   def authorized?(request_params)
-    ActionGuard.authorized?(current_account, request_params)
+    ActionGuard.authorized?(current_account, request_params) 
   end
   helper_method :authorized?
 
@@ -29,6 +29,9 @@ class ApplicationController < ActionController::Base
   end
   def sign_in(account)
     session[:current_account_id] = account
+    session[:previous_login] = account.last_login
+    account.last_login = Time.now
+    account.save
   end
   def sign_out
     session[:current_account_id] = nil

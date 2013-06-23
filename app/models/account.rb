@@ -9,7 +9,7 @@ class Account < ActiveRecord::Base
 
   before_create :generate_authentication_token
 
-  attr_accessible :email, :password, :password_confirmation, :role
+  attr_accessible :email, :password, :password_confirmation, :role, :last_login
 
   has_one :presenter
 
