@@ -1,10 +1,15 @@
 A new review has been made for <%= @session.title %> by <%= @review.presenter.name %>:
 
+    We expect presenters to help each other to develop their proposals, based on peer to peer feedback. 
+    You can give feedback on other people's proposals and improve your proposal based on the feedback you receive. 
+    In this way, we will come to a set of quality session proposals in a transparent, community driven way.
+
 You can find the review here: <%= review_url(@review) %>
 
-Here's the review:
+The XPDay Benelux Team.
 
-I give the session a '<%= @review.score %>' out of 10
+---------------------------------------------------
+Here's the review:
 
 
 What I like:
@@ -13,4 +18,6 @@ What I like:
 Improvement opportunities:
 <%= @review.things_to_improve %>
 
-
+I give the session a '<%= @review.score %>' out of 10
+    This number indicates the ratio of "things you like" to "things to improve". 
+    If the session is almost perfect, this number will be close to 10, so this means that the things to improve are only minor improvements.

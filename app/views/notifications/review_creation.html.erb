@@ -1,10 +1,16 @@
-<p>A new review has been made for <%= @session.title %> by <%= @review.presenter.name %>:</p>
+<p>A new review has been made for session <b><%= @session.title %></b> by <%= @review.presenter.name %>:</p>
+<p><i>
+ We expect presenters to help each other to develop their proposals, based on peer to peer feedback. 
+ You can give feedback on other people's proposals and improve your proposal based on the feedback you receive. 
+ In this way, we will come to a set of quality session proposals in a transparent, community driven way.
+</i></p>
 
 <p>You can find the review <%= link_to 'here', review_url(@review) %></p>
 
+<p>The XPDay Benelux Team.</p>
+<hr>
 <p>Here's the review:</p> 
 
-<p>I give the session a '<%= @review.score %>' out of 10</p>
 
 <p><b>What I like:</b></p>
 <%= wikinize @review.things_i_like %>
@@ -12,4 +18,9 @@
 <p><b>Improvement opportunities:</b></p>
 <%= wikinize @review.things_to_improve %>
 
+<p>I give the session a '<%= @review.score %>' out of 10 </br>
+<i>
+This number indicates the ratio of "things you like" to "things to improve". 
+If the session is almost perfect, this number will be close to 10, so this means that the things to improve are only minor improvements.
+</i></p>
 
