@@ -8,9 +8,54 @@
 </div>
 
 
-<h4>Short:</h4>
+<h3>Short:</h3>
 <div class="outlined"> 
   <%= wikinize(  session.short_description )  %>
+</div>
+
+
+<h3><%= collapse_button_initially_open ("session_properties") %>Session Properties </h3>
+<div id="session_properties" style="display:block;">
+<table class="propertytable" >
+<tr>
+  <td colspan="2"> Goal of the session: <%= @session.session_goal %>  </td>
+</tr>
+<tr>
+  <td> Session Type: <%= @session.session_type %> </td>
+  <td> Max participants: <%= @session.max_participants %>  </td>
+</tr>
+<tr>
+  <td> Topic: <span class="<%= @session.topic %>"> <%= @session.topic_name %> </span> </td>
+  <td> Laptops required: <%= @session.laptops_required %>  </td>
+</tr>
+<tr>
+  <td> Duration: <%= @session.duration %>  </td>
+  <td> Other limitations: <%= @session.other_limitations %>  </td>
+</tr>
+<tr>
+  <td> Intended audience: <%= @session.intended_audience %>  </td>
+  <td> Room setup: <%= @session.room_setup %>  </td>
+</tr>
+<tr>
+  <td> Experience level: <%= @session.experience_level %> </td>
+  <td> Materials needed: <%= @session.materials_needed %> </td>
+</tr>
+</table>
+</div>
+
+
+<h3><%= collapse_button_initially_open ("session_description") %> Description </h3>
+<div id="session_description" style="display:block;">
+  <div class="lessoutlined"> 
+    <%= wikinize( @session.description) %>
+  </div>
+</div>
+
+<h3><%= collapse_button_initially_open ("session_outline") %> Outline or Timetable </h3>
+<div id="session_outline" style="display:block;">
+  <div class="lessoutlined"> 
+    <%= wikinize( @session.outline_or_timetable) %> 
+  </div>
 </div>
 
 
