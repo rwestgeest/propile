@@ -1,5 +1,7 @@
 # 0.4.21
   Review Preview
+  modifications since last login 
+  clarify 2-step submission process
 # 0.4.20 
   improve layout of reviews
   improve session feedback emails
