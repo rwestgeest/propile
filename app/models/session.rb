@@ -87,6 +87,17 @@ class Session < ActiveRecord::Base
     (laptops_required and laptops_required == "yes") ?  "bring laptop" : ""
   end
 
+  def update_status (since)
+    if created_at > since
+      "NEW"
+    elsif !updated_at.nil? && updated_at >  since
+      "UPDATED"
+    else
+      ""
+    end 
+
+  end
+
   def program_card_content(pdf, room="<TODO>", hour="99:99 - 99:99")
     pdf.font_size 10
     pdf.text hour, :align => :center

@@ -21,11 +21,7 @@
     <td> <%= i+1 %> </td>
     <td> 
       <div class="session_status">
-        <% if session.created_at > @previous_login_time %>
-          NEW
-        <% elsif !session.updated_at.nil? && session.updated_at > @previous_login_time %>
-          UPDATED
-         <% end %> 
+        <%= session.update_status (@previous_login_time)%>
       </div>
     </td>
 <% if @voting_active  %>

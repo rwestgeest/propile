@@ -329,4 +329,21 @@ describe Session do
     end
   end
 
+  describe "update_status" do
+    let(:session_without_update) { FactoryGirl.build(:session_with_presenter, :created_at => "23-06-2013") }
+    let(:session_with_update) { FactoryGirl.build(:session_with_presenter, :created_at => "23-06-2013", :updated_at => "25-06-2013") }
+    it "session older than given date" do 
+      session_without_update.update_status("26-06-2013").should == ""
+    end
+    it "session with update older than given date" do 
+      session_with_update.update_status("26-06-2013").should == ""
+    end
+    it "session newer than given date" do 
+      session_with_update.update_status("22-06-2013").should == "NEW"
+    end
+    it "session updated since given date" do 
+      session_with_update.update_status("24-06-2013").should == "UPDATED"
+    end
+  end
+
 end
