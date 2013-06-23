@@ -207,6 +207,13 @@ div.flashy > a {
   font-size: larger;
 }
 
+div.session_status  {
+  background-color:yellow;
+  color:red;
+  font-weight:bold;
+  font-size: smaller;
+}
+
 
 pre {
   white-space: pre-wrap;       /* css-3 */
