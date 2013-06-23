@@ -1,24 +1,24 @@
 require 'spec_helper'
 
 describe PresentersController do
-  it_should_behave_like "a guarded resource controller", :maintainer, :presenter
+  it_should_behave_like "a guarded resource controller", :maintainer, :presenter, :except => [:export]
 
   context "when logged in" do
     login_as :presenter
-      let(:presenter) { FactoryGirl.create :presenter }
-      describe "email " do
-        it "is not possible when logged in as presenter " do
-          orig_email = presenter.email
-          put :update, {:id => presenter.to_param, :presenter => { :email => "new_email@company.com"} }
-          Presenter.find(presenter.to_param).email.should == orig_email
-        end
+    let(:presenter) { FactoryGirl.create :presenter }
+    describe "email " do
+      it "is not possible when logged in as presenter " do
+        orig_email = presenter.email
+        put :update, {:id => presenter.to_param, :presenter => { :email => "new_email@company.com"} }
+        Presenter.find(presenter.to_param).email.should == orig_email
       end
-      describe "role " do
-        it "is possible when logged in as presenter " do
-          put :update, {:id => presenter.to_param, :presenter => { :role => Account::Maintainer } }
-          Presenter.find(presenter.to_param).role.should == Account::Presenter
-        end
+    end
+    describe "role " do
+      it "is possible when logged in as presenter " do
+        put :update, {:id => presenter.to_param, :presenter => { :role => Account::Maintainer } }
+        Presenter.find(presenter.to_param).role.should == Account::Presenter
       end
+    end
   end
 
   context "when logged in" do
@@ -164,6 +164,15 @@ describe PresentersController do
     end
 
     describe "GET export" do
+
+      def login_with_basic_authentication
+        account = Account.new
+        account.email = "mail@example.com"
+        account.save
+        account.confirm_with_password :password => 'secret', :password_confirmation => 'secret'
+        request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials("mail@example.com", "secret")
+      end
+
       render_views
       it "returns a text with pairs of presenter names and emails" do
 
@@ -176,7 +185,8 @@ describe PresentersController do
         john.name = "John Doe"
         john.email = "johnny@company.com"
         john.save
-        
+
+        login_with_basic_authentication
         get :export
 
         output = response.body.split $/
