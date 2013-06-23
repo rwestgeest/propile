@@ -1,6 +1,7 @@
 <table class="tablelist">
   <tr>
     <th></th>
+    <th></th>
 <% if @voting_active  %>
     <th> <%= sortable ? sortable("voted") : "Voted"  %> </th>
 <% end %>
@@ -18,6 +19,12 @@
 <% sessions.each_with_index do |session, i| %>
   <tr>
     <td> <%= i+1 %> </td>
+    <td> <% if session.created_at > @previous_login_time %>
+               NEW
+         <% elsif !session.updated_at.nil? && session.updated_at > @previous_login_time %>
+               MODIFIED
+         <% end %> 
+    </td>
 <% if @voting_active  %>
     <td> <% if session.presenter_has_voted_for?(@current_account.presenter.id) %> YES  <% end %> </td>
 <% end %>

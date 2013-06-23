@@ -31,6 +31,7 @@ class SessionsController < ApplicationController
     @voting_active = PropileConfig.voting_active?
     @maintainer = current_account.maintainer?
     @presenter = current_account.presenter
+    @previous_login_time = previous_login_time
   end
 
   def show
