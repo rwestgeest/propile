@@ -1,4 +1,5 @@
 class PresentersController < ApplicationController
+  skip_before_filter :authorize_action, :only => [:export]
   helper_method :sort_column, :sort_direction
 
   def index
@@ -76,8 +77,16 @@ class PresentersController < ApplicationController
 
 
   def export
-    @presenters = Presenter.all
-    render :layout => false , :content_type => 'text/plain'  # just the html, mam
+    account = nil
+    authenticate_with_http_basic do |username,password|
+      account = Account.authenticate_by_email_and_password(username,password)
+    end
+    if account.nil? then
+      request_http_basic_authentication("Propile presenter export")
+    else
+      @presenters = Presenter.all
+      render :layout => false , :content_type => 'text/plain'  # just the html, mam
+    end
   end
 
 end

@@ -65,7 +65,8 @@ module ApplicationHelper
     text = text.gsub( /_([^_\n]*)_/, '<i>\1</i>' )   #italic
     text = text.gsub(/(^|[^\[])(#{URI::regexp(['http'])})/, '\1<a href="\2">\2</a>') #simple links
     text = text.gsub(/\[\[(#{URI::regexp(['http'])}) /, '<a href="\1">[[') #links with name part 1
-    text = text.gsub(/\[\[(.*)\]\]/, '\1</a>') #links  with name part 2
+    text = text.gsub(/\[\[([^\]]*)\]\]/, '\1</a>') #links  with name part 2
+     
     simple_format( text )
   end
 
