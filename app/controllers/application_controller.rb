@@ -46,6 +46,6 @@ class ApplicationController < ActionController::Base
     session[:current_account_id]
   end
   def previous_login_time
-    session[:previous_login]
+    session[:previous_login] || Time.now
   end
 end
