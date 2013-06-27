@@ -1,3 +1,5 @@
+# 0.4.22
+  session review preview forgets the action on the session
 # 0.4.21
   Review Preview
   modifications since last login 
