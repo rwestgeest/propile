@@ -87,16 +87,28 @@ class Session < ActiveRecord::Base
     (laptops_required and laptops_required == "yes") ?  "bring laptop" : ""
   end
 
+  def status (since)
+    [update_status(since),  review_status(since)].reject(&:empty?).join(" ")
+  end
+
   def update_status (since)
     if created_at > since
-      "NEW"
+      "NEW" 
     elsif !updated_at.nil? && updated_at >  since
       "UPDATED"
     else
       ""
-    end 
-
+    end
   end
+
+  def review_status (since)
+    if !reviews.select{|r| r.created_at > since}.empty?
+      "REVIEWED"
+    else
+      ""
+    end
+  end
+
 
   def program_card_content(pdf, room="<TODO>", hour="99:99 - 99:99")
     pdf.font_size 10

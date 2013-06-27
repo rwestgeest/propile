@@ -21,7 +21,7 @@
     <td> <%= i+1 %> </td>
     <td> 
       <div class="session_status">
-        <%= session.update_status (@previous_login_time)%>
+        <%= session.status (@previous_login_time)%>
       </div>
     </td>
 <% if @voting_active  %>
