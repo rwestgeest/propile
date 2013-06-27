@@ -30,6 +30,7 @@ describe ReviewsController do
       it "assigns the requested review as @review" do
         get :show, {:id => review.to_param}
         assigns(:review).should eq(review)
+        assigns(:session).should eq(review.session)
       end
     end
 
@@ -39,6 +40,7 @@ describe ReviewsController do
         get :new, {:session_id => session.id}
         assigns(:review).should be_a_new(Review)
         assigns(:review).presenter.should == current_presenter
+        assigns(:session).should eq(session)
       end
     end
 
@@ -47,6 +49,7 @@ describe ReviewsController do
         review.update_attribute :presenter, current_presenter
         get :edit, {:id => review.to_param}
         assigns(:review).should eq(review)
+        assigns(:session).should eq(review.session)
       end
     end
 
@@ -56,6 +59,7 @@ describe ReviewsController do
           post :create, {:review => valid_attributes, :commit => 'Preview'}
           assigns(:review).should be_a_new(Review)
           assigns(:review).presenter.should == current_presenter
+          assigns(:session).should eq(review.session)
         end
       end
 
@@ -115,6 +119,7 @@ describe ReviewsController do
         it "assigns the requested review as @review" do
           put :update, {:id => review.to_param, :review => valid_attributes}
           assigns(:review).should eq(review)
+          assigns(:session).should eq(review.session)
         end
 
         it "redirects to the review" do
@@ -125,6 +130,7 @@ describe ReviewsController do
         it "preview assigns the requested review as @review" do
           put :update, {:id => review.to_param, :review => valid_attributes, :commit => 'Preview'}
           assigns(:review).should eq(review)
+          assigns(:session).should eq(review.session)
         end
       end
 
