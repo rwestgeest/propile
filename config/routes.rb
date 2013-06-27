@@ -21,6 +21,7 @@ Propile::Application.routes.draw do
 
   resources :propile_configs do
     put 'toggle', :on => :collection
+    put 'change_last_login', :on => :collection
     get 'start_conference', :on => :collection
   end
 

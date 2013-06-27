@@ -12,6 +12,8 @@
         <%= f.submit 'toggle' %> 
       <% end %>
     </td>
+    <td> <i> if false, only maintainers can submit a session. </i>
+    </td>
   </tr> 
   <tr>
     <td> Voting active: </td> 
@@ -22,12 +24,29 @@
         <%= f.submit 'toggle' %> 
       <% end %>
     </td>
+    <td> <i> voting becomes active 2 weeks before the program committee meeting </i> </td>
   </tr> 
+</table>
+
+<h1>Configuration for test purposes</h1>
+<table>
   <tr>
     <td> Mails are sent (test-env): </td> 
     <td> <%= PropileConfig.send_mails_active? %> </td> 
     <td> 
     </td>
+    <td> <i> modify config.action_mailer.delivery_method in config/environments for the correct env and restart app </i>
+    </td>
+  </tr> 
+  <tr>
+    <%= form_for(@propile_configs, :url => url_for(:action => 'change_last_login') ) do |f| %>
+      <td> Last login (current account): </td> 
+      <!--td> <%= f.text_field  "new_last_login", :value => current_account.last_login %> </td--> 
+      <td> <%= f.text_field  "new_last_login", :value => session[:previous_login] %> </td> 
+      <td> <%= f.submit "update" %> </td>
+        <td> <i> time of previous login (in session) --> to test the dashboard-functionalities. </i>
+      </td>
+    <% end %>
   </tr> 
 </table>
 
