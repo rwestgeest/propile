@@ -32,15 +32,12 @@ class ReviewsController < ApplicationController
   end
 
   def update
-
+    @review = Review.find(params[:id])
+    @session = @review.session
     if params[:commit] == 'Preview' 
-      @review = Review.new(params[:review])
-      @review.presenter = current_presenter
-      @session = @review.session
+      @review.assign_attributes(params[:review])
       render action: "edit"
     else 
-      @review = Review.find(params[:id])
-      @session = @review.session
       if @review.update_attributes(params[:review])
         redirect_to @review, notice: 'Review was successfully updated.'
       else

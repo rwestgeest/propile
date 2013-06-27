@@ -51,6 +51,14 @@ describe ReviewsController do
     end
 
     describe "POST create" do
+      describe "post preview" do
+        it "assigns the requested NEW review as @review" do
+          post :create, {:review => valid_attributes, :commit => 'Preview'}
+          assigns(:review).should be_a_new(Review)
+          assigns(:review).presenter.should == current_presenter
+        end
+      end
+
       describe "with valid params" do
         def do_post
           post :create, {:review => valid_attributes}
@@ -100,10 +108,6 @@ describe ReviewsController do
       describe "with valid params" do
         it "updates the requested review" do
           create_review 
-          # Assuming there are no other reviews in the database, this
-          # specifies that the Review created on the previous line
-          # receives the :update_attributes message with whatever params are
-          # submitted in the request.
           Review.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
           put :update, {:id => review.to_param, :review => {'these' => 'params'}}
         end
@@ -116,6 +120,11 @@ describe ReviewsController do
         it "redirects to the review" do
           put :update, {:id => review.to_param, :review => valid_attributes}
           response.should redirect_to(review)
+        end
+
+        it "preview assigns the requested review as @review" do
+          put :update, {:id => review.to_param, :review => valid_attributes, :commit => 'Preview'}
+          assigns(:review).should eq(review)
         end
       end
 
