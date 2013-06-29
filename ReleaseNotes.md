@@ -1,5 +1,6 @@
 # 0.4.23
   Reviews/Comments since last login
+  improve comments notifications + preview
 # 0.4.22
   session review preview forgets the action on the session
 # 0.4.21
