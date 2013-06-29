@@ -5,7 +5,6 @@ describe CommentsController do
   it_should_behave_like "a guarded resource controller", :presenter, :maintainer
 
   context "when logged in" do
-
     login_as :presenter
 
     let(:review_for_comment) { FactoryGirl.create(:review) }
@@ -30,6 +29,7 @@ describe CommentsController do
       it "assigns the requested comment as @comment" do
         get :show, {:id => comment.to_param}
         assigns(:comment).should eq(comment)
+        assigns(:session).should eq(comment.review.session)
       end
     end
 
@@ -39,6 +39,8 @@ describe CommentsController do
         get :new, {:review_id => review.id}
         assigns(:comment).should be_a_new(Comment)
         assigns(:comment).presenter.should == current_presenter
+        assigns(:review).should == review
+        assigns(:session).should == review.session
       end
     end
 
@@ -47,10 +49,19 @@ describe CommentsController do
         comment.update_attribute :presenter, current_presenter
         get :edit, {:id => comment.to_param}
         assigns(:comment).should eq(comment)
+        assigns(:session).should == comment.review.session
       end
     end
 
     describe "POST create" do
+      describe "post preview" do
+        it "assigns the requested NEW comment as @comment" do
+          post :create, {:comment => valid_attributes, :commit => 'Preview'}
+          assigns(:comment).should be_a_new(Comment)
+          assigns(:comment).presenter.should == current_presenter
+          assigns(:session).should eq(comment.review.session)
+        end
+      end
       describe "with valid params" do
         it "creates a new Comment" do
           expect {
@@ -58,7 +69,7 @@ describe CommentsController do
           }.to change(Comment, :count).by(1)
         end
 
-        it "current_presenter is newly created comments' owner" do
+        it "current_presenter is newly created comment owner" do
           post :create, {:comment => valid_attributes}
           Comment.last.presenter.should == current_presenter
         end
@@ -97,10 +108,6 @@ describe CommentsController do
     describe "PUT update" do
       describe "with valid params" do
         it "updates the requested comment" do
-          # Assuming there are no other comments in the database, this
-          # specifies that the Comment created on the previous line
-          # receives the :update_attributes message with whatever params are
-          # submitted in the request.
           Comment.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
           put :update, {:id => comment.to_param, :comment => {'these' => 'params'}}
         end
@@ -108,11 +115,18 @@ describe CommentsController do
         it "assigns the requested comment as @comment" do
           put :update, {:id => comment.to_param, :comment => valid_attributes}
           assigns(:comment).should eq(comment)
+          assigns(:session).should == comment.review.session
         end
 
         it "redirects to the comment" do
           put :update, {:id => comment.to_param, :comment => valid_attributes}
           response.should redirect_to(comment)
+        end
+
+        it "preview assigns the requested comment as @comment" do
+          put :update, {:id => comment.to_param, :comment => valid_attributes, :commit => 'Preview'}
+          assigns(:comment).should eq(comment)
+          assigns(:session).should eq(comment.review.session)
         end
       end
 

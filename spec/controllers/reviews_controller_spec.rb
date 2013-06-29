@@ -40,7 +40,7 @@ describe ReviewsController do
         get :new, {:session_id => session.id}
         assigns(:review).should be_a_new(Review)
         assigns(:review).presenter.should == current_presenter
-        assigns(:session).should eq(session)
+        assigns(:session).should == session
       end
     end
 
@@ -73,7 +73,7 @@ describe ReviewsController do
           }.to change(Review, :count).by(1)
         end
 
-        it "current_presenter is newly created comments' owner" do
+        it "current_presenter is newly created review owner" do
           do_post
           Review.last.presenter.should == current_presenter
         end
