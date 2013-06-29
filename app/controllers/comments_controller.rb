@@ -24,12 +24,14 @@ class CommentsController < ApplicationController
     @comment = Comment.new(params[:comment])
     @comment.presenter = current_presenter
     @session = @comment.review.session
+    @review  = @comment.review
 
-    if @comment.save
-       Postman.notify_comment_creation(@comment)
-       redirect_to @comment, notice: 'Comment was successfully created.'
+    if params[:commit] != 'Preview' && @comment.save
+      Postman.notify_comment_creation(@comment)
+      redirect_to @comment, notice: 'Comment was successfully created.'
     else
-       render action: "new"
+      @session = @comment.review.session
+      render action: "new"
     end
   end
 
@@ -37,10 +39,15 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     @session = @comment.review.session
 
-    if @comment.update_attributes(params[:comment])
-       redirect_to @comment, notice: 'Comment was successfully updated.'
-    else
-       render action: "edit"
+    if params[:commit] == 'Preview' 
+      @comment.assign_attributes(params[:comment])
+      render action: "edit"
+    else 
+      if @comment.update_attributes(params[:comment])
+        redirect_to @comment, notice: 'Comment was successfully updated.'
+      else
+        render action: "edit"
+      end
     end
   end
 

@@ -1,13 +1,14 @@
-<h4>Comment by <%= link_to w(comment.presenter.name), comment.presenter %></h4>
+<h3>Comment by <%= link_to w(comment.presenter.name), comment.presenter %></h3>
 
 <div class="lessoutlined ">
   <%= wikinize( comment.body ) %>
 </div>
 
 
+<% if !comment.new_record? %> 
 <div class="alignright">
   Comment Created: <%= l comment.created_at %> -- 
   Modified: <%= l comment.updated_at %>  
   by <%= link_to w(comment.presenter.name), comment.presenter %>
 </div>
-
+<% end %>

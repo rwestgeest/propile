@@ -5,14 +5,21 @@
 
   <%= render 'sessions/show_short', :session => @comment.review.session  %>
 
-  <hr>
-
   <%= render 'reviews/show', :review => @comment.review  %>
 
-  <h4>
+<h3><%= collapse_button_initially_open ("comment_preview")%> Preview of the comment</h3>
+  <div id="comment_preview" class="review">
+    <%= render 'comments/show', :comment => @comment  %>
+  </div>
+
+
+<hr />
+
+
+  <div>
     Comment by <%= w @comment.presenter.name %> on this Review:
-  </h4>
-  <div><%= link_to '(formatting)', "/pages/formatting", :target => '_blank', :class => 'smalllink' %> </div>
+    <%= link_to '(formatting)', "/pages/formatting", :target => '_blank', :class => 'smalllink' %> 
+  </div>
 
   <div class="in_a_form">
     <%= f.text_area :body, :cols => 100, :rows => 10 %>
@@ -21,7 +28,17 @@
 
   <hr>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Preview' %>
+    <% if @comment.new_record? %>
+      <%= f.submit "Create" %>
+      <i>When you create the comment, the session presenter(s) receive an email. 
+      <% if Propile::Application.config.action_mailer.delivery_method == :test %>
+        <br/>!!!  Mail is not sent in test environment !!!
+      <% end %>
+      </i>
+    <% else %>
+      <%= f.submit "Update" %>
+    <% end %>
   </div>
 
 <% end %>

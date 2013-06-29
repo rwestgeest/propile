@@ -8,10 +8,9 @@
   <div><i>The goal of a review is to help to improve this session proposal.</i></div>
 <% end %>
 
-<% if !@review.new_record? %> 
-  <%= content_for :created_and_modified do %> 
-    Created: <%= l @review.created_at %> -- Modified: <%= l @review.updated_at %> 
-  <% end %>
+<%= content_for :created_and_modified do %> 
+  Created: <%= l @review.created_at %> -- 
+  Modified: <%= l @review.updated_at %> 
 <% end %>
 
 <%= render 'form' %>
