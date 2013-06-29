@@ -120,6 +120,16 @@ describe ApplicationHelper do
       wikinize("* [[http://www.xpday.be HOI]] and\n* [[http://www.atbru.be Agile Tour Brussels]] also").should ==
         "<p><ul><li><a href=\"http://www.xpday.be\">HOI</a> and</li><li><a href=\"http://www.atbru.be\">Agile Tour Brussels</a> also</li></ul></p>"
     end
+
+    it "accepts secure https URLs" do
+      wikinize("klik hier: https://github.com/rwestgeest/propile").should ==
+        "<p>klik hier: <a href=\"https://github.com/rwestgeest/propile\">https://github.com/rwestgeest/propile</a></p>"
+    end
+
+    it "accepts named secure https URLs" do
+      wikinize("klik hier: [[https://github.com/rwestgeest/propile Our project]]").should ==
+        "<p>klik hier: <a href=\"https://github.com/rwestgeest/propile\">Our project</a></p>"
+    end
   end
 
   describe "wikinize list" do
@@ -138,7 +148,7 @@ describe ApplicationHelper do
         "<p><ul><li>een</li><li>twee</li></ul>\n<br />en nog iets</p>"
     end
 
-    it "2 uls in a string"  do
+    it "formats 2 urls in a string correctly"  do
       wikinize("* een\n* twee\nblabla\n* nog \n* en nog").should ==
         "<p><ul><li>een</li><li>twee</li></ul>\n<br />blabla\n<br /><ul><li>nog </li><li>en nog</li></ul></p>"
     end
