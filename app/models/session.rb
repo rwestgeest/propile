@@ -88,7 +88,7 @@ class Session < ActiveRecord::Base
   end
 
   def status (since)
-    [update_status(since),  review_status(since)].reject(&:empty?).join(" ")
+    [update_status(since),  review_status(since), comment_status(since)].reject(&:empty?).join(" ")
   end
 
   def update_status (since)
@@ -102,8 +102,16 @@ class Session < ActiveRecord::Base
   end
 
   def review_status (since)
-    if !reviews.select{|r| r.created_at > since}.empty?
+    if reviews.any?{|r| r.created_at > since}
       "REVIEWED"
+    else
+      ""
+    end
+  end
+
+  def comment_status (since)
+    if reviews.any?{|r| r.comments.any? {|c| c.created_at > since.to_date } }
+      "COMMENTED"
     else
       ""
     end

@@ -330,55 +330,68 @@ describe Session do
   end
 
   describe "status" do
-    let(:session_without_update) { FactoryGirl.create(:session_with_presenter, :created_at => "23-06-2013", :updated_at => "23-06-2013") }
-    let(:session_with_update) { FactoryGirl.create(:session_with_presenter, :created_at => "23-06-2013", :updated_at => "25-06-2013") }
-    def a_review_for(session, date)
-      FactoryGirl.create(:review , :session => session, :created_at => date) 
+    def a_session(created_at, updated_at)
+      session = FactoryGirl.create(:session_with_presenter, :created_at => created_at, :updated_at => updated_at) 
     end
-
+    def a_review_for(session, date)
+      FactoryGirl.create(:review , :session => session, :created_at => date, :updated_at => date) 
+    end
+    def a_comment_for(review, date)
+      FactoryGirl.create(:comment, :review => review, :created_at => date, :updated_at => date)
+    end
+    def check_statuses(session, check_since, expected_update_status, expected_review_status, expected_comment_status, expected_status)
+      session.update_status(check_since).should == expected_update_status
+      session.review_status(check_since).should == expected_review_status
+      session.comment_status(check_since).should == expected_comment_status
+      session.status(check_since).should == expected_status
+    end
     it "session older than given date" do 
-      session_without_update.update_status("26-06-2013").should == ""
-      session_without_update.review_status("26-06-2013").should == ""
-      session_without_update.status("26-06-2013").should == ""
+      session = a_session("23-06-2013", "23-06-2013")
+      check_statuses(session, "26-06-2013", "", "", "", "")
     end
     it "session with update older than given date" do 
-      session_with_update.update_status("26-06-2013").should == ""
-      session_with_update.review_status("26-06-2013").should == ""
-      session_with_update.status("26-06-2013").should == ""
+      session = a_session("23-06-2013", "26-06-2013")
+      check_statuses(session, "26-06-2013", "", "", "", "")
     end
     it "session newer than given date" do 
-      session_with_update.update_status("22-06-2013").should == "NEW"
-      session_with_update.review_status("22-06-2013").should == ""
-      session_with_update.status("22-06-2013").should == "NEW"
+      session = a_session("23-06-2013", "26-06-2013")
+      check_statuses(session, "22-06-2013", "NEW", "", "", "NEW")
     end
     it "session updated since given date" do 
-      session_with_update.update_status("24-06-2013").should == "UPDATED"
-      session_with_update.review_status("24-06-2013").should == ""
-      session_with_update.status("24-06-2013").should == "UPDATED"
+      session = a_session("23-06-2013", "26-06-2013")
+      check_statuses(session, "24-06-2013", "UPDATED", "", "", "UPDATED")
     end
     it "session older than given date with older review" do 
-      a_review_for(session_without_update, "24-6-2013")
-      session_without_update.update_status("26-06-2013").should == ""
-      session_without_update.review_status("26-06-2013").should == ""
-      session_without_update.status("26-06-2013").should == ""
+      session = a_session("23-06-2013", "23-06-2013")
+      a_review_for(session, "24-6-2013")
+      check_statuses(session, "26-06-2013", "", "", "", "")
     end
     it "session older than given date with newer review" do 
-      r = a_review_for(session_without_update, "27-6-2013")
-      session_without_update.update_status("26-06-2013").should == ""
-      session_without_update.review_status("26-06-2013").should == "REVIEWED"
-      session_without_update.status("26-06-2013").should == "REVIEWED"
+      session = a_session("23-06-2013", "23-06-2013")
+      a_review_for(session, "27-6-2013")
+      check_statuses(session, "26-06-2013", "", "REVIEWED", "", "REVIEWED")
     end
     it "session newer than given date with newer review" do 
-      r = a_review_for(session_with_update, "27-6-2013")
-      session_with_update.update_status("22-06-2013").should == "NEW"
-      session_with_update.review_status("22-06-2013").should == "REVIEWED"
-      session_with_update.status("22-06-2013").should == "NEW REVIEWED"
+      session = a_session("23-06-2013", "26-06-2013")
+      a_review_for(session, "27-6-2013")
+      check_statuses(session, "22-06-2013", "NEW", "REVIEWED", "", "NEW REVIEWED")
     end
     it "session updated since given date with newer review" do 
-      r = a_review_for(session_with_update, "27-6-2013")
-      session_with_update.update_status("24-06-2013").should == "UPDATED"
-      session_with_update.review_status("24-06-2013").should == "REVIEWED"
-      session_with_update.status("24-06-2013").should == "UPDATED REVIEWED"
+      session = a_session("23-06-2013", "26-06-2013")
+      a_review_for(session, "27-6-2013")
+      check_statuses(session, "24-06-2013", "UPDATED", "REVIEWED", "", "UPDATED REVIEWED")
+    end
+    it "session older than given date with older review and older comment" do 
+      session = a_session("23-06-2013", "23-06-2013")
+      review = a_review_for(session, "24-6-2013")
+      a_comment_for(review, "25-6-2013")
+      check_statuses(session, "26-06-2013", "", "", "", "")
+    end
+    it "session older than given date with older review and newer comment" do
+      session = a_session("23-06-2013", "23-06-2013")
+      review = a_review_for(session, "25-6-2013")
+      c = a_comment_for(review, "28-6-2013")
+      check_statuses(session, "26-06-2013", "", "", "COMMENTED", "COMMENTED")
     end
   end
 
