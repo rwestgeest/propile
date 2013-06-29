@@ -71,7 +71,7 @@ describe Notifications do
       mail.body.encoded.should match session.title
       mail.body.encoded.should match comment.presenter.name 
       mail.body.encoded.should match review.presenter.name 
-      mail.body.encoded.should match(review_url(review))
+      mail.body.encoded.should match(comment_url(comment))
     end
   end
 end

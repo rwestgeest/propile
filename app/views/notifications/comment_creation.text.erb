@@ -1,7 +1,14 @@
 A new comment has been made for review by <%= @review.presenter.name %> on <%= @session.title %> by <%= @comment.presenter.name %>:
 
-You can find the review here: <%= review_url(@review) %>
+ We expect presenters to help each other to develop their proposals, based on peer to peer feedback. 
+ You can give feedback on other people's proposals and improve your proposal based on the feedback you receive. 
+ In this way, we will come to a set of quality session proposals in a transparent, community driven way.
 
+You can find the comment here: <%= comment_url(@comment) %>
+
+The XPDay Benelux Team.
+
+---------------------------------------------------
 <%= @comment.presenter.name  %> wrote:
 
 <%= @comment.body %>

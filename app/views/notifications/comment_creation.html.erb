@@ -1,7 +1,15 @@
-<p>A new comment has been made for review by <%= @review.presenter.name %> on <%= @session.title %> by <%= @comment.presenter.name %>:</p>
+<p>A new comment has been made for review by <%= @review.presenter.name %> on session <b><%= @session.title %></b> by <%= @comment.presenter.name %>:</p>
+<p><i>
+ We expect presenters to help each other to develop their proposals, based on peer to peer feedback. 
+ You can give feedback on other people's proposals and improve your proposal based on the feedback you receive. 
+ In this way, we will come to a set of quality session proposals in a transparent, community driven way.
+</i></p>
 
-<p>You can find the review here: <%= review_url(@review) %></p>
+<p>You can find the comment here: <%= comment_url(@comment) %></p>
 
-<p><%= @comment.presenter.name  %> wrote:</p>
+<p>The XPDay Benelux Team.</p>
+<hr>
+<p>Here's the comment:</p> 
+<p><i><%= @comment.presenter.name  %> wrote:</i></p>
 
 <%= wikinize @comment.body %>
