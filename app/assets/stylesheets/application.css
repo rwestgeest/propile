@@ -28,17 +28,16 @@ body {
   left:0px;
 }
 
-
 #main-navigation ul { height: 40px; display: block; list-style-type: none; padding:0;}
 #main-navigation ul li { float: left; }
 #main-navigation ul li a { 
 	display: block; 
-	font-size: 123%;
+	font-size: 110%;
 	text-decoration: none;
 	border-radius: 3px;
 	-moz-border-radius: 3px;
 	-webkit-box-radius: 3px;
-	padding: 6px 17px;
+	padding: 6px 7px;
 	margin: 9px 3px 0 0;
 }
 #main-navigation ul li a:hover { 
