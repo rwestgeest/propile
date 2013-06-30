@@ -118,6 +118,47 @@ class Session < ActiveRecord::Base
   end
 
 
+  def self.generate_program_committee_cards_pdf(file_name)
+    Prawn::Document.generate file_name, 
+                    :page_size => 'A6', :page_layout => :landscape, 
+                    :top_margin => 10, :bottom_margin => 10, 
+                    :left_margin => 20, :right_margin => 20 do |pdf| 
+      Session.all.each_with_index do |session, i| 
+        pdf.start_new_page if i>0
+        session.program_committee_card_content(pdf)
+      end
+    end
+  end
+
+  def program_committee_card_content(pdf)
+    pdf.font_size 10
+    pdf.text id.to_s, :align => :right
+    pdf.bounding_box([0, 275], :width => 380) do 
+      pdf.text title, :align => :center, :size => 18
+      pdf.text sub_title, :align => :center, :style => :italic, :size => 8 if !sub_title.nil? 
+    end
+    pdf.bounding_box([0, 210], :width => 380) do 
+      PdfHelper.new().wikinize_for_pdf(short_description, pdf) if !short_description.nil? 
+    end
+    pdf.bounding_box([0, 50], :width => 380, :height => 50 ) do 
+      pdf.text "Presenters:"
+      pdf.text "Format: "
+      pdf.text "Votes: "
+      pdf.text "Reviews: "
+    end
+    pdf.bounding_box([60, 50], :width => 320, :height => 50 ) do 
+      pdf.text presenter_names
+      pdf.text session_type.truncate(60)if !session_type.nil? 
+      pdf.text votes.size.to_s
+      pdf.text reviews.size.to_s
+    end
+    pdf.bounding_box([300, 50], :width => 80, :height => 50 ) do 
+      pdf.text printable_max_participants, :align => :right
+      pdf.text printable_laptops_required, :align => :right
+    end
+
+  end
+
   def program_card_content(pdf, room="<TODO>", hour="99:99 - 99:99")
     pdf.font_size 10
     pdf.text hour, :align => :center
@@ -125,7 +166,7 @@ class Session < ActiveRecord::Base
     pdf.text id.to_s, :align => :right
     pdf.bounding_box([0, 245], :width => 380) do 
       pdf.text title, :align => :center, :size => 18
-      pdf.text sub_title, :align => :center, :style => :italic, :size => 8
+      pdf.text sub_title, :align => :center, :style => :italic, :size => 8 if !sub_title.nil?
     end
     pdf.bounding_box([0, 190], :width => 380) do 
       PdfHelper.new().wikinize_for_pdf(short_description, pdf) if !short_description.nil? 

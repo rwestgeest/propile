@@ -331,8 +331,18 @@ describe SessionsController do
     describe "GET program_board_card" do
       it "assigns the requested session as @session" do
         session = FactoryGirl.create :session_with_presenter
-        get :show, {:id => session.to_param}
+        get :program_board_card, {:id => session.to_param, :format => 'pdf'}
         assigns(:session).should eq(session)
+        response.should be_success
+      end
+    end
+
+    describe "GET pcm_cards" do
+      it "assigns returns response" do
+        login_as :maintainer
+        session = FactoryGirl.create :session_with_presenter
+        get :pcm_cards, {:format => 'pdf'}
+        response.should be_success
       end
     end
 

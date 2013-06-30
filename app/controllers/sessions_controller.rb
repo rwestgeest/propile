@@ -62,6 +62,16 @@ class SessionsController < ApplicationController
     end
   end
 
+  def pcm_cards
+    respond_to do |format|
+      format.pdf do 
+        file_name = "tmp/pcm_cards.pdf"
+        pdf = Session.generate_program_committee_cards_pdf(file_name)
+        send_file( file_name)
+      end
+    end
+  end
+
   def new
     #if !PropileConfig.submit_session_active? then raise "Session submission is closed" end
     @session = Session.new
@@ -101,11 +111,6 @@ class SessionsController < ApplicationController
       end
     end
     send_data(session_csv, :type => 'test/csv', :filename => 'sessions.csv') 
-  end
-
-  def pcm_cards
-    @sessions = Session.all
-    render :layout => 'pcm_cards'
   end
 
   def create
