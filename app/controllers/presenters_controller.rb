@@ -17,15 +17,13 @@ class PresentersController < ApplicationController
   def show
     @presenter = Presenter.find(params[:id])
     @you_are_current_user = (current_presenter == @presenter)
-    @sessions_reviewed_by_you = (@presenter.reviews.all.collect { |r|  Session.find(r.session_id) } )
+    @sessions_reviewed_by_you = @presenter.sessions_reviewed
     @previous_login_time = previous_login_time
   end
 
   def dashboard
     @presenter = current_presenter
-    @sessions_you_are_involved_in = (@presenter.sessions + 
-                                     @presenter.reviews.collect{|r| r.session }  + 
-                                     @presenter.comments.collect {|c| c.review.session}).uniq
+    @sessions_you_are_involved_in = @presenter.sessions_involved
     @previous_login_time = previous_login_time
   end
 

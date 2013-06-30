@@ -1,6 +1,15 @@
 require 'spec_helper'
 
 describe Presenter do
+  let(:presenter) { FactoryGirl.create :presenter }
+  def create_presenter
+    presenter
+  end
+  let (:maintainer) { FactoryGirl.create :presenter, :account =>  (FactoryGirl.create :confirmed_account)}
+  def create_maintainer
+    maintainer
+  end
+
   it { should validate_presence_of :email } 
   ["rob@", "@mo.nl", "123.nl", "123@nl", "aaa.123.nl", "aaa.123@nl"].each do |illegal_mail|
     it { should_not allow_value(illegal_mail).for(:email) }
@@ -19,7 +28,6 @@ describe Presenter do
   end
 
   describe 'sessions' do
-    let(:presenter) { FactoryGirl.create :presenter }
     it "are empty by default" do
       presenter.sessions.should be_empty
     end
@@ -66,6 +74,39 @@ describe Presenter do
     end
   end
 
+  describe "sessions_reviewed" do
+    let (:review) {FactoryGirl.create :review}
+    it "returns nothing if nothing reviewed" do
+      presenter.sessions_reviewed.should be_empty
+    end
+    it "returns reviewed sessions " do
+      review.presenter.sessions_reviewed.should == [review.session]
+    end
+  end
+
+  describe "sessions_involved" do
+    let (:session) {FactoryGirl.create :session_with_presenter}
+    let (:review) {FactoryGirl.create :review}
+    let (:comment) {FactoryGirl.create :comment}
+    it "returns nothing if nothing submitted or reviewed or commented" do
+      presenter.sessions_involved.should be_empty
+    end
+    it "returns submitted sessions if something submitted" do
+      session.first_presenter.sessions_involved.should == [session]
+    end
+    it "returns reviewed sessions if something reviewed" do
+      review.presenter.sessions_involved.should == [review.session]
+    end
+    it "returns commented sessions if something commented" do
+      comment.presenter.sessions_involved.should == [comment.review.session]
+    end
+    it "returns each session only once " do
+      presenter = session.first_presenter
+      FactoryGirl.create :review, :presenter => presenter, :session => session
+      presenter.sessions_involved.should == [session]
+    end
+  end
+
   describe "archive_all" do
     def compare_archived (archived_presenter, presenter)
       archived_presenter.name.should == presenter.name
@@ -74,33 +115,29 @@ describe Presenter do
     end
 
     it "copies presenter to archived_presenter" do
-      presenter = FactoryGirl.create :presenter 
+      create_presenter
       Presenter.archive_all
       ArchivedPresenter.all.size.should == 1
       compare_archived(ArchivedPresenter.all.first, presenter)
     end
     it "removes presenter from presenter" do
-      presenter = FactoryGirl.create :presenter 
+      create_presenter
       Presenter.archive_all
       Presenter.all.should be_empty
     end
     it "copies maintainer to archived_presenter" do
-      maintainer = FactoryGirl.create :presenter 
-      maintainer.account = FactoryGirl.create :confirmed_account
-      maintainer.save
+      create_maintainer
       Presenter.archive_all
       ArchivedPresenter.all.size.should == 1
       compare_archived(ArchivedPresenter.all.first, maintainer)
     end
     it "does not remove maintainer from presenter" do
-      maintainer = FactoryGirl.create :presenter 
-      maintainer.account = FactoryGirl.create :confirmed_account
-      maintainer.save
+      create_maintainer
       Presenter.archive_all
       Presenter.all.size.should == 1
     end
     it "moves maintainer to archived_presenter" do
-      presenter = FactoryGirl.create :presenter 
+      create_presenter
       Presenter.archive_all
       Presenter.all.should be_empty
       ArchivedPresenter.all.size.should == 1

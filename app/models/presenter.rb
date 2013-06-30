@@ -51,6 +51,14 @@ class Presenter < ActiveRecord::Base
     votes.find_by_id(vote_id) 
   end
 
+  def sessions_reviewed
+    reviews.collect { |r|  r.session } 
+  end
+
+  def sessions_involved
+    (sessions + reviews.collect{|r| r.session }  + comments.collect {|c| c.review.session}).uniq
+  end
+
   def lazy_account
     self.account ||= Account.new
   end
