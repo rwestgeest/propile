@@ -28,6 +28,7 @@
         <ul>
           <%= menu(request) do |m| %>
             <% m.tab("Home", 'pages') %>
+            <% m.tab("Dashboard", "presenters#dashboard") %>
             <% m.tab("Sessions", "sessions") %>
             <% m.tab("Presenters", "presenters") %>
             <% m.tab("Create Session Proposal", "sessions#new") %>

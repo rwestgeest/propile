@@ -1,0 +1,28 @@
+<%= title "" %>
+
+<%= content_for :sub_menu do %> 
+<% end %>
+
+<%= content_for :created_and_modified do %> 
+<% end %>
+
+<hr>
+
+<% if PropileConfig.voting_active?  %> 
+  <h2>Your votes </h2>
+  <div><i>(only you can see this)</i></div>
+  <% if @presenter.votes.empty? %> 
+    You have not voted yet.
+  <% else %> 
+    <%= render 'votes/index', :votes => @presenter.votes  %>
+  <%end%> 
+  <hr>
+<%end%> 
+
+
+<h2>Sessions you are involved in: </h2>
+<div><i> These are the sessions that you submitted, reviewed or commented.</i></div>
+<%= render 'sessions/index', :sessions => @sessions_you_are_involved_in, :sortable => false  %>
+
+
+

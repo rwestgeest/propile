@@ -15,6 +15,7 @@ describe PresentersController do
     end
     describe "role " do
       it "is possible when logged in as presenter " do
+
         put :update, {:id => presenter.to_param, :presenter => { :role => Account::Maintainer } }
         Presenter.find(presenter.to_param).role.should == Account::Presenter
       end
@@ -44,6 +45,14 @@ describe PresentersController do
       it "assigns the requested presenter as @presenter" do
         get :show, {:id => presenter.to_param}
         assigns(:presenter).should eq(presenter)
+      end
+    end
+
+    describe "GET dashboard" do
+      it "assigns the current presenter as @presenter" do
+        current_account.presenter = presenter
+        get :dashboard
+        assigns(:presenter).should eq(current_presenter)
       end
     end
 

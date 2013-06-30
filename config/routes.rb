@@ -39,6 +39,7 @@ Propile::Application.routes.draw do
   resources :presenters do
     put 'toggle_maintainer_role', :on => :member
     get 'export', :on => :collection
+    get 'dashboard', :on => :collection
   end
 
   resources :reviews do

@@ -21,6 +21,14 @@ class PresentersController < ApplicationController
     @previous_login_time = previous_login_time
   end
 
+  def dashboard
+    @presenter = current_presenter
+    @sessions_you_are_involved_in = (@presenter.sessions + 
+                                     @presenter.reviews.collect{|r| r.session }  + 
+                                     @presenter.comments.collect {|c| c.review.session}).uniq
+    @previous_login_time = previous_login_time
+  end
+
   def new
     @presenter = Presenter.new
   end
@@ -88,5 +96,6 @@ class PresentersController < ApplicationController
       render :layout => false , :content_type => 'text/plain'  # just the html, mam
     end
   end
+
 
 end
