@@ -159,7 +159,7 @@ class Session < ActiveRecord::Base
 
   end
 
-  def program_card_content(pdf, room="<TODO>", hour="99:99 - 99:99")
+  def program_board_card_content(pdf, room="<TODO>", hour="99:99 - 99:99")
     pdf.font_size 10
     pdf.text hour, :align => :center
     pdf.move_up 12
@@ -192,7 +192,7 @@ class Session < ActiveRecord::Base
                     :page_size => 'A6', :page_layout => :landscape, 
                     :top_margin => 10, :bottom_margin => 10, 
                     :left_margin => 20, :right_margin => 20 do |pdf| 
-      program_card_content(pdf)
+      program_board_card_content(pdf)
     end
   end
 

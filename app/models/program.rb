@@ -181,7 +181,7 @@ class Program < ActiveRecord::Base
       program_entries_for_topic(topic).each_with_index do |pe, i| 
         if !pe.session.nil?  
           pdf.start_new_page if i>0
-          pe.session.program_card_content(pdf, room_for_program_entry(pe), hour_for_program_entry(pe)) 
+          pe.session.program_board_card_content(pdf, room_for_program_entry(pe), hour_for_program_entry(pe)) 
           add_feedback_card_content(pdf) if !topic.nil?
         end   
       end
