@@ -228,6 +228,20 @@ describe Session do
     end
   end
 
+
+  describe "generate_program_committee_cards_pdf" do
+    let(:session) { FactoryGirl.build(:session_with_presenter, 
+                                      :sub_title => "the sub title", 
+                                      :short_description => "the short description", 
+                                      :session_type => "the session type") }
+    it "returns a pdf file" do
+      FileUtils.mkdir_p 'tmp'
+      pdf = Session.generate_program_committee_cards_pdf("tmp/session_test.pdf")
+      pdf.should_not be_nil
+      pdf.class.should equal File
+    end
+  end
+
   describe "printable_max_participants" do
     let(:session) { FactoryGirl.build(:session_with_presenter) }
     it "if empty max_participants returns nothing" do 
