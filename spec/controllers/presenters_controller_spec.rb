@@ -40,11 +40,18 @@ describe PresentersController do
         assigns(:presenters).should eq([presenter])
       end
     end
-
+    let(:review) { FactoryGirl.create :review }
     describe "GET show" do
       it "assigns the requested presenter as @presenter" do
         get :show, {:id => presenter.to_param}
         assigns(:presenter).should eq(presenter)
+        assigns(:sessions_reviewed_by_you).should be_empty
+      end
+      it "assigns the requested sessions as @sessions_reviewed_by_you" do
+        presenter = review.presenter
+        get :show, {:id => presenter.to_param}
+        assigns(:presenter).should eq(presenter)
+        assigns(:sessions_reviewed_by_you).should ==[review.session]
       end
     end
 
@@ -53,6 +60,16 @@ describe PresentersController do
         current_account.presenter = presenter
         get :dashboard
         assigns(:presenter).should eq(current_presenter)
+        assigns(:sessions_you_are_involved_in).should be_empty
+      end
+      it "assigns the requested sessions in @sessions_you_are_involved_in" do
+        current_account.presenter = presenter
+        session_submitted = FactoryGirl.create :session, :first_presenter => presenter
+        review = FactoryGirl.create :review, :presenter => presenter
+        comment = FactoryGirl.create :comment, :presenter => presenter
+        get :dashboard
+        assigns(:presenter).should eq(current_presenter)
+        assigns(:sessions_you_are_involved_in).should == [session_submitted, review.session, comment.review.session]
       end
     end
 
