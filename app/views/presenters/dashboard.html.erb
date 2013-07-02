@@ -16,8 +16,14 @@
   <%end%> 
   <hr>
 <%end%> 
+<h3>Sessions you are involved in: </h3>
+<div><i> These are the sessions that you submitted, reviewed or commented.</i></div>
+<%= render 'sessions/index_simple', :sessions => @sessions_you_are_involved_in, :sortable => false  %>
+
 
 <% if @presenter.reviews.empty? %>
+<br/>
+<br/>
 <div class="outlined">
  We expect presenters to help each other to develop their proposals, based on peer to peer feedback. 
  You can give feedback on other people's proposals and improve your proposal based on the feedback you receive. 
@@ -28,14 +34,9 @@
 </div>
 <% end %>
 
-<h3>Sessions you are involved in: </h3>
-<div><i> These are the sessions that you submitted, reviewed or commented.</i></div>
-<%= render 'sessions/index_simple', :sessions => @sessions_you_are_involved_in, :sortable => false  %>
-
 <br/>
 <h3>These sessions are waiting for your review: </h3>
 <div><i> These sessions don't have a review and/or are younger than 1 week.</i></div>
-<%= render 'sessions/index_simple', :sessions => @sessions_that_need_a_review, :sortable => false  %>
-
+<%= render 'sessions/index_with_short_desc', :sessions => @sessions_that_need_a_review, :sortable => false  %>
 
 
