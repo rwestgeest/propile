@@ -288,10 +288,15 @@ td.ProgramMatrix  a:hover {
 }
 
 .technology { background-color:#6B0; } 
+.technology a { color:black; } 
 .customer { background-color:#3CF; } 
+.customer a { color:black; } 
 .cases { background-color:#FF9; } 
+.cases a { color:black; } 
 .team { background-color:#F8A; } 
+.team  a { color:black; } 
 .process { background-color:#FFA822; } 
+.process a { color:black; } 
 
 p.ProgramMatrix_presenters {
  font-style:italic; 
