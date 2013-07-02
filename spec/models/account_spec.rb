@@ -229,7 +229,7 @@ describe Account do
       it_should_behave_like "a confirmable account"
       it "sets the landing page to sessions" do
         confirm_with_password!
-        account.landing_page.should == '/sessions'
+        account.landing_page.should == '/presenters/dashboard'
       end
 
     end

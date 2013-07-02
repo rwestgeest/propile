@@ -37,7 +37,7 @@ class Account < ActiveRecord::Base
 
   def landing_page
     return '/account/password/edit' if !confirmed? || reset?
-    return '/sessions'
+    return '/presenters/dashboard'
   end
 
 end
