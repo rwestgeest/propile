@@ -17,6 +17,16 @@
   <hr>
 <%end%> 
 
+<% if @presenter.reviews.empty? %>
+<div class="outlined">
+ We expect presenters to help each other to develop their proposals, based on peer to peer feedback. 
+ You can give feedback on other people's proposals and improve your proposal based on the feedback you receive. 
+ In this way, we will come to a set of quality session proposals in a transparent, community driven way.
+</div>
+<div class="flashy">
+  Review you first session!!! 
+</div>
+<% end %>
 
 <h2>Sessions you are involved in: </h2>
 <div><i> These are the sessions that you submitted, reviewed or commented.</i></div>
