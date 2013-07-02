@@ -43,13 +43,13 @@
 
 <h2>Sessions submitted by <%= @presenter.name  %> </h2>
 
-<%= render 'sessions/index', :sessions => @presenter.sessions, :sortable => false  %>
+<%= render 'sessions/index_simple', :sessions => @presenter.sessions, :sortable => false  %>
 
 <hr>
 
 <h2>Sessions reviewed by <%= @presenter.name  %> </h2>
 
-<%= render 'sessions/index', :sessions => @sessions_reviewed_by_you, :sortable => false  %>
+<%= render 'sessions/index_simple', :sessions => @sessions_reviewed_by_you, :sortable => false  %>
 
 
 
