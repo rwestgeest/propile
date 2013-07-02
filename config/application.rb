@@ -76,6 +76,10 @@ module Propile
     def self.mail_subject_prefix
       "[Propile XP Days 2013] "
     end
+
+    def self.version
+      File.readlines('VERSION').first.strip[/[^\s]*/]
+    end
   end
 
   
