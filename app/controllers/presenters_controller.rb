@@ -24,6 +24,7 @@ class PresentersController < ApplicationController
   def dashboard
     @presenter = current_presenter
     @sessions_you_are_involved_in = @presenter.sessions_involved
+    @sessions_that_need_a_review = Session.sessions_that_need_a_review
     @previous_login_time = previous_login_time
   end
 

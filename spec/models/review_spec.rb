@@ -29,4 +29,5 @@ describe Review do
       review.should be_invalid
     end
   end
+
 end

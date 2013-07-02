@@ -28,9 +28,14 @@
 </div>
 <% end %>
 
-<h2>Sessions you are involved in: </h2>
+<h3>Sessions you are involved in: </h3>
 <div><i> These are the sessions that you submitted, reviewed or commented.</i></div>
 <%= render 'sessions/index_simple', :sessions => @sessions_you_are_involved_in, :sortable => false  %>
+
+<br/>
+<h3>These sessions are waiting for your review: </h3>
+<div><i> These sessions don't have a review and/or are younger than 1 week.</i></div>
+<%= render 'sessions/index_simple', :sessions => @sessions_that_need_a_review, :sortable => false  %>
 
 
 

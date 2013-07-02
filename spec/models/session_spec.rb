@@ -409,4 +409,33 @@ describe Session do
     end
   end
 
+  describe "self.sessions_that_need_a_review" do
+    def a_session(created_at)
+      session = FactoryGirl.create(:session_with_presenter, :created_at => created_at, :updated_at => created_at) 
+    end
+    def a_review_for(session)
+      FactoryGirl.create(:review , :session => session)
+    end
+    it "returns nothing if no sessions" do
+      Session.sessions_that_need_a_review.should be_empty
+    end
+    it "if we have an old session with a review returns nothing " do
+      a_review_for ( a_session(Date.today - 10) )
+      Session.sessions_that_need_a_review.should be_empty
+    end
+    it "if we have an old session without a review returns that session" do
+      session = a_session(Date.today - 10)
+      Session.sessions_that_need_a_review.should == [session]
+    end
+    it "if we have a new session with a review returns that session" do
+      session = a_session(Date.today - 3) 
+      a_review_for ( session )
+      Session.sessions_that_need_a_review.should == [session]
+    end
+    it "returns each session only once " do
+      session = a_session(Date.today - 3) 
+      Session.sessions_that_need_a_review.should == [session]
+    end
+  end
+
 end
