@@ -1,0 +1,30 @@
+<table class="tablelist">
+  <tr>
+    <th></th>
+    <th></th>
+<% if @voting_active  %>
+    <th> <%= sortable ? sortable("voted") : "Voted"  %> </th>
+<% end %>
+    <!--th> <% if sortable %> <%= sortable "title" %> <% else %> Title <% end %> </th-->
+    <th> <%= sortable ? sortable("title") : "Title"  %> </th>
+    <th> <%= sortable ? sortable("presenters", "Presenter(s)") : "Presenter(s)" %> </th>
+  </tr>
+
+<% sessions.each_with_index do |session, i| %>
+  <tr>
+    <td> <%= i+1 %> </td>
+    <td> 
+      <div class="session_status">
+        <%= session.status (@previous_login_time)%>
+      </div>
+    </td>
+<% if @voting_active  %>
+    <td> <% if session.presenter_has_voted_for?(@current_account.presenter.id) %> YES  <% end %> </td>
+<% end %>
+    <td class="<%= session.topic %>"> <%= link_to w(session.title) , session %></td>
+    <td> <%= session_presenter_names(session) %> </td>
+  </tr>
+<% end %>
+</table>
+
+
