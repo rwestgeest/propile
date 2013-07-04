@@ -1,22 +1,22 @@
 <table class="tablelist">
 
-<% sessions.each_with_index do |session, i| %>
-  <tr class="<%= session.topic %>">
+  <% sessions.each_with_index do |session, i| %>
+    <tr class="<%= session.topic %>">
     <td> <%= i+1 %> </td>
     <td> </td>
-        <td> <b> <%= link_to w(session.title) , session %> </b> <i>by <%= session_presenter_names(session) %> 
-    </td>
-  </tr>
-  <tr>
-    <td> </td>
-    <td> 
-      <div class="session_status">
-        <%= session.status (@previous_login_time)%>
-      </div>
-    </td>
-    <td><%= wikinize(session.short_description) %> </td>
-  </tr>
-<% end %>
-</table>
+    <td> <b> <%= link_to w(session.title) , session %> </b> <i>by <%= session_presenter_names(session) %></i>
+   </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> 
+        <div class="session_status">
+          <%= session.status (@previous_login_time)%>
+        </div>
+      </td>
+      <td><%= wikinize(session.short_description) %> </td>
+    </tr>
+  <% end %>
+  </table>
 
 

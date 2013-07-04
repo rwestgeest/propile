@@ -19,6 +19,7 @@ group :test do
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
   gem "capybara"
+  gem 'guard-rspec'
 end
 
 group :development do

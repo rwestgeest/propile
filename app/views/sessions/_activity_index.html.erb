@@ -1,0 +1,20 @@
+<table class="tablelist">
+<% sessions.each_with_index do |session, i| %>
+  <tr>
+<% if @voting_active  %>
+    <td> <% if session.presenter_has_voted_for?(@current_account.presenter.id) %> YES  <% end %> </td>
+<% end %>
+    <td class="<%= session.topic %>"> <%= link_to w(session.title) , session %>
+    <br/> <i> by <%= session_presenter_names(session) %> </i>
+  </td>
+  <td> 
+    <div class="session_status">
+      <%= session.status (@previous_login_time)%>
+    </div>
+  </td>
+  </tr>
+<% end %>
+</table>
+
+
+
