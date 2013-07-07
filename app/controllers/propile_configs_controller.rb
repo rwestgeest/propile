@@ -82,8 +82,15 @@ class PropileConfigsController < ApplicationController
   def change_last_login
     new_last_login = params[:propile_config][:new_last_login]
     session[:previous_login] = new_last_login
-    #current_account.last_login = new_last_login
-    #current_account.save
+
+    respond_to do |format|
+      format.html { redirect_to propile_configs_url }
+      format.json { head :no_content }
+    end
+  end
+
+  def toggle_send_mails
+    PropileConfig.toggle_send_mails
 
     respond_to do |format|
       format.html { redirect_to propile_configs_url }

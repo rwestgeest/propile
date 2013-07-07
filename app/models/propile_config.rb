@@ -27,6 +27,16 @@ class PropileConfig < ActiveRecord::Base
     Propile::Application.config.action_mailer.delivery_method == :sendmail 
   end
 
+  def self.toggle_send_mails
+    if Propile::Application.config.action_mailer.delivery_method == :sendmail
+      new_deliver_method = :test
+    else
+      new_deliver_method = :sendmail
+    end
+    Propile::Application.config.action_mailer.delivery_method = new_deliver_method
+    ActionMailer::Base.delivery_method = new_deliver_method
+  end
+
   def self.submit_session_active?
     is_set( SUBMIT_SESSION_ACTIVE )
   end
