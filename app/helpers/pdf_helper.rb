@@ -36,9 +36,12 @@ module PdfHelper
 
   def wikinize_for_pdf_simple_string( text )
     return "" unless text and not text.empty?
-    text = text.gsub( /\*([^*\n]*)\*/, '<b>\1</b>' ) #bold
-    text = text.gsub( /_([^_\n]*)_/, '<i>\1</i>' )   #italic
-    text = text.gsub(/(http:\/\/[^ ]*)/, '<u>\1</u>') #links
+    text = text.gsub(/(^|[^\[])(#{URI::regexp(['http','https'])})/, '\1<u>\2</u>') #simple links
+    text = text.gsub(/\[\[(#{URI::regexp(['http','https'])}) /, '<u>\1</u> ([[') #links with name part 1
+    text = text.gsub(/\[\[([^\]]*)\]\]/, '\1)') #links  with name part 2
+
+    text = text.gsub( / \*([^*\n]*)\* /, ' <b>\1</b> ' ) #bold
+    text = text.gsub( / _([^_\n]*)_ /, ' <i>\1</i> ' )   #italic
   end
 
   def split_list_string(list_string)
