@@ -1,5 +1,4 @@
 require 'prawn'
-require 'pdf_helper'
 
 class Session < ActiveRecord::Base
   include PdfHelper
