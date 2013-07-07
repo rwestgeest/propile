@@ -2,6 +2,8 @@ require 'prawn'
 require 'pdf_helper'
 
 class Session < ActiveRecord::Base
+  include PdfHelper
+
   AVAILABLE_TOPICS_AND_NAMES = { "technology"=>"Technology and Technique", 
                                  "customer"=>"Customer and Planning", 
                                  "cases"=>"Intro's and Cases", 
@@ -138,7 +140,7 @@ class Session < ActiveRecord::Base
       pdf.text sub_title, :align => :center, :style => :italic, :size => 8 if !sub_title.nil? 
     end
     pdf.bounding_box([0, 210], :width => 380) do 
-      PdfHelper.new().wikinize_for_pdf(short_description, pdf) if !short_description.nil? 
+      wikinize_for_pdf(short_description, pdf) if !short_description.nil? 
     end
     pdf.bounding_box([0, 50], :width => 380, :height => 50 ) do 
       pdf.text "Presenters:"
@@ -169,7 +171,7 @@ class Session < ActiveRecord::Base
       pdf.text sub_title, :align => :center, :style => :italic, :size => 8 if !sub_title.nil?
     end
     pdf.bounding_box([0, 190], :width => 380) do 
-      PdfHelper.new().wikinize_for_pdf(short_description, pdf) if !short_description.nil? 
+      wikinize_for_pdf(short_description, pdf) if !short_description.nil? 
     end
     pdf.bounding_box([0, 29], :width => 380, :height => 36 ) do 
       pdf.text "Presenters:"
@@ -206,7 +208,7 @@ class Session < ActiveRecord::Base
       pdf.text sub_title, :align => :center, :style => :italic, :size => 14
     end
     pdf.bounding_box([0, 700], :width => 550) do 
-      PdfHelper.new().wikinize_for_pdf(description, pdf)
+      wikinize_for_pdf(description, pdf)
     end
     pdf.bounding_box([0, 58], :width => 380, :height => 58 ) do 
       pdf.text "Presenters:"
