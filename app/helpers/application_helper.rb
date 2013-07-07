@@ -61,11 +61,12 @@ module ApplicationHelper
       text = text.gsub( /<\/li>\n<li>/, '</li><li>' ) #put all bullets in 1 list on same line
       text = text.gsub( /^<li>/, '<ul><li>').gsub( /<\/li>$/, '</li></ul>' )
     end
-    text = text.gsub( /\*([^*\n]*)\*/, '<b>\1</b>' ) #bold
-    text = text.gsub( /_([^_\n]*)_/, '<i>\1</i>' )   #italic
     text = text.gsub(/(^|[^\[])(#{URI::regexp(['http','https'])})/, '\1<a href="\2">\2</a>') #simple links
     text = text.gsub(/\[\[(#{URI::regexp(['http','https'])}) /, '<a href="\1">[[') #links with name part 1
     text = text.gsub(/\[\[([^\]]*)\]\]/, '\1</a>') #links  with name part 2
+
+    text = text.gsub( / \*([^*\n]*)\* /, ' <b>\1</b> ' ) #bold
+    text = text.gsub( / _([^_\n]*)_ /, ' <i>\1</i> ' )   #italic
      
     simple_format( text )
   end

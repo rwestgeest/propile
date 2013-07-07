@@ -130,6 +130,26 @@ describe ApplicationHelper do
       wikinize("klik hier: [[https://github.com/rwestgeest/propile Our project]]").should ==
         "<p>klik hier: <a href=\"https://github.com/rwestgeest/propile\">Our project</a></p>"
     end
+
+    it "accepts URLs with an underscore" do
+      wikinize("klik hier: http://github.com/rwestgeest/propile_Our").should ==
+        "<p>klik hier: <a href=\"http://github.com/rwestgeest/propile_Our\">http://github.com/rwestgeest/propile_Our</a></p>"
+    end
+
+    it "accepts URLs with 2 underscores" do
+      wikinize("klik hier: http://github.com/rwestgeest/propile_Our_Project").should ==
+        "<p>klik hier: <a href=\"http://github.com/rwestgeest/propile_Our_Project\">http://github.com/rwestgeest/propile_Our_Project</a></p>"
+    end
+
+    it "accepts URLs with an underscore in braces" do
+      wikinize("klik hier: [[http://github.com/rwestgeest/propile_Our project]]").should ==
+        "<p>klik hier: <a href=\"http://github.com/rwestgeest/propile_Our\">project</a></p>"
+    end
+
+    it "accepts URLs with 2 underscores in braces" do
+      wikinize("klik hier: [[http://github_2.com/rwestgeest/propile_Our project]]").should ==
+        "<p>klik hier: <a href=\"http://github_2.com/rwestgeest/propile_Our\">project</a></p>"
+    end
   end
 
   describe "wikinize list" do
