@@ -69,6 +69,21 @@ describe ApplicationHelper do
         "<p>can we have <b>more</b> than <b>only one</b> bold word?</p>"
     end
 
+    it "bold word at beginning of line"  do
+      wikinize("*this* is a bold word?").should ==
+        "<p><b>this</b> is a bold word?</p>"
+    end
+
+    it "bold word at end of line"  do
+      wikinize("this is a bold *word*").should ==
+        "<p>this is a bold <b>word</b></p>"
+    end
+
+    it "bold word between special chars"  do
+      wikinize("this is a bold (*word*)").should ==
+        "<p>this is a bold (<b>word</b>)</p>"
+    end
+
     it "_word_ returns italic"  do
       wikinize("simple string with _italic_ word").should ==
         "<p>simple string with <i>italic</i> word</p>"
@@ -78,6 +93,22 @@ describe ApplicationHelper do
       wikinize("can we have _more_ than _only one_ italic word?").should ==
         "<p>can we have <i>more</i> than <i>only one</i> italic word?</p>"
     end
+
+    it "italic word at beginning of line"  do
+      wikinize("_this_ is a italic word?").should ==
+        "<p><i>this</i> is a italic word?</p>"
+    end
+
+    it "italic word at end of line"  do
+      wikinize("this is a italic _word_").should ==
+        "<p>this is a italic <i>word</i></p>"
+    end
+
+    it "italic word between special chars"  do
+      wikinize("this is a italic (_word_)").should ==
+        "<p>this is a italic (<i>word</i>)</p>"
+    end
+
   end
 
   describe "wikinize links" do

@@ -35,6 +35,21 @@ describe PdfHelper do
                 "can we have <b>more</b> than <b>only one</b> bold word?"
     end
 
+    it "bold word at beginning of line"  do
+      wikinize_for_pdf_simple_string("*this* is a bold word?").should ==
+        "<b>this</b> is a bold word?"
+    end
+
+    it "bold word at end of line"  do
+      wikinize_for_pdf_simple_string("this is a bold *word*").should ==
+        "this is a bold <b>word</b>"
+    end
+
+    it "bold word between special chars"  do
+      wikinize_for_pdf_simple_string("this is a bold (*word*)").should ==
+        "this is a bold (<b>word</b>)"
+    end
+
     it "_word_ returns italic" do
        wikinize_for_pdf_simple_string("simple string with _italic_ word").should == 
                 "simple string with <i>italic</i> word"
@@ -44,6 +59,22 @@ describe PdfHelper do
        wikinize_for_pdf_simple_string("can we have _more_ than _only one_ italic word?").should == 
                 "can we have <i>more</i> than <i>only one</i> italic word?"
     end
+
+    it "italic word at beginning of line"  do
+      wikinize_for_pdf_simple_string("_this_ is a italic word?").should ==
+        "<i>this</i> is a italic word?"
+    end
+
+    it "italic word at end of line"  do
+      wikinize_for_pdf_simple_string("this is a italic _word_").should ==
+        "this is a italic <i>word</i>"
+    end
+
+    it "italic word between special chars"  do
+      wikinize_for_pdf_simple_string("this is a italic (_word_)").should ==
+        "this is a italic (<i>word</i>)"
+    end
+
   end
 
   describe "wikinize links" do

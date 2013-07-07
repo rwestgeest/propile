@@ -40,8 +40,8 @@ module PdfHelper
     text = text.gsub(/\[\[(#{URI::regexp(['http','https'])}) /, '<u>\1</u> ([[') #links with name part 1
     text = text.gsub(/\[\[([^\]]*)\]\]/, '\1)') #links  with name part 2
 
-    text = text.gsub( / \*([^*\n]*)\* /, ' <b>\1</b> ' ) #bold
-    text = text.gsub( / _([^_\n]*)_ /, ' <i>\1</i> ' )   #italic
+    text = text.gsub( /(^|\W)\*([^*\n]*)\*(\W|$)/, '\1<b>\2</b>\3' ) #bold
+    text = text.gsub( /(^|\W)_([^_\n]*)_(\W|$)/, '\1<i>\2</i>\3' )   #italic
   end
 
   def split_list_string(list_string)
