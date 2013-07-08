@@ -1,4 +1,7 @@
+# 0.4.25
+  Improve dashboard
 # 0.4.24
+  Improve dashboard
 # 0.4.23
   Improve dashboard
 # 0.4.22
