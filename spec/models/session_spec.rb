@@ -436,6 +436,11 @@ describe Session do
       session = a_session(Date.today - 3) 
       Session.sessions_that_need_a_review.should == [session]
     end
+    it "returnrs sessions ordered by created_at" do
+      older_session = a_session(Date.today - 3) 
+      younger_session = a_session(Date.today - 2) 
+      Session.sessions_that_need_a_review.should == [younger_session, older_session]
+    end
   end
 
 end

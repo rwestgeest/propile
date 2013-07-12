@@ -237,7 +237,7 @@ class Session < ActiveRecord::Base
   end
 
   def self.sessions_that_need_a_review
-    (Session.all.select {|s| s.reviews.empty? } + Session.all.select { |s| s.created_at > Date.today-7 }).uniq
+    (Session.order('created_at desc').select {|s| s.reviews.empty? } + Session.all.select { |s| s.created_at > Date.today-7 }).uniq
   end
 
 end
