@@ -82,6 +82,10 @@ describe Presenter do
     it "returns reviewed sessions " do
       review.presenter.sessions_reviewed.should == [review.session]
     end
+    it "is excluded if the session was removed (because of a bug in session.destroy)" do
+      review.session.destroy
+      review.presenter.sessions_reviewed.should == []
+    end
   end
 
   describe "sessions_involved" do
@@ -109,7 +113,7 @@ describe Presenter do
         review.presenter.sessions_involved.should == [review.session]
       end
 
-      it "is excluded if the session was removed" do
+      it "is excluded if the session was removed (because of bug in session.destroy)" do
         review.session.destroy
         review.presenter.sessions_involved.should == []
       end

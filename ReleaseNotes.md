@@ -1,3 +1,5 @@
+# 0.4.27
+  Improve dashboard
 # 0.4.26
   Fixed bug #32
 # 0.4.25

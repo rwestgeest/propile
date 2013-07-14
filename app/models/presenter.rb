@@ -52,7 +52,7 @@ class Presenter < ActiveRecord::Base
   end
 
   def sessions_reviewed
-    reviews.collect { |r|  r.session } 
+    reviews.collect { |r|  r.session }.compact
   end
 
   def sessions_involved
