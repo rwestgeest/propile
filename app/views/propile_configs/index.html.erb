@@ -3,7 +3,11 @@
 <% end %>
 
 <h1>Some statistics</h1>
-<h2>Number of reviews by presenter</h2>
+<h2>Reviews</h2>
+<div> <b>Sessions reviewed</b>: <%= @number_of_sessions_reviewed %> --- that's <b><%=@percentage_of_sessions_reviewed%>%</b> of the total number of sessions (<%=@total_number_of_sessions%>)
+<div> Total number of reviews is <%= @total_number_of_reviews %> </div>
+<div> <b>Done by</b> <%= @total_number_of_reviewers %> presenters --- that's <b><%= @percentage_of_presenters_who_review %>%</b> of the total number of presenters (<%= @total_number_of_presenters %>)</div>
+<div>How many reviews have our presenters done: 
 <table>
   <tr>
     <th> #reviews</th>
@@ -15,12 +19,13 @@
     <td> <%= number_of_reviews_pair[0] %>  </td>
     <td> <%= number_of_reviews_pair[1].size %>  </td>
     <td> <% number_of_reviews_pair[1].each do |reviewer|  %> 
-         <%= link_to reviewer.name, reviewer %> --
+         <%= link_to reviewer.name, reviewer %> -
          <% end %>
     </td>
   </tr>
 <% end %>
 </table>
+</div>
 
 <h1>Configuration</h1>
 
