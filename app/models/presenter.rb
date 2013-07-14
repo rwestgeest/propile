@@ -56,7 +56,7 @@ class Presenter < ActiveRecord::Base
   end
 
   def sessions_involved
-    (sessions + reviews.collect{|r| r.session }  + comments.collect {|c| c.review.session}).uniq
+    (sessions + reviews.collect{|r| r.session }  + comments.collect {|c| c.review.session}).uniq.compact
   end
 
   def lazy_account

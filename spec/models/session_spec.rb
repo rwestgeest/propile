@@ -9,6 +9,29 @@ describe Session do
     end
   end
 
+  describe "destroy" do
+    let!(:session)  { FactoryGirl.create :session_with_presenter }
+
+    it "destroys the session" do
+      expect { session.destroy }.to change(Session, :count).by(-1)
+    end
+
+    context "review on session" do
+      let!(:review) { FactoryGirl.create(:review, :session => session) }
+      it "is destroyed as well" do
+        expect { session.destroy }.to change(Review, :count).by(-1)
+      end
+
+      context "and its comment" do
+        before { FactoryGirl.create(:comment, :review => review) }
+
+        it "destroys comments as well" do
+          expect { session.destroy }.to change(Comment, :count).by(-1)
+        end
+      end
+    end
+  end
+
   it { should validate_presence_of(:title) }
   it { should validate_presence_of(:description) }
   it { should validate_presence_of(:first_presenter) }

@@ -20,7 +20,7 @@ class Session < ActiveRecord::Base
   belongs_to :first_presenter, :class_name => 'Presenter'
   belongs_to :second_presenter, :class_name => 'Presenter'
 
-  has_many :reviews
+  has_many :reviews, :dependent => :destroy
   has_many :votes
   attr_accessible :description, :title, :first_presenter_email, :second_presenter_email 
   attr_accessible :sub_title, :short_description, :session_type, :topic

@@ -85,26 +85,53 @@ describe Presenter do
   end
 
   describe "sessions_involved" do
-    let (:session) {FactoryGirl.create :session_with_presenter}
-    let (:review) {FactoryGirl.create :review}
-    let (:comment) {FactoryGirl.create :comment}
+
     it "returns nothing if nothing submitted or reviewed or commented" do
       presenter.sessions_involved.should be_empty
     end
-    it "returns submitted sessions if something submitted" do
-      session.first_presenter.sessions_involved.should == [session]
+
+    context "the session I have submitted" do
+      let (:session) {FactoryGirl.create :session_with_presenter}
+      it "is included" do
+        session.first_presenter.sessions_involved.should == [session]
+      end
+
     end
-    it "returns reviewed sessions if something reviewed" do
-      review.presenter.sessions_involved.should == [review.session]
+
+    context "the sessions that i reviewed" do 
+      let (:review) {FactoryGirl.create :review}
+      it "is included" do
+        review.presenter.sessions_involved.should == [review.session]
+      end
+
+      it "is included once if i reviewed it twice " do
+        FactoryGirl.create :review, :presenter => review.presenter, :session => review.session
+        review.presenter.sessions_involved.should == [review.session]
+      end
+
+      it "is excluded if the session was removed" do
+        review.session.destroy
+        review.presenter.sessions_involved.should == []
+      end
     end
-    it "returns commented sessions if something commented" do
-      comment.presenter.sessions_involved.should == [comment.review.session]
+
+    context "the sessions that i commented" do 
+      let (:comment) {FactoryGirl.create :comment}
+      it "is included" do
+        comment.presenter.sessions_involved.should == [comment.review.session]
+      end
+
+      it "is included once if i commented it twice " do
+        FactoryGirl.create :comment, :presenter => comment.review.presenter, :review => comment.review
+        comment.review.presenter.sessions_involved.should == [comment.review.session]
+      end
+
+      it "is excluded if the session was removed" do
+        comment.review.session.destroy
+        comment.review.presenter.sessions_involved.should == []
+      end
     end
-    it "returns each session only once " do
-      presenter = session.first_presenter
-      FactoryGirl.create :review, :presenter => presenter, :session => session
-      presenter.sessions_involved.should == [session]
-    end
+
   end
 
   describe "archive_all" do

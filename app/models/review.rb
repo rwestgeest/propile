@@ -1,7 +1,7 @@
 class Review < ActiveRecord::Base
   belongs_to :session
   belongs_to :presenter 
-  has_many :comments
+  has_many :comments, :dependent => :destroy
   attr_accessible :things_i_like, :things_to_improve, :score
   attr_accessible :session_id
 
