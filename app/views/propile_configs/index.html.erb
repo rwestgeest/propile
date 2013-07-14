@@ -1,5 +1,27 @@
-<p>This page is for maintainers only
-</p>
+<%= content_for :extra_info do %> 
+  <i> This page is for maintainers only </i>
+<% end %>
+
+<h1>Some statistics</h1>
+<h2>Number of reviews by presenter</h2>
+<table>
+  <tr>
+    <th> #reviews</th>
+    <th> #presenters</th>
+    <th> Who</th>
+  </tr>
+  <% @number_of_reviews_by_presenters.each do |number_of_reviews_pair| %>
+  <tr>
+    <td> <%= number_of_reviews_pair[0] %>  </td>
+    <td> <%= number_of_reviews_pair[1].size %>  </td>
+    <td> <% number_of_reviews_pair[1].each do |reviewer|  %> 
+         <%= link_to reviewer.name, reviewer %> --
+         <% end %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
 <h1>Configuration</h1>
 
 <table>
@@ -77,6 +99,6 @@
 
 <div class="outlined">
   <%= button_to 'start new conference',  {action: 'start_conference'}, method: :get, confirm: "All programs and sessions will be deleted.\nAre you sure? "  %>   
-  <i>All programs, sessions and votes will be deleted. Presenters are moved to archive. </i>
+  <i><b>Attention!!!</b> All programs, sessions and votes will be deleted. Presenters are moved to archive. </i>
 </div>
 

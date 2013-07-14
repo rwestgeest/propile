@@ -2,6 +2,7 @@ class PropileConfigsController < ApplicationController
   def index
     @propile_configs = PropileConfig.all
     @presenters = Presenter.all
+    @number_of_reviews_by_presenters = Presenter.all.group_by {|p| p.reviews.size}.sort
 
     respond_to do |format|
       format.html # index.html.erb

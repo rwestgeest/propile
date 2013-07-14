@@ -21,6 +21,24 @@ describe PropileConfigsController do
         get :index, {}
         assigns(:propile_configs).should eq([propile_config])
       end
+      it "assigns all presenters @presenters" do
+        presenter = FactoryGirl.create :presenter
+        get :index, {}
+        assigns(:presenters).should eq([presenter])
+      end
+      context "assigns @number_of_reviews_by_presenters " do
+        it "when no reviews" do
+          presenter = FactoryGirl.create :presenter
+          get :index, {}
+          assigns(:number_of_reviews_by_presenters).should eq([ [0, [presenter]] ])
+        end
+        it "when a review exists " do
+          presenter = FactoryGirl.create :presenter
+          review = FactoryGirl.create :review
+          get :index, {}
+          assigns(:number_of_reviews_by_presenters).should eq([ [0, [presenter, review.session.first_presenter]], [1, [review.presenter]] ])
+        end
+      end
     end
 
     describe "GET show" do
