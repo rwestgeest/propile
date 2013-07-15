@@ -26,17 +26,16 @@ describe PropileConfigsController do
         get :index, {}
         assigns(:presenters).should eq([presenter])
       end
-      context "assigns @number_of_reviews_by_presenters " do
+      context "assigns review_statistics" do
         it "when no reviews" do
           presenter = FactoryGirl.create :presenter
           get :index, {}
-          assigns(:number_of_reviews_by_presenters).should eq([ [0, [presenter]] ])
+          assigns(:review_statistics).total_number_of_reviews.should == 0
         end
         it "when a review exists " do
-          presenter = FactoryGirl.create :presenter
           review = FactoryGirl.create :review
           get :index, {}
-          assigns(:number_of_reviews_by_presenters).should eq([ [0, [presenter, review.session.first_presenter]], [1, [review.presenter]] ])
+          assigns(:review_statistics).total_number_of_reviews.should == 1
         end
       end
     end

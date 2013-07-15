@@ -4,9 +4,9 @@
 
 <h1>Some statistics</h1>
 <h2>Reviews</h2>
-<div> <b>Sessions reviewed</b>: <%= @number_of_sessions_reviewed %> --- that's <b><%=@percentage_of_sessions_reviewed%>%</b> of the total number of sessions (<%=@total_number_of_sessions%>)
-<div> Total number of reviews is <%= @total_number_of_reviews %> </div>
-<div> <b>Done by</b> <%= @total_number_of_reviewers %> presenters --- that's <b><%= @percentage_of_presenters_who_review %>%</b> of the total number of presenters (<%= @total_number_of_presenters %>)</div>
+<div> <b>Sessions reviewed</b>: <%= @review_statistics.number_of_sessions_reviewed %> --- that's <b><%=@review_statistics.percentage_of_sessions_reviewed%>%</b> of the total number of sessions (<%=@review_statistics.total_number_of_sessions%>)
+<div> Total number of reviews is <%= @review_statistics.total_number_of_reviews %> </div>
+<div> <b>Done by</b> <%= @review_statistics.total_number_of_reviewers %> presenters --- that's <b><%= @review_statistics.percentage_of_presenters_who_review %>%</b> of the total number of presenters (<%= @review_statistics.total_number_of_presenters %>)</div>
 <div>How many reviews have our presenters done: 
 <table>
   <tr>

@@ -1,7 +1,10 @@
 class PropileConfigsController < ApplicationController
+  include StatisticsHelper
+
   def index
     @propile_configs = PropileConfig.all
     @presenters = Presenter.all
+    @review_statistics = get_review_statistics
     @number_of_reviews_by_presenters = Presenter.all.group_by {|p| p.reviews.size}.sort
     @number_of_sessions_reviewed = Session.select {|s| !s.reviews.empty? }.size
     @total_number_of_sessions = Session.all.size
