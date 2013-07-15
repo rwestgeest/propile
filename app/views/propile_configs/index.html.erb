@@ -14,7 +14,7 @@
     <th> #presenters</th>
     <th> Who</th>
   </tr>
-  <% @number_of_reviews_by_presenters.each do |number_of_reviews_pair| %>
+  <% @review_statistics.number_of_reviews_by_presenters.each do |number_of_reviews_pair| %>
   <tr>
     <td> <%= number_of_reviews_pair[0] %>  </td>
     <td> <%= number_of_reviews_pair[1].size %>  </td>

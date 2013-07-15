@@ -88,6 +88,27 @@ describe StatisticsHelper do
     end
   end
   describe "number_of_reviews_by_presenters" do
-
+    it "returns nothing for empty application" do
+        get_review_statistics.number_of_reviews_by_presenters.should == []
+    end
+    context "when no reviews exist " do
+      it "returns results for 0-reviews " do
+        presenter
+        get_review_statistics.number_of_reviews_by_presenters.should == [ [0, [presenter]] ]
+      end
+    end
+    context "when 1 review exist " do
+      it "returns session-presenter as 0-reviews and reviewer as 1-reviews " do
+        review
+        get_review_statistics.number_of_reviews_by_presenters.should == [ [0, [review.session.first_presenter]], [1, [review.presenter]] ]
+      end
+    end
+    context "when 2 review exist by same reviewer" do
+      it "returns that reviewer as 2-reviews " do
+        review1 = FactoryGirl.create :review
+        review2 = FactoryGirl.create :review, :presenter => review1.presenter
+        get_review_statistics.number_of_reviews_by_presenters.should == [ [0, [review1.session.first_presenter, review2.session.first_presenter]], [2, [review1.presenter]] ]
+      end
+    end
   end
 end
