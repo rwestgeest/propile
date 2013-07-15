@@ -1,3 +1,5 @@
+# 0.4.28
+  Improve dashboard and statistics
 # 0.4.27
   Improve dashboard
 # 0.4.26
