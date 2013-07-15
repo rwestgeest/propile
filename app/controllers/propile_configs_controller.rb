@@ -5,11 +5,13 @@ class PropileConfigsController < ApplicationController
     @number_of_reviews_by_presenters = Presenter.all.group_by {|p| p.reviews.size}.sort
     @number_of_sessions_reviewed = Session.select {|s| !s.reviews.empty? }.size
     @total_number_of_sessions = Session.all.size
-    @percentage_of_sessions_reviewed = (100 * @number_of_sessions_reviewed.to_f / @total_number_of_sessions).to_i
+    @percentage_of_sessions_reviewed = 100
+    @percentage_of_sessions_reviewed = (100 * @number_of_sessions_reviewed.to_f / @total_number_of_sessions).to_i if @total_number_of_sessions>0
     @total_number_of_reviews = Review.all.size
     @total_number_of_reviewers = Presenter.all.select {|p| !p.reviews.empty?}.size 
     @total_number_of_presenters = Presenter.all.size
-    @percentage_of_presenters_who_review = (100 * @total_number_of_reviewers.to_f / @total_number_of_presenters).to_i
+    @percentage_of_presenters_who_review = 100
+    @percentage_of_presenters_who_review = (100 * @total_number_of_reviewers.to_f / @total_number_of_presenters).to_i if @total_number_of_presenters>0
 
     respond_to do |format|
       format.html # index.html.erb
