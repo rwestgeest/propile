@@ -28,7 +28,6 @@ describe PropileConfigsController do
       end
       context "assigns review_statistics" do
         it "when no reviews" do
-          presenter = FactoryGirl.create :presenter
           get :index, {}
           assigns(:review_statistics).total_number_of_reviews.should == 0
         end
@@ -36,6 +35,28 @@ describe PropileConfigsController do
           review = FactoryGirl.create :review
           get :index, {}
           assigns(:review_statistics).total_number_of_reviews.should == 1
+        end
+      end
+      context "assigns session_completeness_statistics" do
+        it "when no sessions" do
+          get :index, {}
+          assigns(:session_completeness_statistics).total_number_of_sessions.should == 0
+        end
+        it "when a session exists " do
+          session = FactoryGirl.create :session_with_presenter
+          get :index, {}
+          assigns(:session_completeness_statistics).total_number_of_sessions.should == 1
+        end
+      end
+      context "assigns presenter_completeness_statistics" do
+        it "when no presenters" do
+          get :index, {}
+          assigns(:presenter_completeness_statistics).total_number_of_presenters.should == 0
+        end
+        it "when a presenter exists " do
+          presenter = FactoryGirl.create :presenter
+          get :index, {}
+          assigns(:presenter_completeness_statistics).total_number_of_presenters.should == 1
         end
       end
     end
