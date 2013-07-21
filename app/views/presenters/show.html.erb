@@ -1,11 +1,11 @@
 <%= title @presenter.name %>
 
 <%= content_for :sub_menu do %> 
-  <%= guarded_link_to 'Edit bio', controller: 'presenters', action: 'edit', id: @presenter.to_param %> 
+  <%= guarded_link_to 'Edit', controller: 'presenters', action: 'edit', id: @presenter.to_param %> 
   <%= link_to 'Back to presenters', presenters_path %> 
   <br/>
   <% if current_account.maintainer? %>
-    <i>(edit bio is only possible for presenter himself or for a maintainer)</i> 
+    <i>(edit is only possible for presenter himself or for a maintainer)</i> 
   <% end %> 
 <% end %>
 

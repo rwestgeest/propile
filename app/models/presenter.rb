@@ -28,7 +28,11 @@ class Presenter < ActiveRecord::Base
   end
 
   def name
-    if super.nil? || super.empty? then email else super end
+    if super.blank? then email else super end
+  end
+
+  def name_filled_in?
+    name != email
   end
 
   def sessions

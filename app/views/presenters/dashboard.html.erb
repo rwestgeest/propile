@@ -24,16 +24,26 @@
 
   <% if @presenter.reviews.empty? %>
     <br/>
-  <br/>
-  <div class="outlined">
-    We expect presenters to help each other to develop their proposals, based on peer to peer feedback. 
-    You can give feedback on other people's proposals and improve your proposal based on the feedback you receive. 
-    In this way, we will come to a set of quality session proposals in a transparent, community driven way.
-  </div>
-  <div class="flashy">
-    Review you first session!!! 
-  </div>
-<% end %>
+    <br/>
+    <div class="outlined">
+      We expect presenters to help each other to develop their proposals, based on peer to peer feedback. 
+      You can give feedback on other people's proposals and improve your proposal based on the feedback you receive. 
+      In this way, we will come to a set of quality session proposals in a transparent, community driven way.
+    </div>
+    <div class="flashy">
+      Review you first session!!! 
+    </div>
+  <% end %>
+  <% if !@presenter.name_filled_in? || @presenter.bio.blank? %>
+    <br/>
+    <br/>
+    <div class="outlined">
+      <% if !@presenter.name_filled_in? %> Fill in your name! <% end %>
+      <% if @presenter.bio.blank? %> Fill in your bio! <% end %>
+      You can do that in <%= link_to "your own presenter page", current_account.presenter %>.
+    </div>
+  <% end %>
+
 </div>
 
 <div style="width:45%; float:left; margin:0 20px;min-width:400px; ">

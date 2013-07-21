@@ -27,6 +27,18 @@ describe Presenter do
     end
   end
 
+  describe "name_filled_in?" do
+    it "is true if set" do
+      Presenter.new(:name => "rob").should be_name_filled_in
+    end
+    it "is false if not set" do
+      Presenter.new(:email => "rob@rob.nl").should_not be_name_filled_in
+    end
+    it "is email if empty" do
+      Presenter.new(:email => "rob@rob.nl", :name => "").should_not be_name_filled_in
+    end
+  end
+
   describe 'sessions' do
     it "are empty by default" do
       presenter.sessions.should be_empty

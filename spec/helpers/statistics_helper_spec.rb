@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe StatisticsHelper, :focus => true do
+describe StatisticsHelper do
   include StatisticsHelper
 
   let(:session)  { FactoryGirl.create :session_with_presenter }

@@ -59,7 +59,7 @@ class PresenterCompletenessStatistics < BaseStatistics
 
   def initialize
     super
-    @with_name = Presenter.all.select {|p| p.name != p.email }.size
+    @with_name = Presenter.all.select {|p| p.name_filled_in? }.size
     @with_name_percentage = percentage(@with_name, @total_number_of_presenters)
     @with_bio = Presenter.all.select {|p| !p.bio.blank? }.size
     @with_bio_percentage = percentage(@with_bio, @total_number_of_presenters)
