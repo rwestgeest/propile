@@ -41,7 +41,8 @@
 </div>
 <div>
 <% if @session.reviews.size==0 %> 
-  no reviews yet.
+  no reviews yet.</br>
+  <%= link_to 'Make a new Review on this session', new_session_review_path(@session) %>  
 <% else %> 
 
   <% @session.reviews.each_with_index do |review, i| %>

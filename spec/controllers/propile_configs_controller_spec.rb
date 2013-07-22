@@ -26,36 +26,39 @@ describe PropileConfigsController do
         get :index, {}
         assigns(:presenters).should eq([presenter])
       end
+    end
+
+    describe "GET statistics" do
       context "assigns review_statistics" do
         it "when no reviews" do
-          get :index, {}
+          get :statistics, {}
           assigns(:review_statistics).total_number_of_reviews.should == 0
         end
         it "when a review exists " do
           review = FactoryGirl.create :review
-          get :index, {}
+          get :statistics, {}
           assigns(:review_statistics).total_number_of_reviews.should == 1
         end
       end
       context "assigns session_completeness_statistics" do
         it "when no sessions" do
-          get :index, {}
+          get :statistics, {}
           assigns(:session_completeness_statistics).total_number_of_sessions.should == 0
         end
         it "when a session exists " do
           session = FactoryGirl.create :session_with_presenter
-          get :index, {}
+          get :statistics, {}
           assigns(:session_completeness_statistics).total_number_of_sessions.should == 1
         end
       end
       context "assigns presenter_completeness_statistics" do
         it "when no presenters" do
-          get :index, {}
+          get :statistics, {}
           assigns(:presenter_completeness_statistics).total_number_of_presenters.should == 0
         end
         it "when a presenter exists " do
           presenter = FactoryGirl.create :presenter
-          get :index, {}
+          get :statistics, {}
           assigns(:presenter_completeness_statistics).total_number_of_presenters.should == 1
         end
       end

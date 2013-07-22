@@ -5,6 +5,15 @@ class PropileConfigsController < ApplicationController
     @propile_configs = PropileConfig.all
     @presenters = Presenter.all
     @review_statistics = get_review_statistics
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @propile_configs }
+    end
+  end
+
+  def statistics
+    @review_statistics = get_review_statistics
     @session_completeness_statistics = get_session_completeness_statistics
     @presenter_completeness_statistics = get_presenter_completeness_statistics
     @number_of_reviews_by_presenters = Presenter.all.group_by {|p| p.reviews.size}.sort

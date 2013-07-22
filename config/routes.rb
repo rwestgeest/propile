@@ -20,6 +20,7 @@ Propile::Application.routes.draw do
   end
 
   resources :propile_configs do
+    get 'statistics', :on => :collection
     put 'toggle', :on => :collection
     put 'change_last_login', :on => :collection
     put 'toggle_send_mails', :on => :collection
