@@ -33,6 +33,13 @@
 
 <h2> Reviews for this session: </h2>
 <div>
+  <i>Reviews are done in 
+    <%= link_to 'Perfection Game Format', "/pages/index#PerfectionGame", :target => '_blank', :class => 'smalllink' %> 
+     Read more about what we expect of a  
+    <%= link_to 'good session', "/pages/index#ReviewCriteria", :target => '_blank', :class => 'smalllink' %> 
+  </i>
+</div>
+<div>
 <% if @session.reviews.size==0 %> 
   no reviews yet.
 <% else %> 
