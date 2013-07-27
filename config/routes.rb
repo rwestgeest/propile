@@ -27,7 +27,7 @@ Propile::Application.routes.draw do
     get 'start_conference', :on => :collection
   end
 
-  resources :votes, except: [:destroy] do
+  resources :votes do
     get 'csv', :on => :collection
   end
 
