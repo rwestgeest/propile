@@ -4,6 +4,10 @@
   <%= link_to 'Show', @program %> 
 <% end %>
 
+<%= content_for :extra_info do %> 
+  <i> This page is for maintainers only </i>
+<% end %>
+
 <%= render 'form' %>
 
 

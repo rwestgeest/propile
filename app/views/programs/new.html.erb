@@ -2,6 +2,9 @@
 <%= content_for :sub_menu do %> 
   <%= link_to 'Back to programs', programs_path %>
 <% end %>
+<%= content_for :extra_info do %> 
+  <i> This page is for maintainers only </i>
+<% end %>
 
 <%= render 'form' %>
 

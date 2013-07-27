@@ -3,6 +3,9 @@
 <%= content_for :sub_menu do %> 
   <%= link_to 'Edit', controller: 'programs', action: 'edit', id: @program.to_param %>
 <% end %>
+<%= content_for :extra_info do %> 
+  <i> This page is for maintainers only </i>
+<% end %>
 
 <%= render 'programs/program_matrix', :program => @program, :editable => false %>
 

@@ -33,7 +33,7 @@
   <h2>Your votes </h2>
   <div><i>(only you can see this)</i></div>
   <% if @presenter.votes.empty? %> 
-    You have not voted yet.
+    You have not yet voted.
   <% else %> 
     <%= render 'votes/index', :votes => @presenter.votes  %>
   <%end%> 

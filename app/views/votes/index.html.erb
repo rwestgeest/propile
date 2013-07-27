@@ -1,5 +1,7 @@
-<p>This page is for maintainers only
-</p>
+<%= content_for :extra_info do %> 
+  <i> This page is for maintainers only </i>
+<% end %>
+
 <p>
 A few weeks before the Program Committee meeting, you can activate the voting system on the <%= link_to 'Configurations', propile_configs_path %> page.
 <br />
@@ -13,6 +15,7 @@ Rules of the game:
 <li> you can cast one vote per session</li>
 <li> you can cast 10 votes (or less)</li>
 <li> you cannot vote for your own session(s)</li>
+<li> the order of the votes is not important</li>
 <li> your votes will not be visible to the other submitters, only to the program committee</li>
 </ul>
 Presenters can see a list of the sessions they have voted for on their own presenter's page (which should have their bio by now ;-). 

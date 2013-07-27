@@ -2,6 +2,9 @@
 <%= content_for :sub_menu do %> 
     <%= link_to 'Show', @program %>
 <% end %>
+<%= content_for :extra_info do %> 
+  <i> This page is for maintainers only </i>
+<% end %>
 <%= content_for :created_and_modified do %> 
   Created: <%= l @program.created_at %> -- 
   Modified: <%= l @program.updated_at %> 
