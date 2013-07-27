@@ -28,7 +28,7 @@ describe VotesController do
     end
 
     it "routes to #destroy" do
-      delete("/votes/1").should route_to("votes#destroy", :id => "1")
+      delete("/votes/1").should_not be_routable
     end
 
   end

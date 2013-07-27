@@ -1,11 +1,11 @@
 Propile::Application.routes.draw do
 
-  resources :archived_presenters
+  resources :archived_presenters, except: [:destroy] 
 
-  resources :program_entries
+  resources :program_entries, except: [:destroy] 
 
-  resources :programs do
-    resources :program_entries, :on => :member
+  resources :programs, except: [:destroy] do
+    resources :program_entries, :on => :member, except: [:destroy] 
     get 'copy', :on => :member
     get 'calculate_paf', :on => :member
     get 'csv', :on => :member
@@ -19,7 +19,7 @@ Propile::Application.routes.draw do
     get 'preview', :on => :member
   end
 
-  resources :propile_configs do
+  resources :propile_configs, except: [:destroy] do
     get 'statistics', :on => :collection
     put 'toggle', :on => :collection
     put 'change_last_login', :on => :collection
@@ -27,30 +27,30 @@ Propile::Application.routes.draw do
     get 'start_conference', :on => :collection
   end
 
-  resources :votes do
+  resources :votes, except: [:destroy] do
     get 'csv', :on => :collection
   end
 
   resources :pages, :only => :show
   
-  resources :accounts
+  resources :accounts, except: [:destroy]
 
-  resources :comments
+  resources :comments, except: [:destroy] 
 
 
-  resources :presenters do
+  resources :presenters, except: [:destroy] do
     put 'toggle_maintainer_role', :on => :member
     get 'export', :on => :collection
     get 'dashboard', :on => :collection
   end
 
-  resources :reviews do
-    resources :comments, :on => :member
+  resources :reviews, except: [:destroy] do
+    resources :comments, :on => :member, except: [:destroy] 
   end
 
-  resources :sessions do
-    resources :reviews, :on => :member
-    resources :votes, :on => :member 
+  resources :sessions, except: [:destroy] do
+    resources :reviews, :on => :member, except: [:destroy]
+    resources :votes, :on => :member , except: [:destroy]
     get 'thanks', :on => :member
     get 'csv', :on => :collection
     get 'pcm_cards', :on => :collection
@@ -60,7 +60,7 @@ Propile::Application.routes.draw do
   end
 
   namespace :account do
-    resource :session, :only => [:new, :create, :destroy]
+    resource :session, :only => [:new, :create]
     resources :response_sessions, :only => [:show]
     resource :password, :only => [:edit, :update]
     resource :password_reset, :only => [:new, :create] do

@@ -28,7 +28,7 @@ describe AccountsController do
     end
 
     it "routes to #destroy" do
-      delete("/accounts/1").should route_to("accounts#destroy", :id => "1")
+      delete("/accounts/1").should_not be_routable
     end
 
   end

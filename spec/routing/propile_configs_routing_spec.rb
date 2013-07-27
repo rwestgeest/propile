@@ -28,7 +28,7 @@ describe PropileConfigsController do
     end
 
     it "routes to #destroy" do
-      delete("/propile_configs/1").should route_to("propile_configs#destroy", :id => "1")
+      delete("/propile_configs/1").should_not be_routable
     end
 
   end

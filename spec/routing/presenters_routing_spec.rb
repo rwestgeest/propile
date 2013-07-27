@@ -28,7 +28,7 @@ describe PresentersController do
     end
 
     it "routes to #destroy" do
-      delete("/presenters/1").should route_to("presenters#destroy", :id => "1")
+      delete("/presenters/1").should_not be_routable
     end
 
   end

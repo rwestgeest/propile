@@ -28,7 +28,7 @@ describe ReviewsController do
     end
 
     it "routes to #destroy" do
-      delete("/reviews/1").should route_to("reviews#destroy", :id => "1")
+      delete("/reviews/1").should_not be_routable
     end
 
   end

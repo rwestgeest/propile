@@ -28,7 +28,7 @@ describe ProgramEntriesController do
     end
 
     it "routes to #destroy" do
-      delete("/program_entries/1").should route_to("program_entries#destroy", :id => "1")
+      delete("/program_entries/1").should_not be_routable
     end
 
   end

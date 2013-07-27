@@ -28,7 +28,7 @@ describe ArchivedPresentersController do
     end
 
     it "routes to #destroy" do
-      delete("/archived_presenters/1").should route_to("archived_presenters#destroy", :id => "1")
+      delete("/archived_presenters/1").should_not be_routable
     end
 
   end
