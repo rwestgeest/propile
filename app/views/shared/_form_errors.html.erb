@@ -1,4 +1,4 @@
-<% if record.errors.any? %>
+<% if record && record.errors.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(record.errors.count, "error") %> prohibited the <%=record.class.name.downcase%> from being saved:</h2>
 
