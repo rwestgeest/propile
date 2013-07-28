@@ -433,8 +433,8 @@ describe Session do
   end
 
   describe "self.sessions_that_need_a_review" do
-    def a_session(created_at)
-      session = FactoryGirl.create(:session_with_presenter, :created_at => created_at, :updated_at => created_at) 
+    def a_session(created_at=Date.today, updated_at=created_at)
+      session = FactoryGirl.create(:session_with_presenter, :created_at => created_at, :updated_at => updated_at) 
     end
     def a_review_for(session)
       FactoryGirl.create(:review , :session => session)
@@ -442,27 +442,36 @@ describe Session do
     it "returns nothing if no sessions" do
       Session.sessions_that_need_a_review.should be_empty
     end
-    it "if we have an old session with a review returns nothing " do
-      a_review_for ( a_session(Date.today - 10) )
-      Session.sessions_that_need_a_review.should be_empty
-    end
-    it "if we have an old session without a review returns that session" do
-      session = a_session(Date.today - 10)
-      Session.sessions_that_need_a_review.should == [session]
-    end
-    it "if we have a new session with a review returns that session" do
-      session = a_session(Date.today - 3) 
-      a_review_for ( session )
-      Session.sessions_that_need_a_review.should == [session]
-    end
     it "returns each session only once " do
       session = a_session(Date.today - 3) 
       Session.sessions_that_need_a_review.should == [session]
     end
-    it "returnrs sessions ordered by created_at" do
+    it "returns sessions ordered by created_at" do
       older_session = a_session(Date.today - 3) 
       younger_session = a_session(Date.today - 2) 
-      Session.sessions_that_need_a_review.should == [younger_session, older_session]
+      youngest_session = a_session(Date.today - 1) 
+      a_review_for(youngest_session)
+      Session.sessions_that_need_a_review.should == [youngest_session, younger_session, older_session]
+    end
+    context "self.without_review" do
+      it "if we have a session without a review returns that session" do
+        session = a_session()
+        Session.without_review.should == [session]
+      end
+      it "if we have a session with a review returns nothing " do
+        a_review_for ( a_session() )
+        Session.without_review.should be_empty
+      end
+    end
+    context "self.younger_than_a_week" do
+      it "if we have a old session returns nothing" do
+        session = a_session(Date.today - 10) 
+        Session.younger_than_a_week.should be_empty
+      end
+      it "if we have a new session returns that session" do
+        session = a_session(Date.today - 3) 
+        Session.younger_than_a_week.should == [session]
+      end
     end
   end
 

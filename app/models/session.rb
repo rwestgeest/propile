@@ -236,8 +236,16 @@ class Session < ActiveRecord::Base
     end
   end
 
+  def self.without_review
+    #Session.order('created_at desc').select {|s| s.reviews.empty? }
+    Session.all.select {|s| s.reviews.empty? }
+  end
+  def self.younger_than_a_week
+    Session.all.select { |s| s.created_at > Date.today-7 }
+  end
   def self.sessions_that_need_a_review
-    (Session.order('created_at desc').select {|s| s.reviews.empty? } + Session.all.select { |s| s.created_at > Date.today-7 }).uniq
+    sessions = (without_review + younger_than_a_week)
+    sessions.uniq.sort {|s1,s2| s2.created_at <=> s1.created_at }
   end
 
 end

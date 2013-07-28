@@ -47,9 +47,10 @@
 </div>
 
 <div style="width:45%; float:left; margin:0 20px;min-width:400px; ">
-  <h3>These sessions are waiting for your review: </h3>
-  <div><i> These sessions don't have a review and/or are younger than 1 week.</i></div>
-  <%= render 'sessions/index_with_short_desc', :sessions => @sessions_that_need_a_review, :sortable => false  %>
-
+  <% if !@sessions_that_need_a_review.empty? %>
+    <h3>These sessions are waiting for your review: </h3>
+    <div><i> These sessions don't have a review and/or are younger than 1 week.</i></div>
+    <%= render 'sessions/index_with_short_desc', :sessions => @sessions_that_need_a_review, :sortable => false  %>
+  <% end %>
 </div>
 <div style="clear:both"></div>
