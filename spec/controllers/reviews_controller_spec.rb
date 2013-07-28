@@ -78,9 +78,9 @@ describe ReviewsController do
           Review.last.presenter.should == current_presenter
         end
 
-        it "redirects to the created review" do
+        it "redirects to the review's session page" do
           do_post
-          response.should redirect_to(Review.last)
+          response.should redirect_to(Review.last.session)
         end
 
         it "sends a message to the sessions presenters" do
@@ -103,7 +103,7 @@ describe ReviewsController do
         end
 
         it "re-renders the 'new' template" do
-          response.should render_template("new")
+          response.should render_template("sessions/show")
         end
       end
     end
@@ -124,7 +124,7 @@ describe ReviewsController do
 
         it "redirects to the review" do
           put :update, {:id => review.to_param, :review => valid_attributes}
-          response.should redirect_to(review)
+          response.should redirect_to(review.session)
         end
 
         it "preview assigns the requested review as @review" do

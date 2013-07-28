@@ -1,34 +1,35 @@
-<%= form_for(@review) do |f| %>
-  <%= errors_for @review %>
+<%= form_for(review) do |f| %>
+  <%= errors_for review %>
 
 <%= f.hidden_field :session_id %>
 
-<%= render 'sessions/show_short', :session => @review.session  %>
+<% if show_session %>
+  <%= render 'sessions/show_short', :session => @review.session  %>
+  <br/>
+  <br/>
+<% end %>
 
-
-<h3><%= collapse_button_initially_open ("review_preview")%> Preview of the review</h3>
+<% if !review.things_i_like.blank? || !review.things_to_improve.blank? %>
+  <h4><%= collapse_button_initially_open ("review_preview")%> Preview of the review</h4>
   <div id="review_preview" class="review">
-    <%= render 'reviews/show', :review => @review  %>
+    <%= render 'reviews/show', :review => review  %>
   </div>
-
-
-<hr />
-
-
+  <hr />
+<% end %> 
 
   <div class="in_a_form">
     <div> 
       What I like: <i>first list the things that you like about this session, why did it get the score you gave it? </i> 
       <%= link_to '(formatting)', "/pages/formatting", :target => '_blank', :class => 'smalllink' %> 
     </div>
-    <%= f.text_area :things_i_like, :cols => 100, :rows => 10 %>
+    <%= f.text_area :things_i_like, :cols => 100, :rows => 3 %>
   </div>
   <div class="in_a_form">
     <div> 
       I will give you a 10/10 if you improve these things: <i> list improvements to the session: what does the session presenters need to change so that you will give them a 10/10? </i> 
       <%= link_to '(formatting)', "/pages/formatting", :target => '_blank', :class => 'smalllink' %> 
     </div>
-    <%= f.text_area :things_to_improve, :cols => 100, :rows => 10 %>
+    <%= f.text_area :things_to_improve, :cols => 100, :rows => 3 %>
   </div>
 
   <div class="in_a_form">
@@ -41,8 +42,10 @@
   <br/>
   <div class="actions">
     <%= f.submit 'Preview' %>
-    <% if @review.new_record? %>
+    <% if review.new_record? %>
       <%= f.submit "Create" %>
+      <%= link_to 'Cancel Review Creation', review.session %>  
+      <br/>
       <i>When you create the review, the session presenter(s) and reviewers receive an email. 
       <% if Propile::Application.config.action_mailer.delivery_method == :test %>
         <br/>!!!  Mail is not sent in test environment !!!
@@ -50,6 +53,7 @@
       </i>
     <% else %>
       <%= f.submit "Update" %>
+      <%= link_to 'Cancel Review Update', review.session %>  
     <% end %>
   </div>
 

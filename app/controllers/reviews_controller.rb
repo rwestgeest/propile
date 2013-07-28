@@ -24,10 +24,13 @@ class ReviewsController < ApplicationController
     @review.presenter = current_presenter
     if params[:commit] != 'Preview' && @review.save
       Postman.notify_review_creation(@review)
-      redirect_to @review, notice: 'Review was successfully created.'
+      redirect_to @review.session, notice: 'Review was successfully created.'
     else
       @session = @review.session
-      render action: "new"
+      @current_presenter_has_voted_for_this_session = Vote.presenter_has_voted_for?(current_presenter.id, @review.session.id) 
+      @my_vote = Vote.vote_of_presenter_for(current_presenter.id, @review.session.id) 
+      @new_review=@review
+      render template: "sessions/show"
     end
   end
 
@@ -39,7 +42,7 @@ class ReviewsController < ApplicationController
       render action: "edit"
     else 
       if @review.update_attributes(params[:review])
-        redirect_to @review, notice: 'Review was successfully updated.'
+        redirect_to @review.session, notice: 'Review was successfully created.'
       else
         render action: "edit"
       end

@@ -2,9 +2,8 @@
 
 <%= content_for :sub_menu do %> 
   <%= guarded_link_to 'Edit this session', controller: 'sessions', action: 'edit', id: @session.to_param %> 
-  <%= link_to 'New Review on this session', new_session_review_path(@session) %>  
-  <%= link_to 'printable card (PDF)', controller: 'sessions', action: 'program_board_card', id: @session.to_param, format: "pdf" %> 
-  <%= link_to 'printable description (PDF)', controller: 'sessions', action: 'show', id: @session.to_param, format: "pdf" %> 
+  <%= link_to 'Printable card (PDF)', controller: 'sessions', action: 'program_board_card', id: @session.to_param, format: "pdf" %> 
+  <%= link_to 'Printable description (PDF)', controller: 'sessions', action: 'show', id: @session.to_param, format: "pdf" %> 
   <%= link_to 'RSS feed', controller: 'sessions', action: 'rss', format: :xml, id: @session.to_param %>
   <%= link_to 'Back to list of sessions', sessions_path %> 
 <% end %>
@@ -57,19 +56,39 @@
     <% if review.comments.size!=0 %> 
       <h3> Comments on this review: </h3>
       <div>
-        <% review.comments.each do |comment| %>
-          <%= collapse_button_initially_open ("session_comment_#{i}") %> 
-          <div id="session_comment_<%=i%>" style="display:block;" class="comment">
+        <% review.comments.each_with_index do |comment, j| %>
+          <%= collapse_button_initially_open ("session_comment_#{j}") %> 
+          <div id="session_comment_<%=j%>" style="display:block;" class="comment">
             <%= render 'comments/show', :comment => comment  %>
             <div class="alignright">
               <%= guarded_link_to 'Edit this comment', controller: 'comments', action: 'edit', id: comment %> 
             </div>
           </div>
         <% end %>
+        <!---
+        <%= collapse_button_initially_open ("session_comment_new") %> 
+        <div id="session_comment_new" style="display:block;" class="comment">
+          <% new_comment = review.comments.build
+             new_comment.presenter = @current_presenter
+          %>
+          <%= render 'comments/form_in_session', :comment=>new_comment %>
+        </div>
+        -->
       </div>
     <% end %> 
   </div>
   <% end %>
+
+  <%= collapse_button_initially_open ("session_review_new") %> 
+  <div id="session_review_new>" style="display:block;" class="review">
+    <h3>Make a new review: </h3>
+    <% if !defined?(@new_review) || @new_review.nil?
+         @new_review = @session.reviews.build
+         @new_review.presenter = @current_presenter
+       end
+    %>
+    <%= render 'reviews/form', :review=>@new_review, :show_session=>false %>
+  </div>
 <% end %> 
 </div>
 

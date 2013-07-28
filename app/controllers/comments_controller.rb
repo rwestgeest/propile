@@ -32,6 +32,7 @@ class CommentsController < ApplicationController
     else
       @session = @comment.review.session
       render action: "new"
+      #render template: 'sessions/show'
     end
   end
 
