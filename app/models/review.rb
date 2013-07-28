@@ -23,4 +23,8 @@ class Review < ActiveRecord::Base
   def max_score?
     score == 10
   end
+
+  def filled?
+    return !things_i_like.blank? || !things_to_improve.blank? || !score.blank?
+  end
 end
