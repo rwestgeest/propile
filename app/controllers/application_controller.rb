@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
     end
   end
   def sign_in(account)
-    session[:current_account_id] = account
+    session[:current_account_id] = account.id
     session[:previous_login] = account.last_login
     account.last_login = Time.now
     account.save
