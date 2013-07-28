@@ -1,4 +1,5 @@
 <%= title "#{@session.title}" %>
+  <%= errors_for @new_review %>
 
 <%= content_for :sub_menu do %> 
   <%= guarded_link_to 'Edit this session', controller: 'sessions', action: 'edit', id: @session.to_param %> 
