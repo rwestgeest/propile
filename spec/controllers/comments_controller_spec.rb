@@ -26,9 +26,8 @@ describe CommentsController do
     end
 
     describe "GET show" do
-      it "assigns the requested comment as @comment" do
+      it "assigns the requested comment's session as @session" do
         get :show, {:id => comment.to_param}
-        assigns(:comment).should eq(comment)
         assigns(:session).should eq(comment.review.session)
       end
     end

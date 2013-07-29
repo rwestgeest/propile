@@ -3,9 +3,15 @@ class CommentsController < ApplicationController
     @comments = Comment.all
   end
 
+  def make_parameters_for_show_session(comment)
+    @session = comment.review.session
+    @current_presenter_has_voted_for_this_session = Vote.presenter_has_voted_for?(current_presenter.id, comment.review.session.id) 
+    @my_vote = Vote.vote_of_presenter_for(current_presenter.id, comment.review.session.id) 
+  end
+
   def show
-    @comment = Comment.find(params[:id])
-    @session = @comment.review.session
+    make_parameters_for_show_session(Comment.find(params[:id]))
+    render template: 'sessions/show'
   end
 
   def new
@@ -17,16 +23,14 @@ class CommentsController < ApplicationController
 
   def edit
     @edit_comment = Comment.find(params[:id])
-    @session = @edit_comment.review.session
+    make_parameters_for_show_session(@edit_comment)
     render template: 'sessions/show'
   end
 
   def create
     @new_comment = Comment.new(params[:comment])
     @new_comment.presenter = current_presenter
-    @session = @new_comment.review.session
-    @current_presenter_has_voted_for_this_session = Vote.presenter_has_voted_for?(current_presenter.id, @new_comment.review.session.id) 
-    @my_vote = Vote.vote_of_presenter_for(current_presenter.id, @new_comment.review.session.id) 
+    make_parameters_for_show_session(@new_comment)
 
     if params[:commit] != 'Preview' && @new_comment.save
       Postman.notify_comment_creation(@new_comment)
@@ -38,9 +42,7 @@ class CommentsController < ApplicationController
 
   def update
     @edit_comment = Comment.find(params[:id])
-    @session = @edit_comment.review.session
-    @current_presenter_has_voted_for_this_session = Vote.presenter_has_voted_for?(current_presenter.id, @edit_comment.review.session.id) 
-    @my_vote = Vote.vote_of_presenter_for(current_presenter.id, @edit_comment.review.session.id) 
+    make_parameters_for_show_session(@edit_comment)
 
     if params[:commit] == 'Preview' 
       @edit_comment.assign_attributes(params[:comment])

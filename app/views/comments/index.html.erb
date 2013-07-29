@@ -18,7 +18,7 @@
     <td><%= comment.review.presenter && w(comment.review.presenter.name) %></td>
     <td><%= w(comment.presenter.name) %></td>
     <td><%= link_to 'Show', comment %></td>
-    <td><%= guarded_link_to 'Edit', controller: 'comment', action: 'edit', id: comment %></td>
+    <td><%= guarded_link_to 'Edit', controller: 'comments', action: 'edit', id: comment %> </td>
   </tr>
 <% end %>
 </table>
