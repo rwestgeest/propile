@@ -1,43 +1,45 @@
-<%= form_for(@comment) do |f| %>
-  <%= errors_for @comment %>
+<%= form_for(comment) do |f| %>
+  <%= errors_for comment %>
 
   <%= f.hidden_field :review_id %>
 
-  <%= render 'sessions/show_short', :session => @comment.review.session  %>
+<% if show_session %>
+  <%= render 'sessions/show_short', :session => comment.review.session  %>
+  <%= render 'reviews/show', :review => comment.review  %>
+  <br/>
+  <br/>
+<% end %>
 
-  <%= render 'reviews/show', :review => @comment.review  %>
-
-<h3><%= collapse_button_initially_open ("comment_preview")%> Preview of the comment</h3>
+<% if !comment.body.blank? %>
+<h4><%= collapse_button_initially_open ("comment_preview")%> Preview of the comment</h4>
   <div id="comment_preview" class="review">
-    <%= render 'comments/show', :comment => @comment  %>
+    <%= render 'comments/show', :comment => comment  %>
   </div>
-
-
-<hr />
-
-
-  <div>
-    Comment by <%= w @comment.presenter.name %> on this Review:
-    <%= link_to '(formatting)', "/pages/formatting", :target => '_blank', :class => 'smalllink' %> 
-  </div>
+<% end %>
 
   <div class="in_a_form">
-    <%= f.text_area :body, :cols => 100, :rows => 10 %>
+    <%= link_to '(formatting)', "/pages/formatting", :target => '_blank', :class => 'smalllink' %> <br/>
+    <%= f.text_area :body, :cols => 95, :rows => 2 %>
   </div>
 
-
-  <hr>
+  <br/>
   <div class="actions">
     <%= f.submit 'Preview' %>
-    <% if @comment.new_record? %>
+    <% if comment.new_record? %>
       <%= f.submit "Create" %>
-      <i>When you create the comment, the session presenter(s) receive an email. 
-      <% if Propile::Application.config.action_mailer.delivery_method == :test %>
-        <br/>!!!  Mail is not sent in test environment !!!
+      <% if !comment.body.blank? %>
+        <%= link_to 'Cancel Comment Creation', comment.review.session %>  
       <% end %>
+      <i>When you create the comment, the session presenter(s) receive an email. 
+        <% if Propile::Application.config.action_mailer.delivery_method == :test %>
+          <br/>!!!  Mail is not sent in test environment !!!
+        <% end %>
       </i>
     <% else %>
       <%= f.submit "Update" %>
+      <% if !comment.body.blank? %>
+        <%= link_to 'Cancel Comment Update', comment.review.session %>  
+      <% end %>
     <% end %>
   </div>
 

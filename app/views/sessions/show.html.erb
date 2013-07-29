@@ -58,7 +58,7 @@
           <%= collapse_button_initially_open ("session_comment_#{j}") %> 
           <div id="session_comment_<%=j%>" style="display:block;" class="comment">
             <% if defined?(@edit_comment) && !@edit_comment.nil? && @edit_comment.id==comment.id %>
-              <%= render 'comments/form_in_session', :comment=>@edit_comment, :show_session=>false %>
+              <%= render 'comments/form', :comment=>@edit_comment, :show_session=>false %>
             <% else %>
               <%= render 'comments/show', :comment => comment  %>
             <% end %>
@@ -79,7 +79,7 @@
                new_comment.presenter = @current_presenter
              end
           %>
-          <%= render 'comments/form_in_session', :comment=>new_comment, :show_session=>false %>
+          <%= render 'comments/form', :comment=>new_comment, :show_session=>false %>
         </div>
   </div>
   <% end %> 
