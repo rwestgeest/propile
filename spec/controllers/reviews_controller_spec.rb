@@ -122,7 +122,7 @@ describe ReviewsController do
           assigns(:session).should eq(review.session)
         end
 
-        it "redirects to the review" do
+        it "redirects to the review session" do
           put :update, {:id => review.to_param, :review => valid_attributes}
           response.should redirect_to(review.session)
         end

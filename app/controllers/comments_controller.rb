@@ -28,11 +28,13 @@ class CommentsController < ApplicationController
 
     if params[:commit] != 'Preview' && @comment.save
       Postman.notify_comment_creation(@comment)
-      redirect_to @comment, notice: 'Comment was successfully created.'
+      redirect_to @comment.review.session, notice: 'Comment was successfully created.'
     else
       @session = @comment.review.session
-      render action: "new"
-      #render template: 'sessions/show'
+      @current_presenter_has_voted_for_this_session = Vote.presenter_has_voted_for?(current_presenter.id, @comment.review.session.id) 
+      @my_vote = Vote.vote_of_presenter_for(current_presenter.id, @comment.review.session.id) 
+      @new_comment=@comment
+      render template: 'sessions/show'
     end
   end
 
@@ -45,7 +47,7 @@ class CommentsController < ApplicationController
       render action: "edit"
     else 
       if @comment.update_attributes(params[:comment])
-        redirect_to @comment, notice: 'Comment was successfully updated.'
+        redirect_to @comment.review.session, notice: 'Comment was successfully created.'
       else
         render action: "edit"
       end

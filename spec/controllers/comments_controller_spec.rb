@@ -74,9 +74,9 @@ describe CommentsController do
           Comment.last.presenter.should == current_presenter
         end
 
-        it "redirects to the created comment" do
+        it "redirects to the created comment session" do
           post :create, {:comment => valid_attributes}
-          response.should redirect_to(Comment.last)
+          response.should redirect_to(Comment.last.review.session)
         end
 
         it "sends a message to the sessions presenters" do
@@ -100,7 +100,7 @@ describe CommentsController do
         end
 
         it "re-renders the 'new' template" do
-          response.should render_template("new")
+          response.should render_template("sessions/show")
         end
       end
     end
@@ -118,9 +118,9 @@ describe CommentsController do
           assigns(:session).should == comment.review.session
         end
 
-        it "redirects to the comment" do
+        it "redirects the comment session" do
           put :update, {:id => comment.to_param, :comment => valid_attributes}
-          response.should redirect_to(comment)
+          response.should redirect_to(comment.review.session)
         end
 
         it "preview assigns the requested comment as @comment" do
