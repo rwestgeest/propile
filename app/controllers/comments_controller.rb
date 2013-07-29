@@ -18,6 +18,7 @@ class CommentsController < ApplicationController
   def edit
     @comment = Comment.find(params[:id])
     @session = @comment.review.session
+    render template: 'sessions/show'
   end
 
   def create
@@ -44,7 +45,10 @@ class CommentsController < ApplicationController
 
     if params[:commit] == 'Preview' 
       @comment.assign_attributes(params[:comment])
-      render action: "edit"
+      @session = @comment.review.session
+      @current_presenter_has_voted_for_this_session = Vote.presenter_has_voted_for?(current_presenter.id, @comment.review.session.id) 
+      @my_vote = Vote.vote_of_presenter_for(current_presenter.id, @comment.review.session.id) 
+      render template: 'sessions/show'
     else 
       if @comment.update_attributes(params[:comment])
         redirect_to @comment.review.session, notice: 'Comment was successfully created.'

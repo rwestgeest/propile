@@ -53,7 +53,11 @@
         <% review.comments.each_with_index do |comment, j| %>
           <%= collapse_button_initially_open ("session_comment_#{j}") %> 
           <div id="session_comment_<%=j%>" style="display:block;" class="comment">
-            <%= render 'comments/show', :comment => comment  %>
+            <% if defined?(@comment) && !@comment.nil? && @comment.id==comment.id %>
+              <%= render 'comments/form_in_session', :comment=>@comment, :show_session=>false %>
+            <% else %>
+              <%= render 'comments/show', :comment => comment  %>
+            <% end %>
             <div class="alignright">
               <%= guarded_link_to 'Edit this comment', controller: 'comments', action: 'edit', id: comment %> 
             </div>
