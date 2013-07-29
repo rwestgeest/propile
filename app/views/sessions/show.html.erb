@@ -42,7 +42,11 @@
   <% @session.reviews.each_with_index do |review, i| %>
   <%= collapse_button_initially_open ("session_review_#{i}") %> 
   <div id="session_review_<%=i%>" style="display:block;" class="review">
-    <%= render 'reviews/show', :review => review  %>
+    <% if defined?(@review) && !@review.nil? && @review.id==review.id %>
+      <%= render 'reviews/form', :review=>@review, :show_session=>false %>
+    <% else %>
+      <%= render 'reviews/show', :review => review  %>
+    <% end %>
     <div class="alignright">
       <%= guarded_link_to 'Edit this review', controller: 'reviews', action: 'edit', id: review  %> &nbsp;
     </div>

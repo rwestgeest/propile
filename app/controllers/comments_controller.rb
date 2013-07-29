@@ -25,7 +25,6 @@ class CommentsController < ApplicationController
     @comment = Comment.new(params[:comment])
     @comment.presenter = current_presenter
     @session = @comment.review.session
-    @review  = @comment.review
 
     if params[:commit] != 'Preview' && @comment.save
       Postman.notify_comment_creation(@comment)

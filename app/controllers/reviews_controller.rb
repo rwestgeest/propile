@@ -17,6 +17,7 @@ class ReviewsController < ApplicationController
   def edit
     @review = Review.find(params[:id])
     @session = @review.session
+    render template: 'sessions/show'
   end
 
   def create
@@ -39,7 +40,10 @@ class ReviewsController < ApplicationController
     @session = @review.session
     if params[:commit] == 'Preview' 
       @review.assign_attributes(params[:review])
-      render action: "edit"
+      @session = @review.session
+      @current_presenter_has_voted_for_this_session = Vote.presenter_has_voted_for?(current_presenter.id, @review.session.id) 
+      @my_vote = Vote.vote_of_presenter_for(current_presenter.id, @review.session.id) 
+      render template: 'sessions/show'
     else 
       if @review.update_attributes(params[:review])
         redirect_to @review.session, notice: 'Review was successfully created.'
