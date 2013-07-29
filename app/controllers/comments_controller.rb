@@ -16,43 +16,40 @@ class CommentsController < ApplicationController
   end
 
   def edit
-    @comment = Comment.find(params[:id])
-    @session = @comment.review.session
+    @edit_comment = Comment.find(params[:id])
+    @session = @edit_comment.review.session
     render template: 'sessions/show'
   end
 
   def create
-    @comment = Comment.new(params[:comment])
-    @comment.presenter = current_presenter
-    @session = @comment.review.session
+    @new_comment = Comment.new(params[:comment])
+    @new_comment.presenter = current_presenter
+    @session = @new_comment.review.session
+    @current_presenter_has_voted_for_this_session = Vote.presenter_has_voted_for?(current_presenter.id, @new_comment.review.session.id) 
+    @my_vote = Vote.vote_of_presenter_for(current_presenter.id, @new_comment.review.session.id) 
 
-    if params[:commit] != 'Preview' && @comment.save
-      Postman.notify_comment_creation(@comment)
-      redirect_to @comment.review.session, notice: 'Comment was successfully created.'
+    if params[:commit] != 'Preview' && @new_comment.save
+      Postman.notify_comment_creation(@new_comment)
+      redirect_to @new_comment.review.session, notice: 'Comment was successfully created.'
     else
-      @session = @comment.review.session
-      @current_presenter_has_voted_for_this_session = Vote.presenter_has_voted_for?(current_presenter.id, @comment.review.session.id) 
-      @my_vote = Vote.vote_of_presenter_for(current_presenter.id, @comment.review.session.id) 
-      @new_comment=@comment
       render template: 'sessions/show'
     end
   end
 
   def update
-    @comment = Comment.find(params[:id])
-    @session = @comment.review.session
+    @edit_comment = Comment.find(params[:id])
+    @session = @edit_comment.review.session
+    @current_presenter_has_voted_for_this_session = Vote.presenter_has_voted_for?(current_presenter.id, @edit_comment.review.session.id) 
+    @my_vote = Vote.vote_of_presenter_for(current_presenter.id, @edit_comment.review.session.id) 
 
     if params[:commit] == 'Preview' 
-      @comment.assign_attributes(params[:comment])
-      @session = @comment.review.session
-      @current_presenter_has_voted_for_this_session = Vote.presenter_has_voted_for?(current_presenter.id, @comment.review.session.id) 
-      @my_vote = Vote.vote_of_presenter_for(current_presenter.id, @comment.review.session.id) 
+      @edit_comment.assign_attributes(params[:comment])
       render template: 'sessions/show'
     else 
-      if @comment.update_attributes(params[:comment])
-        redirect_to @comment.review.session, notice: 'Comment was successfully created.'
+      if @edit_comment.update_attributes(params[:comment])
+        redirect_to @edit_comment.review.session, notice: 'Comment was successfully created.'
       else
-        render action: "edit"
+        render template: 'sessions/show'
       end
     end
   end

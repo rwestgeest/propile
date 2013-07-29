@@ -45,20 +45,20 @@ describe CommentsController do
     end
 
     describe "GET edit" do
-      it "assigns the requested comment as @comment" do
+      it "assigns the requested comment as @edit_comment" do
         comment.update_attribute :presenter, current_presenter
         get :edit, {:id => comment.to_param}
-        assigns(:comment).should eq(comment)
+        assigns(:edit_comment).should eq(comment)
         assigns(:session).should == comment.review.session
       end
     end
 
     describe "POST create" do
       describe "post preview" do
-        it "assigns the requested NEW comment as @comment" do
+        it "assigns the requested NEW comment as @new_comment" do
           post :create, {:comment => valid_attributes, :commit => 'Preview'}
-          assigns(:comment).should be_a_new(Comment)
-          assigns(:comment).presenter.should == current_presenter
+          assigns(:new_comment).should be_a_new(Comment)
+          assigns(:new_comment).presenter.should == current_presenter
           assigns(:session).should eq(comment.review.session)
         end
       end
@@ -95,8 +95,8 @@ describe CommentsController do
           post :create, {:comment => valid_attributes}
         end
 
-        it "assigns a newly created but unsaved comment as @comment" do
-          assigns(:comment).should be_a_new(Comment)
+        it "assigns a newly created but unsaved comment as @new_comment" do
+          assigns(:new_comment).should be_a_new(Comment)
         end
 
         it "re-renders the 'new' template" do
@@ -112,9 +112,9 @@ describe CommentsController do
           put :update, {:id => comment.to_param, :comment => {'these' => 'params'}}
         end
 
-        it "assigns the requested comment as @comment" do
+        it "assigns the requested comment as @edit_comment" do
           put :update, {:id => comment.to_param, :comment => valid_attributes}
-          assigns(:comment).should eq(comment)
+          assigns(:edit_comment).should eq(comment)
           assigns(:session).should == comment.review.session
         end
 
@@ -123,26 +123,26 @@ describe CommentsController do
           response.should redirect_to(comment.review.session)
         end
 
-        it "preview assigns the requested comment as @comment" do
+        it "preview assigns the requested comment as @edit_comment" do
           put :update, {:id => comment.to_param, :comment => valid_attributes, :commit => 'Preview'}
-          assigns(:comment).should eq(comment)
+          assigns(:edit_comment).should eq(comment)
           assigns(:session).should eq(comment.review.session)
         end
       end
 
       describe "with invalid params" do
-        it "assigns the comment as @comment" do
+        it "assigns the comment as @edit_comment" do
           # Trigger the behavior that occurs when invalid params are submitted
           Comment.any_instance.stub(:save).and_return(false)
           put :update, {:id => comment.to_param, :comment => {}}
-          assigns(:comment).should eq(comment)
+          assigns(:edit_comment).should eq(comment)
         end
 
         it "re-renders the 'edit' template" do
           # Trigger the behavior that occurs when invalid params are submitted
           Comment.any_instance.stub(:save).and_return(false)
           put :update, {:id => comment.to_param, :comment => {}}
-          response.should render_template("edit")
+          response.should render_template("sessions/show")
         end
       end
     end
