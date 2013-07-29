@@ -3,9 +3,15 @@ class ReviewsController < ApplicationController
     @reviews = Review.all
   end
 
+  def make_parameters_for_show_session(review)
+    @session = review.session
+    @current_presenter_has_voted_for_this_session = Vote.presenter_has_voted_for?(current_presenter.id, review.session.id) 
+    @my_vote = Vote.vote_of_presenter_for(current_presenter.id, review.session.id) 
+  end
+
   def show
-    @review = Review.find(params[:id])
-    @session = @review.session
+    make_parameters_for_show_session(Review.find(params[:id]))
+    render template: 'sessions/show'
   end
 
   def new
@@ -15,40 +21,35 @@ class ReviewsController < ApplicationController
   end
 
   def edit
-    @review = Review.find(params[:id])
-    @session = @review.session
+    @edit_review = Review.find(params[:id])
+    make_parameters_for_show_session(@edit_review)
     render template: 'sessions/show'
   end
 
   def create
-    @review = Review.new(params[:review])
-    @review.presenter = current_presenter
-    if params[:commit] != 'Preview' && @review.save
-      Postman.notify_review_creation(@review)
-      redirect_to @review.session, notice: 'Review was successfully created.'
+    @new_review = Review.new(params[:review])
+    @new_review.presenter = current_presenter
+    make_parameters_for_show_session(@new_review)
+
+    if params[:commit] != 'Preview' && @new_review.save
+      Postman.notify_review_creation(@new_review)
+      redirect_to @new_review.session, notice: 'Review was successfully created.'
     else
-      @session = @review.session
-      @current_presenter_has_voted_for_this_session = Vote.presenter_has_voted_for?(current_presenter.id, @review.session.id) 
-      @my_vote = Vote.vote_of_presenter_for(current_presenter.id, @review.session.id) 
-      @new_review=@review
       render template: "sessions/show"
     end
   end
 
   def update
-    @review = Review.find(params[:id])
-    @session = @review.session
+    @edit_review = Review.find(params[:id])
+    make_parameters_for_show_session(@edit_review)
     if params[:commit] == 'Preview' 
-      @review.assign_attributes(params[:review])
-      @session = @review.session
-      @current_presenter_has_voted_for_this_session = Vote.presenter_has_voted_for?(current_presenter.id, @review.session.id) 
-      @my_vote = Vote.vote_of_presenter_for(current_presenter.id, @review.session.id) 
+      @edit_review.assign_attributes(params[:review])
       render template: 'sessions/show'
     else 
-      if @review.update_attributes(params[:review])
-        redirect_to @review.session, notice: 'Review was successfully created.'
+      if @edit_review.update_attributes(params[:review])
+        redirect_to @edit_review.session, notice: 'Review was successfully created.'
       else
-        render action: "edit"
+        render template: 'sessions/show'
       end
     end
   end

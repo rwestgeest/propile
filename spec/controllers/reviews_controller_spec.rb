@@ -27,9 +27,8 @@ describe ReviewsController do
     end
 
     describe "GET show" do
-      it "assigns the requested review as @review" do
+      it "assigns the requested review session as @session" do
         get :show, {:id => review.to_param}
-        assigns(:review).should eq(review)
         assigns(:session).should eq(review.session)
       end
     end
@@ -45,20 +44,20 @@ describe ReviewsController do
     end
 
     describe "GET edit" do
-      it "assigns the requested review as @review" do
+      it "assigns the requested review as @edit_review" do
         review.update_attribute :presenter, current_presenter
         get :edit, {:id => review.to_param}
-        assigns(:review).should eq(review)
+        assigns(:edit_review).should eq(review)
         assigns(:session).should eq(review.session)
       end
     end
 
     describe "POST create" do
       describe "post preview" do
-        it "assigns the requested NEW review as @review" do
+        it "assigns the requested NEW review as @new_review" do
           post :create, {:review => valid_attributes, :commit => 'Preview'}
-          assigns(:review).should be_a_new(Review)
-          assigns(:review).presenter.should == current_presenter
+          assigns(:new_review).should be_a_new(Review)
+          assigns(:new_review).presenter.should == current_presenter
           assigns(:session).should eq(review.session)
         end
       end
@@ -98,8 +97,8 @@ describe ReviewsController do
           Review.any_instance.stub(:save).and_return(false)
           post :create, {:review => valid_attributes}
         end
-        it "assigns a newly created but unsaved review as @review" do
-          assigns(:review).should be_a_new(Review)
+        it "assigns a newly created but unsaved review as @new_review" do
+          assigns(:new_review).should be_a_new(Review)
         end
 
         it "re-renders the 'new' template" do
@@ -116,9 +115,9 @@ describe ReviewsController do
           put :update, {:id => review.to_param, :review => {'these' => 'params'}}
         end
 
-        it "assigns the requested review as @review" do
+        it "assigns the requested review as @edit_review" do
           put :update, {:id => review.to_param, :review => valid_attributes}
-          assigns(:review).should eq(review)
+          assigns(:edit_review).should eq(review)
           assigns(:session).should eq(review.session)
         end
 
@@ -127,9 +126,9 @@ describe ReviewsController do
           response.should redirect_to(review.session)
         end
 
-        it "preview assigns the requested review as @review" do
+        it "preview assigns the requested review as @edit_review" do
           put :update, {:id => review.to_param, :review => valid_attributes, :commit => 'Preview'}
-          assigns(:review).should eq(review)
+          assigns(:edit_review).should eq(review)
           assigns(:session).should eq(review.session)
         end
       end
@@ -140,12 +139,12 @@ describe ReviewsController do
           Review.any_instance.stub(:save).and_return(false)
           put :update, {:id => review.to_param, :review => {}}
         end
-        it "assigns the review as @review" do
-          assigns(:review).should eq(review)
+        it "assigns the review as @edit_review" do
+          assigns(:edit_review).should eq(review)
         end
 
         it "re-renders the 'edit' template" do
-          response.should render_template("edit")
+          response.should render_template("sessions/show")
         end
       end
     end
