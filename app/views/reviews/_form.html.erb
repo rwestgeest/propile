@@ -3,15 +3,11 @@
 
 <%= f.hidden_field :session_id %>
 
-<% if show_session %>
-  <%= render 'sessions/show_short', :session => @review.session  %>
-  <br/>
-  <br/>
-<% end %>
+<% if review.filled? %> <div class="editing"> <% end %> 
 
 <% if review.filled? %>
   <h4><%= collapse_button_initially_open ("review_preview")%> Preview of the review</h4>
-  <div id="review_preview" class="review">
+  <div id="review_preview" class="review editing_preview">
     <%= render 'reviews/show', :review => review  %>
   </div>
 <% end %> 
@@ -19,16 +15,16 @@
   <div class="in_a_form">
     <div> 
       What I like: <i>first list the things that you like about this session, why did it get the score you gave it? </i> 
-      <%= link_to '(formatting)', "/pages/formatting", :target => '_blank', :class => 'smalllink' %> 
     </div>
     <%= f.text_area :things_i_like, :cols => 100, :rows => 3 %>
+    <%= link_to '(formatting)', "/pages/formatting", :target => '_blank', :class => 'smalllink' %> 
   </div>
   <div class="in_a_form">
     <div> 
       I will give you a 10/10 if you improve these things: <i> list improvements to the session: what does the session presenters need to change so that you will give them a 10/10? </i> 
-      <%= link_to '(formatting)', "/pages/formatting", :target => '_blank', :class => 'smalllink' %> 
     </div>
     <%= f.text_area :things_to_improve, :cols => 100, :rows => 3 %>
+    <%= link_to '(formatting)', "/pages/formatting", :target => '_blank', :class => 'smalllink' %> 
   </div>
 
   <div class="in_a_form">
@@ -62,3 +58,4 @@
 
 <% end %>
 
+<% if review.filled? %> </div> <% end %> 

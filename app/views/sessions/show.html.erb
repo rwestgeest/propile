@@ -33,8 +33,8 @@
 
 <h2> Reviews for this session: </h2>
 <div>
-  <i>Reviews are done in <%= link_to 'Perfection Game Format', "/pages/index#PerfectionGame", :target => '_blank', :class => 'smalllink' %>.
-     Read more about what we expect of a  <%= link_to 'good session', "/pages/index#ReviewCriteria", :target => '_blank', :class => 'smalllink' %> 
+  <i>Reviews are done in <%= link_to 'Perfection Game Format', "/pages/index#PerfectionGame", :target => '_blank' %>.
+     Read more about what we expect of a  <%= link_to 'good session', "/pages/index#ReviewCriteria", :target => '_blank' %> 
   </i>
 </div>
 
@@ -43,7 +43,7 @@
   <%= collapse_button_initially_open ("session_review_#{i}") %> 
   <div id="session_review_<%=i%>" style="display:block;" class="review">
     <% if defined?(@edit_review) && !@edit_review.nil? && @edit_review.id==review.id %>
-      <%= render 'reviews/form', :review=>@edit_review, :show_session=>false %>
+      <%= render 'reviews/form', :review=>@edit_review %>
     <% else %>
       <%= render 'reviews/show', :review => review  %>
     <% end %>
@@ -58,7 +58,7 @@
           <%= collapse_button_initially_open ("session_comment_#{j}") %> 
           <div id="session_comment_<%=j%>" style="display:block;" class="comment">
             <% if defined?(@edit_comment) && !@edit_comment.nil? && @edit_comment.id==comment.id %>
-              <%= render 'comments/form', :comment=>@edit_comment, :show_session=>false %>
+              <%= render 'comments/form', :comment=>@edit_comment %>
             <% else %>
               <%= render 'comments/show', :comment => comment  %>
             <% end %>
@@ -79,7 +79,7 @@
                new_comment.presenter = @current_presenter
              end
           %>
-          <%= render 'comments/form', :comment=>new_comment, :show_session=>false %>
+          <%= render 'comments/form', :comment=>new_comment %>
         </div>
   </div>
   <% end %> 
@@ -92,7 +92,7 @@
          @new_review.presenter = @current_presenter
        end
     %>
-    <%= render 'reviews/form', :review=>@new_review, :show_session=>false %>
+    <%= render 'reviews/form', :review=>@new_review %>
   </div>
 </div>
 

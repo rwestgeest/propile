@@ -3,23 +3,18 @@
 
   <%= f.hidden_field :review_id %>
 
-<% if show_session %>
-  <%= render 'sessions/show_short', :session => comment.review.session  %>
-  <%= render 'reviews/show', :review => comment.review  %>
-  <br/>
-  <br/>
-<% end %>
+<% if !comment.body.blank? %> <div class="editing"> <% end %> 
 
 <% if !comment.body.blank? %>
 <h4><%= collapse_button_initially_open ("comment_preview")%> Preview of the comment</h4>
-  <div id="comment_preview" class="review">
+  <div id="comment_preview" class="comment">
     <%= render 'comments/show', :comment => comment  %>
   </div>
 <% end %>
 
   <div class="in_a_form">
-    <%= link_to '(formatting)', "/pages/formatting", :target => '_blank', :class => 'smalllink' %> <br/>
     <%= f.text_area :body, :cols => 95, :rows => 2 %>
+    <%= link_to '(formatting)', "/pages/formatting", :target => '_blank', :class => 'smalllink' %> <br/>
   </div>
 
   <br/>
@@ -44,3 +39,5 @@
   </div>
 
 <% end %>
+
+<% if !comment.body.blank? %> </div> <% end %> 
