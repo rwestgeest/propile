@@ -36,8 +36,8 @@ describe CommentsController do
       it "assigns a new comment as @comment" do
         review = FactoryGirl.create :review
         get :new, {:review_id => review.id}
-        assigns(:comment).should be_a_new(Comment)
-        assigns(:comment).presenter.should == current_presenter
+        assigns(:new_comment).should be_a_new(Comment)
+        assigns(:new_comment).presenter.should == current_presenter
         assigns(:review).should == review
         assigns(:session).should == review.session
       end
