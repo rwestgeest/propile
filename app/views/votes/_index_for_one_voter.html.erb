@@ -3,17 +3,15 @@
   <tr>
     <th></th>
     <th> <%= "Session" %>  </th>
-    <th> <%= "Voted by" %> </th>
-    <th> <%= "Created" %>  </th>
     <th></th>
   </tr>
 
 <% votes.each_with_index do |vote, i| %>
   <tr>
     <td> <%= i+1 %> </td>
-    <td> <%= link_to w(vote.session.title) , vote.session %></td>
-    <td> <%= link_to w(vote.presenter.name), vote.presenter %> </td>
-    <td class="nowrap" ><%= l vote.created_at %> </td>
+    <td class="<%= vote.session.topic %>"> <%= link_to w(vote.session.title) , vote.session %> 
+      <br/> <i> by <%= session_presenter_names(vote.session) %> </i>
+    </td>
     <td> <%= link_to 'Destroy', vote, method: :delete %> </td>
   </tr>
 <% end %>

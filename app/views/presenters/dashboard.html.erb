@@ -6,27 +6,13 @@
 <%= content_for :created_and_modified do %> 
 <% end %>
 
-<% if PropileConfig.voting_active?  %> 
-  <h2>Your votes </h2>
-  <div><i>(only you can see this)</i></div>
-  <% if @presenter.votes.empty? %> 
-    You have not yet voted.
-  <% else %> 
-    <%= render 'votes/index', :votes => @presenter.votes  %>
-  <%end%> 
-  <hr>
-<%end%> 
 <div style="width:45%; float:left; margin:0 20px;min-width:400px; ">
-  <h3>Sessions you are involved in: </h3>
-  <div><i> These are the sessions that you submitted, reviewed or commented.</i></div>
-  <%= render 'sessions/activity_index', :sessions => @sessions_you_are_involved_in, :sortable => false  %>
-
 
   <% if @presenter.reviews.empty? %>
     <br/>
     <br/>
     <div class="outlined">
-      We expect presenters to help each other to develop their proposals, based on peer to peer feedback. 
+      We expect presenters to help each other to develop their proposals, based on <b>peer to peer feedback</b>. <br/>
       You can give feedback on other people's proposals and improve your proposal based on the feedback you receive. 
       In this way, we will come to a set of quality session proposals in a transparent, community driven way.
     </div>
@@ -44,9 +30,31 @@
     </div>
   <% end %>
 
+  <h3>Sessions you are involved in: </h3>
+  <div><i> These are the sessions that you submitted, reviewed or commented.</i></div>
+  <%= render 'sessions/activity_index', :sessions => @sessions_you_are_involved_in, :sortable => false  %>
+
 </div>
 
 <div style="width:45%; float:left; margin:0 20px;min-width:400px; ">
+
+  <% if PropileConfig.voting_active?  %> 
+    <div ">
+      <div class="flashy">
+        Voting is now activated!
+      </div>
+      <%= render :partial=>'votes/rules' %>
+      <h3>Your votes </h3>
+      <div><i>(only you can see this)</i></div>
+      <% if @presenter.votes.empty? %> 
+        You have not yet voted.
+      <% else %> 
+        <%= render 'votes/index_for_one_voter', :votes => @presenter.votes  %>
+      <%end%> 
+      <hr>
+      </div>
+  <%end%> 
+
   <% if !@sessions_that_need_a_review.empty? %>
     <h3>These sessions are waiting for your review: </h3>
     <div><i> These sessions don't have a review and/or are younger than 1 week.</i></div>

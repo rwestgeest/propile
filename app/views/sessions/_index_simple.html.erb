@@ -3,11 +3,9 @@
     <th></th>
     <th></th>
 <% if @voting_active  %>
-    <th> <%= sortable ? sortable("voted") : "Voted"  %> </th>
+    <th> Voted </th>
 <% end %>
-    <!--th> <% if sortable %> <%= sortable "title" %> <% else %> Title <% end %> </th-->
-    <th> <%= sortable ? sortable("title") : "Title"  %> </th>
-    <th> <%= sortable ? sortable("presenters", "Presenter(s)") : "Presenter(s)" %> </th>
+    <th> Session </th>
   </tr>
 
 <% sessions.each_with_index do |session, i| %>
@@ -21,8 +19,8 @@
 <% if @voting_active  %>
     <td> <% if session.presenter_has_voted_for?(@current_account.presenter.id) %> YES  <% end %> </td>
 <% end %>
-    <td class="<%= session.topic %>"> <%= link_to w(session.title) , session %></td>
-    <td> <%= session_presenter_names(session) %> </td>
+    <td class="<%= session.topic %>"> <%= link_to w(session.title) , session %> 
+      <br/> <i> by <%= session_presenter_names(session) %> </i>
   </tr>
 <% end %>
 </table>

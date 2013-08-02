@@ -35,21 +35,22 @@
   <% if @presenter.votes.empty? %> 
     You have not yet voted.
   <% else %> 
-    <%= render 'votes/index', :votes => @presenter.votes  %>
+    <%= render 'votes/index_for_one_voter', :votes => @presenter.votes  %>
   <%end%> 
-  <hr>
+  <br/>
+  <hr/>
 <%end%> 
 
 
-<h2>Sessions submitted by <%= @presenter.name  %> </h2>
+<div style="width:45%; float:left; margin:0 20px;min-width:400px; ">
+  <h2>Sessions submitted by <%= @presenter.name  %> </h2>
+  <%= render 'sessions/index_simple', :sessions => @presenter.sessions, :sortable => false  %>
+</div>
 
-<%= render 'sessions/index_simple', :sessions => @presenter.sessions, :sortable => false  %>
+<div style="width:45%; float:left; margin:0 20px;min-width:400px; ">
+  <h2>Sessions reviewed by <%= @presenter.name  %> </h2>
+  <%= render 'sessions/index_simple', :sessions => @sessions_reviewed_by_you, :sortable => false  %>
+</div>
 
-<hr>
-
-<h2>Sessions reviewed by <%= @presenter.name  %> </h2>
-
-<%= render 'sessions/index_simple', :sessions => @sessions_reviewed_by_you, :sortable => false  %>
-
-
+<div style="clear:both"></div>
 
