@@ -31,6 +31,7 @@
 <div>Sessions that have...</b></div>
 <div> <b>short description</b>: <%= @session_completeness_statistics.with_short_description %> -- that's  <%= @session_completeness_statistics.with_short_description_percentage %>%  </div>
 <div> <b>outline or timetable</b>: <%= @session_completeness_statistics.with_outline_or_timetable %> -- that's  <%= @session_completeness_statistics.with_outline_or_timetable_percentage %>%  </div>
+<div> <b>new review </b>: <%= @session_completeness_statistics.with_new_review %> -- that's  <%= @session_completeness_statistics.with_new_review_percentage %>% <i>(these sessions have a review but were never updated or commented afterwards)</i> </div>
 
 <h2>Presenter completeness</h2>
 <div>Presenters that have...</b></div>

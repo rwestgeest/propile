@@ -154,6 +154,22 @@ describe StatisticsHelper do
         get_session_completeness_statistics.with_outline_or_timetable_percentage.should == 100
       end
     end
+    describe "with_new_review" do
+      it "returns 0 if no sessions are defined " do
+        get_session_completeness_statistics.with_new_review.should == 0
+        get_session_completeness_statistics.with_new_review_percentage.should == 100
+      end
+      it "returns 0 if a default session is defined " do
+        session
+        get_session_completeness_statistics.with_new_review.should == 0
+        get_session_completeness_statistics.with_new_review_percentage.should == 0
+      end
+      it "returns 1 if a session is defined with a short description" do
+        FactoryGirl.create(:review)
+        get_session_completeness_statistics.with_new_review.should == 1
+        get_session_completeness_statistics.with_new_review_percentage.should == 100
+      end
+    end
   end
   describe "PresenterCompleteness" do
     it "returns something for an empty application" do
