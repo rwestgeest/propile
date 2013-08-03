@@ -118,6 +118,12 @@ class Session < ActiveRecord::Base
     end
   end
 
+  def has_new_review?
+    reviews.any? do |r| 
+      r.created_at > updated_at && !r.comments.any? {|c| presenters.include?(c.presenter)}
+    end
+  end
+
 
   def self.generate_program_committee_cards_pdf(file_name)
     Prawn::Document.generate file_name, 

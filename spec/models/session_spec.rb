@@ -368,7 +368,7 @@ describe Session do
 
   describe "status" do
     def a_session(created_at, updated_at)
-      session = FactoryGirl.create(:session_with_presenter, :created_at => created_at, :updated_at => updated_at) 
+      FactoryGirl.create(:session_with_presenter, :created_at => created_at, :updated_at => updated_at) 
     end
     def a_review_for(session, date)
       FactoryGirl.create(:review , :session => session, :created_at => date, :updated_at => date) 
@@ -432,9 +432,59 @@ describe Session do
     end
   end
 
+  describe "updated_after_last_review?" do
+    def a_session(created_at, updated_at)
+      FactoryGirl.create(:session_with_2_presenters, :created_at => created_at, :updated_at => updated_at) 
+    end
+    def a_review_for(session, date)
+      FactoryGirl.create(:review , :session => session, :created_at => date, :updated_at => date) 
+    end
+    def a_comment_for_by(review, date, commenter)
+      FactoryGirl.create(:comment, :review => review, :presenter => commenter, :created_at => date, :updated_at => date)
+    end
+    def a_comment_for(review, date)
+      FactoryGirl.create(:comment, :review => review, :created_at => date, :updated_at => date)
+    end
+    it "session without reviews" do
+      a_session("3-8-2013","3-8-2013").should_not have_new_review
+    end
+    context "session with review" do
+      it "that is older than update" do
+        session = a_session("3-8-2013","5-8-2013")
+        a_review_for(session, "4-8-2013")
+        session.should_not have_new_review
+      end
+      it "that is newer than update" do
+        session = a_session("3-8-2013","5-8-2013")
+        a_review_for(session, "6-8-2013")
+        session.should have_new_review
+      end
+    end
+    context "session with commented review" do
+      it "is not a new review if comment was by first presenter" do
+        session = a_session("3-8-2013","3-8-2013")
+        review = a_review_for(session, "4-8-2013")
+        a_comment_for_by(review, "4-8-2013", session.first_presenter )
+        session.should_not have_new_review
+      end
+      it "is not a new review if comment was by second presenter" do
+        session = a_session("3-8-2013","3-8-2013")
+        review = a_review_for(session, "4-8-2013")
+        a_comment_for_by(review, "4-8-2013", session.second_presenter )
+        session.should_not have_new_review
+      end
+      it "is a new review if comment was by someone else" do
+        session = a_session("3-8-2013","3-8-2013")
+        review = a_review_for(session, "4-8-2013")
+        a_comment_for(review, "4-8-2013" )
+        session.should have_new_review
+      end
+    end
+  end
+
   describe "self.sessions_that_need_a_review" do
     def a_session(created_at=Date.today, updated_at=created_at)
-      session = FactoryGirl.create(:session_with_presenter, :created_at => created_at, :updated_at => updated_at) 
+      FactoryGirl.create(:session_with_presenter, :created_at => created_at, :updated_at => updated_at) 
     end
     def a_review_for(session)
       FactoryGirl.create(:review , :session => session)

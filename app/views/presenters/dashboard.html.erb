@@ -9,8 +9,7 @@
 <div style="width:45%; float:left; margin:0 20px;min-width:400px; ">
 
   <% if @presenter.reviews.empty? %>
-    <br/>
-    <br/>
+    <br/> <br/>
     <div class="outlined">
       We expect presenters to help each other to develop their proposals, based on <b>peer to peer feedback</b>. <br/>
       You can give feedback on other people's proposals and improve your proposal based on the feedback you receive. 
@@ -20,14 +19,25 @@
       Review your first session!!! 
     </div>
   <% end %>
+
   <% if !@presenter.name_filled_in? || @presenter.bio.blank? %>
-    <br/>
-    <br/>
+    <br/> <br/>
     <div class="outlined">
       <% if !@presenter.name_filled_in? %> Fill in your name! <% end %>
       <% if @presenter.bio.blank? %> Fill in your bio! <% end %>
       You can do that in <%= link_to "your own presenter page", current_account.presenter %>.
     </div>
+  <% end %>
+
+  <% @presenter.sessions.each do |session|  %>
+    <%  if session.has_new_review?  %>
+      <br/> <br/>
+      <div class="outlined">
+        Your session <%= link_to session.title, session%> has a <b>new review</b>. 
+        Have a look at the review and use it to improve your session. 
+        Leave a comment to explain to the reviewer what you modified and why. 
+      </div>
+    <% end %>
   <% end %>
 
   <h3>Sessions you are involved in: </h3>
