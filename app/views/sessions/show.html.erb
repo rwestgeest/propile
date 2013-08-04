@@ -55,8 +55,8 @@
       <h3> Comments on this review: </h3>
       <div>
         <% review.comments.each_with_index do |comment, j| %>
-          <%= collapse_button_initially_open ("session_comment_#{j}") %> 
-          <div id="session_comment_<%=j%>" style="display:block;" class="comment">
+          <%= collapse_button_initially_open ("session_review_#{i}_comment_#{j}") %> 
+          <div id="session_review_<%=i%>_comment_<%=j%>" style="display:block;" class="comment">
             <% if defined?(@edit_comment) && !@edit_comment.nil? && @edit_comment.id==comment.id %>
               <%= render 'comments/form', :comment=>@edit_comment %>
             <% else %>
@@ -69,8 +69,8 @@
         <% end %>
       </div>
     <% end %> 
-        <%= collapse_button_initially_open ("session_comment_new") %> 
-        <div id="session_comment_new" style="display:block;" class="comment">
+    <%= collapse_button_initially_open ("session_review_#{i}_comment_new") %> 
+        <div id="session_review_<%=i%>_comment_new" style="display:block;" class="comment">
           <h4>Make a new comment on this review: </h4>
           <% if defined?(@new_comment) && !@new_comment.nil? && @new_comment.review.id==review.id
                new_comment = @new_comment
@@ -85,7 +85,7 @@
   <% end %> 
 
   <%= collapse_button_initially_open ("session_review_new") %> 
-  <div id="session_review_new>" style="display:block;" class="review">
+  <div id="session_review_new" style="display:block;" class="review">
     <h3>Make a new review: </h3>
     <% if !defined?(@new_review) || @new_review.nil?
          @new_review = @session.reviews.build
