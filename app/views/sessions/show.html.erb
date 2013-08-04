@@ -50,7 +50,7 @@
   <%= collapse_button_initially_open ("session_review_#{i}") %> 
   <div id="session_review_<%=i%>" style="display:block;" class="review">
     <% if defined?(@edit_review) && !@edit_review.nil? && @edit_review.id==review.id %>
-      <%= render 'reviews/form', :review=>@edit_review %>
+      <%= render 'reviews/form', :review=>@edit_review, :review_index=>i %>
     <% else %>
       <%= render 'reviews/show', :review => review  %>
     <% end %>
