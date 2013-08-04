@@ -488,11 +488,7 @@ describe Session do
       FactoryGirl.create(:session_with_presenter).should_not be_complete
     end
     it "session with several important fiels filled in is complete" do
-      session = FactoryGirl.create(:session_with_presenter, 
-                  :short_description=>"short", :session_type=>Session::AVAILABLE_SESSION_TYPE[0],
-                  :duration=>Session::AVAILABLE_DURATION[0], 
-                  :session_goal=>"blabla", :outline_or_timetable=>"bablabla")
-      session.should be_complete
+      FactoryGirl.create(:session_complete).should be_complete
     end
   end
 

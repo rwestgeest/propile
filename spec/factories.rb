@@ -21,6 +21,14 @@ FactoryGirl.define do
       sequence(:first_presenter_email) { |n| "first_presenter_#{n}@presenters.com" }
       sequence(:second_presenter_email) { |n| "second_presenter_#{n}@presenters.com" }
     end
+    factory :session_complete do
+      sequence(:first_presenter_email) { |n| "first_presenter_#{n}@presenters.com" }
+      short_description "short"
+      session_type Session::AVAILABLE_SESSION_TYPE[0]
+      duration Session::AVAILABLE_DURATION[0]
+      session_goal "blabla"
+      outline_or_timetable "bablabla"
+    end
   end
 
   factory :review do

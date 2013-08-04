@@ -38,7 +38,8 @@ end
 class SessionCompletenessStatistics < BaseStatistics
   attr_reader :with_short_description, :with_short_description_percentage,
               :with_outline_or_timetable, :with_outline_or_timetable_percentage,
-              :with_new_review, :with_new_review_percentage
+              :updated_after_review, :updated_after_review_percentage,
+              :complete, :complete_percentage
 
   def initialize
     super
@@ -46,8 +47,10 @@ class SessionCompletenessStatistics < BaseStatistics
     @with_short_description_percentage = percentage(@with_short_description, @total_number_of_sessions)
     @with_outline_or_timetable = Session.all.select {|s| !s.outline_or_timetable.blank? }.size
     @with_outline_or_timetable_percentage = percentage(@with_outline_or_timetable, @total_number_of_sessions)
-    @with_new_review = Session.all.select {|s| s.has_new_review? }.size
-    @with_new_review_percentage = percentage(@with_new_review, @total_number_of_sessions)
+    @updated_after_review = Session.all.select {|s| !s.has_new_review? }.size
+    @updated_after_review_percentage = percentage(@updated_after_review, @total_number_of_sessions)
+    @complete = Session.all.select {|s| s.complete? }.size
+    @complete_percentage = percentage(@complete, @total_number_of_sessions)
   end
 end
 
