@@ -482,6 +482,20 @@ describe Session do
     end
   end
 
+
+  describe "complete?" do
+    it "default session is not complete" do
+      FactoryGirl.create(:session_with_presenter).should_not be_complete
+    end
+    it "session with several important fiels filled in is complete" do
+      session = FactoryGirl.create(:session_with_presenter, 
+                  :short_description=>"short", :session_type=>Session::AVAILABLE_SESSION_TYPE[0],
+                  :duration=>Session::AVAILABLE_DURATION[0], 
+                  :session_goal=>"blabla", :outline_or_timetable=>"bablabla")
+      session.should be_complete
+    end
+  end
+
   describe "self.sessions_that_need_a_review" do
     def a_session(created_at=Date.today, updated_at=created_at)
       FactoryGirl.create(:session_with_presenter, :created_at => created_at, :updated_at => updated_at) 

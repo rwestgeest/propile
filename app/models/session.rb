@@ -16,6 +16,7 @@ class Session < ActiveRecord::Base
   AVAILABLE_DURATION = [ "30 min", "75 min", "150 min" ]
   AVAILABLE_SESSION_TYPE = [ "hands on coding/design/architecture session", "discovery session", "experiential learning session", "short experience report (30 min)"]
 
+  FIELDS_THAT_NEED_TO_BE_COMPLETE=[:short_description, :session_type, :duration, :session_goal, :outline_or_timetable]
 
   belongs_to :first_presenter, :class_name => 'Presenter'
   belongs_to :second_presenter, :class_name => 'Presenter'
@@ -38,6 +39,7 @@ class Session < ActiveRecord::Base
   validates :duration, :inclusion => { :in => AVAILABLE_DURATION, :message => "has invalid value: %{value}. " }, :allow_blank => true 
   validates_numericality_of :max_participants, :allow_blank => true
   validates :session_type, :inclusion => { :in => AVAILABLE_SESSION_TYPE, :message => "has invalid value: %{value}. " }, :allow_blank => true 
+
 
   public
   def first_presenter_email
@@ -124,6 +126,9 @@ class Session < ActiveRecord::Base
     end
   end
 
+  def complete?
+    ! Session::FIELDS_THAT_NEED_TO_BE_COMPLETE.any?{|field| attributes[field.to_s].blank?}
+  end
 
   def self.generate_program_committee_cards_pdf(file_name)
     Prawn::Document.generate file_name, 

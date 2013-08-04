@@ -40,6 +40,16 @@
     <% end %>
   <% end %>
 
+  <% @presenter.sessions.each do |session|  %>
+    <%  if !session.complete?  %>
+      <br/> <br/>
+      <div class="outlined">
+        Several important fields are not filled in in your session <%= link_to session.title, session%>. 
+        Please <b>update your session</b>, so that reviewers and program committee have a better understanding of it 
+      </div>
+    <% end %>
+  <% end %>
+
   <h3>Sessions you are involved in: </h3>
   <div><i> These are the sessions that you submitted, reviewed or commented.</i></div>
   <%= render 'sessions/activity_index', :sessions => @sessions_you_are_involved_in, :sortable => false  %>
