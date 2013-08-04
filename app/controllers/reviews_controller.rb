@@ -22,6 +22,7 @@ class ReviewsController < ApplicationController
 
   def edit
     @edit_review = Review.find(params[:id])
+    @anchor="session_review_#{@edit_review.id}"
     make_parameters_for_show_session(@edit_review)
     render template: 'sessions/show'
   end
@@ -44,7 +45,7 @@ class ReviewsController < ApplicationController
     @edit_review = Review.find(params[:id])
     make_parameters_for_show_session(@edit_review)
     if params[:commit] == 'Preview' 
-      @anchor="session_review_#{params['review_index']}"
+      @anchor="session_review_#{@edit_review.id}"
       @edit_review.assign_attributes(params[:review])
       render template: 'sessions/show'
     else 

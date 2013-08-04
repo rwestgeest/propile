@@ -2,9 +2,6 @@
   <%= errors_for review %>
 
 <%= f.hidden_field :session_id %>
-<% if defined?(review_index) %>
-  <%= hidden_field_tag 'review_index', review_index.to_s %>
-<% end %> 
 
 <% if review.filled? %> <div class="editing"> <% end %> 
 

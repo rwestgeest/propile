@@ -2,9 +2,6 @@
   <%= errors_for comment %>
 
   <%= f.hidden_field :review_id %>
-  <% if defined?(review_index) %>
-    <%= hidden_field_tag 'review_index', review_index.to_s %>
-  <% end %> 
 
 <% if !comment.body.blank? %> <div class="editing"> <% end %> 
 

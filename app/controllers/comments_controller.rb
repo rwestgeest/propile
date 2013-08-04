@@ -23,6 +23,7 @@ class CommentsController < ApplicationController
 
   def edit
     @edit_comment = Comment.find(params[:id])
+    @anchor="session_review_#{@edit_comment.review.id}_comment_#{@edit_comment.id}"
     make_parameters_for_show_session(@edit_comment)
     render template: 'sessions/show'
   end
@@ -36,7 +37,7 @@ class CommentsController < ApplicationController
       Postman.notify_comment_creation(@new_comment)
       redirect_to @new_comment.review.session, notice: 'Comment was successfully created.'
     else
-      @anchor="session_review_#{params['review_index']}_comment_new"
+      @anchor="session_review_#{@new_comment.review.id}_comment_new"
       render template: 'sessions/show'
     end
   end
@@ -47,6 +48,7 @@ class CommentsController < ApplicationController
 
     if params[:commit] == 'Preview' 
       @edit_comment.assign_attributes(params[:comment])
+      @anchor="session_review_#{@edit_comment.review.id}_comment_#{@edit_comment.id}"
       render template: 'sessions/show'
     else 
       if @edit_comment.update_attributes(params[:comment])
