@@ -35,6 +35,7 @@ class ReviewsController < ApplicationController
       Postman.notify_review_creation(@new_review)
       redirect_to @new_review.session, notice: 'Review was successfully created.'
     else
+      @anchor="session_review_new"
       render template: "sessions/show"
     end
   end
