@@ -1,6 +1,17 @@
 <%= form_for(@session) do |f| %>
   <%= errors_for @session %>
 
+  <% if !@session.complete? %>
+    <div class="flashy">
+      Several important fields are not filled in in this session. <br/>
+    </div>
+    <div>
+      Check the following fields: 
+        <%= Session.fields_that_need_to_be_complete_printable %>
+      <br/> <br/>
+    </div>
+  <% end %>
+
 <div class="in_a_form"> 
   <div> <%= f.label :title %>*: </div>
   <div> <%= text_area :session, :title, :cols => "100", :rows => "1"  %> </div>
