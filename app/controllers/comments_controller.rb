@@ -36,6 +36,7 @@ class CommentsController < ApplicationController
       Postman.notify_comment_creation(@new_comment)
       redirect_to @new_comment.review.session, notice: 'Comment was successfully created.'
     else
+      @anchor="session_review_#{params['review_index']}_comment_new"
       render template: 'sessions/show'
     end
   end
