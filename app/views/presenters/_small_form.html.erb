@@ -1,0 +1,15 @@
+<%= form_for(@presenter) do |f| %>
+  <%= errors_for @presenter %>
+  <% if current_account.maintainer? %>
+    <div class="outlined">
+      <div>
+        <%= f.label :name %> <%= text_field :presenter, :name, :size => "70" %> 
+        <%= f.label :email %> <%= text_field :presenter, :email, :disabled => (!current_account.maintainer?), :size => "70" %> 
+        <%= f.select :role, [Account::Maintainer, Account::Presenter]  %>
+      </div>
+      <div class="actions">
+        <%= f.submit %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

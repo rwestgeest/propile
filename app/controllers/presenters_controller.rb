@@ -30,6 +30,11 @@ class PresentersController < ApplicationController
 
   def new
     @presenter = Presenter.new
+    respond_to do |format|
+      format.html #new.html.erb
+      format.json {render json: @product }
+      format.js
+    end
   end
 
   def edit
@@ -47,7 +52,7 @@ class PresentersController < ApplicationController
     @presenter = Presenter.new(params[:presenter])
 
     if @presenter.save
-      redirect_to @presenter, notice: 'Presenter was successfully created.'
+      redirect_to :back, notice: 'Presenter was successfully created.'
     else
       render action: "new"
     end

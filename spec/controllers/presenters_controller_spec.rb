@@ -90,20 +90,23 @@ describe PresentersController do
     describe "POST create" do
       describe "with valid params" do
         it "creates a new Presenter" do
+          request.env["HTTP_REFERER"] = 'dummy'
           expect {
             post :create, {:presenter => valid_attributes}
           }.to change(Presenter, :count).by(1)
         end
 
         it "assigns a newly created presenter as @presenter" do
+          request.env["HTTP_REFERER"] = 'dummy'
           post :create, {:presenter => valid_attributes}
           assigns(:presenter).should be_a(Presenter)
           assigns(:presenter).should be_persisted
         end
 
         it "redirects to the created presenter" do
+          request.env["HTTP_REFERER"] = 'dummy'
           post :create, {:presenter => valid_attributes}
-          response.should redirect_to(Presenter.last)
+          response.should redirect_to('http://test.hostdummy')
         end
       end
 

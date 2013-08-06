@@ -55,6 +55,7 @@
 </table>
 
 <h1>Maintainers</h1>
+<%= link_to 'New presenter/Maintainer', new_presenter_path, :remote => true, :id => "new_presenter_link" %>   
 <table>
 <% @presenters.each_with_index do |presenter, i| %>
   <% if presenter.account.maintainer? %>
@@ -70,8 +71,6 @@
 <% end %>
 </table>
 
-
-<%= link_to 'New Presenter/Maintainer', new_presenter_path %>   
 
 <br>
 <br>
