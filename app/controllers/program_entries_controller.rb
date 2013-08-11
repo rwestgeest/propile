@@ -41,6 +41,7 @@ class ProgramEntriesController < ApplicationController
 
   def create
     @program_entry = ProgramEntry.new(params[:program_entry])
+    @program=@program_entry.program
 
     respond_to do |format|
       if @program_entry.save
@@ -57,6 +58,7 @@ class ProgramEntriesController < ApplicationController
 
   def update
     @program_entry = ProgramEntry.find(params[:id])
+    @program=@program_entry.program
 
     respond_to do |format|
       if @program_entry.update_attributes(params[:program_entry])

@@ -1,4 +1,4 @@
-<div>
+<div id="ProgramMatrix">
 
 <% if editable %> 
   <i>
@@ -8,14 +8,11 @@
     Move program entries to another cell: edit and change slot/track.  <br />
   </i> 
 
-  <div>
-    <%= link_to 'New entry in this program', new_program_program_entry_path(@program) %>   
-  </div>
 <% end %>
 
 <div class="popupcontainer">
 <% if !@program.program_entries.nil? && !@program.program_entries.empty? %> 
-<table class="ProgramMatrix">
+  <table class="ProgramMatrix" >
   <% if editable %>
     <tr>
       <th></th>
@@ -68,10 +65,5 @@
 <% end %> 
 </div>
 
-<% if editable %> 
-  <div>
-    <%= link_to 'New entry in this program', new_program_program_entry_path(@program) %>   
-  </div>
-<% end %>
 </div>
 
