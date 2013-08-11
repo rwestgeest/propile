@@ -31,6 +31,11 @@ class ProgramEntriesController < ApplicationController
 
   def edit
     @program_entry = ProgramEntry.find(params[:id])
+    respond_to do |format|
+      format.html # edit.html.erb
+      format.json { render json: @program_entry }
+      format.js 
+    end
   end
 
   def create

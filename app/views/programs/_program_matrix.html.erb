@@ -13,6 +13,7 @@
   </div>
 <% end %>
 
+<div class="popupcontainer">
 <% if !@program.program_entries.nil? && !@program.program_entries.empty? %> 
 <table class="ProgramMatrix">
   <% if editable %>
@@ -64,8 +65,8 @@
     </tr>
   <% end %> 
 </table>
-
 <% end %> 
+</div>
 
 <% if editable %> 
   <div>

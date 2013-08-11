@@ -1,4 +1,4 @@
-<%= form_for(@presenter) do |f| %>
+<%= form_for(@presenter, remote: true) do |f| %>
   <%= errors_for @presenter %>
   <% if current_account.maintainer? %>
     <div class="outlined">

@@ -51,10 +51,16 @@ class PresentersController < ApplicationController
   def create
     @presenter = Presenter.new(params[:presenter])
 
-    if @presenter.save
-      redirect_to :back, notice: 'Presenter was successfully created.'
-    else
-      render action: "new"
+    respond_to do |format|
+      if @presenter.save
+        format.html {redirect_to :back, notice: 'Presenter was successfully created.'}
+        format.json {render json: @product }
+        format.js
+      else
+        format.html { render action: "new" }
+        format.json {render json: @product }
+        format.js
+      end
     end
   end
 

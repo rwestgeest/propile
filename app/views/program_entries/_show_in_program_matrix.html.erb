@@ -13,7 +13,7 @@
          <% end %> 
          <%= wikinize(program_entry.comment) %>
          <% if editable %> 
-           <%= link_to "edit", {controller: 'program_entries', action: 'edit', id: program_entry.to_param },  :class => "ProgramMatrix_edit_link"  %>
+           <%= link_to "edit", {controller: 'program_entries', action: 'edit', id: program_entry.to_param}, id: "program_entry_#{program_entry.id}" ,  :remote => true, :class => "ProgramMatrix_edit_link"  %>
          <% end %> 
        </td>
      <% end %> 
