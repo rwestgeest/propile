@@ -26,6 +26,7 @@ class ProgramEntriesController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @program_entry }
+      format.js 
     end
   end
 
@@ -45,9 +46,11 @@ class ProgramEntriesController < ApplicationController
       if @program_entry.save
         format.html { redirect_to  :controller => 'programs', :action => 'edit', :id =>  @program_entry.program.id  }
         format.json { render json: @program_entry, status: :created, location: @program_entry }
+        format.js 
       else
         format.html { render action: "new" }
         format.json { render json: @program_entry.errors, status: :unprocessable_entity }
+        format.js 
       end
     end
   end

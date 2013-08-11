@@ -1,0 +1,3 @@
+$('<%="#new_program_entry"%>').remove();
+$('<%="#ProgramMatrix_entry_#{@program_entry.slot}_#{@program_entry.track}"%>').after("<%= j render 'show_in_program_matrix',  :program_entry => @program_entry, :program=> @program_entry.program, :slot=> @program_entry.slot, :track=> @program_entry.track, :editable=> true   %>");
+$('<%="#ProgramMatrix_entry_#{@program_entry.slot}_#{@program_entry.track}"%>').remove();
