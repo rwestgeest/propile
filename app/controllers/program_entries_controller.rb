@@ -59,9 +59,11 @@ class ProgramEntriesController < ApplicationController
       if @program_entry.update_attributes(params[:program_entry])
         format.html { redirect_to  :controller => 'programs', :action => 'edit', :id =>  @program_entry.program.id  }
         format.json { head :no_content }
+        format.js 
       else
         format.html { render action: "edit" }
         format.json { render json: @program_entry.errors, status: :unprocessable_entity }
+        format.js 
       end
     end
   end

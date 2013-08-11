@@ -269,6 +269,7 @@ div.popupcontainer {
 div.popup {
   background-color:LightYellow ;
   border: 1px solid grey;
+  padding: 0px 25px 10px 25px;
   z-index: 10;
   position: absolute;
   box-shadow: 10px 10px 5px #888888;
