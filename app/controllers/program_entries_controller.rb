@@ -32,6 +32,7 @@ class ProgramEntriesController < ApplicationController
 
   def edit
     @program_entry = ProgramEntry.find(params[:id])
+    @program=@program_entry.program
     respond_to do |format|
       format.html # edit.html.erb
       format.json { render json: @program_entry }
@@ -63,7 +64,7 @@ class ProgramEntriesController < ApplicationController
     respond_to do |format|
       if @program_entry.update_attributes(params[:program_entry])
         format.html { redirect_to  :controller => 'programs', :action => 'edit', :id =>  @program_entry.program.id  }
-        format.json { head :no_content }
+        format.json { render json: @program_entry, status: :updated, location: @program_entry }
         format.js 
       else
         format.html { render action: "edit" }

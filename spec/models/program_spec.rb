@@ -3,7 +3,7 @@ require 'fileutils'
 
 describe Program do
 
-  let(:program) { FactoryGirl.build :program  }
+  let(:program) { FactoryGirl.create :program  }
   def a_program_entry_in_slot(program, slot)
     FactoryGirl.create(:program_entry, :program => program, :slot => slot)
   end

@@ -1,3 +1,7 @@
-$('<%="#edit_program_entry_#{@program_entry.id}"%>').remove();
-$('#ProgramMatrix').after("<%= j render 'programs/program_matrix',  :program=> @program, :editable=> true   %>");
-$('#ProgramMatrix').remove();
+<% if @program_entry.errors.any? -%>
+  $('<%="#edit_program_entry_#{@program_entry.id}"%>').html('<%= j render("form_popup") %>');
+<% else %>
+  $('<%="#edit_program_entry_#{@program_entry.id}"%>').remove();
+  $('#ProgramMatrix').after("<%= j render 'programs/program_matrix',  :program=> @program, :editable=> true   %>");
+  $('#ProgramMatrix').remove();
+<% end %> 
