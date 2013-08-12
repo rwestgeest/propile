@@ -420,6 +420,50 @@ describe Program do
     end
   end
 
+  describe "switch_entries" do
+    it "empty program does not crash" do
+      program.switch_entries(1,1,2,2)
+    end
+    context "switch 2 existing entries" do
+      let(:entry_12) { FactoryGirl.create(:program_entry, :program => program, :slot => 1, :track => 2) }
+      let(:entry_34) { FactoryGirl.create(:program_entry, :program => program, :slot => 3, :track => 4) }
+      before do
+        entry_12
+        entry_34
+        program.switch_entries(1,2,3,4)
+      end
+      it "entry-method returns switched entries" do
+        program.entry(1,2).should == entry_34
+        program.entry(3,4).should == entry_12
+      end
+      it "entry-method returns switched entries after reload" do
+        program.reload
+        program.entry(1,2).should == entry_34
+        program.entry(3,4).should == entry_12
+      end
+      it "entry_12 knows its new location after reload" do
+        entry_12.reload
+        [entry_12.slot, entry_12.track].should == [3, 4]
+      end
+      it "entry_12 does not know its new location without reload" do
+        [entry_12.slot, entry_12.track].should == [1, 2]
+      end
+      it "entry_34 knows its new location after reload" do
+        entry_34.reload
+        [entry_34.slot, entry_34.track].should == [1, 2]
+      end
+      it "entry_34 does not know its new location without reload" do
+        [entry_34.slot, entry_34.track].should == [3, 4]
+      end
+    end
+    it "move entry to empty location" do
+      entry_12 = a_program_entry_in_slot_and_track(program, 1, 2)
+      program.switch_entries(1,2,3,4)
+      program.entry(1,2).should be_nil
+      program.entry(3,4).should == entry_12
+    end
+  end
+
   describe "sessionsInProgram" do
     def a_program_entry_for(program)
       FactoryGirl.create(:program_entry, :program => program)

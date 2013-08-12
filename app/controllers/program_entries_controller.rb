@@ -40,6 +40,16 @@ class ProgramEntriesController < ApplicationController
     end
   end
 
+  def edit_location
+    @program_entry = ProgramEntry.find(params[:id])
+    @program=@program_entry.program
+    respond_to do |format|
+      format.html # edit.html.erb
+      format.json { render json: @program_entry }
+      format.js 
+    end
+  end
+
   def create
     @program_entry = ProgramEntry.new(params[:program_entry])
     @program=@program_entry.program
@@ -63,6 +73,28 @@ class ProgramEntriesController < ApplicationController
 
     respond_to do |format|
       if @program_entry.update_attributes(params[:program_entry])
+        format.html { redirect_to  :controller => 'programs', :action => 'edit', :id =>  @program_entry.program.id  }
+        format.json { render json: @program_entry, status: :updated, location: @program_entry }
+        format.js 
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @program_entry.errors, status: :unprocessable_entity }
+        format.js 
+      end
+    end
+  end
+
+  def update_location
+    @program_entry = ProgramEntry.find(params[:id])
+    old_slot = @program_entry.slot
+    old_track = @program_entry.track
+    new_slot = params[:program_entry][:slot].to_i
+    new_track = params[:program_entry][:track].to_i
+
+    @program=Program.find(@program_entry.program.id)
+    respond_to do |format|
+      if @program.switch_entries(old_slot, old_track, new_slot, new_track)
+        @program_entry.reload
         format.html { redirect_to  :controller => 'programs', :action => 'edit', :id =>  @program_entry.program.id  }
         format.json { render json: @program_entry, status: :updated, location: @program_entry }
         format.js 

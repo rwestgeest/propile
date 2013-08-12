@@ -2,7 +2,10 @@ Propile::Application.routes.draw do
 
   resources :archived_presenters, except: [:destroy] 
 
-  resources :program_entries, except: [:destroy] 
+  resources :program_entries, except: [:destroy] do
+    get 'edit_location', :on => :member
+    put 'update_location', :on => :member
+  end
 
   resources :programs, except: [:destroy] do
     resources :program_entries, :on => :member, except: [:destroy] 

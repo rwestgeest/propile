@@ -38,6 +38,20 @@ class Program < ActiveRecord::Base
     @matrix
   end
 
+  def switch_entries(old_slot, old_track, new_slot, new_track)
+    entry_on_old_location = entry(old_slot, old_track)
+    entry_on_new_location = entry(new_slot, new_track)
+
+    if entry_on_new_location 
+      entry_on_new_location.slot, entry_on_new_location.track = old_slot,old_track
+    end
+    if entry_on_old_location 
+      entry_on_old_location.slot, entry_on_old_location.track = new_slot, new_track
+    end
+    @matrix=nil
+    save
+  end
+
   def maxSlot
     program_entries.collect{ |pe| pe.slot }.max || 0 
   end
