@@ -300,44 +300,101 @@ h4 {
   margin: 0px;
 }
 
-
-td.ProgramMatrix {
+table.ProgramMatrix td {
   text-align:center;
   vertical-align:top;
   padding: 0px;
-  margin: 0px;
-} 
-td.ProgramMatrix > p {
-  background-color: light-grey;
-  padding: 0px;
-  margin: 0px;
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  border-style:solid;
+  border-width:1px;
+  border-color:#969696;
+  background-color : #EFEFEF;
 }
-td.ProgramMatrix  a {
+
+table.ProgramMatrix  p {
+  text-align : center ;
+}
+
+table.ProgramMatrix {
+  border-collapse: separate;
+  border-spacing : 5px ;
+}
+
+table.ProgramCard {
+  border-collapse: collapse;
+  border-spacing : 5px ;
+}
+
+table.ProgramCard td {
+ text-align:left;
+  vertical-align:top;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  border: 1px solid black ;
+}
+
+
+table.ProgramMatrix td.technology {
+	background-color:#C7FFB1;
+	font-family:Lucida Sans Unicode;
+	font-size: small;
+}
+table.ProgramMatrix td.customer {
+	background-color:#D6F9FF;
+	font-family:Lucida Sans Unicode;
+	font-size: small;
+}
+table.ProgramMatrix td.cases {
+	background-color:#FF9;
+	font-family:Lucida Sans Unicode;
+	font-size: small;
+}
+table.ProgramMatrix td.team {
+	background-color:#FEC9DC;
+	font-family:Lucida Sans Unicode;
+	font-size: small;
+}
+table.ProgramMatrix td.process {
+	background-color:#FED28E;
+	font-family:Lucida Sans Unicode;
+	font-size: small;
+}
+
+.technology { background-color:#C7FFB1; }
+table.customer { background-color:#D6F9FF; }
+table.cases { background-color:#FF9; }
+table.team { background-color:#FEC9DC; }
+table.process { background-color:#FED28E; }
+
+table.ProgramMatrix td  a {
   color: black;
   text-decoration: none;
-}
-td.ProgramMatrix  a:hover {
-  color: purple;
+  font-weight : bold ;
 }
 
-.technology { background-color:#6B0; } 
-.technology a { color:black; } 
-.customer { background-color:#3CF; } 
-.customer a { color:black; } 
-.cases { background-color:#FF9; } 
-.cases a { color:black; } 
-.team { background-color:#F8A; } 
-.team  a { color:black; } 
-.process { background-color:#FFA822; } 
-.process a { color:black; } 
-
-p.ProgramMatrix_presenters {
- font-style:italic; 
- font-size:smaller;
+table.ProgramMatrix  td a:hover {
+  color: black;
+  text-decoration: underline;
+  font-weight : bold ;
 }
-a.ProgramMatrix_edit_link {
- font-size:smaller;
- float:right;
+
+table.ProgramCard td  a {
+  color: black;
+  text-decoration: none;
+  font-weight : bold ;
+}
+
+table.ProgramCard  td a:hover {
+  color: black;
+  text-decoration: underline;
+  font-weight : bold ;
+}
+
+table.ProgramCard h3 {
+ color : black ;
 }
 
 input.collapsebutton {

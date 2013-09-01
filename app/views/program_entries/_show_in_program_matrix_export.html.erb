@@ -1,23 +1,34 @@
-     <% if program_entry.nil? %>  
-       <td class="ProgramMatrix" > 
-         
-       </td>
-     <% else %> 
-       <td class="ProgramMatrix <%=program_entry.topic%>" <%= program_entry.span_entire_row==true ? "colspan="+(@program.maxTrack+1-program_entry.track).to_s : "" %> > 
-         <% if !program_entry.session.nil? %>  
+<% if program_entry.nil? %>  
+  <td class="ProgramMatrix" >
+  </td>
+<% else %> 
+  <% if !program_entry.session.nil? %>
+    <td class="ProgramMatrix <%=program_entry.topic%>" <%= program_entry.span_entire_row==true ? "colspan="+(@program.maxTrack+1-program_entry.track).to_s : "" %> >
 
-           <a href="#session_<%=program_entry.session.to_param%>"><%= w program_entry.session.title %></a>
 
-           <p class=ProgramMatrix_presenters>
-             <% if  program_entry.session.presenters[0] %>
-               <a href="#presenter_<%=  program_entry.session.presenters[0].id %>"><%= w  program_entry.session.presenters[0].name %></a>
-             <% end %>
-             <% if  program_entry.session.presenters[1] %>
-               &amp; <br /><a href="#presenter_<%=  program_entry.session.presenters[1].id %>"><%= w  program_entry.session.presenters[1].name %></a>
-             <% end %>
-           </p>
-  
-         <% end %>
-           <strong><%= wikinize(program_entry.comment) %></strong>
-       </td>
-     <% end %> 
+      <a href="#session_<%=program_entry.session.to_param%>"><%= w program_entry.session.title %></a>
+      <p class=ProgramMatrix_presenters>
+        <% if  program_entry.session.presenters[0] %>
+          <a href="#presenter_<%=  program_entry.session.presenters[0].id %>"><%= w  program_entry.session.presenters[0].name %></a>
+        <% end %>
+        <% if  program_entry.session.presenters[1] %>
+          &amp; <br /><a href="#presenter_<%=  program_entry.session.presenters[1].id %>"><%= w  program_entry.session.presenters[1].name %></a>
+        <% end %>
+      </p>
+      <strong><%= wikinize(program_entry.comment) %></strong>
+
+      <% if  program_entry.session.laptops_required.strip.downcase != "no" %>
+        <div style="float:left;"><%= image_tag('Computer.png')%></div>
+      <%  end %>
+      <% if program_entry.session.max_participants.strip.length > 0 then %>
+        <div style="float:right;"><strong>Max: <%=  program_entry.session.max_participants %>&nbsp</strong></div>
+      <% end %>
+
+    </td>
+  <% else %>
+    <td class="ProgramMatrix <%=program_entry.topic%>" <%= program_entry.span_entire_row==true ? "colspan="+(@program.maxTrack+1-program_entry.track).to_s : "" %> >
+      <strong><%= wikinize(program_entry.comment) %></strong>
+    </td>
+  <% end %>
+
+<% end %> 
