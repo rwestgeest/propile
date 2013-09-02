@@ -11,7 +11,7 @@
   <td class="propertyname">Session Type:</td><td> <%= this_session.duration %> <%= w this_session.session_type %> </td>
 </tr>
 
-<% if this_session.max_participants.strip.length > 0 then %>
+<% if this_session.limited? then %>
 <tr>
   <td class="propertyname" nowrap>Max participants:</td><td> <%= this_session.max_participants %>  </td>
 </tr>

@@ -20,7 +20,7 @@
       <% if  program_entry.session.laptops_required.strip.downcase != "no" %>
         <div style="float:left;"><%= image_tag('Computer.png')%></div>
       <%  end %>
-      <% if program_entry.session.max_participants.strip.length > 0 then %>
+      <% if program_entry.session.limited?  then %>
         <div style="float:right;"><strong>Max: <%=  program_entry.session.max_participants %>&nbsp;</strong></div>
       <% end %>
 
