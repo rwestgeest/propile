@@ -36,10 +36,10 @@
       <% end %>
       <% if editable %> 
         <td class="ProgramMatrix" > 
-          <%= form_for(@program, :url => url_for(:action => 'insertSlot')) do |f| %>
+          <%= form_for(@program, :url => insertSlot_program_url(@program)) do |f| %>
             <%= hidden_field_tag "field[before]", slot %> <%= f.submit "+", :class=>"adddelete_button" %>
           <% end %>
-          <%= form_for(@program, :url => url_for(:action => 'removeSlot')) do |f| %>
+          <%= form_for(@program, :url => removeSlot_program_url(@program)) do |f| %>
             <%= hidden_field_tag "field[slot]", slot %> <%= f.submit "-", :class=>"adddelete_button"  %>
           <% end %>
         </td>
@@ -51,10 +51,10 @@
       <td> </td>
       <% @program.eachTrack do |track| %> 
         <td class="ProgramMatrix" > 
-          <%= form_for(@program, :url => url_for(:action => 'insertTrack')) do |f| %>
+          <%= form_for(@program, :url => insertTrack_program_url(@program )) do |f| %>
             <%= hidden_field_tag "field[before]", track %> <%= f.submit "+", :class=>"adddelete_button" %>
           <% end %>
-          <%= form_for(@program, :url => url_for(:action => 'removeTrack')) do |f| %>
+          <%= form_for(@program, :url => removeTrack_program_url(@program )) do |f| %>
             <%= hidden_field_tag "field[track]", track %> <%= f.submit "-", :class=>"adddelete_button" %>
           <% end %>
         </td> 
