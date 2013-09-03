@@ -3,7 +3,7 @@
   <head>
     <title>Propile</title>
     <%= stylesheet_link_tag    "application", :media => "all" %>
-    <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "application", "rails" %>
     <% if signed_in? %>
       <%= auto_discovery_link_tag(:rss,controller: 'sessions', action: 'activity_rss', format: :xml) %>
     <% end %>
