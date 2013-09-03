@@ -28,6 +28,7 @@ class Session < ActiveRecord::Base
   attr_accessible :duration, :intended_audience, :experience_level
   attr_accessible :max_participants, :laptops_required, :other_limitations, :room_setup, :materials_needed
   attr_accessible :session_goal, :outline_or_timetable
+  attr_accessible :material_description, :material_url
 
   validates :title, :presence => true
   validates :description, :presence => true

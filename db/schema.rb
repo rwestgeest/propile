@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130623133601) do
+ActiveRecord::Schema.define(:version => 20130902183808) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                :limit => 150,                          :null => false
@@ -108,8 +108,8 @@ ActiveRecord::Schema.define(:version => 20130623133601) do
   create_table "sessions", :force => true do |t|
     t.string   "title"
     t.string   "description"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
     t.string   "sub_title"
     t.string   "short_description"
     t.string   "session_type"
@@ -126,6 +126,8 @@ ActiveRecord::Schema.define(:version => 20130623133601) do
     t.string   "outline_or_timetable"
     t.integer  "first_presenter_id"
     t.integer  "second_presenter_id"
+    t.string   "material_description", :limit => 128
+    t.string   "material_url",         :limit => 1024
   end
 
   add_index "sessions", ["first_presenter_id"], :name => "index_sessions_on_first_presenter_id"
