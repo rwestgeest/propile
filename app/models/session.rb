@@ -131,6 +131,9 @@ class Session < ActiveRecord::Base
     ! Session::FIELDS_THAT_NEED_TO_BE_COMPLETE.any?{|field| attributes[field.to_s].blank?}
   end
 
+  def limited?
+    max_participants.present?
+  end
   def self.fields_that_need_to_be_complete_printable
       FIELDS_THAT_NEED_TO_BE_COMPLETE.collect{|f| f.to_s.gsub(/_/," ")}.join(", ") 
   end

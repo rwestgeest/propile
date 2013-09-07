@@ -326,20 +326,22 @@ describe Session do
 
   describe "max_participants" do
     let(:session) { FactoryGirl.build(:session_with_presenter) }
-    it "if nil max_participants is valid" do 
+    it "accepts nil limit" do
       session.max_participants.should == nil
       session.should be_valid
+      session.should_not be_limited
     end
-    it "if empty max_participants is valid" do 
-      session.max_participants == ""
-      session.max_participants.should == nil
+    it "accepts empty limit" do
+      session.max_participants = ""
       session.should be_valid
+      session.should_not be_limited
     end
-    it "if correct max_participants is valid" do 
+    it "accepts numeric limit" do
       session.max_participants = "120"
       session.should be_valid
+      session.should be_limited
     end
-    it "if incorrect max_participants is invalid" do 
+    it "doens't accept non-numeric limits" do
       session.max_participants = "bla"
       session.should be_invalid
     end
