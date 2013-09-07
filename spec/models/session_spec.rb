@@ -227,9 +227,9 @@ describe Session do
 
   describe "generate_pdf" do
     let(:session) { FactoryGirl.build(:session_with_presenter, 
-                                      :sub_title => "the sub title", 
-                                      :short_description => "the short description", 
-                                      :session_type => "the session type") }
+        :sub_title => "the sub title",
+        :short_description => "the short description",
+        :session_type => "the session type") }
     it "returns a pdf file" do
       FileUtils.mkdir_p 'tmp'
       pdf = session.generate_pdf("tmp/session_test.pdf")
@@ -240,9 +240,9 @@ describe Session do
 
   describe "generate_program_board_card_pdf" do
     let(:session) { FactoryGirl.build(:session_with_presenter, 
-                                      :sub_title => "the sub title", 
-                                      :short_description => "the short description", 
-                                      :session_type => "the session type") }
+        :sub_title => "the sub title",
+        :short_description => "the short description",
+        :session_type => "the session type") }
     it "returns a pdf file" do
       FileUtils.mkdir_p 'tmp'
       pdf = session.generate_program_board_card_pdf("tmp/session_test.pdf")
@@ -254,9 +254,9 @@ describe Session do
 
   describe "generate_program_committee_cards_pdf" do
     let(:session) { FactoryGirl.build(:session_with_presenter, 
-                                      :sub_title => "the sub title", 
-                                      :short_description => "the short description", 
-                                      :session_type => "the session type") }
+        :sub_title => "the sub title",
+        :short_description => "the short description",
+        :session_type => "the session type") }
     it "returns a pdf file" do
       FileUtils.mkdir_p 'tmp'
       pdf = Session.generate_program_committee_cards_pdf("tmp/session_test.pdf")
@@ -347,6 +347,34 @@ describe Session do
     end
   end
 
+  describe "laptops_required" do
+    let(:session) { FactoryGirl.build(:session_with_presenter) }
+    it "nil means no laptop" do
+      session.laptops_required.should == nil
+      session.should be_valid
+      session.should_not be_laptops_required
+    end
+    it "empty means no laptop" do
+      session.laptops_required = ""
+      session.should be_valid
+      session.should_not be_laptops_required
+    end
+    it "no means no laptop" do
+      session.laptops_required = "no"
+      session.should be_valid
+      session.should_not be_laptops_required
+    end
+    it "yes means laptio_required" do
+      session.laptops_required = "yes"
+      session.should be_valid
+      session.should be_laptops_required
+    end
+    it "doens't accept other strings" do
+      session.laptops_required = "bla"
+      session.should be_invalid
+    end
+  end
+  
   describe "session_type" do
     let(:session) { FactoryGirl.build(:session_with_presenter) }
     it "if nil session_type is valid" do 
@@ -354,8 +382,8 @@ describe Session do
       session.should be_valid
     end
     it "if empty session_type is valid" do 
-      session.session_type == ""
-      session.session_type.should == nil
+      session.session_type = ""
+      session.session_type.should == ""
       session.should be_valid
     end
     it "if correct session_type is valid" do 

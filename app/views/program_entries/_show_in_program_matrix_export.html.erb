@@ -1,9 +1,9 @@
 <% if program_entry.nil? %>  
-  <td class="ProgramMatrix" >
+  <td class="structure" >
   </td>
 <% else %> 
   <% if !program_entry.session.nil? %>
-    <td class="ProgramMatrix <%=program_entry.topic%>" <%= program_entry.span_entire_row==true ? "colspan="+(@program.maxTrack+1-program_entry.track).to_s : "" %> >
+    <td class="<%=program_entry.topic%>" <%= program_entry.span_entire_row==true ? "colspan="+(@program.maxTrack+1-program_entry.track).to_s : "" %> >
 
 
       <a href="#session_<%=program_entry.session.to_param%>"><%= w program_entry.session.title %></a>
@@ -26,7 +26,7 @@
 
     </td>
   <% else %>
-    <td class="ProgramMatrix <%=program_entry.topic%>" <%= program_entry.span_entire_row==true ? "colspan="+(@program.maxTrack+1-program_entry.track).to_s : "" %> >
+    <td class="structure" <%= program_entry.span_entire_row==true ? "colspan="+(@program.maxTrack+1-program_entry.track).to_s : "" %> >
       <strong><%= wikinize(program_entry.comment) %></strong>
     </td>
   <% end %>

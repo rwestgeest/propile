@@ -134,6 +134,11 @@ class Session < ActiveRecord::Base
   def limited?
     max_participants.present?
   end
+
+  def laptops_required?
+    laptops_required && laptops_required == "yes"
+  end
+
   def self.fields_that_need_to_be_complete_printable
       FIELDS_THAT_NEED_TO_BE_COMPLETE.collect{|f| f.to_s.gsub(/_/," ")}.join(", ") 
   end

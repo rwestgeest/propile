@@ -16,7 +16,7 @@
   <td class="propertyname" nowrap>Max participants:</td><td> <%= this_session.max_participants %>  </td>
 </tr>
 <% end %>
-<% if  this_session.laptops_required.strip.downcase != "no" %>
+<% if  this_session.laptops_required? == "yes" %>
 <tr>
   <td class="propertyname">Laptops required:</td><td> <%= this_session.laptops_required %>  </td>
 </tr>

@@ -300,8 +300,8 @@ h4 {
   margin: 0px;
 }
 
-table.ProgramMatrix td {
-    	font-family:"Lucida Sans Unicode";
+table.ProgramMatrix tr td {
+  font-family:"Lucida Sans Unicode";
   text-align:center;
   vertical-align:top;
   padding: 0px;
@@ -309,10 +309,10 @@ table.ProgramMatrix td {
   padding-right: 0.5em ;
   margin-left: 0.5em;
   margin-right: 0.5em;
+  margin-top: 0.5em;
   border-style:solid;
   border-width:1px;
   border-color:#969696;
-  background-color : #EFEFEF;
 }
 
 table.ProgramMatrix  p {
@@ -324,26 +324,23 @@ table.ProgramMatrix {
   border-spacing : 5px ;
 }
 
-
-
 table.ProgramMatrix td.technology {
-       background-color:#C7FFB1;
 	font-size: small;
 }
 table.ProgramMatrix td.customer {
-	background-color:#D6F9FF;
 	font-size: small;
 }
 table.ProgramMatrix td.cases {
-	background-color:#FF9;
 	font-size: small;
 }
 table.ProgramMatrix td.team {
-	background-color:#FEC9DC;
 	font-size: small;
 }
 table.ProgramMatrix td.process {
-	background-color:#FED28E;
+	font-size: small;
+}
+
+table.ProgramMatrix td.none {
 	font-size: small;
 }
 
@@ -352,6 +349,8 @@ table.ProgramMatrix td.process {
 .cases { background-color:#FF9; }
 .team { background-color:#FEC9DC; }
 .process { background-color:#FED28E; }
+.none { background-color:white; }
+.structure {  background-color : #EFEFEF;}
 
 table.ProgramMatrix td  a {
   color: black;
@@ -368,11 +367,13 @@ table.ProgramMatrix  td a:hover {
 table.ProgramCard {
   border-collapse: collapse;
   border-spacing : 5px ;
+  width : 90% ;
 }
 
 table.ProgramCard td {
- text-align:left;
+  text-align:left;
   vertical-align:top;
+  margin-left: 1em ;
   padding-left: 0.5em;
   padding-right: 0.5em;
   border: 1px solid black ;
