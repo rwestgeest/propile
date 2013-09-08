@@ -3,5 +3,6 @@
   <%= link_to 'All activity as RSS', :controller => :sessions , :action => 'activity_rss', :format => :xml %>
 <% end %>
 
-<%= render 'sessions/index', :sessions => @sessions, :sortable => true  %>
-
+<%= render 'sessions/index', :sessions => @active_sessions, :sortable => true  %>
+<h3>CANCELED</h3>
+<%= render 'sessions/index', :sessions => @canceled_sessions, :sortable => true  %>

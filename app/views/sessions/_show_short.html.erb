@@ -1,3 +1,7 @@
+<% if session.canceled? %>
+<div class="flashy">THIS SESSION HAS BEEN CANCELED</div>
+<% end %>
+
 <h3>
   <%= w session.sub_title  %>
 </h3>

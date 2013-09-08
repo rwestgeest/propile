@@ -1,27 +1,33 @@
-     <% if program_entry.nil? %>  
-       <td class="ProgramMatrix" id="ProgramMatrix_entry_<%=slot%>_<%=track%>"> 
-         <% if editable %> 
-           <%= link_to 'add', new_program_program_entry_path(program, :slot => slot, :track => track  ), 
-                       id: "program_entry_#{slot}_#{track}",
-                       :remote => true, :class => "ProgramMatrix_edit_link" %>  
-         <% end %> 
-       </td>
-     <% else %> 
-       <td class="ProgramMatrix <%=program_entry.topic%>" id="ProgramMatrix_entry_<%=program_entry.id%>"
-         <%= program_entry.span_entire_row==true ? "colspan="+(@program.maxTrack+1-program_entry.track).to_s : "" %> > 
-         <% if !program_entry.session.nil? %>  
-           <%= link_to program_entry.session.id.to_s+"- "+program_entry.session.title, program_entry.session %>
-           <p class=ProgramMatrix_presenters> <%= session_presenter_names(program_entry.session) %> </p>
-         <% end %> 
-         <%= wikinize(program_entry.comment) %>
-         <% if editable %> 
-           <div class= "ProgramMatrix_edit_link" >
-             <%= link_to "edit", {controller: 'program_entries', action: 'edit', id: program_entry.to_param}, 
-                         id: "program_entry_#{program_entry.id}",
-                         :remote => true %> 
-             <%= link_to "move", {controller: 'program_entries', action: 'edit_location', id: program_entry.to_param}, 
-                         :remote => true %>
-           </div>
-         <% end %> 
-       </td>
-     <% end %> 
+<% if program_entry.nil? %>  
+  <td class="ProgramMatrix" id="ProgramMatrix_entry_<%=slot%>_<%=track%>">
+    <% if editable %>
+      <%= link_to 'add', new_program_program_entry_path(program, :slot => slot, :track => track  ),
+        id: "program_entry_#{slot}_#{track}",
+        :remote => true, :class => "ProgramMatrix_edit_link" %>
+    <% end %>
+  </td>
+<% else %> 
+  <td class="ProgramMatrix <%=program_entry.topic%>" id="ProgramMatrix_entry_<%=program_entry.id%>"
+      <%= program_entry.span_entire_row==true ? "colspan="+(@program.maxTrack+1-program_entry.track).to_s : "" %> >
+        <% if !program_entry.session.nil? %>
+          <%= link_to program_entry.session.id.to_s+"- "+program_entry.session.title, program_entry.session %>
+      <p class=ProgramMatrix_presenters> <%= session_presenter_names(program_entry.session) %> </p>
+      <% if !program_entry.session.confirmed? %>
+        [TO BE CONFIRMED]
+       <% else %>
+        [CONFIRMED
+      <% end %>
+    <% end %>
+    <%= wikinize(program_entry.comment) %>
+
+    <% if editable %>
+      <div class= "ProgramMatrix_edit_link" >
+        <%= link_to "edit", {controller: 'program_entries', action: 'edit', id: program_entry.to_param},
+          id: "program_entry_#{program_entry.id}",
+          :remote => true %>
+        <%= link_to "move", {controller: 'program_entries', action: 'edit_location', id: program_entry.to_param},
+          :remote => true %>
+      </div>
+    <% end %>
+  </td>
+<% end %> 

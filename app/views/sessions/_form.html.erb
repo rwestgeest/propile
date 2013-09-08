@@ -43,6 +43,10 @@
   </table >
 </div>
 
+<div >
+  <div> <%= f.label :state %>: <i><%= !current_account.maintainer? || "(editable for maintainers only)" %></i> </div>
+  <div>  <%= f.select :state, Session::AVAILABLE_STATES, :include_blank => false %> </div>
+</div>
 
 <p > 
   <div> <%= f.label :short_description %>: <i> will appear on the "Program Cards" on the "Program Board" at the conference. It should be a teaser. </i> 

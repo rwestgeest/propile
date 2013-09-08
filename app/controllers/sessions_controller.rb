@@ -32,6 +32,8 @@ class SessionsController < ApplicationController
     @maintainer = current_account.maintainer?
     @presenter = current_account.presenter
     @previous_login_time = previous_login_time
+    @active_sessions = @sessions.select {|session| session.state != Session::CANCELED }
+    @canceled_sessions = @sessions.select {|session| session.state == Session::CANCELED }
   end
 
   def show

@@ -3,18 +3,24 @@ require 'prawn'
 class Session < ActiveRecord::Base
   include PdfHelper
 
+  # Session States
+  DRAFT = 0
+  CANCELED = 1
+  CONFIRMED = 2
+  
   AVAILABLE_TOPICS_AND_NAMES = { "technology"=>"Technology and Technique", 
-                                 "customer"=>"Customer and Planning", 
-                                 "cases"=>"Intro's and Cases", 
-                                 "team"=>"Team and Individual", 
-                                 "process"=>"Process and Improvement", 
-                                 "other"=>"Other"}
+    "customer"=>"Customer and Planning",
+    "cases"=>"Intro's and Cases",
+    "team"=>"Team and Individual",
+    "process"=>"Process and Improvement",
+    "other"=>"Other"}
   AVAILABLE_TOPICS_AND_NAMES_FOR_SELECT = AVAILABLE_TOPICS_AND_NAMES.invert
   AVAILABLE_TOPICS = AVAILABLE_TOPICS_AND_NAMES.keys
   AVAILABLE_TOPIC_NAMES = AVAILABLE_TOPICS_AND_NAMES.values
   AVAILABLE_LAPTOPS_REQUIRED = { "no" => "no", "yes" => "yes"}
   AVAILABLE_DURATION = [ "30 min", "75 min", "150 min" ]
   AVAILABLE_SESSION_TYPE = [ "hands on coding/design/architecture session", "discovery session", "experiential learning session", "short experience report (30 min)"]
+  AVAILABLE_STATES = {"Draft" => 0, "Canceled" => 1, "Confirmed" => 2 }
 
   FIELDS_THAT_NEED_TO_BE_COMPLETE=[:short_description, :session_type, :duration, :session_goal, :outline_or_timetable]
 
@@ -29,6 +35,7 @@ class Session < ActiveRecord::Base
   attr_accessible :max_participants, :laptops_required, :other_limitations, :room_setup, :materials_needed
   attr_accessible :session_goal, :outline_or_timetable
   attr_accessible :material_description, :material_url
+  attr_accessible :state
 
   validates :title, :presence => true
   validates :description, :presence => true
@@ -39,10 +46,19 @@ class Session < ActiveRecord::Base
   validates :laptops_required, :inclusion => { :in => AVAILABLE_LAPTOPS_REQUIRED.values, :message => "has invalid value: %{value}. Enter yes or no." }, :allow_blank => true 
   validates :duration, :inclusion => { :in => AVAILABLE_DURATION, :message => "has invalid value: %{value}. " }, :allow_blank => true 
   validates_numericality_of :max_participants, :allow_blank => true
-  validates :session_type, :inclusion => { :in => AVAILABLE_SESSION_TYPE, :message => "has invalid value: %{value}. " }, :allow_blank => true 
+  validates :session_type, :inclusion => { :in => AVAILABLE_SESSION_TYPE, :message => "has invalid value: %{value}. " }, :allow_blank => true
 
 
   public
+
+  def canceled?
+    state == CANCELED
+  end
+
+  def confirmed?
+    state == CONFIRMED
+  end
+  
   def first_presenter_email
     first_presenter && first_presenter.email || ''
   end
@@ -145,14 +161,14 @@ class Session < ActiveRecord::Base
   end
 
   def self.fields_that_need_to_be_complete_printable
-      FIELDS_THAT_NEED_TO_BE_COMPLETE.collect{|f| f.to_s.gsub(/_/," ")}.join(", ") 
+    FIELDS_THAT_NEED_TO_BE_COMPLETE.collect{|f| f.to_s.gsub(/_/," ")}.join(", ")
   end
 
   def self.generate_program_committee_cards_pdf(file_name)
     Prawn::Document.generate file_name, 
-                    :page_size => 'A6', :page_layout => :landscape, 
-                    :top_margin => 10, :bottom_margin => 10, 
-                    :left_margin => 20, :right_margin => 20 do |pdf| 
+      :page_size => 'A6', :page_layout => :landscape,
+      :top_margin => 10, :bottom_margin => 10,
+      :left_margin => 20, :right_margin => 20 do |pdf|
       Session.all.each_with_index do |session, i| 
         pdf.start_new_page if i>0
         session.program_committee_card_content(pdf)
@@ -219,9 +235,9 @@ class Session < ActiveRecord::Base
 
   def generate_program_board_card_pdf(file_name)
     Prawn::Document.generate file_name, 
-                    :page_size => 'A6', :page_layout => :landscape, 
-                    :top_margin => 10, :bottom_margin => 10, 
-                    :left_margin => 20, :right_margin => 20 do |pdf| 
+      :page_size => 'A6', :page_layout => :landscape,
+      :top_margin => 10, :bottom_margin => 10,
+      :left_margin => 20, :right_margin => 20 do |pdf|
       program_board_card_content(pdf)
     end
   end
@@ -258,9 +274,9 @@ class Session < ActiveRecord::Base
 
   def generate_pdf(file_name)
     Prawn::Document.generate file_name, 
-                    :page_size => 'A4', :page_layout => :portrait, 
-                    :top_margin => 10, :bottom_margin => 10, 
-                    :left_margin => 20, :right_margin => 20 do |pdf| 
+      :page_size => 'A4', :page_layout => :portrait,
+      :top_margin => 10, :bottom_margin => 10,
+      :left_margin => 20, :right_margin => 20 do |pdf|
       printable_description_content(pdf)
     end
   end

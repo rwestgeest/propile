@@ -40,6 +40,16 @@ class ProgramEntriesController < ApplicationController
     end
   end
 
+    def confirm
+    @program_entry = ProgramEntry.find(params[:id])
+    @program=@program_entry.program
+    respond_to do |format|
+      format.html # edit.html.erb
+      format.json { render json: @program_entry }
+      format.js
+    end
+  end
+
   def edit_location
     @program_entry = ProgramEntry.find(params[:id])
     @program=@program_entry.program
