@@ -58,4 +58,7 @@
   </div>
 </div>
 
-
+<% if @session.has_materials? %>
+<h3>Session Materials</h3>
+<a href="<%= @session.material_url%>" target="_blank"><%= @session.material_description %></a>
+<% end %>

@@ -5,21 +5,26 @@
 </tr>
 <tr>
   <td class="propertyname">Intended audience:</td><td> <%= w this_session.intended_audience %>
-       (see <a href="http://www.xpday.net/Xpday2012/Personas.html" target="_new">Personas</a>). <%= w  this_session.experience_level %> </td>
+    (see <a href="http://www.xpday.net/Xpday2012/Personas.html" target="_new">Personas</a>). <%= w  this_session.experience_level %> </td>
 </tr>
 <tr>
   <td class="propertyname">Session Type:</td><td> <%= this_session.duration %> <%= w this_session.session_type %> </td>
 </tr>
 
 <% if this_session.limited? then %>
-<tr>
-  <td class="propertyname" nowrap>Max participants:</td><td> <%= this_session.max_participants %>  </td>
-</tr>
+  <tr>
+    <td class="propertyname" nowrap>Max participants:</td><td> <%= this_session.max_participants %>  </td>
+  </tr>
 <% end %>
-<% if  this_session.laptops_required? == "yes" %>
-<tr>
-  <td class="propertyname">Laptops required:</td><td> <%= this_session.laptops_required %>  </td>
-</tr>
+<% if  this_session.laptops_required? %>
+  <tr>
+    <td class="propertyname">Laptops required:</td><td> <%= this_session.laptops_required %>  </td>
+  </tr>
 <%  end %>
-
+<% if this_session.has_materials? %>
+  <tr>
+    <td class="propertyname">Materials:</td>
+    <td>   <a href="<%= this_session.material_url%>" target="_blank"><%= this_session.material_description %></a></td>
+  <% end  %>
+</tr>
 <tr><td colspan="2" ><%= wikinize( this_session.description) %></td></tr>

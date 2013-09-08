@@ -136,7 +136,12 @@ class Session < ActiveRecord::Base
   end
 
   def laptops_required?
-    laptops_required && laptops_required == "yes"
+    laptops_required.present? && laptops_required == "yes"
+  end
+
+  def has_materials?
+    material_description.present? && material_description.length > 0 &&
+      material_url.present? && material_url.length > 0
   end
 
   def self.fields_that_need_to_be_complete_printable

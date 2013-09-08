@@ -171,7 +171,14 @@
   </div>
   <div> <%= text_area :session, :outline_or_timetable, :cols => "100", :rows => "10"  %> </div>
 </div>
-
+<div class="in_a_form">
+  <div> <%= f.label :material_description %>: <i>Descriptive text for the link to your session materials</i> </div>
+  <div> <%= text_field :session, :material_description, :size => 128 , :maxlength => 128 %> </div>
+</div>
+<div class="in_a_form">
+  <div> <%= f.label :material_url %>: <i>Absolute URL to your session materials</i> </div>
+  <div> <%= text_field :session, :material_url, :size => 128 , :maxlength => "1024" %> </div>
+</div>
 <div > 
   <div class="actions">
     <%= f.submit %>

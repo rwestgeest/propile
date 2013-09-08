@@ -17,13 +17,16 @@
       </p>
       <strong><%= wikinize(program_entry.comment) %></strong>
 
-      <% if  program_entry.session.laptops_required.strip.downcase != "no" %>
+      <% if  program_entry.session.laptops_required? %>
         <div style="float:left;"><%= image_tag('Computer.png')%></div>
       <%  end %>
       <% if program_entry.session.limited?  then %>
         <div style="float:right;"><strong>Max: <%=  program_entry.session.max_participants %>&nbsp;</strong></div>
       <% end %>
-
+      <% if program_entry.session.has_materials? %>
+        <hr style="clear:both;"/>
+        <a href="<%= program_entry.session.material_url%>" target="_blank"><%= program_entry.session.material_description %></a>
+      <% end  %>
     </td>
   <% else %>
     <td class="structure" <%= program_entry.span_entire_row==true ? "colspan="+(@program.maxTrack+1-program_entry.track).to_s : "" %> >
