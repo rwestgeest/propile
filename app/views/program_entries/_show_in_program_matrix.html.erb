@@ -10,7 +10,7 @@
        <td class="ProgramMatrix <%=program_entry.topic%>" id="ProgramMatrix_entry_<%=program_entry.id%>"
          <%= program_entry.span_entire_row==true ? "colspan="+(@program.maxTrack+1-program_entry.track).to_s : "" %> > 
          <% if !program_entry.session.nil? %>  
-           <%= link_to program_entry.session.id.to_s+"- "+w(program_entry.session.title), program_entry.session %>
+           <%= link_to program_entry.session.id.to_s+"- "+program_entry.session.title, program_entry.session %>
            <p class=ProgramMatrix_presenters> <%= session_presenter_names(program_entry.session) %> </p>
          <% end %> 
          <%= wikinize(program_entry.comment) %>
