@@ -14,13 +14,24 @@
   Modified: <%= l @presenter.updated_at %> 
 <% end %>
 
+  <% if @presenter.profile_image.present? %>
+  <img class="profile" src="<%=  @presenter.profile_image%>" alt="<%=  @presenter.name %>"/>
+  <% end %>
 
 <div> <%= @presenter.email %> </div>
+<%if @presenter.website.present? %>
+<div>Website: <a href="<%= @presenter.website %>" target="_blank"> <%= @presenter.website %> </a></div>
+<% end %>
+
+<%if @presenter.twitter_id.present? %>
+<div>Twitter: <a href="https://twitter.com/<%= @presenter.twitter_id %>" target="_blank"> <%= @presenter.twitter_id %> </a></div>
+<% end %>
+
 <% if current_account.maintainer? %>
   <div> <i>maintainer: <%= @presenter.account.maintainer? %> <br> </i> </div>
   <div> <i>last login time: <%= @presenter.account.last_login %> <br> </i> </div>
 <% end %>
-<hr>
+<hr style="clear:both;">
 
 <div class="lessoutlined"> 
   <%= wikinize(@presenter.bio) %> 

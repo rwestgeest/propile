@@ -61,6 +61,7 @@ describe ProgramsController do
       session.duration = "75 min"
       session.first_presenter = me
       session.second_presenter = friend
+      session.state = Session::CONFIRMED
       session.should be_valid
       session.save
 

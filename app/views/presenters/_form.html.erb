@@ -7,22 +7,42 @@
   <div>
     <%= text_field :presenter, :name, :size => "100" %> 
   </div>
-  <br>
+  <br />
   <div>
     <%= f.label :email %> <i><%= current_account.maintainer? ? "(only maintainers can modify)" : ""  %></i> 
   </div>
   <div>
     <%= text_field :presenter, :email, :disabled => (!current_account.maintainer?), :size => "100" %> 
   </div>
-  <br>
-
+  <br />
+  <div>
+    <%= f.label :profile_image %> <i>Link to a profile image (max 200x200 pixels)</i>
+  </div>
+  <div>
+    <%= text_field :presenter, :profile_image, :size => 128 , :maxlength => 1024 %>
+  </div>
+  <br />
+    <div>
+    <%= f.label :website %> <i>Link to your blog, company website...</i>
+  </div>
+  <div>
+    <%= text_field :presenter, :website, :size => 128 , :maxlength => 1024 %>
+  </div>
+  <br />
+    <div>
+    <%= f.label :twitter_id %> <i>in the format @username</i>
+  </div>
+  <div>
+    <%= text_field :presenter, :twitter_id, :size => 128 , :maxlength => 128 %>
+  </div>
+  <br />
   <% if current_account.maintainer? %>
     <div>
       <%= f.select :role, [Account::Maintainer, Account::Presenter]  %>
       <i>(only maintainers see or modify this) </i> 
     </div>
   <% end %>
-  <br>
+  <br />
   <div>
     <%= f.label :bio %> 
     <%= link_to '(formatting)', "/pages/formatting", :target => '_blank', :class => 'smalllink' %> 

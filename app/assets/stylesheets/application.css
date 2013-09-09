@@ -395,6 +395,12 @@ table.ProgramCard h3 {
  color : black ;
 }
 
+img.profile {
+    padding-right : 1em ;
+    max-width : 200px ;
+    float : left ;
+}
+
 input.collapsebutton {
   height:15px;
   width:15px;

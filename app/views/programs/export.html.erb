@@ -5,69 +5,65 @@
 <br />
 <br />
 <table border="1" class="ProgramMatrix">
-<tr><td class="propertyname">Legend</td></tr>
-<%for topic in Session::AVAILABLE_TOPICS do %>
-  <% if ! @program.program_entries_for_topic(topic).empty? then %> 
-    <tr><td class="<%=topic%>"><%=Session.topic_name(topic)%></td></tr>
-  <% end %> 
-<%end%>
+  <tr><td class="propertyname">Legend</td></tr>
+  <%for topic in Session::AVAILABLE_TOPICS do %>
+    <% if ! @program.program_entries_for_topic(topic).empty? then %>
+      <tr><td class="<%=topic%>"><%=Session.topic_name(topic)%></td></tr>
+    <% end %>
+  <%end%>
 </table>
 <h1>Session descriptions</h1>
 <%
-   sessions = []
-   @program.eachSlot do |slot|
-     @program.eachTrack do |track|
-       program_entry = @program.entry(slot,track)
-       if !program_entry.nil? && !program_entry.session.nil? && !sessions.include?(program_entry.session.id) %>
-         <table class="ProgramCard <%=  program_entry.topic%>">
-           <tr>
-             <td colspan="2">
-               <h2><a name="session_<%=  program_entry.session.to_param%>"></a><%= w program_entry.session.title %></h2>
-               <h3><%= w program_entry.session.sub_title  %></h3>
+sessions = []
+@program.eachSlot do |slot|
+  @program.eachTrack do |track|
+    program_entry = @program.entry(slot,track)
+    if !program_entry.nil? && !program_entry.session.nil? && program_entry.session.confirmed? && !sessions.include?(program_entry.session.id) %>
+      <table class="ProgramCard <%=  program_entry.topic%>">
+        <tr>
+          <td colspan="2">
+            <h2><a name="session_<%=  program_entry.session.to_param%>"></a><%= w program_entry.session.title %></h2>
+            <h3><%= w program_entry.session.sub_title  %></h3>
 
-               <h3>
-                 <% if  program_entry.session.presenters[0] %>
-                   <a href="#presenter_<%=  program_entry.session.presenters[0].id %>"><%= w  program_entry.session.presenters[0].name %></a>
-                 <% end %>
-                 <% if  program_entry.session.presenters[1] %>
-                   &amp; <a href="#presenter_<%=  program_entry.session.presenters[1].id %>"><%= w  program_entry.session.presenters[1].name %></a>
-                 <% end %>
-               </h3>
-             </td>
-           </tr>
-           <%= render :partial => 'sessions/export_description',:locals => { :this_session => program_entry.session }  %>
-         </table>
-<br />
-<a href="#top">Back to program</a><br />
-<hr />
-<%
-         sessions << program_entry.session.id
-       end
+            <h3>
+              <% if  program_entry.session.presenters[0] %>
+                <a href="#presenter_<%=  program_entry.session.presenters[0].id %>"><%= w  program_entry.session.presenters[0].name %></a>
+              <% end %>
+              <% if  program_entry.session.presenters[1] %>
+                &amp; <a href="#presenter_<%=  program_entry.session.presenters[1].id %>"><%= w  program_entry.session.presenters[1].name %></a>
+              <% end %>
+            </h3>
+          </td>
+        </tr>
+        <%= render :partial => 'sessions/export_description',:locals => { :this_session => program_entry.session }  %>
+      </table>
+      <br />
+      <a href="#top">Back to program</a><br />
+      <hr />
+      <%
+      sessions << program_entry.session.id
     end
   end
+end
 %>
 <h1>Presenters</h1>
 <%
-   presenters = []
-   @program.eachSlot do |slot|
-     @program.eachTrack do |track|
-       program_entry = @program.entry(slot,track)
-       if !program_entry.nil? && !program_entry.session.nil? %>
-             <% if  program_entry.session.presenters[0] && !presenters.include?(program_entry.session.presenters[0].id) %>
-               <h3><a name="presenter_<%=  program_entry.session.presenters[0].id %>"></a><%= w  program_entry.session.presenters[0].name %></h3>
-               <%= wikinize program_entry.session.presenters[0].bio %>
-               <br /><a href="#top">Back to program</a><br /><hr />
-               <% presenters << program_entry.session.presenters[0].id %>
-             <% end %>
-             <% if  program_entry.session.presenters[1] && !presenters.include?(program_entry.session.presenters[1].id) %>
-               <h3><a name="presenter_<%=  program_entry.session.presenters[1].id %>"></a><%= w  program_entry.session.presenters[1].name %></h3>
-               <%= wikinize program_entry.session.presenters[1].bio %>
-               <br /><a href="#top">Back to program</a><br /><hr />
-               <% presenters << program_entry.session.presenters[1].id %>
-             <% end %>
+presenters = []
+@program.eachSlot do |slot|
+  @program.eachTrack do |track|
+    program_entry = @program.entry(slot,track)
+    if !program_entry.nil? && !program_entry.session.nil? && program_entry.session.confirmed? %>
+      <% if  program_entry.session.presenters[0] && !presenters.include?(program_entry.session.presenters[0].id) %>
+        <%= render :partial => 'presenters/export_description',:locals => { :this_presenter => program_entry.session.presenters[0] }  %>
+        <% presenters << program_entry.session.presenters[0].id %>
+      <% end %>
+      <% if  program_entry.session.presenters[1] && !presenters.include?(program_entry.session.presenters[1].id) %>
+        <%= render :partial => 'presenters/export_description',:locals => { :this_presenter => program_entry.session.presenters[1] }  %>
+        <% presenters << program_entry.session.presenters[1].id %>
+      <% end %>
 
-<%
-       end
+    <%
     end
   end
+end
 %>

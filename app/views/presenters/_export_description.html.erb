@@ -1,0 +1,15 @@
+<% if this_presenter.profile_image.present? %>
+
+  <a name="presenter_<%=  this_presenter.id %>"></a>
+    <img class="profile" src="<%=  this_presenter.profile_image%>" alt="<%= this_presenter.name %>" />
+  <% end %>
+  <h3><%= w  this_presenter.name %></h3>
+  <%if this_presenter.website.present? %>
+    <p>Website: <a href="<%= this_presenter.website %>" target="_blank"> <%= this_presenter.website %> </a></p>
+  <% end %>
+  <%if this_presenter.twitter_id.present? %>
+    <p>Twitter: <a href="https://twitter.com/<%= this_presenter.twitter_id %>" target="_blank"> <%= this_presenter.twitter_id %> </a></p>
+  <% end %>
+
+  <%= wikinize this_presenter.bio %>
+  <br style="clear:both;"/><a href="#top">Back to program</a><br /><hr />

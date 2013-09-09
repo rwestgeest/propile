@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130908192837) do
+ActiveRecord::Schema.define(:version => 20130909190234) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                :limit => 150,                          :null => false
@@ -51,11 +51,14 @@ ActiveRecord::Schema.define(:version => 20130908192837) do
   add_index "comments", ["review_id"], :name => "index_comments_on_review_id"
 
   create_table "presenters", :force => true do |t|
-    t.string   "name",       :limit => 100
+    t.string   "name",          :limit => 100
     t.text     "bio"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.integer  "account_id"
+    t.string   "twitter_id",    :limit => 128
+    t.string   "profile_image", :limit => 1024
+    t.string   "website",       :limit => 1024
   end
 
   add_index "presenters", ["account_id"], :name => "index_presenters_on_account_id"

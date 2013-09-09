@@ -6,187 +6,189 @@
       Several important fields are not filled in in this session. <br/>
     </div>
     <div>
-      Check the following fields: 
-        <%= Session.fields_that_need_to_be_complete_printable %>
+      Check the following fields:
+      <%= Session.fields_that_need_to_be_complete_printable %>
       <br/> <br/>
     </div>
   <% end %>
 
-<div class="in_a_form"> 
-  <div> <%= f.label :title %>*: </div>
-  <div> <%= text_area :session, :title, :cols => "100", :rows => "1"  %> </div>
-</div>
-<div class="in_a_form"> 
-  <div> <%= f.label :sub_title %>: <i>sometimes your title is catchy but doesn't describe the content of your session. A subtitle can help. Keep short! </i> </div> 
-  <div> <%= text_area :session, :sub_title, :cols => "100", :rows => "1"  %> </div>
-</div>
+  <div class="in_a_form">
+    <div> <%= f.label :title %>*: </div>
+    <div> <%= text_area :session, :title, :cols => "100", :rows => "1"  %> </div>
+  </div>
+  <div class="in_a_form">
+    <div> <%= f.label :sub_title %>: <i>sometimes your title is catchy but doesn't describe the content of your session. A subtitle can help. Keep short! </i> </div>
+    <div> <%= text_area :session, :sub_title, :cols => "100", :rows => "1"  %> </div>
+  </div>
 
 
-<div > 
-  <table class="sessiontable">
-    <tr> 
-      <td class="sessiontable_label" width="100px">  
+  <div >
+    <table class="sessiontable">
+      <tr>
+        <td class="sessiontable_label" width="100px">
           <div> <%= f.label :first_presenter_email %>*: <i><%= !current_account.maintainer? || "(editable for maintainers only)" %></i> </div>
-      </td>
-      <td class="sessiontable_label">  
+        </td>
+        <td class="sessiontable_label">
           <div> <%= f.label :second_presenter_email %>: <i><%= !current_account.maintainer? || "(editable for maintainers only)" %></i> </div>
-      </td>
-    </tr>
-    <tr> 
-      <td class="sessiontable" >  
-        <%= f.text_area :first_presenter_email, :cols => "48", :rows => "1", :disabled =>  (!current_account.maintainer?) %> 
-      </td>
-      <td class="sessiontable">  
-	<%= f.text_area :second_presenter_email, :cols => "48", :rows => "1", :disabled =>  (!current_account.maintainer?) %> 
-      </td>
-    </tr>
-  </table >
-</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sessiontable" >
+          <%= f.text_area :first_presenter_email, :cols => "48", :rows => "1", :disabled =>  (!current_account.maintainer?) %>
+        </td>
+        <td class="sessiontable">
+          <%= f.text_area :second_presenter_email, :cols => "48", :rows => "1", :disabled =>  (!current_account.maintainer?) %>
+        </td>
+      </tr>
+    </table >
+  </div>
 
-<div >
-  <div> <%= f.label :state %>: <i><%= !current_account.maintainer? || "(editable for maintainers only)" %></i> </div>
-  <div>  <%= f.select :state, Session::AVAILABLE_STATES, :include_blank => false %> </div>
-</div>
+  <%if current_account.maintainer? %>
+    <div >
+      <div> <%= f.label :state %>: <i><%= !current_account.maintainer? || "(visible and editable for maintainers only)" %></i> </div>
+      <div>  <%= f.select :state, Session::AVAILABLE_STATES, :include_blank => false %> </div>
+    </div>
+  <%  end %>
 
-<p > 
-  <div> <%= f.label :short_description %>: <i> will appear on the "Program Cards" on the "Program Board" at the conference. It should be a teaser. </i> 
-    <%= link_to '(formatting)', "/pages/formatting", :target => '_blank', :class => 'smalllink' %> 
+  <p >
+  <div> <%= f.label :short_description %>: <i> will appear on the "Program Cards" on the "Program Board" at the conference. It should be a teaser. </i>
+    <%= link_to '(formatting)', "/pages/formatting", :target => '_blank', :class => 'smalllink' %>
   </div>
   <div> <%= text_area :session, :short_description, :cols => "100", :rows => "6"  %> </div>
-</p>
+  </p>
 
-<div > 
-  <div> <%= f.label :session_goal %>: <i> what do you expect participants to get out of this session?</i> </div>
-  <div> <%= text_area :session, :session_goal, :cols => "100", :rows => "1"  %> </div>
-</div>
-
-
+  <div >
+    <div> <%= f.label :session_goal %>: <i> what do you expect participants to get out of this session?</i> </div>
+    <div> <%= text_area :session, :session_goal, :cols => "100", :rows => "1"  %> </div>
+  </div>
 
 
-<div>
-  <table class="sessiontable">
-    <tr> 
-      <td class="sessiontable_label" width="100px">  
-        <%= f.label :session_type %>:<br/> 
-          <i class="session_explanation"> 
+
+
+  <div>
+    <table class="sessiontable">
+      <tr>
+        <td class="sessiontable_label" width="100px">
+          <%= f.label :session_type %>:<br/>
+          <i class="session_explanation">
             <b>hands on </b>coding/design/architecture session <br/>
             <b>discovery session</b>: open ended workshops that explore new topics, common problems, promising techniques, or burning questions <br/>
             <b>experiential learning session</b>: get people learning by doing & reflecting; for example games or simulations <br/>
             <b>short experience report (30 min) </b>that focus on what didn.t work and why </i>
-      </td>
-      <td class="sessiontable_label">  
-          <%= f.label :max_participants %>: 
-      </td>
-    </tr>
-    <tr> 
-      <td class="sessiontable" >  
-        <%= f.select :session_type, Session::AVAILABLE_SESSION_TYPE, :include_blank => true %>
-      </td>
-      <td class="sessiontable">  
-        <%= text_area :session, :max_participants, :cols => "48", :rows => "1"  %> 
-      </td>
-    </tr>
-    <tr> 
-      <td class="sessiontable_label">  
-        <%= f.label :topic %>: 
-        <i> will determine the "color" of your session: Technology and Technique,
-            Team and Individual, Process and Improvement, Customer and Planning, Cases and Intros </i> 
-      </td>
-      <td class="sessiontable_label">  
-        <%= f.label :laptops_required %>: 
-        <i> for session participants </i> 
-      </td>
-    </tr>
-    <tr> 
-      <td class="sessiontable">  
-        <%= f.select :topic,  Session::AVAILABLE_TOPICS_AND_NAMES_FOR_SELECT, :include_blank => true %>
-      </td>
-      <td class="sessiontable">  
-        <%= f.select :laptops_required, Session::AVAILABLE_LAPTOPS_REQUIRED, :include_blank => true %>
-      </td>
-    </tr>
-    <tr> 
-      <td class="sessiontable_label">  
-        <%= f.label :duration %>: 
-      </td>
-      <td class="sessiontable_label">  
-        <%= f.label :other_limitations %>:
-      </td>
-    </tr>
-    <tr>
-      <td class="sessiontable">  
-        <%= f.select :duration,  Session::AVAILABLE_DURATION, :include_blank => true %>
-      </td>
-      <td class="sessiontable">  
-        <%= text_area :session, :other_limitations, :cols => "48", :rows => "1"  %> 
-      </td>
-    </tr>
-    <tr> 
-      <td class="sessiontable_label">  
-        <%= f.label :room_setup %>: <i> eg: groups (=cabaret), theater, classroom</i> 
-      </td>
-      <td class="sessiontable_label">  
-        <%= f.label :intended_audience %>: 
-        <i> who will benefit from this session? 
-            Have a look at the <a href="http://www.xpday.net/Xpday2012/Personas.html" target="_new">Personas</a> 
-            to get ideas about what participants want out of XP Days.</i> 
-      </td>
-    </tr>
-    <tr> 
-      <td class="sessiontable">  
-        <%= text_area :session, :room_setup, :cols => "48", :rows => "1"  %> 
-      </td>
-      <td class="sessiontable">  
-        <%= text_area :session, :intended_audience, :cols => "48", :rows => "1"  %> 
-      </td>
-    </tr>
-    <tr> 
-      <td class="sessiontable_label">  
-        <%= f.label :materials_needed %>: 
-        <i> extra stuff you need the organisers to arrange for your session </i> 
-      </td>
-      <td class="sessiontable_label">  
-        <%= f.label :experience_level %>: 
-        <i> do you expect them to have certain knowledge or experience?</i> 
-      </td>
-    </tr>
-    <tr> 
-      <td class="sessiontable">  
-        <%= text_area :session, :materials_needed, :cols => "48", :rows => "1"  %>
-      </td>
-      <td class="sessiontable">  
-        <%= text_area :session, :experience_level, :cols => "48", :rows => "1"  %> 
-      </td>
-    </tr>
-  </table> 
-</div>
+        </td>
+        <td class="sessiontable_label">
+          <%= f.label :max_participants %>:
+        </td>
+      </tr>
+      <tr>
+        <td class="sessiontable" >
+          <%= f.select :session_type, Session::AVAILABLE_SESSION_TYPE, :include_blank => true %>
+        </td>
+        <td class="sessiontable">
+          <%= text_area :session, :max_participants, :cols => "48", :rows => "1"  %>
+        </td>
+      </tr>
+      <tr>
+        <td class="sessiontable_label">
+          <%= f.label :topic %>:
+          <i> will determine the "color" of your session: Technology and Technique,
+            Team and Individual, Process and Improvement, Customer and Planning, Cases and Intros </i>
+        </td>
+        <td class="sessiontable_label">
+          <%= f.label :laptops_required %>:
+          <i> for session participants </i>
+        </td>
+      </tr>
+      <tr>
+        <td class="sessiontable">
+          <%= f.select :topic,  Session::AVAILABLE_TOPICS_AND_NAMES_FOR_SELECT, :include_blank => true %>
+        </td>
+        <td class="sessiontable">
+          <%= f.select :laptops_required, Session::AVAILABLE_LAPTOPS_REQUIRED, :include_blank => true %>
+        </td>
+      </tr>
+      <tr>
+        <td class="sessiontable_label">
+          <%= f.label :duration %>:
+        </td>
+        <td class="sessiontable_label">
+          <%= f.label :other_limitations %>:
+        </td>
+      </tr>
+      <tr>
+        <td class="sessiontable">
+          <%= f.select :duration,  Session::AVAILABLE_DURATION, :include_blank => true %>
+        </td>
+        <td class="sessiontable">
+          <%= text_area :session, :other_limitations, :cols => "48", :rows => "1"  %>
+        </td>
+      </tr>
+      <tr>
+        <td class="sessiontable_label">
+          <%= f.label :room_setup %>: <i> eg: groups (=cabaret), theater, classroom</i>
+        </td>
+        <td class="sessiontable_label">
+          <%= f.label :intended_audience %>:
+          <i> who will benefit from this session?
+            Have a look at the <a href="http://www.xpday.net/Xpday2012/Personas.html" target="_new">Personas</a>
+            to get ideas about what participants want out of XP Days.</i>
+        </td>
+      </tr>
+      <tr>
+        <td class="sessiontable">
+          <%= text_area :session, :room_setup, :cols => "48", :rows => "1"  %>
+        </td>
+        <td class="sessiontable">
+          <%= text_area :session, :intended_audience, :cols => "48", :rows => "1"  %>
+        </td>
+      </tr>
+      <tr>
+        <td class="sessiontable_label">
+          <%= f.label :materials_needed %>:
+          <i> extra stuff you need the organisers to arrange for your session </i>
+        </td>
+        <td class="sessiontable_label">
+          <%= f.label :experience_level %>:
+          <i> do you expect them to have certain knowledge or experience?</i>
+        </td>
+      </tr>
+      <tr>
+        <td class="sessiontable">
+          <%= text_area :session, :materials_needed, :cols => "48", :rows => "1"  %>
+        </td>
+        <td class="sessiontable">
+          <%= text_area :session, :experience_level, :cols => "48", :rows => "1"  %>
+        </td>
+      </tr>
+    </table>
+  </div>
 
-<div class="in_a_form"> 
-  <div> 
-    <%= f.label :description %>*: <i> this will appear on the website, and they will also be displayed on the wall during the conference -> public description </i> 
-    <%= link_to '(formatting)', "/pages/formatting", :target => '_blank', :class => 'smalllink' %> 
+  <div class="in_a_form">
+    <div>
+      <%= f.label :description %>*: <i> this will appear on the website, and they will also be displayed on the wall during the conference -> public description </i>
+      <%= link_to '(formatting)', "/pages/formatting", :target => '_blank', :class => 'smalllink' %>
+    </div>
+    <div> <%= text_area :session, :description, :cols => "100"  , :rows => "20"%> </div>
   </div>
-  <div> <%= text_area :session, :description, :cols => "100"  , :rows => "20"%> </div>
-</div>
-<div class="in_a_form"> 
-  <div> 
-    <%= f.label :outline_or_timetable %>: <i> this section contains a detailed outline of your session. It will not be viewable by the public, only by reviewers </i>
-    <%= link_to '(formatting)', "/pages/formatting", :target => '_blank', :class => 'smalllink' %> 
+  <div class="in_a_form">
+    <div>
+      <%= f.label :outline_or_timetable %>: <i> this section contains a detailed outline of your session. It will not be viewable by the public, only by reviewers </i>
+      <%= link_to '(formatting)', "/pages/formatting", :target => '_blank', :class => 'smalllink' %>
+    </div>
+    <div> <%= text_area :session, :outline_or_timetable, :cols => "100", :rows => "10"  %> </div>
   </div>
-  <div> <%= text_area :session, :outline_or_timetable, :cols => "100", :rows => "10"  %> </div>
-</div>
-<div class="in_a_form">
-  <div> <%= f.label :material_description %>: <i>Descriptive text for the link to your session materials</i> </div>
-  <div> <%= text_field :session, :material_description, :size => 128 , :maxlength => 128 %> </div>
-</div>
-<div class="in_a_form">
-  <div> <%= f.label :material_url %>: <i>Absolute URL to your session materials</i> </div>
-  <div> <%= text_field :session, :material_url, :size => 128 , :maxlength => "1024" %> </div>
-</div>
-<div > 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="in_a_form">
+    <div> <%= f.label :material_description %>: <i>Descriptive text for the link to your session materials</i> </div>
+    <div> <%= text_field :session, :material_description, :size => 128 , :maxlength => 128 %> </div>
   </div>
-</div>
+  <div class="in_a_form">
+    <div> <%= f.label :material_url %>: <i>Absolute URL to your session materials</i> </div>
+    <div> <%= text_field :session, :material_url, :size => 128 , :maxlength => "1024" %> </div>
+  </div>
+  <div >
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  </div>
 
 <% end %>

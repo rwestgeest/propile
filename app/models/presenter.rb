@@ -8,6 +8,7 @@ class Presenter < ActiveRecord::Base
   belongs_to :account
 
   attr_accessible :bio, :email, :name, :role
+  attr_accessible :twitter_id, :profile_image, :website
 
   validates :email, :presence => true,
                     :format => { :with => EMAIL_REGEXP }
