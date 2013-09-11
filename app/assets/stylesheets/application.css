@@ -372,6 +372,9 @@ table.ProgramCard {
   border-collapse: collapse;
   border-spacing : 5px ;
   width : 90% ;
+  -moz-box-shadow:    10px 10px 5px 6px #ccc;
+  -webkit-box-shadow: 10px 10px 5px 6px #ccc;
+  box-shadow:         10px 10px 5px 6px #ccc;
 }
 
 table.ProgramCard td {
