@@ -29,6 +29,13 @@
     </div>
   <% end %>
 
+    <% if !@presenter.twitter_id.present? && !@presenter.profile_image.present? && !@presenter.website.present? %>
+    <div class="outlined">
+      You can now add a profile image, website link or Twitter ID to your profile.
+      You can do that in <%= link_to "your own presenter page", current_account.presenter %>.
+    </div>
+    <%  end %>
+
   <% @presenter.sessions.each do |session|  %>
     <%  if session.has_new_review?  %>
       <br/> <br/>
