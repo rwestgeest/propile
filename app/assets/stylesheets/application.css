@@ -344,12 +344,16 @@ table.ProgramMatrix td.none {
 	font-size: small;
 }
 
+table.ProgramMatrix td.other {
+	font-size: small;
+}
 .technology { background-color:#C7FFB1; }
 .customer { background-color:#D6F9FF; }
 .cases { background-color:#FF9; }
 .team { background-color:#FEC9DC; }
 .process { background-color:#FED28E; }
 .none { background-color:white; }
+.other { background-color:white; }
 .structure {  background-color : #EFEFEF;}
 
 table.ProgramMatrix td  a {
@@ -398,6 +402,7 @@ table.ProgramCard h3 {
 img.profile {
     padding-right : 1em ;
     max-width : 200px ;
+    max-height: 200px;
     float : left ;
 }
 
