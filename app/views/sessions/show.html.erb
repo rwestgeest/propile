@@ -1,104 +1,119 @@
 <%= title "#{@session.title}" %>
-  <%= errors_for @new_review %>
+<%= errors_for @new_review %>
 
-  <% if @anchor %>
-      <script type="text/javascript">
-      window.location.hash = "<%= @anchor %>";
-    </script>
-  <% end %>
+<% if @anchor %>
+  <script type="text/javascript">
+    window.location.hash = "<%= @anchor %>";
+  </script>
+<% end %>
 
 
 <%= content_for :sub_menu do %> 
-  <%= guarded_link_to 'Edit this session', controller: 'sessions', action: 'edit', id: @session.to_param %> 
-  <%= link_to 'Printable card (PDF)', controller: 'sessions', action: 'program_board_card', id: @session.to_param, format: "pdf" %> 
-  <%= link_to 'Printable description (PDF)', controller: 'sessions', action: 'show', id: @session.to_param, format: "pdf" %> 
+  <%= guarded_link_to 'Edit this session', controller: 'sessions', action: 'edit', id: @session.to_param %>
+  <%= link_to 'Printable card (PDF)', controller: 'sessions', action: 'program_board_card', id: @session.to_param, format: "pdf" %>
+  <%= link_to 'Printable description (PDF)', controller: 'sessions', action: 'show', id: @session.to_param, format: "pdf" %>
   <%= link_to 'RSS feed', controller: 'sessions', action: 'rss', format: :xml, id: @session.to_param %>
-  <%= link_to 'Back to list of sessions', sessions_path %> 
+  <%= link_to 'Back to list of sessions', sessions_path %>
 <% end %>
 
 <%= content_for :extra_info do %> 
-  <% if PropileConfig.voting_active?  %> 
+  <% if PropileConfig.voting_active?  %>
     <div class="flashy">
-    <% if @current_presenter_has_voted_for_this_session  %>  
-      You have voted for this session 
-      --> <%= link_to 'Destroy this vote', @my_vote, method: :delete %>
-    <% else %>
-      <%= link_to 'Vote for this session', session_votes_path(@session), method: :post %>
-    <% end %>
+      <% if @current_presenter_has_voted_for_this_session  %>
+        You have voted for this session
+        --> <%= link_to 'Destroy this vote', @my_vote, method: :delete %>
+      <% else %>
+        <%= link_to 'Vote for this session', session_votes_path(@session), method: :post %>
+      <% end %>
     </div>
   <% end %>
 <% end %>
 
 <%= content_for :created_and_modified do %> 
-  Session Created: <%= l @session.created_at %> -- 
-  Modified: <%= l @session.updated_at %> 
+  Session Created: <%= l @session.created_at %> --
+  Modified: <%= l @session.updated_at %>
 <% end %>
 
+<% if @session.canceled? %>
+  <div class="flashy">THIS SESSION HAS BEEN CANCELED</div>
+<%else%>
+  <div>
+    by <%= session_presenter_names(@session) %>
+    <hr />
+  </div>
+  <%= render :partial => 'sessions/export_description',:locals => { :this_session => @session }  %>
+  <% if  @session.presenters[0]  %>
+    <%= render :partial => 'presenters/export_description',:locals => { :this_presenter => @session.presenters[0] }  %>
+  <% end %>
+  <% if  @session.presenters[1] %>
+    <%= render :partial => 'presenters/export_description',:locals => { :this_presenter => @session.presenters[1] }  %>
+  <% end %>
 
-<%= render 'sessions/show_short', :session => @session  %>
+  <%= render 'sessions/show_short', :session => @session  %>
+<% end %>
 
 
 <h2> Reviews for this session: </h2>
 <div>
   <i>Reviews are done in <%= link_to 'Perfection Game Format', "/pages/index#PerfectionGame", :target => '_blank' %>.
-     Read more about what we expect of a  <%= link_to 'good session', "/pages/index#ReviewCriteria", :target => '_blank' %> 
+    Read more about what we expect of a  <%= link_to 'good session', "/pages/index#ReviewCriteria", :target => '_blank' %>
   </i>
 </div>
 
 <div>
   <% @session.reviews.each_with_index do |review, i| %>
-  <%= collapse_button_initially_open ("session_review_#{review.id}") %> 
-  <div id="session_review_<%=review.id%>" style="display:block;" class="review">
-    <% if defined?(@edit_review) && !@edit_review.nil? && @edit_review.id==review.id %>
-      <%= render 'reviews/form', :review=>@edit_review %>
-    <% else %>
-      <%= render 'reviews/show', :review => review  %>
-    <% end %>
-    <div class="alignright">
-      <%= guarded_link_to 'Edit this review', controller: 'reviews', action: 'edit', id: review  %> &nbsp;
-    </div>
-
-    <% if review.comments.size!=0 %> 
-      <h3> Comments on this review: </h3>
-      <div>
-        <% review.comments.each_with_index do |comment, j| %>
-          <%= collapse_button_initially_open ("session_review_#{review.id}_comment_#{comment.id}") %> 
-          <div id="session_review_<%=review.id%>_comment_<%=comment.id%>" style="display:block;" class="comment">
-            <% if defined?(@edit_comment) && !@edit_comment.nil? && @edit_comment.id==comment.id %>
-              <%= render 'comments/form', :comment=>@edit_comment %>
-            <% else %>
-              <%= render 'comments/show', :comment => comment  %>
-            <% end %>
-            <div class="alignright">
-              <%= guarded_link_to 'Edit this comment', controller: 'comments', action: 'edit', id: comment %> 
-            </div>
-          </div>
-        <% end %>
+    <%= collapse_button_initially_open ("session_review_#{review.id}") %>
+    <div id="session_review_<%=review.id%>" style="display:block;" class="review">
+      <% if defined?(@edit_review) && !@edit_review.nil? && @edit_review.id==review.id %>
+        <%= render 'reviews/form', :review=>@edit_review %>
+      <% else %>
+        <%= render 'reviews/show', :review => review  %>
+      <% end %>
+      <div class="alignright">
+        <%= guarded_link_to 'Edit this review', controller: 'reviews', action: 'edit', id: review  %> &nbsp;
       </div>
-    <% end %> 
-    <%= collapse_button_initially_open ("session_review_#{review.id}_comment_new") %> 
-        <div id="session_review_<%=review.id%>_comment_new" style="display:block;" class="comment">
-          <h4>Make a new comment on this review: </h4>
-          <% if defined?(@new_comment) && !@new_comment.nil? && @new_comment.review.id==review.id
-               new_comment = @new_comment
-             else
-               new_comment = review.comments.build
-               new_comment.presenter = @current_presenter
-             end
-          %>
-          <%= render 'comments/form', :comment=>new_comment %>
-        </div>
-  </div>
-  <% end %> 
 
-  <%= collapse_button_initially_open ("session_review_new") %> 
+      <% if review.comments.size!=0 %>
+        <h3> Comments on this review: </h3>
+        <div>
+          <% review.comments.each_with_index do |comment, j| %>
+            <%= collapse_button_initially_open ("session_review_#{review.id}_comment_#{comment.id}") %>
+            <div id="session_review_<%=review.id%>_comment_<%=comment.id%>" style="display:block;" class="comment">
+              <% if defined?(@edit_comment) && !@edit_comment.nil? && @edit_comment.id==comment.id %>
+                <%= render 'comments/form', :comment=>@edit_comment %>
+              <% else %>
+                <%= render 'comments/show', :comment => comment  %>
+              <% end %>
+              <div class="alignright">
+                <%= guarded_link_to 'Edit this comment', controller: 'comments', action: 'edit', id: comment %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+      <%= collapse_button_initially_open ("session_review_#{review.id}_comment_new") %>
+      <div id="session_review_<%=review.id%>_comment_new" style="display:block;" class="comment">
+        <h4>Make a new comment on this review: </h4>
+        <% if defined?(@new_comment) && !@new_comment.nil? && @new_comment.review.id==review.id
+          new_comment = @new_comment
+        else
+          new_comment = review.comments.build
+          new_comment.presenter = @current_presenter
+        end
+      %>
+        <%= render 'comments/form', :comment=>new_comment %>
+      </div>
+    </div>
+  <% end %>
+
+  <%= collapse_button_initially_open ("session_review_new") %>
   <div id="session_review_new" style="display:block;" class="review">
     <h3>Make a new review: </h3>
     <% if !defined?(@new_review) || @new_review.nil?
-         @new_review = @session.reviews.build
-         @new_review.presenter = @current_presenter
-       end
-    %>
+      @new_review = @session.reviews.build
+      @new_review.presenter = @current_presenter
+    end
+  %>
     <%= render 'reviews/form', :review=>@new_review %>
   </div>
 </div>

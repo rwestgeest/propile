@@ -19,24 +19,7 @@ sessions = []
   @program.eachTrack do |track|
     program_entry = @program.entry(slot,track)
     if !program_entry.nil? && !program_entry.session.nil? && program_entry.session.confirmed? && !sessions.include?(program_entry.session.id) %>
-      <table class="ProgramCard <%=  program_entry.topic%>">
-        <tr>
-          <td colspan="2">
-            <h2><a name="session_<%=  program_entry.session.to_param%>"></a><%= w program_entry.session.title %></h2>
-            <h3><%= w program_entry.session.sub_title  %></h3>
-
-            <h3>
-              <% if  program_entry.session.presenters[0] %>
-                <a href="#presenter_<%=  program_entry.session.presenters[0].id %>"><%= w  program_entry.session.presenters[0].name %></a>
-              <% end %>
-              <% if  program_entry.session.presenters[1] %>
-                &amp; <a href="#presenter_<%=  program_entry.session.presenters[1].id %>"><%= w  program_entry.session.presenters[1].name %></a>
-              <% end %>
-            </h3>
-          </td>
-        </tr>
-        <%= render :partial => 'sessions/export_description',:locals => { :this_session => program_entry.session }  %>
-      </table>
+      <%= render :partial => 'sessions/export_description',:locals => { :this_session => program_entry.session }  %>
       <br />
       <a href="#top">Back to program</a><br />
       <hr />
@@ -55,10 +38,12 @@ presenters = []
     if !program_entry.nil? && !program_entry.session.nil? && program_entry.session.confirmed? %>
       <% if  program_entry.session.presenters[0] && !presenters.include?(program_entry.session.presenters[0].id) %>
         <%= render :partial => 'presenters/export_description',:locals => { :this_presenter => program_entry.session.presenters[0] }  %>
+        <a href="#top">Back to program</a><br /><hr />
         <% presenters << program_entry.session.presenters[0].id %>
       <% end %>
       <% if  program_entry.session.presenters[1] && !presenters.include?(program_entry.session.presenters[1].id) %>
         <%= render :partial => 'presenters/export_description',:locals => { :this_presenter => program_entry.session.presenters[1] }  %>
+        <a href="#top">Back to program</a><br /><hr />
         <% presenters << program_entry.session.presenters[1].id %>
       <% end %>
 
