@@ -1,0 +1,9 @@
+<% this_session = program_entry.session %>
+<td class="<%=  this_session.topic%>" <%= program_entry.span_entire_row==true ? "colspan="+(@program.maxTrack+1-program_entry.track).to_s : "" %> >
+
+  <% if  this_session.confirmed? %>
+    <a href="#session_<%=this_session.to_param%>"><%= w this_session.title %></a>
+   
+    <p>CONTINUED</p>
+  <% end  %>
+</td>
