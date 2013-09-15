@@ -24,7 +24,7 @@ sessions_per_presenter = Hash.new {|hash,key| hash[key] = [] }
       <% sessions_per_presenter[program_entry.session.presenters[1].id] << program_entry.session if program_entry.session.presenters[1] %>
       <%= render :partial => 'sessions/export_description',:locals => { :this_session => program_entry.session }  %>
       <br />
-      <a href="#top">Back to program</a><br />
+      <a href="#session_slot_<%=program_entry.session.to_param%>">Back to program</a><br />
       <hr />
       <%
       sessions << program_entry.session.id

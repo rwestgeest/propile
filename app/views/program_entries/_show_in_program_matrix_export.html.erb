@@ -2,7 +2,7 @@
 <td class="<%=  this_session.topic%>" <%= program_entry.span_entire_row==true ? "colspan="+(@program.maxTrack+1-program_entry.track).to_s : "" %> >
 
   <% if  this_session.confirmed? %>
-    <a href="#session_<%=this_session.to_param%>"><%= w this_session.title %></a>
+    <a name="session_slot_<%=this_session.to_param%>">&nbsp;</a><a href="#session_<%=this_session.to_param%>"><%= w this_session.title %></a>
     <p class=ProgramMatrix_presenters>
       <% if  this_session.presenters[0] %>
         <a href="#presenter_<%=  this_session.presenters[0].id %>"><%= w  this_session.presenters[0].name %></a>
