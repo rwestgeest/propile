@@ -1,25 +1,38 @@
 <div>
-
-
-<% if !@program.program_entries.nil? && !@program.program_entries.empty? %> 
-<table class="ProgramMatrix">
-  <% @program.eachSlot do |slot|
-    no_more_columns_on_this_row = false
-  %>
-    <tr>
-      <% @program.eachTrack do |track|
-           program_entry = @program.entry(slot,track) %>
-        <% if no_more_columns_on_this_row %>  
-        <% else %> 
-          <%= render 'program_entries/show_in_program_matrix_export', :program_entry => program_entry, :program => @program, :slot => slot, :track => track  %>
-          <% no_more_columns_on_this_row |= (!program_entry.nil? && program_entry.span_entire_row) %>
-        <% end %> 
+  <% shown_sessions = [] %>
+  <% if !@program.program_entries.nil? && !@program.program_entries.empty? %>
+    <table class="ProgramMatrix">
+      <% @program.eachSlot do |slot|
+        no_more_columns_on_this_row = false
+      %>
+        <tr>
+          <% @program.eachTrack do |track|
+            program_entry = @program.entry(slot,track) %>
+            <% if no_more_columns_on_this_row %>
+            <% else %>
+              <% if program_entry.nil? %>
+                <td class="structure" ></td>
+              <% else %>
+                <% if !program_entry.session.nil? %>
+                  <% if !shown_sessions.include? program_entry.session.id
+                    shown_sessions << program_entry.session.id
+                  %>
+                    <%= render 'program_entries/show_in_program_matrix_export', :program_entry => program_entry, :program => @program, :slot => slot, :track => track  %>
+                  <% else %>
+                    <%= render 'program_entries/show_continued_session_export', :program_entry => program_entry, :program => @program, :slot => slot, :track => track  %>
+                  <% end  %>
+                <% else %>
+                  <td class="structure" <%= program_entry.span_entire_row==true ? "colspan="+(@program.maxTrack+1-program_entry.track).to_s : "" %> >
+                    <strong><%= wikinize(program_entry.comment) %></strong>
+                  </td>
+                <% end %>
+              <% end %>
+              <% no_more_columns_on_this_row |= (!program_entry.nil? && program_entry.span_entire_row) %>
+            <% end %>
+          <% end %>
+        </tr>
       <% end %>
-    </tr>
+    </table>
   <% end %>
-</table>
-
-<% end %> 
-
 </div>
 
