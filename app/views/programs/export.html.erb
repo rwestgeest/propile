@@ -15,10 +15,13 @@
 <h1>Session descriptions</h1>
 <%
 sessions = []
+sessions_per_presenter = Hash.new {|hash,key| hash[key] = [] }
 @program.eachSlot do |slot|
   @program.eachTrack do |track|
     program_entry = @program.entry(slot,track)
     if !program_entry.nil? && !program_entry.session.nil? && program_entry.session.confirmed? && !sessions.include?(program_entry.session.id) %>
+      <% sessions_per_presenter[program_entry.session.presenters[0].id] << program_entry.session if program_entry.session.presenters[0] %>
+      <% sessions_per_presenter[program_entry.session.presenters[1].id] << program_entry.session if program_entry.session.presenters[1] %>
       <%= render :partial => 'sessions/export_description',:locals => { :this_session => program_entry.session }  %>
       <br />
       <a href="#top">Back to program</a><br />
@@ -37,12 +40,12 @@ presenters = []
     program_entry = @program.entry(slot,track)
     if !program_entry.nil? && !program_entry.session.nil? && program_entry.session.confirmed? %>
       <% if  program_entry.session.presenters[0] && !presenters.include?(program_entry.session.presenters[0].id) %>
-        <%= render :partial => 'presenters/export_description',:locals => { :this_presenter => program_entry.session.presenters[0] }  %>
+        <%= render :partial => 'presenters/export_description',:locals => { :this_presenter => program_entry.session.presenters[0] , :sessions => sessions_per_presenter }  %>
         <a href="#top">Back to program</a><br /><hr />
         <% presenters << program_entry.session.presenters[0].id %>
       <% end %>
       <% if  program_entry.session.presenters[1] && !presenters.include?(program_entry.session.presenters[1].id) %>
-        <%= render :partial => 'presenters/export_description',:locals => { :this_presenter => program_entry.session.presenters[1] }  %>
+        <%= render :partial => 'presenters/export_description',:locals => { :this_presenter => program_entry.session.presenters[1] , :sessions => sessions_per_presenter}  %>
         <a href="#top">Back to program</a><br /><hr />
         <% presenters << program_entry.session.presenters[1].id %>
       <% end %>
