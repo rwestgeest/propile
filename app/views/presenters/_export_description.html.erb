@@ -10,13 +10,5 @@
   <p>Twitter: <a href="https://twitter.com/<%= this_presenter.twitter_id %>" target="_blank"> <%= this_presenter.twitter_id %> </a></p>
 <% end %>
 <%= wikinize this_presenter.bio %>
-<h4>Sessions</h4>
-<p>
-<ul>
-  <% my_sessions = sessions[this_presenter.id]
-  my_sessions.each do |session| %>
-    <li><a href="#session_<%=session.to_param%>"><%= w session.title %></a></li>
-  <% end %>
-</ul>
-</p>
+
 <br style="clear:both;"/>
