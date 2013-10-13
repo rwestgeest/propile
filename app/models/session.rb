@@ -168,8 +168,8 @@ class Session < ActiveRecord::Base
   def self.generate_program_committee_cards_pdf(file_name)
     Prawn::Document.generate file_name, 
       :page_size => 'A6', :page_layout => :landscape,
-      :top_margin => 10, :bottom_margin => 10,
-      :left_margin => 20, :right_margin => 20 do |pdf|
+      :top_margin => 3.5.mm, :bottom_margin => 3.5.mm,
+      :left_margin => 7.mm, :right_margin => 7.mm do |pdf|
       Session.all.each_with_index do |session, i| 
         pdf.start_new_page if i>0
         session.program_committee_card_content(pdf)
@@ -179,27 +179,28 @@ class Session < ActiveRecord::Base
 
   def program_committee_card_content(pdf)
     pdf.font_size 10
-    pdf.text id.to_s, :align => :right
-    pdf.bounding_box([0, 275], :width => 135.mm) do 
+    pdf.text id.to_s, :align => :right, :size => 6
+    pdf.move_up 4.mm
+    pdf.text "#{votes.size} votes"
+    pdf.text "#{reviews.size} reviews"
+    pdf.bounding_box([0, 85.mm], :width => 135.mm) do 
       pdf.text title, :align => :center, :size => 18
       pdf.text sub_title, :align => :center, :style => :italic, :size => 8 if !sub_title.nil? 
     end
-    pdf.bounding_box([0, 210], :width => 135.mm) do 
+    pdf.bounding_box([0, 65.mm], :width => 135.mm) do 
       wikinize_for_pdf(short_description, pdf) if !short_description.nil? 
     end
-    pdf.bounding_box([0, 50], :width => 135.mm, :height => 50 ) do 
+    pdf.bounding_box([0, 10.mm], :width => 135.mm, :height => 12.mm ) do 
       pdf.text "Presenters:"
       pdf.text "Format: "
-      pdf.text "Votes: "
-      pdf.text "Reviews: "
+      pdf.text "Topic: "
     end
-    pdf.bounding_box([60, 50], :width => 320, :height => 50 ) do 
+    pdf.bounding_box([20.mm, 10.mm], :width => 113.mm, :height => 12.mm ) do 
       pdf.text presenter_names
       pdf.text session_type.truncate(60)if !session_type.nil? 
-      pdf.text votes.size.to_s
-      pdf.text reviews.size.to_s
+      pdf.text topic_name
     end
-    pdf.bounding_box([300, 50], :width => 80, :height => 50 ) do 
+    pdf.bounding_box([100.mm, 10.mm], :width => 35.mm, :height => 12.mm ) do 
       pdf.text printable_max_participants, :align => :right
       pdf.text printable_laptops_required, :align => :right
     end
@@ -210,7 +211,7 @@ class Session < ActiveRecord::Base
     pdf.font_size 10
     pdf.text hour, :align => :center
     pdf.move_up 4.mm
-    pdf.text id.to_s, :align => :right
+    pdf.text id.to_s, :align => :right, :size => 6
     pdf.bounding_box([0, 85.mm], :width => 135.mm) do 
       pdf.text title, :align => :center, :size => 18
       pdf.text sub_title, :align => :center, :style => :italic, :size => 8 if !sub_title.nil?
@@ -223,12 +224,12 @@ class Session < ActiveRecord::Base
       pdf.text "Format: "
       pdf.text "Room: "
     end
-    pdf.bounding_box([20.mm, 10.mm], :width => 320, :height => 12.mm ) do 
+    pdf.bounding_box([20.mm, 10.mm], :width => 113.mm, :height => 12.mm ) do 
       pdf.text presenter_names
       pdf.text session_type.truncate(60)if !session_type.nil? 
       pdf.text room
     end
-    pdf.bounding_box([100.mm, 10.mm], :width => 80, :height => 12.mm ) do 
+    pdf.bounding_box([100.mm, 10.mm], :width => 35.mm, :height => 12.mm ) do 
       pdf.text printable_max_participants, :align => :right
       pdf.text printable_laptops_required, :align => :right
     end
@@ -237,8 +238,8 @@ class Session < ActiveRecord::Base
   def generate_program_board_card_pdf(file_name)
     Prawn::Document.generate file_name, 
       :page_size => 'A6', :page_layout => :landscape,
-      :top_margin => 10, :bottom_margin => 10,
-      :left_margin => 20, :right_margin => 20 do |pdf|
+      :top_margin => 3.5.mm, :bottom_margin => 3.5.mm,
+      :left_margin => 7.mm, :right_margin => 7.mm do |pdf|
       program_board_card_content(pdf)
     end
   end
@@ -276,8 +277,8 @@ class Session < ActiveRecord::Base
   def generate_pdf(file_name)
     Prawn::Document.generate file_name, 
       :page_size => 'A4', :page_layout => :portrait,
-      :top_margin => 10, :bottom_margin => 10,
-      :left_margin => 20, :right_margin => 20 do |pdf|
+      :top_margin => 3.5.mm, :bottom_margin => 3.5.mm,
+      :left_margin => 7.mm, :right_margin => 7.mm do |pdf|
       printable_description_content(pdf)
     end
   end
