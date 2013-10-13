@@ -1,4 +1,5 @@
 require 'prawn'
+require 'prawn/measurement_extensions'
 
 class Session < ActiveRecord::Base
   include PdfHelper

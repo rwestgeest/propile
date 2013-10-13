@@ -1,4 +1,5 @@
 require "prawn"
+require 'prawn/measurement_extensions'
 require 'csv'
 
 class Program < ActiveRecord::Base
@@ -205,13 +206,14 @@ class Program < ActiveRecord::Base
   def add_feedback_card_content(pdf) 
     pdf.start_new_page
     pdf.font_size 10
-    pdf.bounding_box([0, 270], :width => 380) do 
+    pdf.bounding_box([0, 95.mm], :width =>135.mm ) do 
       pdf.text "<b>Feedback</b>", :align => :center, :size => 18, :inline_format => true
     end
-    pdf.bounding_box([230, 270], :width => 150) do 
+    pdf.bounding_box([80.mm, 85.mm], :width => 50.mm) do 
+      #pdf.stroke_bounds
       pdf.font_size 15
       pdf.font_size 15
-      pdf.rotate(270, :origin => [70,-70]) do
+      pdf.rotate(270, :origin => [25.mm,-25.mm]) do
         pdf.text "<b>:-(</b>", :align => :left, :inline_format => true
         pdf.text "   ", :align => :left
         pdf.text "<b>:-|</b>", :align => :left, :inline_format => true
@@ -220,13 +222,13 @@ class Program < ActiveRecord::Base
       end
     end
     pdf.font_size 10
-    pdf.bounding_box([0, 240], :width => 380) do 
+    pdf.bounding_box([0, 75.mm], :width => 135.mm) do 
       pdf.text "<b>What I like about this session: </b>", :align => :justify, :inline_format => true
     end
-    pdf.bounding_box([0, 140], :width => 380) do 
+    pdf.bounding_box([0, 40.mm], :width => 135.mm) do 
       pdf.text "<b>What I think you can improve: </b>", :align => :justify, :inline_format => true
     end
-    pdf.bounding_box([0, 10], :width => 380) do 
+    pdf.bounding_box([0, 3.5.mm], :width => 135.mm) do 
       pdf.text "<i><font size='8'>the intention is that the session presenters can use your feedback to improve their session.</font></i> ", :align => :center, :inline_format => true 
     end
   end
