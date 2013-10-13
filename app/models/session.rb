@@ -248,27 +248,27 @@ class Session < ActiveRecord::Base
     pdf.font_size 12
     pdf.text hour, :align => :center
     pdf.move_up 14
-    pdf.text id.to_s, :align => :right
-    pdf.bounding_box([0, 800], :width => 550) do 
+    pdf.text id.to_s, :align => :right, :size => 6
+    pdf.bounding_box([0, 280.mm], :width => 195.mm) do 
       pdf.text title, :align => :center, :size => 24
       pdf.text sub_title, :align => :center, :style => :italic, :size => 14
     end
-    pdf.bounding_box([0, 700], :width => 550) do 
+    pdf.bounding_box([0, 250.mm], :width => 195.mm) do 
       wikinize_for_pdf(description, pdf)
     end
-    pdf.bounding_box([0, 58], :width => 135.mm, :height => 58 ) do 
+    pdf.bounding_box([0, 20.mm], :width => 135.mm, :height => 20.mm ) do 
       pdf.text "Presenters:"
       pdf.text "Format: "
       pdf.text "Topic: "
       pdf.text "Room: "
     end
-    pdf.bounding_box([70, 58], :width => 320, :height => 58 ) do 
+    pdf.bounding_box([25.mm, 20.mm], :width => 110.mm, :height => 20.mm ) do 
       pdf.text presenter_names
       pdf.text session_type.truncate(60) unless session_type.nil? 
       pdf.text topic_name 
       pdf.text room
     end
-    pdf.bounding_box([480, 58], :width => 80, :height => 58 ) do 
+    pdf.bounding_box([480, 20.mm], :width => 30.mm, :height => 20.mm ) do 
       pdf.text printable_max_participants, :align => :right
       pdf.text printable_laptops_required, :align => :right
     end
