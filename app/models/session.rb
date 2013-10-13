@@ -180,14 +180,14 @@ class Session < ActiveRecord::Base
   def program_committee_card_content(pdf)
     pdf.font_size 10
     pdf.text id.to_s, :align => :right
-    pdf.bounding_box([0, 275], :width => 380) do 
+    pdf.bounding_box([0, 275], :width => 135.mm) do 
       pdf.text title, :align => :center, :size => 18
       pdf.text sub_title, :align => :center, :style => :italic, :size => 8 if !sub_title.nil? 
     end
-    pdf.bounding_box([0, 210], :width => 380) do 
+    pdf.bounding_box([0, 210], :width => 135.mm) do 
       wikinize_for_pdf(short_description, pdf) if !short_description.nil? 
     end
-    pdf.bounding_box([0, 50], :width => 380, :height => 50 ) do 
+    pdf.bounding_box([0, 50], :width => 135.mm, :height => 50 ) do 
       pdf.text "Presenters:"
       pdf.text "Format: "
       pdf.text "Votes: "
@@ -209,26 +209,26 @@ class Session < ActiveRecord::Base
   def program_board_card_content(pdf, room="<TODO>", hour="99:99 - 99:99")
     pdf.font_size 10
     pdf.text hour, :align => :center
-    pdf.move_up 12
+    pdf.move_up 4.mm
     pdf.text id.to_s, :align => :right
-    pdf.bounding_box([0, 245], :width => 380) do 
+    pdf.bounding_box([0, 85.mm], :width => 135.mm) do 
       pdf.text title, :align => :center, :size => 18
       pdf.text sub_title, :align => :center, :style => :italic, :size => 8 if !sub_title.nil?
     end
-    pdf.bounding_box([0, 190], :width => 380) do 
+    pdf.bounding_box([0, 65.mm], :width => 135.mm) do 
       wikinize_for_pdf(short_description, pdf) if !short_description.nil? 
     end
-    pdf.bounding_box([0, 29], :width => 380, :height => 36 ) do 
+    pdf.bounding_box([0, 10.mm], :width => 135.mm, :height => 12.mm ) do 
       pdf.text "Presenters:"
       pdf.text "Format: "
       pdf.text "Room: "
     end
-    pdf.bounding_box([60, 29], :width => 320, :height => 36 ) do 
+    pdf.bounding_box([20.mm, 10.mm], :width => 320, :height => 12.mm ) do 
       pdf.text presenter_names
       pdf.text session_type.truncate(60)if !session_type.nil? 
       pdf.text room
     end
-    pdf.bounding_box([300, 29], :width => 80, :height => 36 ) do 
+    pdf.bounding_box([100.mm, 10.mm], :width => 80, :height => 12.mm ) do 
       pdf.text printable_max_participants, :align => :right
       pdf.text printable_laptops_required, :align => :right
     end
@@ -255,7 +255,7 @@ class Session < ActiveRecord::Base
     pdf.bounding_box([0, 700], :width => 550) do 
       wikinize_for_pdf(description, pdf)
     end
-    pdf.bounding_box([0, 58], :width => 380, :height => 58 ) do 
+    pdf.bounding_box([0, 58], :width => 135.mm, :height => 58 ) do 
       pdf.text "Presenters:"
       pdf.text "Format: "
       pdf.text "Topic: "

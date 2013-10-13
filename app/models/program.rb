@@ -177,8 +177,8 @@ class Program < ActiveRecord::Base
   def generate_pdf(file_name, topic=nil)
     Prawn::Document.generate file_name, 
                     :page_size => 'A4', :page_layout => :portrait, 
-                    :top_margin => 10, :bottom_margin => 10, 
-                    :left_margin => 20, :right_margin => 20 do |pdf| 
+                    :top_margin => 3.5.mm, :bottom_margin => 3.5.mm, 
+                    :left_margin => 7.mm, :right_margin => 7.mm do |pdf| 
       program_entries_for_topic(topic).each_with_index do |pe, i| 
         if !pe.session.nil?  
           pdf.start_new_page if i>0
@@ -191,8 +191,8 @@ class Program < ActiveRecord::Base
   def generate_program_board_cards_pdf(file_name, topic=nil)
     Prawn::Document.generate file_name, 
                     :page_size => 'A6', :page_layout => :landscape, 
-                    :top_margin => 10, :bottom_margin => 10, 
-                    :left_margin => 20, :right_margin => 20 do |pdf| 
+                    :top_margin => 3.5.mm, :bottom_margin => 3.5.mm, 
+                    :left_margin => 7.mm, :right_margin => 7.mm do |pdf| 
       program_entries_for_topic(topic).each_with_index do |pe, i| 
         if !pe.session.nil?  
           pdf.start_new_page if i>0
