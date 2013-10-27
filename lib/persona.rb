@@ -82,6 +82,7 @@ Ellen wants to learn new ideas and share experience of techniques that work. She
   end
 
   def Persona.mentioned_in(description)
+    return [] if description.nil?
     description = description.downcase
     personas = []
     ALL.each do |name,persona|

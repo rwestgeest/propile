@@ -74,7 +74,7 @@ end
         <%
         my_sessions = sessions_per_persona[persona.name]
         if my_sessions.length > 0 then %>
-          <p>I'm going to</p>
+          <p>Meet <%= persona.name %> at the following sessions </p>
           <ul>
             <% my_sessions.each do |this_session|%>
               <li><a href="#session_<%= this_session.to_param%>"><%= this_session.title %></a> hosted by

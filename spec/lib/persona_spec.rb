@@ -12,10 +12,9 @@ describe Persona do
   end
 
   it "should be able to describe marieke" do
-    puts
-    puts Persona.called("Marieke").short_description
-    puts "====="
-    puts Persona.called("Marieke").long_description
+    
+    Persona.called("Marieke").short_description.length.should > 0
+    Persona.called("Marieke").long_description.split($/).length.should == 3
   end
 
   it "should be able to find personas in a description" do

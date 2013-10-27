@@ -1,6 +1,7 @@
 <%= content_for :sub_menu do %> 
   <%= link_to 'Export CSV', csv_sessions_path %>
   <%= link_to 'All activity as RSS', :controller => :sessions , :action => 'activity_rss', :format => :xml %>
+  <%= link_to 'Personas', personas_sessions_path %>
 <% end %>
 
 <%= render 'sessions/index', :sessions => @active_sessions, :sortable => true  %>

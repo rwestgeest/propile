@@ -60,6 +60,7 @@ Propile::Application.routes.draw do
     get 'program_board_card', :on => :member
     get 'rss' , :on => :member
     get 'activity_rss' , :on => :collection
+    get 'personas' , :on => :collection
   end
 
   namespace :account do
