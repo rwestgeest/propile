@@ -402,6 +402,21 @@ table.ProgramCard h3 {
  color : black ;
 }
 
+table.personalist {
+    background-color: white ;
+}
+table.personalist td.card {
+    background-color: white ;
+    text-align:  center ;
+    vertical-align: top ;
+}
+
+table.personalist td.description {
+    background-color: white ;
+    text-align:  justify ;
+    vertical-align: top ;
+}
+
 img.profile {
     padding-right : 1em ;
     padding-top : 1em ;

@@ -42,4 +42,15 @@
     <% end  %>
   </tr>
   <tr><td colspan="2" ><%= wikinize( this_session.description) %></td></tr>
+  <% personas = Persona.mentioned_in(this_session.intended_audience)
+  if personas.length > 0 then
+  %>
+    <tr><td colspan="2">
+        <table border="0" class="personalist"><tr>
+            <% personas.each do |persona| %>
+              <td class="card"><a href="#persona_<%= persona.name.downcase %>"><img src="<%= persona.image %> " alt="<%= persona.short_description%>" title="<%= persona.short_description%>" width="96" height="96"/></a><br /><%= persona.name %></td>
+            <%  end %>
+          </tr></table>
+      </td></tr>
+  <% end %>
 </table>

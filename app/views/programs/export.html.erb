@@ -16,12 +16,20 @@
 <%
 sessions = []
 sessions_per_presenter = Hash.new {|hash,key| hash[key] = [] }
+sessions_per_persona = Hash.new {|hash,key| hash[key] = [] }
+
 @program.eachSlot do |slot|
   @program.eachTrack do |track|
     program_entry = @program.entry(slot,track)
-    if !program_entry.nil? && !program_entry.session.nil? && program_entry.session.confirmed? && !sessions.include?(program_entry.session.id) %>
-      <% sessions_per_presenter[program_entry.session.presenters[0].id] << program_entry.session if program_entry.session.presenters[0] %>
-      <% sessions_per_presenter[program_entry.session.presenters[1].id] << program_entry.session if program_entry.session.presenters[1] %>
+    if !program_entry.nil? && !program_entry.session.nil? && program_entry.session.confirmed? && !sessions.include?(program_entry.session.id)
+      sessions_per_presenter[program_entry.session.presenters[0].id] << program_entry.session if program_entry.session.presenters[0]
+      sessions_per_presenter[program_entry.session.presenters[1].id] << program_entry.session if program_entry.session.presenters[1]
+      personas = Persona.mentioned_in(program_entry.session.intended_audience)
+      personas.each do |persona|
+        sessions_per_persona[persona.name] << program_entry.session
+      end
+    %>
+
       <%= render :partial => 'sessions/export_description',:locals => { :this_session => program_entry.session }  %>
       <br />
       <a href="#session_slot_<%=program_entry.session.to_param%>">Back to program</a><br />
@@ -55,3 +63,32 @@ presenters = []
   end
 end
 %>
+<h1>Participants</h1>
+<% Persona.all.each do |name,persona| %>
+  <a name="persona_<%=  name%>"></a>
+  <table class="personalist">
+    <tr><td class="card">
+        <img src="<%= persona.image %> " alt="<%= persona.short_description%>" title="<%= persona.short_description%>" width="192" height="192"/><br /><%= persona.name %>
+      </td>
+      <td class="description"><%= wikinize persona.long_description %>
+        <%
+        my_sessions = sessions_per_persona[persona.name]
+        if my_sessions.length > 0 then %>
+          <p>I'm going to</p>
+          <ul>
+            <% my_sessions.each do |this_session|%>
+              <li><a href="#session_<%= this_session.to_param%>"><%= this_session.title %></a> hosted by
+                <% if  this_session.presenters[0] %>
+                  <a href="#presenter_<%=  this_session.presenters[0].id %>"><%= w  this_session.presenters[0].name %></a>
+                <% end %>
+                <% if  this_session.presenters[1] %>
+                  &amp; <a href="#presenter_<%=  this_session.presenters[1].id %>"><%= w  this_session.presenters[1].name %></a>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+      </td>
+    </tr>
+  </table>
+<% end %>
