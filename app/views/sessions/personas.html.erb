@@ -1,0 +1,21 @@
+<% Persona.all.each do |name,persona| %>
+  <a name="persona_<%=  name%>"></a>
+  <table class="personalist">
+    <tr><td class="card">
+        <img src="<%= persona.image %> " alt="<%= persona.short_description%>" title="<%= persona.short_description%>" width="192" height="192"/><br /><%= persona.name %>
+      </td>
+      <td class="description"><%= wikinize persona.long_description %>
+        <%
+        my_sessions = @sessions_per_persona[persona.name]
+        if my_sessions.length > 0 then %>
+          <p>I'd like to go to</p>
+          <ul>
+            <% my_sessions.each do |this_session|%>
+              <li><%= link_to w(this_session.title) , this_session %> hosted by <%= session_presenter_names(this_session) %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      </td>
+    </tr>
+  </table>
+<% end %>

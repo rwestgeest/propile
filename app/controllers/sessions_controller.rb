@@ -189,6 +189,19 @@ class SessionsController < ApplicationController
     end
   end
 
+  def personas
+    @sessions = Session.all
+    @sessions_per_persona = Hash.new {|hash,key| hash[key] = [] }
+    @sessions.each do |session|
+      unless session.intended_audience.nil?
+        personas = Persona.mentioned_in(session.intended_audience)
+        personas.each do |persona|
+          @sessions_per_persona[persona.name] << session
+        end
+      end
+    end
+  end
+
 
   def sort_column
     params[:sort] ? params[:sort] : "reviewcount"

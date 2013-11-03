@@ -12,219 +12,219 @@
 */
 
 body {
-  font-family: Sans-serif;
-  font: Arial;
-  font-size: medium;
+    font-family: Sans-serif;
+    font: Arial;
+    font-size: medium;
 }
 
 #header-navigation {
-  text-align: right;
-  height:50px;
+    text-align: right;
+    height:50px;
 }
 
 #header-navigation img {
-  vertical-align:text-top;
-  position:absolute;
-  left:0px;
+    vertical-align:text-top;
+    position:absolute;
+    left:0px;
 }
 
 #main-navigation ul { height: 40px; display: block; list-style-type: none; padding:0;}
 #main-navigation ul li { float: left; }
 #main-navigation ul li a { 
-	display: block; 
-	font-size: 110%;
-	text-decoration: none;
-	border-radius: 3px;
-	-moz-border-radius: 3px;
-	-webkit-box-radius: 3px;
-	padding: 6px 7px;
-	margin: 9px 3px 0 0;
+    display: block;
+    font-size: 110%;
+    text-decoration: none;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-box-radius: 3px;
+    padding: 6px 7px;
+    margin: 9px 3px 0 0;
 }
 #main-navigation ul li a:hover { 
-	display: block;
-	background: lightGrey;
+    display: block;
+    background: lightGrey;
 }
 #main-navigation ul li a.active {
-	background: Grey;
-  color: #fff;
+    background: Grey;
+    color: #fff;
 }
 
 #notice {
-  color: #0f0;
+    color: #0f0;
 }
 
 #alert {
-  font-weight:bold;
-  color: #f00;
+    font-weight:bold;
+    color: #f00;
 }
 
 #error_explanation {
-  color: #f00;
+    color: #f00;
 }
 
 a {
-	text-decoration: none;
-  color:#0088cc;
+    text-decoration: none;
+    color:#0088cc;
 }
 a:hover { 
-  color:seagreen;
-	background: lightGrey;
+    color:seagreen;
+    background: lightGrey;
 }
 
 table.tablelist {
-  border-collapse:collapse;
-  border: 2px solid lavender;
-  text-align: left;
+    border-collapse:collapse;
+    border: 2px solid lavender;
+    text-align: left;
 }
 
 .tablelist th .current {
-  padding-right: 12px;
-  background-repeat: no-repeat;
-  background-position: right center;
+    padding-right: 12px;
+    background-repeat: no-repeat;
+    background-position: right center;
 }
 
 .tablelist th .asc {
-  background-image: url(/assets/up_arrow.gif);
+    background-image: url(/assets/up_arrow.gif);
 }
 
 .tablelist th .desc {
-  background-image: url(/assets/down_arrow.gif);
+    background-image: url(/assets/down_arrow.gif);
 }
 
 table.propertytable {
-  border-collapse:collapse;
-  border: 2px solid lavender;
-  text-align: left;
-  width: 100%;
+    border-collapse:collapse;
+    border: 2px solid lavender;
+    text-align: left;
+    width: 100%;
 }
 
 td, th {
-  border: 1px solid lavender;
-  padding: 5px;
+    border: 1px solid lavender;
+    padding: 5px;
 }
 
 th {
-  background-color: ghostwhite;
+    background-color: ghostwhite;
 }
 
 td.propertyname {
-  font-weight:bold;
+    font-weight:bold;
 }
 
 td.nowrap {
-  white-space:nowrap;
+    white-space:nowrap;
 }
 
 table.sessiontable {
-  border-collapse:collapse;
-  border: 0px;
-  text-align: left;
-  margin: 0;
-  padding: 0;
-  #background-color: pink;
+    border-collapse:collapse;
+    border: 0px;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+    #background-color: pink;
 }
 
 td.sessiontable_label {
-  border: 0px;
-  #background-color: yellow;
-  padding: 10px 10px 0px 0px;
-  vertical-align: bottom;
+    border: 0px;
+    #background-color: yellow;
+    padding: 10px 10px 0px 0px;
+    vertical-align: bottom;
 }
 
 td.sessiontable {
-  border: 0px;
-  #background-color: pink;
-  padding: 0px 10px 10px 0px;
-  vertical-align: bottom;
+    border: 0px;
+    #background-color: pink;
+    padding: 0px 10px 10px 0px;
+    vertical-align: bottom;
 }
 
 div.in_a_form {
-  border: 0px;
-  padding: 10px 10px 0px 0px;
-  vertical-align: bottom;
-  text-align: left;
+    border: 0px;
+    padding: 10px 10px 0px 0px;
+    vertical-align: bottom;
+    text-align: left;
 }
 
 .alignright {
-  text-align: right;
-  font-size: smaller;
+    text-align: right;
+    font-size: smaller;
 }
 
 .smalllink {
-  font-size: 60%;
+    font-size: 60%;
 }
 
 div.outlined {
-  border: 2px solid lavender;
-  background-color: #D8E6D8;
-  margin: 1px;
-  padding: 6px;
+    border: 2px solid lavender;
+    background-color: #D8E6D8;
+    margin: 1px;
+    padding: 6px;
 }
 
 div.outlined > p {
-  margin: 0px 0px;
-  padding: 3px 0px;
+    margin: 0px 0px;
+    padding: 3px 0px;
 }
 
 div.lessoutlined {
-  border: 1px solid lavender;
-  background-color: ghostwhite;
-  margin: 0px 0px;
-  padding: 5px 10px;
-  font-family: Sans-serif;
-  font-size: 100%;
+    border: 1px solid lavender;
+    background-color: ghostwhite;
+    margin: 0px 0px;
+    padding: 5px 10px;
+    font-family: Sans-serif;
+    font-size: 100%;
 }
 
 div.lessoutlined > p {
-  margin: 0px 0px;
-  padding: 3px 0px;
+    margin: 0px 0px;
+    padding: 3px 0px;
 }
 
 div > i {
-  color:brown;
-  font-size:smaller;
+    color:brown;
+    font-size:smaller;
 }
 
 td > i {
-  color:brown;
-  font-size:smaller;
+    color:brown;
+    font-size:smaller;
 }
 
 div > a {
-  font-size: smaller;
+    font-size: smaller;
 }
 
 div.important {
-  color:brown;
-  font-weight:bold;
+    color:brown;
+    font-weight:bold;
 }
 
 div.flashy  {
-  color:red;
-  font-weight:bold;
-  font-size: larger;
+    color:red;
+    font-weight:bold;
+    font-size: larger;
 }
 
 div.flashy > a {
-  color:red;
-  font-weight:bold;
-  font-size: larger;
+    color:red;
+    font-weight:bold;
+    font-size: larger;
 }
 
 div.session_status  {
-  background-color:yellow;
-  color:red;
-  font-weight:bold;
-  font-size: smaller;
+    background-color:yellow;
+    color:red;
+    font-weight:bold;
+    font-size: smaller;
 }
 
 
 pre {
-  white-space: pre-wrap;       /* css-3 */
-  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-  white-space: -pre-wrap;      /* Opera 4-6 */
-  white-space: -o-pre-wrap;    /* Opera 7 */
-  word-wrap: break-word;   
+    white-space: pre-wrap;       /* css-3 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;
 }
 
 div.menu {
@@ -234,118 +234,118 @@ div.title {
 }
 
 div.submenu a {
-	font-size: 90%;
-	text-decoration: none;
-  padding: 1px 6px;
-	margin: 3px 3px 0 0;
+    font-size: 90%;
+    text-decoration: none;
+    padding: 1px 6px;
+    margin: 3px 3px 0 0;
 }
 
 
 div.review {
-  border: 3px solid lavender;
-  margin: 2px 20px;
-  padding: 2px 20px;
+    border: 3px solid lavender;
+    margin: 2px 20px;
+    padding: 2px 20px;
 }
 
 div.editing_preview {
-  background-color:whitesmoke;
-  border: 0px;
-  margin: 0px;
-  padding: 0px;
+    background-color:whitesmoke;
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
 }
 div.editing {
-  background-color:LightYellow ;
-  border: 0px;
-  margin: 0px;
-  padding: 0px;
+    background-color:LightYellow ;
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
 }
 
 div.popupcontainer {
-  position: relative;
-  width: 100%;
-  height: 100%;
+    position: relative;
+    width: 100%;
+    height: 100%;
 }
 
 div.popup {
-  background-color:LightYellow ;
-  border: 1px solid grey;
-  padding: 0px 25px 10px 25px;
-  z-index: 10;
-  position: absolute;
-  box-shadow: 10px 10px 5px #888888;
+    background-color:LightYellow ;
+    border: 1px solid grey;
+    padding: 0px 25px 10px 25px;
+    z-index: 10;
+    position: absolute;
+    box-shadow: 10px 10px 5px #888888;
 }
 
 div.reviewcontenttitle {
-  margin: 10px 0px;
-  width: 100%;
+    margin: 10px 0px;
+    width: 100%;
 }
 
 div.comment {
-  border: 1px solid lavender;
-  margin: 5px 20px;
-  padding: 5px 20px;
+    border: 1px solid lavender;
+    margin: 5px 20px;
+    padding: 5px 20px;
 }
 
 hr {
-  height:1px;
-  background-color:lavender;
-  border: 0px;
+    height:1px;
+    background-color:lavender;
+    border: 0px;
 }
 
 h3 {
-  margin: 20px 0px 0px 0px;
+    margin: 20px 0px 0px 0px;
 }
 
 h4 {
-  margin: 0px;
+    margin: 0px;
 }
 
 table.ProgramMatrix tr td {
-  font-family:"Lucida Sans Unicode";
-  text-align:center;
-  vertical-align:top;
-  padding: 0px;
-  padding-left: 0.5em ;
-  padding-right: 0.5em ;
-  margin-left: 0.5em;
-  margin-right: 0.5em;
-  margin-top: 0.5em;
-  border-style:solid;
-  border-width:1px;
-  border-color:#969696;
+    font-family:"Lucida Sans Unicode";
+    text-align:center;
+    vertical-align:top;
+    padding: 0px;
+    padding-left: 0.5em ;
+    padding-right: 0.5em ;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    margin-top: 0.5em;
+    border-style:solid;
+    border-width:1px;
+    border-color:#969696;
 }
 
 table.ProgramMatrix  p {
-  text-align : center ;
+    text-align : center ;
 }
 
 table.ProgramMatrix {
-  border-collapse: separate;
-  border-spacing : 5px ;
+    border-collapse: separate;
+    border-spacing : 5px ;
 }
 
 table.ProgramMatrix td.technology {
-	font-size: small;
+    font-size: small;
 }
 table.ProgramMatrix td.customer {
-	font-size: small;
+    font-size: small;
 }
 table.ProgramMatrix td.cases {
-	font-size: small;
+    font-size: small;
 }
 table.ProgramMatrix td.team {
-	font-size: small;
+    font-size: small;
 }
 table.ProgramMatrix td.process {
-	font-size: small;
+    font-size: small;
 }
 
 table.ProgramMatrix td.none {
-	font-size: small;
+    font-size: small;
 }
 
 table.ProgramMatrix td.other {
-	font-size: small;
+    font-size: small;
 }
 .technology { background-color:#C7FFB1; }
 .customer { background-color:#D6F9FF; }
@@ -357,49 +357,88 @@ table.ProgramMatrix td.other {
 .structure {  background-color : #EFEFEF;}
 
 table.ProgramMatrix td  a {
-  color: black;
-  text-decoration: none;
-  font-weight : bold ;
+    color: black;
+    text-decoration: none;
+    font-weight : bold ;
 }
 
 table.ProgramMatrix  td a:hover {
-  color: black;
-  text-decoration: underline;
-  font-weight : bold ;
+    color: black;
+    text-decoration: underline;
+    font-weight : bold ;
 }
 
 table.ProgramCard {
-  border-collapse: collapse;
-  border-spacing : 5px ;
-  width : 90% ;
-  -moz-box-shadow:    10px 10px 5px 6px #ccc;
-  -webkit-box-shadow: 10px 10px 5px 6px #ccc;
-  box-shadow:         10px 10px 5px 6px #ccc;
+    border-collapse: collapse;
+    border-spacing : 5px ;
+    width : 90% ;
+    -moz-box-shadow:    10px 10px 5px 6px #ccc;
+    -webkit-box-shadow: 10px 10px 5px 6px #ccc;
+    box-shadow:         10px 10px 5px 6px #ccc;
 }
 
 table.ProgramCard td {
-  text-align:left;
-  vertical-align:top;
-  margin-left: 1em ;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
-  border: 1px solid black ;
+    text-align:left;
+    vertical-align:top;
+    margin-left: 1em ;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    border: 1px solid black ;
 }
 
 table.ProgramCard td  a {
-  color: black;
-  text-decoration: none;
-  font-weight : bold ;
+    color: black;
+    text-decoration: none;
+    font-weight : bold ;
 }
 
 table.ProgramCard  td a:hover {
-  color: black;
-  text-decoration: underline;
-  font-weight : bold ;
+    color: black;
+    text-decoration: underline;
+    font-weight : bold ;
 }
 
 table.ProgramCard h3 {
- color : black ;
+    color : black ;
+}
+
+table.personalist {
+    border-collapse: separate ;
+}
+table.personalist td.card {
+    background-color: white ;
+    text-align:  center ;
+    vertical-align: top ;
+}
+
+table.personalist td.description {
+    background-color: white ;
+    text-align:  justify ;
+    vertical-align: top ;
+}
+
+img.persona_id {
+    border : 1px solid black ;
+}
+
+div.persona {
+    background-color: white ;
+    display: inline-block ;
+    padding : 0.5em ;
+    border : 1px solid black ;
+    margin : 0.2em;
+
+}
+
+div.persona div.mugshot {
+}
+
+div.persona div.mugshot img {
+    border : 1px solid black ;
+}
+
+div.persona div.name {
+    text-align: center ;
 }
 
 span.sessionlimit {
@@ -428,29 +467,29 @@ img.profile {
 }
 
 input.collapsebutton {
-  height:15px;
-  width:15px;
-  font-size:15px;
-  padding:0px;
-  border:0px;
-  background-color:#F3F3F3;
-  box-shadow: 2px 1px 2px #888888;
+    height:15px;
+    width:15px;
+    font-size:15px;
+    padding:0px;
+    border:0px;
+    background-color:#F3F3F3;
+    box-shadow: 2px 1px 2px #888888;
 }
 input.collapsebutton:hover { 
-	background: lavender;
+    background: lavender;
 }
 
 
 input.adddelete_button {
-  height:15px;
-  width:15px;
-  font-size:15px;
-  padding:0px;
-  border:0px;
-  background-color:#F3F3F3;
-  box-shadow: 2px 1px 2px #888888;
+    height:15px;
+    width:15px;
+    font-size:15px;
+    padding:0px;
+    border:0px;
+    background-color:#F3F3F3;
+    box-shadow: 2px 1px 2px #888888;
 }
 input.adddelete_button:hover { 
-	background: lavender;
+    background: lavender;
 }
 
