@@ -6,9 +6,9 @@ describe Persona do
   end
 
   it "should know JAN" do
-   Persona.called("jan").name.should == "Jan"
-   Persona.called("Jan").name.should == "Jan"
-   Persona.called("Jan").image.should == "/personas/jan.jpg"
+    Persona.called("jan").name.should == "Jan"
+    Persona.called("Jan").name.should == "Jan"
+    Persona.called("Jan").image.should == "/personas/jan.jpg"
   end
 
   it "should be able to describe marieke" do
@@ -25,6 +25,24 @@ describe Persona do
     personas[2].name.should == "Vincent"
   end
 
+  it "should add all personas if keywords anybody or anyone are used" do
+    personas = Persona.mentioned_in("this session is for anybody.")
+    personas.length.should == Persona.all.length
+    personas = Persona.mentioned_in("Anybody will benefit")
+    personas.length.should == Persona.all.length
+    personas = Persona.mentioned_in("this session is for anyone.")
+    personas.length.should == Persona.all.length
+    personas = Persona.mentioned_in("Anyone will benefit")
+    personas.length.should == Persona.all.length
+    personas = Persona.mentioned_in("this session is for everyone.")
+    personas.length.should == Persona.all.length
+    personas = Persona.mentioned_in("Everyone will benefit")
+    personas.length.should == Persona.all.length
+    personas = Persona.mentioned_in("this session is for everybody.")
+    personas.length.should == Persona.all.length
+    personas = Persona.mentioned_in("Everybody will benefit")
+    personas.length.should == Persona.all.length
+  end
  
 end
 

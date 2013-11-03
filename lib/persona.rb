@@ -81,8 +81,16 @@ Ellen wants to learn new ideas and share experience of techniques that work. She
     ALL[name.downcase]
   end
 
+  def Persona.all_personas
+    ALL.values
+  end
+
   def Persona.mentioned_in(description)
     return [] if description.nil?
+    return all_personas if description =~ /\banyone\b/i
+    return all_personas if description =~ /\banybody\b/i
+    return all_personas if description =~ /\beverybody\b/i
+    return all_personas if description =~ /\beveryone\b/i
     description = description.downcase
     personas = []
     ALL.each do |name,persona|
