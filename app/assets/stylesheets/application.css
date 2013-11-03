@@ -402,6 +402,23 @@ table.ProgramCard h3 {
  color : black ;
 }
 
+span.sessionlimit {
+    float : right ;
+    text-align : center ;
+    display: inline ;
+    padding : 1em ;
+}
+
+span.sessionlimit .count {
+    font-size: 4em ;
+    font-weight:bold;
+}
+
+span.sessionlimit .legend {
+    font-size: 1em ;
+
+}
+
 img.profile {
     padding-right : 1em ;
     padding-top : 1em ;

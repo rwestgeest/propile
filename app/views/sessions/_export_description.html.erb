@@ -1,7 +1,11 @@
 <table class="ProgramCard <%=  this_session.topic%>">
   <tr>
     <td colspan="2">
-       <% if  this_session.laptops_required? %>
+       
+      <% if this_session.limited? then %>
+      <span class="sessionlimit"><span class="legend">max</span> <br /> <span class="count"><%= this_session.max_participants %></span></span>
+      <% end  %>
+      <% if  this_session.laptops_required? %>
       <div style="float:right;"><%= image_tag('Portable Computer.png',height: 128, width: 128)%></div>
     <%  end %>
       <h2><a name="session_<%=  this_session.to_param%>"></a><%= w this_session.title %></h2>
@@ -28,16 +32,13 @@
   <tr>
     <td class="propertyname">Session Type:</td><td> <%= this_session.duration %> <%= w this_session.session_type %> </td>
   </tr>
-  <% if this_session.limited? then %>
-    <tr>
-      <td class="propertyname" nowrap>Max participants:</td><td> <%= this_session.max_participants %>  </td>
-    </tr>
-  <% end %>
   <% if this_session.has_materials? %>
     <tr>
       <td class="propertyname">Materials:</td>
       <td>   <a href="<%= this_session.material_url%>" target="_blank"><%= this_session.material_description %></a></td>
     <% end  %>
   </tr>
-  <tr><td colspan="2" ><%= wikinize( this_session.description) %></td></tr>
+  <tr><td colspan="2" >
+      <%= wikinize( this_session.description) %>
+    </td></tr>
 </table>
