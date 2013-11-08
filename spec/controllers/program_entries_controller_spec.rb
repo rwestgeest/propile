@@ -111,7 +111,7 @@ describe ProgramEntriesController do
   
         it "redirects to the program_entry" do
           put :update, {:id => program_entry.to_param, :program_entry => valid_attributes}
-          response.should redirect_to( :controller => 'programs', :action => 'edit' )
+          response.should redirect_to( :controller => 'programs', :action => 'edit', id: program_entry.program.id )
         end
       end
   

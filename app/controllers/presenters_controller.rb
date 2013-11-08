@@ -10,7 +10,15 @@ class PresentersController < ApplicationController
       @presenters = Presenter.all.sort_by { |p| p.email.upcase }  
       @presenters = sort_direction=="asc" ? @presenters :  @presenters.reverse 
     else
-      @presenters = Presenter.order( "upper("+sort_column+") " + sort_direction)
+      sort = begin
+        if ( Presenter.attribute_names - %w[created_at] ).include?( sort_column.to_s )
+          "upper(cast (#{sort_column} as text))"
+        else
+          'created_at'
+        end
+      end
+
+      @presenters = Presenter.order( "#{sort} #{sort_direction}" )
     end
   end
 

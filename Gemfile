@@ -8,7 +8,7 @@ gem "haml-rails"
 
 gem "action-guard", "~> 1.2.0"
 #gem 'guid'
-gem 'sqlite3'
+gem 'pg'
 gem "recaptcha", :require => "recaptcha/rails"
 gem 'prawn'
 gem 'htmlentities'
@@ -20,6 +20,7 @@ group :test do
   gem 'shoulda-matchers'
   gem "capybara"
   gem 'guard-rspec'
+  gem 'database_cleaner'
 end
 
 group :development do
