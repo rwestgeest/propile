@@ -40,3 +40,8 @@ To create databases :
 Then, ensure tests are passing :
 
     bundle exec rspec spec/
+
+
+To populate database the very first time you run the app :
+
+    bundle exec rake db:seed
