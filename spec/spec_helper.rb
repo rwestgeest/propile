@@ -23,9 +23,17 @@ RSpec.configure do |config|
   config.filter_run_excluding :broken => true
   config.filter_run 
   config.run_all_when_everything_filtered = true
-end
 
- load_schema = lambda {  
-   load "#{Rails.root.to_s}/db/schema.rb" # use db agnostic schema by default  
- }
- silence_stream(STDOUT, &load_schema)
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :deletion
+    DatabaseCleaner.clean_with( :truncation )
+  end
+
+  config.before :each do
+    DatabaseCleaner.start
+  end
+
+  config.after :each do
+    DatabaseCleaner.clean
+  end
+end

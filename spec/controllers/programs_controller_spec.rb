@@ -39,37 +39,37 @@ describe ProgramsController do
       entry.comment = "helaba!"
       program.program_entries << entry
 
-      me = Presenter.new
-      me.email = "presenter@company.com"
-      me.name = "Jane Presenter"
-      me.bio = "I've led an interesting life"
-      me.should be_valid
-      me.save
+      @me = Presenter.new
+      @me.email = "presenter@company.com"
+      @me.name = "Jane Presenter"
+      @me.bio = "I've led an interesting life"
+      @me.should be_valid
+      @me.save
 
-      friend = Presenter.new
-      friend.email = "irene@company.com"
-      friend.name = "Irène Presenter"
-      friend.bio = "I've led an interesting life. A bientôt! Irène"
-      friend.should be_valid
-      friend.save
+      @friend = Presenter.new
+      @friend.email = "irene@company.com"
+      @friend.name = "Irène Presenter"
+      @friend.bio = "I've led an interesting life. A bientôt! Irène"
+      @friend.should be_valid
+      @friend.save
 
-      session = Session.new
-      session.title = "Session expérimentale"
-      session.description = "We're going to do things nobody's ever done before. At least Irène hasn't done them."
-      session.topic = "team"
-      session.laptops_required = 'no'
-      session.duration = "75 min"
-      session.first_presenter = me
-      session.second_presenter = friend
-      session.state = Session::CONFIRMED
-      session.should be_valid
-      session.save
+      @session = Session.new
+      @session.title = "Session expérimentale"
+      @session.description = "We're going to do things nobody's ever done before. At least Irène hasn't done them."
+      @session.topic = "team"
+      @session.laptops_required = 'no'
+      @session.duration = "75 min"
+      @session.first_presenter = @me
+      @session.second_presenter = @friend
+      @session.state = Session::CONFIRMED
+      @session.should be_valid
+      @session.save
 
       entry = ProgramEntry.new
       entry.slot = 1
       entry.track = 2
       entry.comment = "hocus pocus!"
-      entry.session = session
+      entry.session = @session
       program.program_entries << entry
       program.should be_valid
       program.save
@@ -132,6 +132,7 @@ describe ProgramsController do
         
         get :export, :id => program.to_param
         assigns(:program).should eq(program)
+
         response.should be_succes
 #        puts "-------------"
 #        puts response.body
@@ -139,9 +140,9 @@ describe ProgramsController do
         response.body.should  match(/Legend/)
         response.body.should  match(/Session descriptions/)
         response.body.should  match(/Presenters/)
-        response.body.should match("<a href=\"#presenter_1\">Jane Presenter</a>")
-        response.body.should match("<a href=\"#presenter_2\">Ir&egrave;ne Presenter</a>")
-        response.body.should match("<a href=\"#session_1\">Session exp&eacute;rimentale</a>")
+        response.body.should match("<a href=\"#presenter_#{@me.id}\">Jane Presenter</a>")
+        response.body.should match("<a href=\"#presenter_#{@friend.id}\">Ir&egrave;ne Presenter</a>")
+        response.body.should match("<a href=\"#session_#{@session.id}\">Session exp&eacute;rimentale</a>")
         response.body.should_not match("Irène")
       end
     end
