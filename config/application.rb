@@ -74,7 +74,7 @@ module Propile
     end
 
     def self.mail_subject_prefix
-      "[Propile XP Days 2013] "
+      "[Propile XP Days 2014] "
     end
 
     def self.version
