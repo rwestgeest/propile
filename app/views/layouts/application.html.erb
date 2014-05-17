@@ -25,6 +25,7 @@
       </nav>
 
       <nav id="main-navigation">
+
         <ul>
           <%= menu(request) do |m| %>
             <% m.tab("Home", 'pages') %>
@@ -57,7 +58,7 @@
     <div class="submenu"> <%= yield :sub_menu %> </div>
     <div class="alignright"> 
       <a href="mailto:sessions@xpday.net">problems or questions
-      (<%= Propile::Application.version %>)
+        (<%= Propile::Application.version %>)
       </a> 
     </div> 
   </body>

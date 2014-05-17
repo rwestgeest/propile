@@ -1,7 +1,6 @@
 <table class="ProgramCard <%=  this_session.topic%>">
   <tr>
     <td colspan="2">
-       
       <% if this_session.limited? then %>
       <span class="sessionlimit"><span class="legend">max</span> <br /> <span class="count"><%= this_session.max_participants %></span></span>
       <% end  %>

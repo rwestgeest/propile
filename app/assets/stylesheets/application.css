@@ -20,6 +20,8 @@ body {
 #header-navigation {
     text-align: right;
     height:50px;
+    margin-right : 2em ;
+    margin-left : 2em ;
 }
 
 #header-navigation img {
