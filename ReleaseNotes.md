@@ -1,4 +1,6 @@
+# 0.4.39
 # 0.4.38
+Updated timeline until 11/08 - voting starts
 # 0.4.37
 # 0.4.36
 # 0.4.35
