@@ -37,10 +37,12 @@
       <% if editable %> 
         <td class="ProgramMatrix" > 
           <%= form_for(@program, :url => insertSlot_program_url(@program)) do |f| %>
-            <%= hidden_field_tag "field[before]", slot %> <%= f.submit "+", :class=>"adddelete_button" %>
+            <%= hidden_field_tag "field[before]", slot %> 
+            <%= f.submit "+", :class=>"adddelete_button", "data-tooltip" => true, :title => "Add row (slot) below this row"  %>
           <% end %>
           <%= form_for(@program, :url => removeSlot_program_url(@program)) do |f| %>
-            <%= hidden_field_tag "field[slot]", slot %> <%= f.submit "-", :class=>"adddelete_button"  %>
+            <%= hidden_field_tag "field[slot]", slot %> 
+            <%= f.submit "-", :class=>"adddelete_button", "data-tooltip" => true, :title => "Remove this row (slot)"  %>
           <% end %>
         </td>
       <% end %> 
@@ -52,10 +54,12 @@
       <% @program.eachTrack do |track| %> 
         <td class="ProgramMatrix" > 
           <%= form_for(@program, :url => insertTrack_program_url(@program )) do |f| %>
-            <%= hidden_field_tag "field[before]", track %> <%= f.submit "+", :class=>"adddelete_button" %>
+            <%= hidden_field_tag "field[before]", track %> 
+            <%= f.submit "+", :class=>"adddelete_button", "data-tooltip" => true, :title => "Add column (track) to the left of this column"   %>
           <% end %>
           <%= form_for(@program, :url => removeTrack_program_url(@program )) do |f| %>
-            <%= hidden_field_tag "field[track]", track %> <%= f.submit "-", :class=>"adddelete_button" %>
+            <%= hidden_field_tag "field[track]", track %> 
+             <%= f.submit "-", :class=>"adddelete_button", "data-tooltip" => true, :title => "Remove this column (track)"   %>
           <% end %>
         </td> 
       <% end %>
