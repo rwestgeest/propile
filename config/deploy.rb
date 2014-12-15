@@ -15,7 +15,7 @@ namespace :vlad do
     assets
     start
   }
-  desc "deploy and migrate"
+  desc "deploy and migrate db"
   task "deploy:migrate" => %w{
     update
     update-bundle

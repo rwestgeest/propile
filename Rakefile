@@ -15,7 +15,7 @@ require File.expand_path('../config/application', __FILE__)
 
 Propile::Application.load_tasks
 
-desc "release version defined in VERSION" 
+desc "release version defined in VERSION to PROD + puts tag in git -fails if already released" 
 task "release" do
   releaseline = File.readlines('VERSION').first.strip
   p releaseline
@@ -27,12 +27,12 @@ task "release" do
   sh 'rake vlad:deploy:migrate to=prod'
 end
 
-desc "Get the production database to local development"
+desc "Get the production database and copy to local development"
 task "get_prod_db" do
   sh 'scp agilesystems@propile.xpday.net:propile-prod/data/production.sqlite3 data/development.sqlite3'
 end
 
-desc "Get the production database to remote test"
+desc "Get the production database and copy to remote test"
 task "get_prod_db_to_test" do
   sh 'ssh agilesystems@propile.xpday.net cp -v propile-test/data/development.sqlite3 propile-test/data/development.sqlite3.backup'
   sh 'ssh agilesystems@propile.xpday.net cp -v propile-prod/data/production.sqlite3 propile-test/data/development.sqlite3'
