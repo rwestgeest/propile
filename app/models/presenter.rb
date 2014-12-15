@@ -83,7 +83,13 @@ class Presenter < ActiveRecord::Base
 
   def self.create_from_archived_presenter(email_value)
     if archived_presenter = ArchivedPresenter.where('lower(email) = ?', email_value.downcase).first
-      presenter = Presenter.new(:email => email_value, :name => archived_presenter.name, :bio => archived_presenter.bio)
+      presenter = Presenter.new(:email => email_value, 
+                                :name => archived_presenter.name, 
+                                :bio => archived_presenter.bio, 
+                                :twitter_id => archived_presenter.twitter_id, 
+                                :profile_image => archived_presenter.profile_image, 
+                                :website => archived_presenter.website 
+                               )
     else
       presenter = Presenter.new(:email => email_value)
     end

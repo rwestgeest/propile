@@ -30,11 +30,14 @@ ActiveRecord::Schema.define(:version => 20130909190234) do
   add_index "accounts", ["email"], :name => "index_accounts_on_email"
 
   create_table "archived_presenters", :force => true do |t|
-    t.string   "name",       :limit => 100
-    t.string   "email",      :limit => 150
+    t.string   "name",          :limit => 100
+    t.string   "email",         :limit => 150
     t.text     "bio"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.string   "twitter_id",    :limit => 128
+    t.string   "profile_image", :limit => 1024
+    t.string   "website",       :limit => 1024
   end
 
   add_index "archived_presenters", ["email"], :name => "index_archived_presenters_on_email"

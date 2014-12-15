@@ -155,6 +155,9 @@ describe Presenter do
       archived_presenter.name.should == presenter.name
       archived_presenter.email.should == presenter.email
       archived_presenter.bio.should == presenter.bio
+      archived_presenter.twitter_id.should == presenter.twitter_id
+      archived_presenter.profile_image.should == presenter.profile_image
+      archived_presenter.website.should == presenter.website
     end
 
     it "copies presenter to archived_presenter" do

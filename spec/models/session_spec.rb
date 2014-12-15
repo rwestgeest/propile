@@ -57,13 +57,16 @@ describe Session do
       end
       context "and presenter does not exist but presenter is archived" do
         it "creates the presenter from the archive" do
-          archived_presenter = FactoryGirl.create :archived_presenter, :bio => "the bio"
+          archived_presenter = FactoryGirl.create :archived_presenter, :bio => "the bio", :twitter_id => "twitterit", :profile_image => "myprofile", :website => "mywebsite"
           set_email_value_to archived_presenter.email
           session.save
           presenter = Presenter.includes(:account).where('accounts.email = ?', archived_presenter.email).first 
           presenter.should_not be_nil
           presenter.name.should == archived_presenter.name
           presenter.bio.should == archived_presenter.bio
+          presenter.twitter_id.should == archived_presenter.twitter_id
+          presenter.profile_image.should == archived_presenter.profile_image
+          presenter.website.should == archived_presenter.website
         end
       end
 
