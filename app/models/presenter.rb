@@ -11,7 +11,7 @@ class Presenter < ActiveRecord::Base
   attr_accessible :twitter_id, :profile_image, :website
 
   validates :email, :presence => true,
-                    :format => { :with => EMAIL_REGEXP }
+    :format => { :with => EMAIL_REGEXP }
 
   delegate :email, :to => :lazy_account, :allow_nil => true
   delegate :email=, :to => :lazy_account
@@ -30,6 +30,14 @@ class Presenter < ActiveRecord::Base
 
   def name
     if super.blank? then email else super end
+  end
+
+  def website=(url)
+    url = url.strip
+    if url.length > 0 then
+      url = "http://" + url unless url =~ /^http[s]{0,1}:\/\//i
+    end
+    write_attribute :website,url
   end
 
   def name_filled_in?
@@ -84,12 +92,12 @@ class Presenter < ActiveRecord::Base
   def self.create_from_archived_presenter(email_value)
     if archived_presenter = ArchivedPresenter.where('lower(email) = ?', email_value.downcase).first
       presenter = Presenter.new(:email => email_value, 
-                                :name => archived_presenter.name, 
-                                :bio => archived_presenter.bio, 
-                                :twitter_id => archived_presenter.twitter_id, 
-                                :profile_image => archived_presenter.profile_image, 
-                                :website => archived_presenter.website 
-                               )
+        :name => archived_presenter.name,
+        :bio => archived_presenter.bio,
+        :twitter_id => archived_presenter.twitter_id,
+        :profile_image => archived_presenter.profile_image,
+        :website => archived_presenter.website
+      )
     else
       presenter = Presenter.new(:email => email_value)
     end

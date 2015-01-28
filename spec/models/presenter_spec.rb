@@ -86,6 +86,35 @@ describe Presenter do
     end
   end
 
+  describe "website" do
+    let(:presenter) { Presenter.new }
+
+    it "allows empty website" do
+      presenter.website = " "
+      presenter.website.should ==  ""
+    end
+
+    it "allows http URLs" do
+      presenter.website = "http://www.xpday.net"
+      presenter.website.should ==  "http://www.xpday.net"
+    end
+
+    it "allows https URLs" do
+      presenter.website = "https://www.xpday.net"
+      presenter.website.should ==  "https://www.xpday.net"
+    end
+
+    it "uses http:// if no protocol specified" do
+      presenter.website = "www.xpday.net"
+      presenter.website.should ==  "http://www.xpday.net"
+    end
+
+    it "uses http:// if no protocol specified even when there are spaces" do
+      presenter.website = " www.xpday.net"
+      presenter.website.should ==  "http://www.xpday.net"
+    end
+  end
+
   describe "sessions_reviewed" do
     let (:review) {FactoryGirl.create :review}
     it "returns nothing if nothing reviewed" do
