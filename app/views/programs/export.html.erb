@@ -1,7 +1,5 @@
-
 <a name="top">&nbsp;</a>
 <%= render 'programs/program_matrix_export', :program => @program  %>
-
 <br />
 <br />
 <table border="1" class="ProgramMatrix">
@@ -29,7 +27,6 @@ sessions_per_persona = Hash.new {|hash,key| hash[key] = [] }
         sessions_per_persona[persona.name] << program_entry.session
       end
     %>
-
       <%= render :partial => 'sessions/export_description',:locals => { :this_session => program_entry.session }  %>
       <br />
       <a href="#session_slot_<%=program_entry.session.to_param%>">Back to program</a><br />
@@ -57,7 +54,6 @@ presenters = []
         <a href="#top">Back to program</a><br /><hr />
         <% presenters << program_entry.session.presenters[1].id %>
       <% end %>
-
     <%
     end
   end

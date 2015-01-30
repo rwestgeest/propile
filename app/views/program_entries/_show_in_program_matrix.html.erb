@@ -1,4 +1,4 @@
-<% if program_entry.nil? %>  
+<%- if program_entry.nil? -%>
   <td class="ProgramMatrix" id="ProgramMatrix_entry_<%=slot%>_<%=track%>">
     <% if editable %>
       <%= link_to 'add', new_program_program_entry_path(program, :slot => slot, :track => track  ),
@@ -7,7 +7,7 @@
         "data-tooltip" => true, :title => "Add info to this empty cell"   %>
     <% end %>
   </td>
-<% else %> 
+<%- else -%>
   <td class="ProgramMatrix <%=program_entry.topic%>" id="ProgramMatrix_entry_<%=program_entry.id%>"
       <%= program_entry.span_entire_row==true ? "colspan="+(@program.maxTrack+1-program_entry.track).to_s : "" %> >
         <% if !program_entry.session.nil? %>
@@ -20,7 +20,6 @@
       <% end %>
     <% end %>
     <%= wikinize(program_entry.comment) %>
-
     <% if editable %>
       <div class= "ProgramMatrix_edit_link" >
         <%= link_to "edit", {controller: 'program_entries', action: 'edit', id: program_entry.to_param},
@@ -33,4 +32,4 @@
       </div>
     <% end %>
   </td>
-<% end %> 
+<%- end -%>

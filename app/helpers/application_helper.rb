@@ -52,6 +52,47 @@ module ApplicationHelper
     content_tag :div, message, :id => "#{name}", :class => "flash"
   end
 
+        # Returns +text+ transformed into HTML using simple formatting rules.
+      # Two or more consecutive newlines(<tt>\n\n</tt>) are considered as a
+      # paragraph and wrapped in <tt><p></tt> tags. One newline (<tt>\n</tt>) is
+      # considered as a linebreak and a <tt><br /></tt> tag is appended. This
+      # method does not remove the newlines from the +text+.
+      #
+      # You can pass any HTML attributes into <tt>html_options</tt>. These
+      # will be added to all created paragraphs.
+      #
+      # ==== Options
+      # * <tt>:sanitize</tt> - If +false+, does not sanitize +text+.
+      #
+      # ==== Examples
+      #   my_text = "Here is some basic text...\n...with a line break."
+      #
+      #   simple_format(my_text)
+      #   # => "<p>Here is some basic text...\n<br />...with a line break.</p>"
+      #
+      #   more_text = "We want to put a paragraph...\n\n...right there."
+      #
+      #   simple_format(more_text)
+      #   # => "<p>We want to put a paragraph...</p>\n\n<p>...right there.</p>"
+      #
+      #   simple_format("Look ma! A class!", :class => 'description')
+      #   # => "<p class='description'>Look ma! A class!</p>"
+      #
+      #   simple_format("<span>I'm allowed!</span> It's true.", {}, :sanitize => false)
+      #   # => "<p><span>I'm allowed!</span> It's true.</p>"
+      def wikinize_simple_format(text, html_options={}, options={})
+        text = '' if text.nil?
+        text = text.dup
+        start_tag = tag('p', html_options, true)
+        text = sanitize(text) unless options[:sanitize] == false
+        text = text.to_str
+        text.gsub!(/\r\n?/, "\n")                    # \r\n and \r -> \n
+        text.gsub!(/\n\n+/, "</p>#{start_tag}")  # 2+ newline  -> paragraph
+        text.gsub!(/([^\n]\n)(?=[^\n])/, '\1<br />') # 1 newline   -> br
+        text.insert 0, start_tag
+        text.html_safe.safe_concat("</p>")
+      end
+
   def wikinize( text )
     return "" unless text and not text.empty?
     coder = HTMLEntities.new
@@ -68,7 +109,7 @@ module ApplicationHelper
     text = text.gsub( /(^|\W)\*([^*\n]*)\*(\W|$)/, '\1<b>\2</b>\3' ) #bold 
     text = text.gsub( /(^|\W)_([^_\n]*)_(\W|$)/, '\1<i>\2</i>\3' )   #italic
      
-    simple_format( text )
+    wikinize_simple_format( text )
   end
 
   def w(text)

@@ -2,14 +2,13 @@
   <tr>
     <td colspan="2">
       <% if this_session.limited? then %>
-      <span class="sessionlimit"><span class="legend">max</span> <br /> <span class="count"><%= this_session.max_participants %></span></span>
+        <span class="sessionlimit"><span class="legend">max</span> <br /> <span class="count"><%= this_session.max_participants %></span></span>
       <% end  %>
       <% if  this_session.laptops_required? %>
-      <div style="float:right;"><%= image_tag('Portable Computer.png',height: 128, width: 128)%></div>
-    <%  end %>
+        <div style="float:right;"><%= image_tag('Portable%20Computer.png',height: 128, width: 128)%></div>
+      <%  end %>
       <h2><a name="session_<%=  this_session.to_param%>"></a><%= w this_session.title %></h2>
       <h3><%= w this_session.sub_title  %></h3>
-
       <h3>
         <% if  this_session.presenters[0] %>
           <a href="#presenter_<%=  this_session.presenters[0].id %>"><%= w  this_session.presenters[0].name %></a>
@@ -20,7 +19,7 @@
       </h3>
     </td>
   </tr>
-  <tr><td colspan="2" ><strong><%= wikinize(  this_session.short_description )  %></strong></td></tr>
+  <tr><td colspan="2" ><%= wikinize(  this_session.short_description )  %></td></tr>
   <tr>
     <td class="propertyname">Goal of the session: </td><td><%= w this_session.session_goal %>  </td>
   </tr>
@@ -41,8 +40,8 @@
     <tr>
       <td class="propertyname">Materials:</td>
       <td>   <a href="<%= this_session.material_url%>" target="_blank"><%= this_session.material_description %></a></td>
-    <% end  %>
-  </tr>
+    </tr>
+  <% end  %>
   <tr><td colspan="2" ><%= wikinize( this_session.description) %></td></tr>
   <% personas = Persona.mentioned_in(this_session.intended_audience)
   if personas.length > 0 then
@@ -50,10 +49,10 @@
   %>
     <tr><td colspan="2">
         <% personas.each do |persona| %>
-        <div class="persona">
-          <div class="mugshot"><a href="<%=@persona_url%>#persona_<%= persona.name.downcase %>"><img src="<%= persona.image %> " alt="<%= persona.short_description%>" title="<%= persona.short_description%>" width="96" height="96" border="0"/></a></div>
-          <div class="name"><%= persona.name %></div>
-        </div>
+          <div class="persona">
+            <div class="mugshot"><a href="<%=@persona_url%>#persona_<%= persona.name.downcase %>"><img src="<%= persona.image %> " alt="<%= persona.short_description%>" title="<%= persona.short_description%>" width="96" height="96" border="0"/></a></div>
+            <div class="name"><%= persona.name %></div>
+          </div>
         <% end  %>
       </td></tr>
   <% end %>

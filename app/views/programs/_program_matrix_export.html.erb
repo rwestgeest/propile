@@ -11,7 +11,7 @@
             <% if no_more_columns_on_this_row %>
             <% else %>
               <% if program_entry.nil? %>
-                <td class="structure" ></td>
+                <td class="structure" >&nbsp;</td>
               <% else %>
                 <% if !program_entry.session.nil? %>
                   <% if !shown_sessions.include? program_entry.session.id
@@ -23,7 +23,7 @@
                   <% end  %>
                 <% else %>
                   <td class="structure" <%= program_entry.span_entire_row==true ? "colspan="+(@program.maxTrack+1-program_entry.track).to_s : "" %> >
-                    <strong><%= wikinize(program_entry.comment) %></strong>
+                    <%= program_entry.comment.length > 0 ? wikinize(program_entry.comment) : '' %>
                   </td>
                 <% end %>
               <% end %>
@@ -35,4 +35,3 @@
     </table>
   <% end %>
 </div>
-

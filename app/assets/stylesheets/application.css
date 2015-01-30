@@ -370,6 +370,11 @@ table.ProgramMatrix  td a:hover {
     font-weight : bold ;
 }
 
+
+table.ProgramMatrix td.structure {
+  font-weight: bold ;
+}
+
 table.ProgramCard {
     border-collapse: collapse;
     border-spacing : 5px ;
@@ -418,6 +423,7 @@ table.personalist td.description {
     text-align:  justify ;
     vertical-align: top ;
 }
+
 
 img.persona_id {
     border : 1px solid black ;

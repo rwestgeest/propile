@@ -1,6 +1,5 @@
-<% this_session = program_entry.session %>
+<%- this_session = program_entry.session -%>
 <td class="<%=  this_session.topic%>" <%= program_entry.span_entire_row==true ? "colspan="+(@program.maxTrack+1-program_entry.track).to_s : "" %> >
-
   <% if  this_session.confirmed? %>
     <a name="session_slot_<%=this_session.to_param%>">&nbsp;</a><a href="#session_<%=this_session.to_param%>"><%= w this_session.title %></a>
     <p class=ProgramMatrix_presenters>
@@ -11,8 +10,9 @@
         &amp; <br /><a href="#presenter_<%=  this_session.presenters[1].id %>"><%= w  this_session.presenters[1].name %></a>
       <% end %>
     </p>
-    <strong><%= wikinize(program_entry.comment) %></strong>
-
+    <% if program_entry.comment.length > 0 then %>
+      <%= wikinize(program_entry.comment) %>
+    <% end %>
     <% if  this_session.laptops_required? %>
       <div style="float:left;"><%= image_tag('Computer.png')%></div>
     <%  end %>
