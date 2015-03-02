@@ -47,7 +47,7 @@ describe ApplicationHelper do
     end
 
     it "2 new-lines return new <p>"  do
-      wikinize("string\n\nwith newline").should == "<p>string</p>\n\n<p>with newline</p>"
+      wikinize("string\n\nwith newline").should == "<p>string</p><p>with newline</p>"
     end
 
     it "*word* returns bold"  do
