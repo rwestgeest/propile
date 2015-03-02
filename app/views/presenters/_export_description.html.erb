@@ -9,7 +9,7 @@
 <%if this_presenter.twitter_id.present? %>
   <p>Twitter: <a href="https://twitter.com/<%= this_presenter.twitter_id %>" target="_blank"> <%= this_presenter.twitter_id %> </a></p>
 <% end %>
-<% if this_presenter.bio.length > 0 then %>
+<% if this_presenter.bio.present? && this_presenter.bio.length > 0 then %>
   <%= wikinize this_presenter.bio %>
 <%  end %>
 <br style="clear:both;"/>
