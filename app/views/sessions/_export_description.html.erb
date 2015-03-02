@@ -5,7 +5,7 @@
         <span class="sessionlimit"><span class="legend">max</span> <br /> <span class="count"><%= this_session.max_participants %></span></span>
       <% end  %>
       <% if  this_session.laptops_required? %>
-        <div style="float:right;"><%= image_tag('Portable%20Computer.png',height: 128, width: 128)%></div>
+        <div style="float:right;"><%= image_tag('Laptop.png',height: 128, width: 128)%></div>
       <%  end %>
       <h2><a name="session_<%=  this_session.to_param%>"></a><%= w this_session.title %></h2>
       <h3><%= w this_session.sub_title  %></h3>
