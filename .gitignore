@@ -22,3 +22,5 @@ test.rb
 
 # Ignore Netbeans project files
 /nbproject/*
+/vendor/bundle/*
+/vendor/bundles/*
