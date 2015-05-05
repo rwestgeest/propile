@@ -44,7 +44,8 @@ class SessionsController < ApplicationController
     respond_to do |format|
       format.html { render }
       format.json { render json: @session }
-      format.pdf do 
+      format.pdf do
+        FileUtils.mkdir_p 'tmp'
         file_name = "tmp/session_#{@session.id}.pdf"
         pdf = @session.generate_pdf(file_name)
         send_file( file_name)
@@ -56,7 +57,8 @@ class SessionsController < ApplicationController
     @session = Session.find(params[:id])
     
     respond_to do |format|
-      format.pdf do 
+      format.pdf do
+        FileUtils.mkdir_p 'tmp'
         file_name = "tmp/session_card_#{@session.id}.pdf"
         pdf = @session.generate_program_board_card_pdf(file_name)
         send_file( file_name)
