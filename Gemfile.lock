@@ -2,7 +2,7 @@ GEM
   remote: http://rubygems.org/
   specs:
     Ascii85 (1.0.2)
-    ZenTest (4.11.0)
+    ZenTest (4.7.0)
     action-guard (1.2.1)
     actionmailer (3.2.3)
       actionpack (= 3.2.3)
@@ -216,7 +216,7 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
-  ZenTest (~> 4.11)
+  ZenTest (= 4.7)
   action-guard (~> 1.2.0)
   bcrypt-ruby
   capybara
