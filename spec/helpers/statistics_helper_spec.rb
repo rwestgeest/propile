@@ -96,7 +96,7 @@ describe StatisticsHelper do
   end
   describe "number_of_reviews_by_presenters" do
     it "returns nothing for empty application" do
-        get_review_statistics.number_of_reviews_by_presenters.should == []
+      get_review_statistics.number_of_reviews_by_presenters.should == []
     end
     context "when no reviews exist " do
       it "returns results for 0-reviews " do
@@ -165,7 +165,7 @@ describe StatisticsHelper do
         get_session_completeness_statistics.updated_after_review_percentage.should == 100
       end
       it "returns 0 if a session is defined with review -and no updates afterwards" do
-        FactoryGirl.create(:review)
+        FactoryGirl.create(:review, :created_at => 5.seconds.from_now , :updated_at => 5.seconds.from_now)
         get_session_completeness_statistics.updated_after_review.should == 0
         get_session_completeness_statistics.updated_after_review_percentage.should == 0
       end
