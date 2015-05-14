@@ -16,6 +16,7 @@ describe Review do
   it { should validate_presence_of(:session) }
   it { should validate_presence_of(:score) }
   it { should validate_numericality_of(:score) }
+  it { should validate_numericality_of(:xp_factor) }
 
   describe "relation things to improve and score" do
     it "things to improve has to be empty when score is 10" do

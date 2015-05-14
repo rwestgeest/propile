@@ -35,6 +35,8 @@ describe Session do
   it { should validate_presence_of(:title) }
   it { should validate_presence_of(:description) }
   it { should validate_presence_of(:first_presenter) }
+  it { should validate_numericality_of(:xp_factor) }
+
   ["rob@", "@mo.nl", "123.nl", "123@nl", "aaa.123.nl", "aaa.123@nl"].each do |illegal_mail|
     it { should_not allow_value(illegal_mail).for(:first_presenter_email) }
     it { should_not allow_value(illegal_mail).for(:second_presenter_email) }

@@ -36,6 +36,7 @@ FactoryGirl.define do
     sequence(:things_i_like) {|n| "things_i_like_#{n}"}
     sequence(:things_to_improve) {|n| "things_to_improve_#{n}"}
     score 5
+    xp_factor 5
     association :session, factory: :session_with_presenter
     presenter
   end

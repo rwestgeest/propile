@@ -2,7 +2,7 @@ class Review < ActiveRecord::Base
   belongs_to :session
   belongs_to :presenter 
   has_many :comments, :dependent => :destroy
-  attr_accessible :things_i_like, :things_to_improve, :score
+  attr_accessible :things_i_like, :things_to_improve, :score, :xp_factor
   attr_accessible :session_id
 
   validates :things_i_like, :presence => true
@@ -11,6 +11,7 @@ class Review < ActiveRecord::Base
   validates :session, :presence => true
   validates :score, :presence => true
   validates_numericality_of :score
+  validates_numericality_of :xp_factor
 
   validate :no_things_to_improve_when_max_score
    
