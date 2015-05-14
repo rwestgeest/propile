@@ -12,15 +12,7 @@
     </div>
   <% end %>
 
-  <div class="in_a_form">
-    <div> <%= f.label :title %>*: </div>
-    <div> <%= text_area :session, :title, :cols => "100", :rows => "1"  %> </div>
-  </div>
-  <div class="in_a_form">
-    <div> <%= f.label :sub_title %>: <i>sometimes your title is catchy but doesn't describe the content of your session. A subtitle can help. Keep short! </i> </div>
-    <div> <%= text_area :session, :sub_title, :cols => "100", :rows => "1"  %> </div>
-  </div>
-
+  <%= render partial: 'form_essentials', locals: { f: f }  %>
 
   <div >
     <table class="sessiontable">
@@ -61,9 +53,6 @@
     <div> <%= f.label :session_goal %>: <i> what do you expect participants to get out of this session?</i> </div>
     <div> <%= text_area :session, :session_goal, :cols => "100", :rows => "1"  %> </div>
   </div>
-
-
-
 
   <div>
     <table class="sessiontable">

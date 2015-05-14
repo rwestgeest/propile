@@ -37,6 +37,7 @@ class Session < ActiveRecord::Base
   attr_accessible :session_goal, :outline_or_timetable
   attr_accessible :material_description, :material_url
   attr_accessible :state
+  attr_accessible :xp_factor
 
   validates :title, :presence => true
   validates :description, :presence => true

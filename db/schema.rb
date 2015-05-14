@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130909190234) do
+ActiveRecord::Schema.define(:version => 20150514133929) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                :limit => 150,                          :null => false
@@ -135,6 +135,7 @@ ActiveRecord::Schema.define(:version => 20130909190234) do
     t.string   "material_description", :limit => 128
     t.string   "material_url",         :limit => 1024
     t.integer  "state",                                :default => 0, :null => false
+    t.integer  "xp_factor",                            :default => 0, :null => false
   end
 
   add_index "sessions", ["first_presenter_id"], :name => "index_sessions_on_first_presenter_id"

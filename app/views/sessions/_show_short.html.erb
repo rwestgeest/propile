@@ -3,18 +3,12 @@
 <h3>Session Properties </h3>
 <div id="session_properties" style="display:block;">
 <table class="propertytable" >
-<tr>
-  <td> Room setup:</td><td> <%= @session.room_setup %>  </td>
-</tr>
-<tr>
-  <td> Other limitations:</td><td> <%= @session.other_limitations %>  </td>
-</tr>
-<tr>
-  <td> Materials needed: </td><td><%= @session.materials_needed %> </td>
-</tr>
+<tr> <td> XP Factor according to author: </td><td><%= @session.xp_factor %> </td> </tr>
+<tr> <td> Room setup:</td><td> <%= @session.room_setup %>  </td> </tr>
+<tr> <td> Other limitations:</td><td> <%= @session.other_limitations %>  </td> </tr>
+<tr> <td> Materials needed: </td><td><%= @session.materials_needed %> </td> </tr>
 </table>
 </div>
-
 
 <h3><%= collapse_button_initially_open ("session_outline") %> Outline or Timetable </h3>
 <div id="session_outline" style="display:block;">

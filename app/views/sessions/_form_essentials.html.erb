@@ -1,0 +1,12 @@
+<div class="in_a_form">
+  <div> <%= f.label :title %>*: </div>
+  <div> <%= text_area :session, :title, :cols => "100", :rows => "1"  %> </div>
+</div>
+<div class="in_a_form">
+  <div> <%= f.label :sub_title %>: <i>sometimes your title is catchy but doesn't describe the content of your session. A subtitle can help. Keep short! </i> </div>
+  <div> <%= text_area :session, :sub_title, :cols => "100", :rows => "1"  %> </div>
+</div>
+<div class="in_a_form"> 
+  <div> <%= f.label :xp_factor %>: <i>the xp_factor is indicates the eXtremeness of your session. How thought provoking, exiting, extreme, wtf? is your session?</i></div> 
+  <div> <%= text_field :session, :xp_factor, :cols => "100", :rows => "1"  %> </div>
+</div>

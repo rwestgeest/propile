@@ -14,6 +14,7 @@ FactoryGirl.define do
   factory :session do
     sequence(:title) {|n| "title_#{n}"}
     sequence(:description) {|n| "description_#{n}"}
+    xp_factor 5
     factory :session_with_presenter do
       sequence(:first_presenter_email) { |n| "first_presenter_#{n}@presenters.com" }
     end
