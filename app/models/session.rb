@@ -49,7 +49,7 @@ class Session < ActiveRecord::Base
   validates :duration, :inclusion => { :in => AVAILABLE_DURATION, :message => "has invalid value: %{value}. " }, :allow_blank => true 
   validates_numericality_of :max_participants, :allow_blank => true
   validates :session_type, :inclusion => { :in => AVAILABLE_SESSION_TYPE, :message => "has invalid value: %{value}. " }, :allow_blank => true
-  validates_numericality_of :xp_factor
+  validates_numericality_of :xp_factor, less_than_or_equal_to: 10, greater_than_or_equal_to: 0
 
 
   public

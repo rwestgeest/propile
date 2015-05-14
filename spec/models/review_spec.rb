@@ -17,6 +17,7 @@ describe Review do
   it { should validate_presence_of(:score) }
   it { should validate_numericality_of(:score) }
   it { should validate_numericality_of(:xp_factor) }
+  it { [-1, 11].each { |n| should_not allow_value(n).for(:xp_factor) } }
 
   describe "relation things to improve and score" do
     it "things to improve has to be empty when score is 10" do

@@ -11,7 +11,7 @@ class Review < ActiveRecord::Base
   validates :session, :presence => true
   validates :score, :presence => true
   validates_numericality_of :score
-  validates_numericality_of :xp_factor
+  validates_numericality_of :xp_factor, less_than_or_equal_to: 10, greater_than_or_equal_to: 0
 
   validate :no_things_to_improve_when_max_score
    
