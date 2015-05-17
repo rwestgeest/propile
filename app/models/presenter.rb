@@ -33,7 +33,7 @@ class Presenter < ActiveRecord::Base
   end
 
   def website=(url)
-    url = url.strip
+    url = url && url.strip || ""
     if url.length > 0 then
       url = "http://" + url unless url =~ /^http[s]{0,1}:\/\//i
     end

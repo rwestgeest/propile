@@ -94,6 +94,11 @@ describe Presenter do
       presenter.website.should ==  ""
     end
 
+    it "allows nil  website" do
+      presenter.website = nil
+      presenter.website.should ==  ""
+    end
+
     it "allows http URLs" do
       presenter.website = "http://www.xpday.net"
       presenter.website.should ==  "http://www.xpday.net"
@@ -225,6 +230,14 @@ describe Presenter do
       Presenter.archive_all
       ArchivedPresenter.all.size.should == 1
       compare_archived(ArchivedPresenter.all.first, presenter)
+    end
+  end
+  describe "from archived presenter" do
+    let(:archived_presenter) { FactoryGirl.create :archived_presenter }
+    it "takes over the archived_presenters attributes" do
+      p = Presenter.create_from_archived_presenter archived_presenter.email
+      p.email.should == archived_presenter.email
+      p.name.should == archived_presenter.name
     end
   end
 end
