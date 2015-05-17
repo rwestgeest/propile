@@ -1,3 +1,5 @@
+# 0.4.44
+  Added XPFactor to session and reviews
 # 0.4.43
 # 0.4.42
 # 0.4.41
