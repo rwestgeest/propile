@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'spec_helper'
 
 describe Presenter do
@@ -24,6 +26,9 @@ describe Presenter do
     end
     it "is email if empty" do
       Presenter.new(:email => "rob@rob.nl", :name => "").name.should == "rob@rob.nl"
+    end
+    it "can export names without accents for mailman" do
+      Presenter.new(:name => "Hélène François").export_name.should == "Helene Francois"
     end
   end
 

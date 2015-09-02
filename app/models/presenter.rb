@@ -1,3 +1,5 @@
+require 'i18n'
+
 class Presenter < ActiveRecord::Base
   EMAIL_REGEXP = /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/i
   has_many :first_presenter_sessions, :class_name => 'Session', :foreign_key => :first_presenter_id
@@ -30,6 +32,10 @@ class Presenter < ActiveRecord::Base
 
   def name
     if super.blank? then email else super end
+  end
+
+  def export_name
+    I18n.transliterate(name)
   end
 
   def website=(url)
