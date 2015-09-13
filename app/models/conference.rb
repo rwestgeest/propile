@@ -14,5 +14,6 @@ class Conference
     "xprocess"=>"xProcess and Improvement",
     "xother"=>"xOther"}
 
+  EMAIL_ADDRESS = "xsessions@xpday.net"
   EMAIL_SUBJECT_PREFIX = "x[Propile XP Days 2015] "
 end
