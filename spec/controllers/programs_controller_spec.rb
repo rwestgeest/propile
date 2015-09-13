@@ -58,7 +58,7 @@ describe ProgramsController do
       session.description = "We're going to do things nobody's ever done before. At least Irène hasn't done them."
       session.topic = "team"
       session.laptops_required = 'no'
-      session.duration = "75 min"
+      session.duration = Session::AVAILABLE_DURATION[1]
       session.first_presenter = me
       session.second_presenter = friend
       session.state = Session::CONFIRMED

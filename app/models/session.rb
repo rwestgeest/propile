@@ -19,8 +19,8 @@ class Session < ActiveRecord::Base
   AVAILABLE_TOPICS = AVAILABLE_TOPICS_AND_NAMES.keys
   AVAILABLE_TOPIC_NAMES = AVAILABLE_TOPICS_AND_NAMES.values
   AVAILABLE_LAPTOPS_REQUIRED = { "no" => "no", "yes" => "yes"}
-  AVAILABLE_DURATION = [ "30 min", "75 min", "150 min" ]
-  AVAILABLE_SESSION_TYPE = [ "hands on coding/design/architecture session", "discovery session", "experiential learning session", "short experience report (30 min)"]
+  AVAILABLE_DURATION = Conference::AVAILABLE_DURATION
+  AVAILABLE_SESSION_TYPE = Conference::AVAILABLE_SESSION_TYPE
   AVAILABLE_STATES = {"Draft" => 0, "Canceled" => 1, "Confirmed" => 2 }
 
   FIELDS_THAT_NEED_TO_BE_COMPLETE=[:short_description, :session_type, :duration, :session_goal, :outline_or_timetable]
