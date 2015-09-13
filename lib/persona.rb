@@ -16,7 +16,7 @@ class Persona
 
   ALL = { "jan" =>
       Persona.new("Jan",
-      "Jan is an experienced programmer. He comes to XP Days to get tips and tricks from experts and to learn about the latest trends in continuous integration and automated testing.",
+      "Jan is an experienced programmer. He comes to #{Conference::NAME} to get tips and tricks from experts and to learn about the latest trends in continuous integration and automated testing.",
       "Jan has been working as a programmer for 5 years now. Jan loves to program. He knows a lot of languages, and a lot of tools. At work, he he is not always happy because the circumstances often force him to deliver the quality he  knows he can reach. Jan explores new technologies and trends on the internet and in books and magazines. At night Jan contributes to an open source project together with 10 other guys, from all over the world. That's where he heard about agile methodologies. In the open source group, he is  used to work  with unit tests, but he hopes to get some real in-depth tips and tricks from experts at the XP Days conference. He is also interested to learn about the latest trends  for continuous intergration tools and test automation."),
 
     "marieke" =>

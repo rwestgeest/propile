@@ -1,6 +1,8 @@
 # This class contains all conference-specific settings
 
 class Conference
+  NAME = "xXP Days"
+  
   AVAILABLE_DURATION = [ "x30 min", "x75 min", "x150 min" ]
 
   AVAILABLE_SESSION_TYPE = [ "xhands on coding/design/architecture session", "xdiscovery session", "xexperiential learning session", "xshort experience report (30 min)"]
