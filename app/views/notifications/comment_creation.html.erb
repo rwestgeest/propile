@@ -7,12 +7,12 @@
 
 <p>You can find the comment <%= link_to 'here', comment_url(@comment) %></p>
 
-<p>The XPDay Benelux Team.</p>
-<hr>
+<p>The <%= Conference::NAME %> Team.</p>
+<hr />
 <p>Here's the comment:</p> 
 <p><i><%= @comment.presenter.name  %> wrote:</i></p>
 
 <%= wikinize @comment.body %>
 
-<hr>
+<hr />
 <div align="right" style="font-size:10px;"> (<%= Propile::Application.version %>) </div>

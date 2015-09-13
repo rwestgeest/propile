@@ -74,7 +74,7 @@ module Propile
     end
 
     def self.mail_subject_prefix
-      "[Propile XP Days 2015] "
+      Conference::EMAIL_SUBJECT_PREFIX
     end
 
     def self.version

@@ -225,9 +225,10 @@ describe Session do
         Session.topic_name("").should == "" 
       end 
     end
-    context "existent topic" do 
-      it "returns name from hash" do 
-        Session.topic_name("technology").should == "Technology and Technique" 
+    context "existing topic" do
+      it "returns name from hash" do
+        key = Session::AVAILABLE_TOPICS[0]
+        Session.topic_name(key).should == Conference::AVAILABLE_TOPICS_AND_NAMES[key]
       end 
     end
   end
@@ -322,7 +323,7 @@ describe Session do
       session.should be_valid
     end
     it "if correct duration is valid" do 
-      session.duration = "150 min"
+      session.duration = Session::AVAILABLE_DURATION[2]
       session.should be_valid
     end
     it "if incorrect duration is invalid" do 
@@ -394,7 +395,7 @@ describe Session do
       session.should be_valid
     end
     it "if correct session_type is valid" do 
-      session.session_type = "discovery session"
+      session.session_type = Session::AVAILABLE_SESSION_TYPE[1]
       session.should be_valid
     end
     it "if incorrect session_type is invalid" do 
