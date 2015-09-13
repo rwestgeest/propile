@@ -225,9 +225,10 @@ describe Session do
         Session.topic_name("").should == "" 
       end 
     end
-    context "existent topic" do 
-      it "returns name from hash" do 
-        Session.topic_name("technology").should == "Technology and Technique" 
+    context "existing topic" do
+      it "returns name from hash" do
+        key = Session::AVAILABLE_TOPICS[0]
+        Session.topic_name(key).should == Conference::AVAILABLE_TOPICS_AND_NAMES[key]
       end 
     end
   end

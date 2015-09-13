@@ -608,7 +608,7 @@ describe Program do
         program_entries.should be_empty
       end
       it "returns all program_entries with a session for program with sessions" do 
-        pe = a_program_entry_for(program,"process")
+        pe = a_program_entry_for(program,Session::AVAILABLE_TOPICS[0])
         program_entries = program.program_entries_for_topic(nil)
         program_entries.should_not be_empty
         program_entries.size.should be(1)
@@ -628,18 +628,18 @@ describe Program do
     end
     context "with existing topic as a parameter" do
       it "returns emtpy list for empty program" do 
-        program_entries = program.program_entries_for_topic("technology")
+        program_entries = program.program_entries_for_topic(Session::AVAILABLE_TOPICS[0])
         program_entries.should be_empty
       end
       it "returns emtpy list for program with sessions with only other topics" do 
-        pe = a_program_entry_for(program,"technology")
-        program_entries = program.program_entries_for_topic("process")
+        pe = a_program_entry_for(program,Session::AVAILABLE_TOPICS[0])
+        program_entries = program.program_entries_for_topic(Session::AVAILABLE_TOPICS[1])
         program_entries.should be_empty
       end
       it "returns program_entries for program that has sessions with chosen topic" do 
-        pe1 = a_program_entry_for(program,"process")
-        pe2 = a_program_entry_for(program,"process")
-        program_entries = program.program_entries_for_topic("process")
+        pe1 = a_program_entry_for(program,Session::AVAILABLE_TOPICS[0])
+        pe2 = a_program_entry_for(program,Session::AVAILABLE_TOPICS[0])
+        program_entries = program.program_entries_for_topic(Session::AVAILABLE_TOPICS[0])
         program_entries.should_not be_empty
         program_entries.size.should be(2)
         program_entries.should include(pe1)
@@ -647,7 +647,7 @@ describe Program do
       end
       it "returns no program_entries that have no session" do 
         a_program_entry_without_session_for(program)
-        program_entries = program.program_entries_for_topic("process")
+        program_entries = program.program_entries_for_topic(Session::AVAILABLE_TOPICS[0])
         program_entries.should be_empty
       end
     end

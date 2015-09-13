@@ -56,7 +56,7 @@ describe ProgramsController do
       session = Session.new
       session.title = "Session expérimentale"
       session.description = "We're going to do things nobody's ever done before. At least Irène hasn't done them."
-      session.topic = "team"
+      session.topic = Session::AVAILABLE_TOPICS[0]
       session.laptops_required = 'no'
       session.duration = Session::AVAILABLE_DURATION[1]
       session.first_presenter = me

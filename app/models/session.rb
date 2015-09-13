@@ -9,12 +9,7 @@ class Session < ActiveRecord::Base
   CANCELED = 1
   CONFIRMED = 2
   
-  AVAILABLE_TOPICS_AND_NAMES = { "technology"=>"Technology and Technique", 
-    "customer"=>"Customer and Planning",
-    "cases"=>"Intro's and Cases",
-    "team"=>"Team and Individual",
-    "process"=>"Process and Improvement",
-    "other"=>"Other"}
+  AVAILABLE_TOPICS_AND_NAMES = Conference::AVAILABLE_TOPICS_AND_NAMES
   AVAILABLE_TOPICS_AND_NAMES_FOR_SELECT = AVAILABLE_TOPICS_AND_NAMES.invert
   AVAILABLE_TOPICS = AVAILABLE_TOPICS_AND_NAMES.keys
   AVAILABLE_TOPIC_NAMES = AVAILABLE_TOPICS_AND_NAMES.values
