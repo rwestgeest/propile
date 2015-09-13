@@ -32,8 +32,8 @@ Marieke started to think all this agile stuff is only an unusable hype. But then
 
     "bram" =>
       Persona.new("Bram",
-      "Bram has never missed an #{Conference::NAME}. Bram likes he #{Conference::NAME} because of the friendly and informal atmosphere. Every year he goes back to work from #{Conference::NAME} full of energy, with a bag full of new ideas and techniques.",
-      "Bram has never missed an #{Conference::NAME}. Well, to be correct, he has never missed a Benelux #{Conference::NAME}. He has been to several other #{Conference::NAME} in Germany, London, Paris, and in Italy, and also attended quite a few bigger agile and other conferences. Bram likes he #{Conference::NAME}, because of the friendly and informal atmosphere. Every year he goes back to work from #{Conference::NAME} full of energy, with a bag full of new ideas and techniques."),
+      "Bram has never missed an #{Conference::NAME}. Bram likes the #{Conference::NAME} because of the friendly and informal atmosphere. Every year he goes back to work from #{Conference::NAME} full of energy, with a bag full of new ideas and techniques.",
+      "Bram has never missed an #{Conference::NAME}. He has been to several other conferences in Europe, and also attended quite a few bigger agile and other conferences. Bram likes the #{Conference::NAME}, because of the friendly and informal atmosphere. Every year he goes back to work from #{Conference::NAME} full of energy, with a bag full of new ideas and techniques."),
 
     "philippe" =>
       Persona.new("Philippe",
@@ -68,9 +68,9 @@ Lately, Georges has been hearing more and more about agile methods. Some of his 
 
     "ellen" =>
       Persona.new("Ellen",
-      "Ellen is an agile coach. She wants to learn and share new ideas and experience of techniques that work. She comes to #{Conference::NAME} Benelux because of its friendly and collaborative atmosphere.",
+      "Ellen is an agile coach. She wants to learn and share new ideas and experience of techniques that work. She comes to #{Conference::NAME} because of its friendly and collaborative atmosphere.",
       "Ellen is an agile coach. She's been using agile methods for a few years now. XP, SCRUM, Lean... it doesn't matter much to her. She's more interested in doing things that matter to deliver value for her customers. She wants to work with a happy team, doing meaningful work.\n
-Ellen wants to learn new ideas and share experience of techniques that work. She comes to #{Conference::NAME} Benelux because of its friendly and collaborative atmosphere."),
+Ellen wants to learn new ideas and share experience of techniques that work. She comes to #{Conference::NAME} because of its friendly and collaborative atmosphere."),
   }
 
   def Persona.all
