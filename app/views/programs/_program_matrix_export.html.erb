@@ -23,7 +23,11 @@
                   <% end  %>
                 <% else %>
                   <td class="structure" <%= program_entry.span_entire_row==true ? "colspan="+(@program.maxTrack+1-program_entry.track).to_s : "" %> >
-                    <%= program_entry.comment.length > 0 ? wikinize(program_entry.comment) : '' %>
+                    <% comment = program_entry.comment
+                       comment = '' if comment.nil?
+                       comment.strip!
+                    %>
+                    <%= comment.length > 0 ? wikinize(comment) : '&nbsp;' %>
                   </td>
                 <% end %>
               <% end %>
