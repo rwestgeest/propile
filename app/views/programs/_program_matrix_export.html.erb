@@ -27,7 +27,7 @@
                        comment = '' if comment.nil?
                        comment.strip!
                     %>
-                    <%= comment.length > 0 ? wikinize(comment) : '&nbsp;' %>
+                    <%= comment.length > 0 ? wikinize(comment) : '&nbsp;'.html_safe %>
                   </td>
                 <% end %>
               <% end %>
