@@ -64,7 +64,7 @@ end
   <a name="persona_<%=  name%>"></a>
   <table class="personalist">
     <tr><td class="card">
-        <img src="<%= persona.image %> " alt="<%= persona.name%>" title="<%= persona.name %>" width="192" height="192"/><br /><%= persona.name %>
+        <img src="<%= persona.image %> " alt="<%= w persona.name%>" title="<%= w persona.name %>" width="192" height="192"/><br /><%= w persona.name %>
       </td>
       <td class="description"><%= wikinize persona.long_description %>
         <%
@@ -73,7 +73,7 @@ end
           <p>Meet <%= persona.name %> at the following sessions </p>
           <ul>
             <% my_sessions.each do |this_session|%>
-              <li><a href="#session_<%= this_session.to_param%>"><%= this_session.title %></a> hosted by
+              <li><a href="#session_<%= this_session.to_param%>"><%= w this_session.title %></a> hosted by
                 <% if  this_session.presenters[0] %>
                   <a href="#presenter_<%=  this_session.presenters[0].id %>"><%= w  this_session.presenters[0].name %></a>
                 <% end %>
