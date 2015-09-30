@@ -1,7 +1,7 @@
 <a name="presenter_<%=  this_presenter.id %>"></a>
 <h3><%= w  this_presenter.name %></h3>
 <% if this_presenter.profile_image.present? %>
-  <img class="profile" src="<%=  this_presenter.profile_image%>" alt="<%= this_presenter.name %>" />
+  <img class="profile" src="<%=  this_presenter.profile_image%>" alt="<%= w this_presenter.name %>" />
 <% end %>
 <%if this_presenter.website.present? %>
   <p>Website: <a href="<%= this_presenter.website %>" target="_blank"> <%= this_presenter.website %> </a></p>
