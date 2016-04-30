@@ -27,8 +27,10 @@
       <nav id="main-navigation">
 
         <ul>
+          <li>
+            <%= link_to "Home", 'http://www.xpdays.net/call-for-sessions/' %>
+          </li>
           <%= menu(request) do |m| %>
-            <% m.tab("Home", 'pages') %>
             <% m.tab("Dashboard", "presenters#dashboard") %>
             <% m.tab("Sessions", "sessions") %>
             <% m.tab("Presenters", "presenters") %>
