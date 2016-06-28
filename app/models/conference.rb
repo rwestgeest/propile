@@ -15,7 +15,7 @@ class Conference
     "other"=>"Other"}
 
   EMAIL_ADDRESS = "sessions@xpday.net"
-  EMAIL_SUBJECT_PREFIX = "[Propile XP Days 2015] "
+  EMAIL_SUBJECT_PREFIX = "[Propile XP Days 2016] "
 
   SERVER_URL = 'propile.xpday.net'
 end
