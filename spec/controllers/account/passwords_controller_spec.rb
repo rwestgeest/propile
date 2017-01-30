@@ -33,7 +33,7 @@ describe Account::PasswordsController do
         end
         it "updates the password" do
           update
-          current_account.authenticate('secret').should be_true
+          current_account.authenticate('secret').should == true
         end
         it "confirms the account" do
           update

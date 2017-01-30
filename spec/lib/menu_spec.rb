@@ -19,7 +19,7 @@ describe Menu do
   end
 
   before do
-    ActionGuard.stub!(:authorized?).and_return true
+    ActionGuard.stub(:authorized?).and_return true
   end
 
   describe "render a menu tab" do
@@ -33,7 +33,7 @@ describe Menu do
     end
 
     it "renders nothing when not authorized" do
-      ActionGuard.stub!(:authorized?).and_return false
+      ActionGuard.stub(:authorized?).and_return false
       menu.tab("LinkName", 'controller_path').render(request_params_for('home'), "some_account").should == ''
     end
 

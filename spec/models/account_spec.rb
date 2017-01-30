@@ -87,7 +87,7 @@ describe Account do
     end
 
     it "updates password if password is passed and matches password_confirmation" do
-      account.update_attributes(:password => 'secret', :password_confirmation => 'secret').should be_true
+      account.update_attributes(:password => 'secret', :password_confirmation => 'secret').should == true
       account.password.should == 'secret'
     end
 
@@ -97,7 +97,7 @@ describe Account do
     end
 
     it "ingores passwords if nil" do
-      account.update_attributes({:password => nil}).should be_true
+      account.update_attributes({:password => nil}).should == true
       account.password.should == old_password
     end
   end
@@ -165,7 +165,7 @@ describe Account do
 
     context "without_password" do
       it "fails" do
-        account.confirm!.should be_false
+        account.confirm!.should == false
         account.reload #reload the account from database by id
         account.should_not be_confirmed
       end
@@ -177,7 +177,7 @@ describe Account do
 
         it "returns true and confirms" do
           confirmation_result = confirm_with_password!
-          confirmation_result.should be_true
+          confirmation_result.should be_truthy
           account.should be_confirmed
         end
 
@@ -197,7 +197,7 @@ describe Account do
 
       describe "with invalid password" do 
         it "returns false and does not confirm" do
-          account.confirm_with_password(:password => '').should be_false
+          account.confirm_with_password(:password => '').should == false
           account.should_not be_confirmed
         end
       end

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ReviewsController do
   render_views
-  it_should_behave_like "a guarded resource controller", :presenter, :maintainer
+  it_should_behave_like "a guarded resource controller", :presenter, :maintainer, :except => [:destroy]
 
 
   context "when logged in" do
@@ -84,9 +84,7 @@ describe ReviewsController do
 
         it "sends a message to the sessions presenters" do
           # we can safely assume that an_instance_of_review is the only review in the database
-          Postman.should_receive(:notify_review_creation).with do |review| 
-            review.should be_persisted
-          end
+          Postman.should_receive(:notify_review_creation).with(a_persisted_value)
           do_post
         end
       end
@@ -149,19 +147,6 @@ describe ReviewsController do
       end
     end
 
-    describe "DELETE destroy" do
-      it "destroys the requested review" do
-        create_review
-        expect {
-          delete :destroy, {:id => review.to_param}
-        }.to change(Review, :count).by(-1)
-      end
-
-      it "redirects to the reviews list" do
-        delete :destroy, {:id => review.to_param}
-        response.should redirect_to(reviews_url)
-      end
-    end
   end
 
 end

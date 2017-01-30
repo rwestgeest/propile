@@ -240,9 +240,8 @@ describe Session do
         :session_type => "the session type") }
     it "returns a pdf file" do
       FileUtils.mkdir_p 'tmp'
-      pdf = session.generate_pdf("tmp/session_test.pdf")
-      pdf.should_not be_nil
-      pdf.class.should equal File
+      session.generate_pdf("tmp/session_test.pdf")
+      expect(File.exists?("tmp/session_test.pdf")).to be true
     end
   end
 
@@ -253,9 +252,8 @@ describe Session do
         :session_type => "the session type") }
     it "returns a pdf file" do
       FileUtils.mkdir_p 'tmp'
-      pdf = session.generate_program_board_card_pdf("tmp/session_test.pdf")
-      pdf.should_not be_nil
-      pdf.class.should equal File
+      session.generate_program_board_card_pdf("tmp/session_test.pdf")
+      expect(File.exists?("tmp/session_test.pdf")).to be true
     end
   end
 
@@ -267,9 +265,8 @@ describe Session do
         :session_type => "the session type") }
     it "returns a pdf file" do
       FileUtils.mkdir_p 'tmp'
-      pdf = Session.generate_program_committee_cards_pdf("tmp/session_test.pdf")
-      pdf.should_not be_nil
-      pdf.class.should equal File
+      Session.generate_program_committee_cards_pdf("tmp/session_test.pdf")
+      expect(File.exists?("tmp/session_test.pdf")).to be true
     end
   end
 

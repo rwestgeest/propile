@@ -25,7 +25,7 @@ shared_examples_for "a guarded singular resource controller" do |*args|
       actions.each do |action|
         it "signs_out when attempting #{action}" do
           get action
-          controller.signed_in?.should be_false
+          controller.signed_in?.should == false
         end
       end
     end
@@ -65,7 +65,7 @@ shared_examples_for "a guarded resource controller" do |*args|
       actions.each do |action|
         it "signs_out when attempting #{action} as #{role}" do
           action_procs[action].call(self)
-          controller.signed_in?.should be_false
+          controller.signed_in?.should == false
         end
       end
     end

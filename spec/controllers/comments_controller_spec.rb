@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe CommentsController do
   render_views
-  it_should_behave_like "a guarded resource controller", :presenter, :maintainer
+  it_should_behave_like "a guarded resource controller", :presenter, :maintainer, :except => [:destroy]
 
   context "when logged in" do
     login_as :presenter
@@ -80,9 +80,7 @@ describe CommentsController do
 
         it "sends a message to the sessions presenters" do
           # we can safely assume that an_instance_of_review is the only review in the database
-          Postman.should_receive(:notify_comment_creation).with do |comment| 
-            comment.should be_persisted
-          end
+          Postman.should_receive(:notify_comment_creation).with(a_persisted_value) 
           post :create, {:comment => valid_attributes}
         end
       end
@@ -146,19 +144,6 @@ describe CommentsController do
       end
     end
 
-    describe "DELETE destroy" do
-      it "destroys the requested comment" do
-        create_comment
-        expect {
-          delete :destroy, {:id => comment.to_param}
-        }.to change(Comment, :count).by(-1)
-      end
-
-      it "redirects to the comments list" do
-        delete :destroy, {:id => comment.to_param}
-        response.should redirect_to(comments_url)
-      end
-    end
   end
 
 end

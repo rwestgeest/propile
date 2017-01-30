@@ -121,19 +121,6 @@ describe AccountsController do
       end
     end
 
-    describe "DELETE destroy" do
-      let!(:account) { create_confirmed_account }
-      it "destroys the requested account" do
-        expect {
-          delete :destroy, {:id => account.to_param}
-        }.to change(Account, :count).by(-1)
-      end
-
-      it "redirects to the accounts list" do
-        delete :destroy, {:id => account.to_param}
-        response.should redirect_to(accounts_url)
-      end
-    end
   end
 
 end

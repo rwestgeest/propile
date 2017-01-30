@@ -98,16 +98,6 @@ class ProgramsController < ApplicationController
     end
   end
 
-  def destroy
-    @program = Program.find(params[:id])
-    @program.destroy
-
-    respond_to do |format|
-      format.html { redirect_to programs_url }
-      format.json { head :no_content }
-    end
-  end
-
   def calculate_paf
     @program = Program.find(params[:id])
     @program.calculatePaf

@@ -74,16 +74,6 @@ class PropileConfigsController < ApplicationController
     end
   end
 
-  def destroy
-    @propile_config = PropileConfig.find(params[:id])
-    @propile_config.destroy
-
-    respond_to do |format|
-      format.html { redirect_to propile_configs_url }
-      format.json { head :no_content }
-    end
-  end
-
   def toggle
     prop_name = params[:field][:prop_name]
     PropileConfig.toggle(prop_name)

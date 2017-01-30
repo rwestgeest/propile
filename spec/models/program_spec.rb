@@ -558,9 +558,8 @@ describe Program do
   describe "generate_pdf" do
     it "returns emtpy pdf for empty program" do
       FileUtils.mkdir_p 'tmp'
-      pdf = program.generate_pdf("tmp/program_test.pdf")
-      pdf.should_not be_nil
-      pdf.class.should equal File
+      program.generate_pdf("tmp/program_test.pdf")
+      expect(File.exists?("tmp/program_test.pdf")).to be true
     end
   end
 

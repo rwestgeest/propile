@@ -23,7 +23,7 @@ require 'spec_helper'
 
 
 describe ProgramsController do
-  it_should_behave_like "a guarded resource controller", :maintainer
+  it_should_behave_like "a guarded resource controller", :maintainer, :except => [:destroy]
 
   context "when logged in" do
     login_as :maintainer
@@ -287,21 +287,6 @@ describe ProgramsController do
           put :update, {:id => program.to_param, :program => {}}
           response.should render_template("edit")
         end
-      end
-    end
-  
-    describe "DELETE destroy" do
-      it "destroys the requested program" do
-        program = Program.create! valid_attributes
-        expect {
-          delete :destroy, {:id => program.to_param}
-        }.to change(Program, :count).by(-1)
-      end
-  
-      it "redirects to the programs list" do
-        program = Program.create! valid_attributes
-        delete :destroy, {:id => program.to_param}
-        response.should redirect_to(programs_url)
       end
     end
   

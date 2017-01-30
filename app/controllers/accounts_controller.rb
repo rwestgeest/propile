@@ -35,10 +35,4 @@ class AccountsController < ApplicationController
     end
   end
 
-  def destroy
-    @account = Account.find(params[:id])
-    @account.destroy
-
-    redirect_to accounts_url
-  end
 end

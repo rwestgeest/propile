@@ -116,14 +116,4 @@ class ProgramEntriesController < ApplicationController
     end
   end
 
-  def destroy
-    @program_entry = ProgramEntry.find(params[:id])
-    @program = @program_entry.program
-    @program_entry.destroy
-
-    respond_to do |format|
-      format.html { redirect_to program_entries_url }
-      format.json { head :no_content }
-    end
-  end
 end

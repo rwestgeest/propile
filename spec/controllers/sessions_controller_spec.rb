@@ -4,7 +4,7 @@ require 'rexml/document'
 
 describe SessionsController do
   it_should_behave_like "a guarded resource controller", :presenter, :maintainer,
-    :except => [:new, :create, :rss]
+    :except => [:new, :create, :rss, :destroy]
 
   def login_with_basic_authentication
     account = Account.new
@@ -45,7 +45,7 @@ describe SessionsController do
       #      puts response.body
       #      puts "-------------"
 
-      assigns(:sessions).should have(2).items
+      expect(assigns(:sessions).size).to be 2
       assigns(:last_update).to_s.should == session2.updated_at.to_s
       doc = REXML::Document.new response.body
       doc.elements['rss/channel/title'][0].should == "Propile: All updates"
@@ -399,19 +399,5 @@ describe SessionsController do
       end
     end
 
-    describe "DELETE destroy" do
-      it "destroys the requested session" do
-        session = FactoryGirl.create :session_with_presenter
-        expect {
-          delete :destroy, {:id => session.to_param}
-        }.to change(Session, :count).by(-1)
-      end
-
-      it "redirects to the sessions list" do
-        session = FactoryGirl.create :session_with_presenter
-        delete :destroy, {:id => session.to_param}
-        response.should redirect_to(sessions_url)
-      end
-    end
   end
 end

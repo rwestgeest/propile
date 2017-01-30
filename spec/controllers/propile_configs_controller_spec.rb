@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe PropileConfigsController do
-  it_should_behave_like "a guarded resource controller", :maintainer
+  it_should_behave_like "a guarded resource controller", :maintainer, :except => [:destroy]
 
   context "when logged in" do
     login_as :maintainer
@@ -162,20 +162,5 @@ describe PropileConfigsController do
         end
       end
     end
-  
-    describe "DELETE destroy" do
-      it "destroys the requested propile_config" do
-        create_propile_config
-        expect {
-          delete :destroy, {:id => propile_config.to_param}
-        }.to change(PropileConfig, :count).by(-1)
-      end
-  
-      it "redirects to the propile_configs list" do
-        delete :destroy, {:id => propile_config.to_param}
-        response.should redirect_to(propile_configs_url)
-      end
-    end
-  
   end
 end

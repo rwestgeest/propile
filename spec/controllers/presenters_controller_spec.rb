@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe PresentersController do
-  it_should_behave_like "a guarded resource controller", :maintainer, :presenter, :except => [:export]
+  it_should_behave_like "a guarded resource controller", :maintainer, :presenter, :except => [:export, :destroy]
 
   context "when logged in" do
     login_as :presenter
@@ -175,20 +175,6 @@ describe PresentersController do
           put :update, {:id => presenter.to_param, :presenter => {}}
           response.should render_template("edit")
         end
-      end
-    end
-
-    describe "DELETE destroy" do
-      it "destroys the requested presenter" do
-        create_presenter
-        expect {
-          delete :destroy, {:id => presenter.to_param}
-        }.to change(Presenter, :count).by(-1)
-      end
-
-      it "redirects to the presenters list" do
-        delete :destroy, {:id => presenter.to_param}
-        response.should redirect_to(presenters_url)
       end
     end
 
