@@ -1,5 +1,5 @@
 source 'http://rubygems.org'
-
+gem 'dotenv-rails', groups: [:development, :test]
 gem 'rails', '3.2.22'
 gem "haml-rails"
 #gem "markitup_rails" 
@@ -47,7 +47,6 @@ end
 
 gem 'jquery-rails'
 gem 'bcrypt-ruby'
-
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
