@@ -1,4 +1,6 @@
 require 'csv'
+require_dependency 'captcha'
+require_dependency 'persona'
 
 class SessionsController < ApplicationController
   skip_before_filter :authorize_action, :only => [:create, :thanks, :csv,:rss,:activity_rss]

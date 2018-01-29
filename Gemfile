@@ -47,6 +47,7 @@ end
 
 gem 'jquery-rails'
 gem 'bcrypt-ruby'
+gem 'puma'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'

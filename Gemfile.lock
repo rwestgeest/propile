@@ -132,6 +132,7 @@ GEM
       method_source (~> 0.8.1)
       slop (~> 3.4)
     public_suffix (2.0.5)
+    puma (3.11.2)
     rack (1.4.7)
     rack-cache (1.7.0)
       rack (>= 0.4)
@@ -242,6 +243,7 @@ DEPENDENCIES
   htmlentities
   jquery-rails
   prawn
+  puma
   rails (= 3.2.22)
   recaptcha
   rspec-rails (~> 2.9)
