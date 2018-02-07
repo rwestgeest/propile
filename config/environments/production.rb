@@ -51,8 +51,15 @@ Propile::Application.configure do
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default_url_options = { :host => Conference::SERVER_URL }
-  config.action_mailer.delivery_method = :sendmail
-
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.mailgun.org',
+    port:                 587,
+    domain:               'propile.qwan.it',
+    user_name:            'postmaster@propile.qwan.it',
+    password:             '319c456f5e4e74f3a2476856e39e4625Manage',
+    authentication:       'plain',
+    enable_starttls_auto: true  }
   # Enable threaded mode
   config.threadsafe! unless $rails_rake_task
 
