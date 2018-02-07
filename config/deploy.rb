@@ -51,7 +51,7 @@ namespace :vlad do
     end
     run in_current_path + "which passenger"
 
-    run in_current_path + "RAILS_ENV=#{rails_env} passenger start -a 127.0.0.1 -p #{passenger_port} -d"
+    run in_current_path + "RECAPTCHA_SITE_KEY=6Lezl0EUAAAAAHORlGxiuYiSogAKyOJVHi8BtyeU RECAPTCHA_SECRET_KEY=6Lezl0EUAAAAAIi_Glrsv5HL70CgcofsyeGUTJ3K RAILS_ENV=#{rails_env} passenger start -a 127.0.0.1 -p #{passenger_port} -d"
   end
 
 end
