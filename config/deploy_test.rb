@@ -9,7 +9,7 @@ namespace :vlad do
     update
     bundle
     assets
-    migrate
+    db-migrate
     tests
     start
   }

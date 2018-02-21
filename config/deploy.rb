@@ -1,6 +1,7 @@
 set :application, "propile"
 set :repository,  "git://github.com/rwestgeest/propile.git"
 set :user, "agilesystems"
+set :revision, "master"
 shared_paths['data'] = 'data'
 shared_paths['assets'] = 'public/assets'
 ENV['to'] = 'test' unless ENV['to']
@@ -20,7 +21,7 @@ namespace :vlad do
     update
     update-bundle
     assets
-    migrate
+    db-migrate
     start
   }
 
@@ -37,7 +38,7 @@ namespace :vlad do
   end
 
   desc "migrate database" 
-  remote_task "migrate", :role => :app  do
+  remote_task "db-migrate", :role => :app  do
     in_current_path = "cd #{current_path} && "
     run in_current_path + "RAILS_ENV=#{rails_env} bundle exec rake db:migrate"
   end
