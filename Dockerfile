@@ -11,4 +11,5 @@ USER nobody
 ENV RACK_ENV production
 EXPOSE 3000
 WORKDIR /app
+CMD rails db:migrate && rails s puma
 
