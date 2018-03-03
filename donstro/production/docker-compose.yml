@@ -1,0 +1,17 @@
+version: "3"
+services:
+  propile:
+    image: westghost/propile:${VERSION}
+    hostname: propile
+    ports:
+      - "3000:3000"
+    environment:
+      - RAILS_ENV
+      - RECAPTCHA_SITE_KEY
+      - RECAPTCHA_SECRET_KEY
+    volumes:
+      - data:/app/data
+      - logs:/app/log
+volumes:
+  data:
+  logs:
