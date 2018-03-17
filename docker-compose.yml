@@ -6,9 +6,11 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - RAILS_ENV=development
+      - RAILS_ENV
       - RECAPTCHA_SITE_KEY
       - RECAPTCHA_SECRET_KEY
+      - SES_SMTP_USER
+      - SES_SMTP_PASS
     volumes:
       - data:/app/data
       - logs:/app/log

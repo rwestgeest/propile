@@ -24,14 +24,14 @@ class PropileConfig < ActiveRecord::Base
   end
 
   def self.send_mails_active?
-    Propile::Application.config.action_mailer.delivery_method == :sendmail 
+    Propile::Application.config.action_mailer.delivery_method == :smtp 
   end
 
   def self.toggle_send_mails
-    if Propile::Application.config.action_mailer.delivery_method == :sendmail
+    if Propile::Application.config.action_mailer.delivery_method == :smtp
       new_deliver_method = :test
     else
-      new_deliver_method = :sendmail
+      new_deliver_method = :smtp
     end
     Propile::Application.config.action_mailer.delivery_method = new_deliver_method
     ActionMailer::Base.delivery_method = new_deliver_method

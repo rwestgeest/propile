@@ -51,7 +51,17 @@ Propile::Application.configure do
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default_url_options = { :host => Conference::SERVER_URL }
-  config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.delivery_method = :smtp
+
+  config.action_mailer.smtp_settings = {
+    :address => "email-smtp.eu-west-1.amazonaws.com",
+    :port => 587,
+    :domain => "xpday.net",
+    :user_name => ENV["SES_SMTP_USER"],
+    :password => ENV["SES_SMTP_PASS"],
+    :authentication => :login,
+    :enable_starttls_auto => true
+  }
 
   # Enable threaded mode
   config.threadsafe! unless $rails_rake_task
