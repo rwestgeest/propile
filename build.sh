@@ -5,10 +5,10 @@ VERSION=$(cat VERSION)
 command=$1
 case $command in
   push)
-    docker push wesghost/propile:$VERSION
+    docker push westghost/propile:$VERSION
     ;;
   *)
-    docker build . -t wesghost/propile:$VERSION
+    docker build . -t westghost/propile:$VERSION
     ;;
 esac
 
