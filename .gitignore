@@ -24,3 +24,5 @@ test.rb
 /nbproject/*
 /vendor/bundle/*
 /vendor/bundles/*
+
+remote.secrets

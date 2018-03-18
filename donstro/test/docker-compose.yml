@@ -9,6 +9,8 @@ services:
       - RAILS_ENV
       - RECAPTCHA_SITE_KEY
       - RECAPTCHA_SECRET_KEY
+      - SES_SMTP_USER
+      - SES_SMTP_PASS
     volumes:
       - data:/app/data
       - logs:/app/log
