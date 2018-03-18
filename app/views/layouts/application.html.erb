@@ -12,7 +12,7 @@
   <body>
     <div class="menu">
       <nav id="header-navigation">
-        <%= image_tag "logo-200.png", :size => "100x50" %>
+        <%= image_tag "logo-250.png", :width => "100" %>
         <% if signed_in? %>
           <%= "Signed in as" %>&nbsp;<%= link_to current_account.email , current_account.presenter %>
           <%= current_account.maintainer? ? "(maintainer)" : "" %>
