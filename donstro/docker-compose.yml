@@ -1,13 +1,13 @@
 version: "3"
 services:
   haproxy:
-    build: haproxy
+    image: westghost/haproxy:0.1
     hostname: haproxy
     ports:
       - "80:80"
       - "8080:8080"
   propile_prod:
-    build: .
+    image: westghost/propile:0.4.51-SNAPSHOT
     hostname: propile_prod
     ports:
       - "3000:3000"
@@ -21,10 +21,10 @@ services:
       - prod_data:/app/data
       - prod_logs:/app/log
   propile_test:
-    build: .
+    image: westghost/propile:0.4.51-SNAPSHOT
     hostname: propile_test
     ports:
-      - "3001:3000"
+      - "3002:3000"
     environment:
       - RAILS_ENV=production
       - RECAPTCHA_SITE_KEY

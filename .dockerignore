@@ -3,3 +3,4 @@ data/*
 .git
 donstro/*
 tmp/*
+haproxy/*
