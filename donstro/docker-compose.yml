@@ -7,7 +7,7 @@ services:
       - "80:80"
       - "8080:8080"
   propile_prod:
-    image: westghost/propile:0.4.51
+    image: westghost/propile:0.4.52
     hostname: propile_prod
     ports:
       - "3000:3000"
