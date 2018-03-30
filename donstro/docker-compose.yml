@@ -7,7 +7,7 @@ services:
       - "80:80"
       - "8080:8080"
   propile_prod:
-    image: westghost/propile:0.4.51-SNAPSHOT
+    image: westghost/propile:0.4.51
     hostname: propile_prod
     ports:
       - "3000:3000"
@@ -21,7 +21,7 @@ services:
       - prod_data:/app/data
       - prod_logs:/app/log
   propile_test:
-    image: westghost/propile:0.4.51-SNAPSHOT
+    image: westghost/propile:0.4.52
     hostname: propile_test
     ports:
       - "3002:3000"
