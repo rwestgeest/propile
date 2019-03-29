@@ -15,7 +15,7 @@ gem 'htmlentities'
  
 
 group :test do
-  gem 'ZenTest','4.11'
+  gem 'ZenTest','4.11.2'
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
   gem "capybara"

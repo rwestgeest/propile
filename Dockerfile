@@ -1,4 +1,4 @@
-FROM ruby:2.3.6-jessie
+FROM ruby:2.3.8-stretch
 WORKDIR /app
 
 ADD Gemfile /app
@@ -6,7 +6,7 @@ ADD Gemfile.lock /app
 
 RUN apt-get update && apt-get install -y sqlite3 libsqlite3-dev build-essential nodejs
 RUN apt-get install -y ruby-dev && \
-    gem install bundler --no-ri --no-rdoc && \
+    gem install bundler --no-document && \
     cd /app ; bundle install
 
 ADD . /app

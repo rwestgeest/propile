@@ -1,7 +1,7 @@
 GEM
   remote: http://rubygems.org/
   specs:
-    ZenTest (4.11.0)
+    ZenTest (4.11.2)
     action-guard (1.2.1)
     actionmailer (3.2.22)
       actionpack (= 3.2.22)
@@ -230,7 +230,7 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
-  ZenTest (= 4.11)
+  ZenTest (= 4.11.2)
   action-guard (~> 1.2.0)
   bcrypt-ruby
   capybara
@@ -257,4 +257,4 @@ DEPENDENCIES
   vlad-git
 
 BUNDLED WITH
-   1.11.2
+   1.17.2

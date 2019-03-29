@@ -34,8 +34,22 @@ services:
     volumes:
       - test_data:/app/data
       - test_logs:/app/log
+  propile_dev:
+    build: .
+    hostname: propile_dev
+    ports:
+      - "3002:3000"
+    environment:
+      - RAILS_ENV=development
+      - RECAPTCHA_SITE_KEY
+      - RECAPTCHA_SECRET_KEY
+    volumes:
+      - dev_data:/app/data
+      - dev_logs:/app/log
 volumes:
   prod_data:
   prod_logs:
   test_data:
   test_logs:
+  dev_data:
+  dev_logs:
