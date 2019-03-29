@@ -1,3 +1,5 @@
+# 0.4.53
+  Update session durations
 # 0.4.49
 # 0.4.48
 # 0.4.47
