@@ -3,7 +3,7 @@
 class Conference
   NAME = "XP Days"
   
-  AVAILABLE_DURATION = [ "30 min", "75 min", "150 min" ]
+  AVAILABLE_DURATION = [ "30 min", "60 min", "90 min", "150 min" ]
 
   AVAILABLE_SESSION_TYPE = [ "hands on coding/design/architecture session", "discovery session", "experiential learning session", "short experience report (30 min)"]
 
