@@ -1,6 +1,6 @@
 resource "aws_key_pair" "propile-machine" {
   key_name = "propile-machine"
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7z+3Gu1yPnj1XPnkXY4droW8q1U+jYsQD5kpxHn/WRyfTWpwLqmePQoD5v7ChPr6eX0+3E9nEexlZJ73KcfdjYUVch4eQqcXbWUcGUxRXrvhHwDti48v+2WB6t9XaaMLyilQbwmNGPd8ydOxSskmNjxjkWglprXKDdzWInyo3Qrmaco9gCuBDNV2QSv9X5ozC31lw2J1J/trgmIuvmZ3/79L7hbY/tGvkKmfNjZL0kUI+5HcY2Snl6Tk6AdhRubYVhA3CUu5A+5C8qUYg6P40XcVpiDLfLrlug3Z07DGgZ6DDIwTUpGduZ6+7cYHDMMNMyK++gcSLwLms8+vCKf/v rob@bargeld"
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC/dCIndvf278jXPEcnlHbHPtJR3OE16yPbsz1/QzcpFVnGAeAFdwYRFDosduoOcvC4IlBqO+Lb5gxmJLOMUB2RBd9NM07a694OXCE5++PSeCCuFpiO+QbGCsSxt7svi/Ck7Qe4k211YyQZRrtbAFhTXx6xH3f2Kiy/yvyt1tsM3rzzQJNXd3ZVEVofamkA8jh+c0niRrr9rGuXUQ3XbWLlucfLppUe0MDMVjlgr7q1olqB44e4bDOv1QZQMMk2iOOU/a5e3bowuRhxlRjWS267fVW+8PSwD2tRZhKDTiXUpRJF8loaoZhPIPXB+IVq/N8/2OaKrmZpD1AwiyiBzrUeNNIoZQNAz9CNShj6EmhWqDjaSJdMzaM9X82pXFdR/ExiIGzimcvBKAqlEOGkefFJ0cB7YMvZ6dzMH+xrKjXfacuj6k7eKz3gVviD4lPU6dGpmCZP80Pxbph5gP4cqAJK1jIxvoe6Cb9A/jYJ2PVJCE4J9oO+//4+ZZu2QEgHKE0= dimitribauwens@MacBook-Pro-van-Dimitri.local"
 }
 
 resource "aws_instance" "propile-production-server" {
@@ -20,14 +20,14 @@ resource "aws_instance" "propile-production-server" {
   }
   vpc_security_group_ids = [aws_security_group.allow_propile_server_incoming_traffic.id]
   source_dest_check = true
-  subnet_id = "subnet-b478a7c9"
+  subnet_id = "subnet-014d79c7d63c86192"
   tenancy = "default"
 
   connection {
     type        = "ssh"
     host        = self.public_ip
     user        = "ubuntu"
-    private_key = file("~/.ssh/id_rsa_propile")
+    private_key = file("~/.ssh/id_rsa-propile-no")
   }
 
   provisioner "remote-exec" {
@@ -44,7 +44,7 @@ resource "aws_instance" "propile-production-server" {
 resource "aws_security_group" "allow_propile_server_incoming_traffic" {
   name        = "launch-wizard-1"
   description = "launch-wizard-1 created 2018-02-07T16:49:43.748+01:00"
-  vpc_id      = "vpc-818250ea"
+  vpc_id      = "vpc-0ebd292c9c9b3e710"
   tags = {
     "Name" = "allow_rails_ports_aws_linux"
   }

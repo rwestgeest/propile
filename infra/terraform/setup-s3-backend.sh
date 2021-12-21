@@ -8,4 +8,4 @@ aws dynamodb create-table \
   --key-schema '[{"AttributeName": "LockID", "KeyType": "HASH" }]' \
   --tags '[ { "Key": "Name", "Value": "Terraform State Lock File" } ]'
 
-aws s3 mb s3://propile-terraform-state
+aws s3 mb s3://xpdays-propile-terraform-state
