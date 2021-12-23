@@ -27,7 +27,7 @@ resource "aws_instance" "propile-production-server" {
     type        = "ssh"
     host        = self.public_ip
     user        = "ubuntu"
-    private_key = file("~/.ssh/id_rsa-propile-no")
+    private_key = file("~/.ssh/id_rsa_propile_pem")
   }
 
   provisioner "remote-exec" {
