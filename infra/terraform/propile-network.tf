@@ -1,7 +1,15 @@
+locals {
+  vpc_id = "vpc-0ebd292c9c9b3e710"
+  subnet_1a_id = "subnet-02d9669595647de7b"
+  subnet_1b_id = "subnet-014d79c7d63c86192"
+  subnet_1c_id = "subnet-04479bd86cd6ebeac"
+}
+
+
 resource "aws_security_group" "allow_propile_server_incoming_traffic" {
   name        = "launch-wizard-1"
   description = "launch-wizard-1 created 2018-02-07T16:49:43.748+01:00"
-  vpc_id      = "vpc-0ebd292c9c9b3e710"
+  vpc_id      = local.vpc_id
   tags = {
     "Name" = "allow_rails_ports_aws_linux"
   }
