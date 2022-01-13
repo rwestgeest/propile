@@ -51,3 +51,42 @@ resource "aws_security_group_rule" "allow_all_out" {
   cidr_blocks = ["0.0.0.0/0"]
   security_group_id = aws_security_group.allow_propile_server_incoming_traffic.id
 }
+
+
+
+resource "aws_security_group" "propile_ec2_sg" {
+  name        = "propile_ec2_sg"
+  description = "security group for the propile ec2 server"
+  vpc_id      = local.vpc_id
+  tags = {
+    "Name" = "propile_ec2_sg",
+    "Infra" = "propile"
+  }
+}
+
+resource "aws_security_group_rule" "allow_http_to_propile_ec2" {
+  type = "ingress"
+  from_port   = 80
+  to_port     = 80
+  protocol    = "tcp"
+  cidr_blocks = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.propile_ec2_sg.id
+}
+
+resource "aws_security_group_rule" "allow_ssh_to_propile_ec2" {
+  type = "ingress"
+  from_port   = 22
+  to_port     = 22
+  protocol    = "tcp"
+  cidr_blocks = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.propile_ec2_sg.id
+}
+
+resource "aws_security_group_rule" "allow_all_from_propile_ec2" {
+  type = "egress"
+  from_port       = 0
+  to_port         = 0
+  protocol        = "-1"
+  cidr_blocks     = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.propile_ec2_sg.id
+}
